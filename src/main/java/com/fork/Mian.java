@@ -11,9 +11,9 @@ import java.io.IOException;
 public class Mian {
 
     public static void main(String[] args) {
-//        Parser parser = new Parser("http://sports.williamhill.com/bet/ru/betlive/24");
-//        parser.pars();
-//        parser.print();
+        Parser parser = new Parser("http://sports.williamhill.com/bet/ru/betlive/24");
+        parser.pars();
+        parser.print();
 
 
 
