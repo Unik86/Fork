@@ -4,7 +4,9 @@ import com.fork.model.Bet;
 import com.fork.model.Node;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
@@ -34,30 +36,22 @@ public class WillMatchParser {
     }
 
     public void pars() {
-//        Elements rows = doc.select(".tableData .rowLive");
-//
-//        for (Element row: rows) {
-//            Player one = new Player();
-//            Player two = new Player();
-//            Match match = new Match(one, two);
-//            List<String> list;
-//
-//            list = parsSplitCell(row, "a[id~=^ip_[0-9]+_score$]", "-");
-//            one.setScore(Integer.parseInt(list.get(0)));
-//            two.setScore(Integer.parseInt(list.get(1)));
-//
-//            list = parsSplitCell(row, "span[id~=^[0-9]+_mkt_namespace$]", " v ");
-//            one.setName(list.get(0));
-//            two.setName(list.get(1));
-//
-//            list = parsSplitCell(row, "div[id~=^ip_selection[0-9]+price$]", " ");
-//            one.setPrice(Double.parseDouble(list.get(0)));
-//            two.setPrice(Double.parseDouble(list.get(1)));
-//
-//            match.setLink(parsLinkCell(row));
-//
-//            matchs.add(match);
-//        }
+        List<WebElement> elements = driver.findElements(By.xpath("//table[@class='tableData']"));
+
+        for (WebElement element: elements) {
+//            List<WebElement> nodes = element.findElements(By.cssSelector(".//*"));
+            WebElement nameNode = element.findElement(By.xpath("thead//span[contains(@id, 'ip_market_name')]"));
+            System.out.println(nameNode.getText());
+
+            List<WebElement> bets = element.findElements(By.xpath("tbody/tr/td"));
+            for (WebElement bet: bets) {
+                System.out.println(bet.getText());
+                System.out.println("++++++");
+            }
+            System.out.println("----------------");
+        }
+
+        driver.close();
     }
 
     private List<String> parsSplitCell(Element row, String selector, String split) {
