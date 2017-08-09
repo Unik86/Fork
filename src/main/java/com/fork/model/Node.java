@@ -8,6 +8,11 @@ public class Node {
 
     private List<Bet> bets;
 
+    public Node(String name, List<Bet> bets) {
+        this.name = name;
+        this.bets = bets;
+    }
+
     public String getName() {
         return name;
     }

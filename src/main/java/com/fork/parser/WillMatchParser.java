@@ -3,7 +3,6 @@ package com.fork.parser;
 import com.fork.model.Bet;
 import com.fork.model.Node;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,19 +35,26 @@ public class WillMatchParser {
     }
 
     public void pars() {
-        List<WebElement> elements = driver.findElements(By.xpath("//table[@class='tableData']"));
+        List<WebElement> elements = driver.findElements(By.className("tableData"));
 
         for (WebElement element: elements) {
-//            List<WebElement> nodes = element.findElements(By.cssSelector(".//*"));
             WebElement nameNode = element.findElement(By.xpath("thead//span[contains(@id, 'ip_market_name')]"));
-            System.out.println(nameNode.getText());
 
-            List<WebElement> bets = element.findElements(By.xpath("tbody/tr/td"));
-            for (WebElement bet: bets) {
-                System.out.println(bet.getText());
-                System.out.println("++++++");
+            List<WebElement> elementBets = element.findElements(By.xpath("tbody/tr/td"));
+            List<Bet> bets = new ArrayList<Bet>();
+
+            for (WebElement elBet: elementBets) {
+//                WebElement nameBet = elBet.findElement(By.className("eventselection"));
+//                WebElement nameBet = elBet.findElement(By.xpath("div/div[contains(@id, 'name')]"));
+//                WebElement rateBet = elBet.findElement(By.className("eventprice"));
+//                WebElement rateBet = elBet.findElement(By.xpath("div/div[contains(@id, 'price')]"));
+
+                Bet bet = new Bet(elBet.getText(), 0);
+                bets.add(bet);
             }
-            System.out.println("----------------");
+
+            Node node = new Node(nameNode.getText(), bets);
+            nodes.add(node);
         }
 
         driver.close();
