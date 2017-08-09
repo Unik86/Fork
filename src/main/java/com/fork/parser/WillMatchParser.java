@@ -1,53 +1,41 @@
 package com.fork.parser;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import com.fork.model.Bet;
+import com.fork.model.Node;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FavbetParser {
+public class WillMatchParser {
 
-    private Document doc;
+    private WebDriver driver = new ChromeDriver();
+    private List<Node> nodes = new ArrayList<Node>();
 
-    public FavbetParser(String url) {
-        try {
-            doc = Jsoup.connect(url)
-                    .ignoreContentType(true)
-                    .ignoreHttpErrors(true)
-                    .timeout(10000)
-                    .get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public WillMatchParser(String url) {
+        driver.navigate().to(url);
     }
 
     public void print() {
-//        for (Match match: matchs) {
-//            Player one = match.getOne();
-//            Player two = match.getTwo();
-//
-//            printCell(Integer.toString(one.getScore()));
-//            printCell(Integer.toString(two.getScore()));
-//            printCell(fixLengthStr(one.getName(), 30));
-//            printCell(fixLengthStr(two.getName(), 30));
-//            printCell(fixLengthStr(Double.toString(one.getPrice()), 7));
-//            printCell(fixLengthStr(Double.toString(two.getPrice()), 7));
-//            printCell(match.getLink());
-//
-//            System.out.println();
-//        }
+        for (Node node: nodes) {
+            System.out.println(node.getName());
+
+            for (Bet bet : node.getBets()) {
+                System.out.print(bet.getName() + " - " + Double.toString(bet.getRate()));
+                System.out.print("|");
+            }
+
+            System.out.println();
+        }
     }
 
     public void pars() {
-        Elements rows = doc.select(".disclaim");
-
-        System.out.println(rows);
-
+//        Elements rows = doc.select(".tableData .rowLive");
+//
 //        for (Element row: rows) {
 //            Player one = new Player();
 //            Player two = new Player();
@@ -85,11 +73,6 @@ public class FavbetParser {
 
     private String parsLinkCell(Element row) {
         return row.select("a[href]").attr("href");
-    }
-
-    private void printCell(String cell) {
-        System.out.print(cell);
-        System.out.print(" | ");
     }
 
     private String fixLengthStr(String string, int length) {
