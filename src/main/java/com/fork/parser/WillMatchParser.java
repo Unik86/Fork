@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.*;
 
-public class WillMatchParser {
+public class WillMatchParser implements Parser{
 
     private WebDriver driver = new ChromeDriver();
     private Map<Integer, Node> nodes = new HashMap<>();
@@ -19,21 +19,7 @@ public class WillMatchParser {
         driver.navigate().to(url);
     }
 
-    public void print() {
-        nodes.forEach((k,v) -> {
-            System.out.println();
-            System.out.println("*** " + v.getName() + " ***");
-            System.out.println();
-
-            for (Bet bet : v.getBets()) {
-                System.out.print(fixLengthStr(bet.getName() + " - " + Double.toString(bet.getRate()), 20));
-                System.out.print(" | ");
-            }
-
-            System.out.println();
-        });
-    }
-
+    @Override
     public void pars() {
         List<WebElement> elements = driver.findElements(By.className("tableData"));
 
@@ -67,7 +53,4 @@ public class WillMatchParser {
         driver.close();
     }
 
-    private String fixLengthStr(String string, int length) {
-        return String.format("%1$"+length+ "s", string);
-    }
 }

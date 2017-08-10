@@ -5,9 +5,9 @@ import java.util.List;
 
 public enum NodeDict {
 
-    WINNER(1, Arrays.asList("Победитель встречи Live")),
+    WINNER(1, Arrays.asList("Победитель встречи Live", "Победа")),
 
-    MORE_LESS_0_5(2, Arrays.asList("Игра - Больше/Меньше 0.5 голов Live")),
+    MORE_LESS_0_5(2, Arrays.asList("Игра - Больше/Меньше 0.5 голов Live", "Тотал")),
     MORE_LESS_1_5(3, Arrays.asList("Игра - Больше/Меньше 1.5 голов Live")),
     MORE_LESS_2_5(4, Arrays.asList("Игра - Больше/Меньше 2.5 голов Live")),
     MORE_LESS_3_5(5, Arrays.asList("Игра - Больше/Меньше 3.5 голов Live")),
