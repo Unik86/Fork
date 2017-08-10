@@ -1,37 +1,37 @@
 package com.fork.parser;
 
+import com.fork.dict.NodeDict;
 import com.fork.model.Bet;
 import com.fork.model.Node;
-import org.jsoup.nodes.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class WillMatchParser {
 
     private WebDriver driver = new ChromeDriver();
-    private List<Node> nodes = new ArrayList<Node>();
+    private Map<Integer, Node> nodes = new HashMap<>();
 
     public WillMatchParser(String url) {
         driver.navigate().to(url);
     }
 
     public void print() {
-        for (Node node: nodes) {
-            System.out.println(node.getName());
+        nodes.forEach((k,v) -> {
+            System.out.println();
+            System.out.println("*** " + v.getName() + " ***");
+            System.out.println();
 
-            for (Bet bet : node.getBets()) {
-                System.out.print(fixLengthStr(bet.getName() + " - " + Double.toString(bet.getRate()), 30));
+            for (Bet bet : v.getBets()) {
+                System.out.print(fixLengthStr(bet.getName() + " - " + Double.toString(bet.getRate()), 20));
                 System.out.print(" | ");
             }
 
             System.out.println();
-        }
+        });
     }
 
     public void pars() {
@@ -39,9 +39,14 @@ public class WillMatchParser {
 
         for (WebElement element: elements) {
             WebElement nameNode = element.findElement(By.xpath("thead//span[contains(@id, 'ip_market_name')]"));
+            String nameNodeStr = nameNode.getText().trim();
+            Integer codeNode = NodeDict.findCode(nameNodeStr);
+
+            if(codeNode == null)
+                continue;
 
             List<WebElement> elementBets = element.findElements(By.xpath("tbody/tr/td"));
-            List<Bet> bets = new ArrayList<Bet>();
+            List<Bet> bets = new ArrayList<>();
 
             for (WebElement elBet: elementBets) {
 //                WebElement nameBet = elBet.findElement(By.xpath("div/div[contains(@id, 'name')]"));
@@ -55,8 +60,8 @@ public class WillMatchParser {
                 }
             }
 
-            Node node = new Node(nameNode.getText(), bets);
-            nodes.add(node);
+            Node node = new Node(nameNodeStr, bets);
+            nodes.put(codeNode, node);
         }
 
         driver.close();

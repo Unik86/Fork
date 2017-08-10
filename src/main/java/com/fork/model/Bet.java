@@ -3,7 +3,7 @@ package com.fork.model;
 public class Bet {
 
     private String name;
-    private double rate;
+    private Double rate;
 
     public Bet(String name, double rate) {
         this.name = name;
@@ -14,7 +14,7 @@ public class Bet {
         return name;
     }
 
-    public double getRate() {
+    public Double getRate() {
         return rate;
     }
 }
