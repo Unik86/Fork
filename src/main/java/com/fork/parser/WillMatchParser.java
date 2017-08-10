@@ -26,8 +26,8 @@ public class WillMatchParser {
             System.out.println(node.getName());
 
             for (Bet bet : node.getBets()) {
-                System.out.print(bet.getName() + " - " + Double.toString(bet.getRate()));
-                System.out.print("|");
+                System.out.print(fixLengthStr(bet.getName() + " - " + Double.toString(bet.getRate()), 30));
+                System.out.print(" | ");
             }
 
             System.out.println();
@@ -44,13 +44,15 @@ public class WillMatchParser {
             List<Bet> bets = new ArrayList<Bet>();
 
             for (WebElement elBet: elementBets) {
-//                WebElement nameBet = elBet.findElement(By.className("eventselection"));
 //                WebElement nameBet = elBet.findElement(By.xpath("div/div[contains(@id, 'name')]"));
-//                WebElement rateBet = elBet.findElement(By.className("eventprice"));
 //                WebElement rateBet = elBet.findElement(By.xpath("div/div[contains(@id, 'price')]"));
 
-                Bet bet = new Bet(elBet.getText(), 0);
-                bets.add(bet);
+                // TODO костыль потом убрать
+                List<String> res = Arrays.asList(elBet.getText().split("\n"));
+                if(!res.isEmpty() && res.size() > 1) {
+                    Bet bet = new Bet(res.get(1), Double.parseDouble(res.get(0)));
+                    bets.add(bet);
+                }
             }
 
             Node node = new Node(nameNode.getText(), bets);
@@ -58,21 +60,6 @@ public class WillMatchParser {
         }
 
         driver.close();
-    }
-
-    private List<String> parsSplitCell(Element row, String selector, String split) {
-        List<String> list = Arrays.asList(row.select(selector).text().split(split));
-        String one = list.get(0).replace(String.valueOf((char) 160), " ").trim();
-        String two = list.get(1).replace(String.valueOf((char) 160), " ").trim();
-
-        List<String> result = new ArrayList<String>();
-        result.add(one);
-        result.add(two);
-        return result;
-    }
-
-    private String parsLinkCell(Element row) {
-        return row.select("a[href]").attr("href");
     }
 
     private String fixLengthStr(String string, int length) {
