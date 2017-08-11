@@ -10,10 +10,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.*;
 
+import static com.fork.util.Utils.fixLengthStr;
+
 public class WillMatchParser implements Parser{
 
     private WebDriver driver = new ChromeDriver();
-    private Map<Integer, Node> nodes = new HashMap<>();
 
     public WillMatchParser(String url) {
         driver.navigate().to(url);
@@ -35,19 +36,20 @@ public class WillMatchParser implements Parser{
             List<Bet> bets = new ArrayList<>();
 
             for (WebElement elBet: elementBets) {
-//                WebElement nameBet = elBet.findElement(By.xpath("div/div[contains(@id, 'name')]"));
-//                WebElement rateBet = elBet.findElement(By.xpath("div/div[contains(@id, 'price')]"));
+                WebElement nameBet = elBet.findElement(By.xpath("div/div[2]"));
+                WebElement rateBet = elBet.findElement(By.xpath("div/div[1]"));
 
-                // TODO костыль потом убрать
-                List<String> res = Arrays.asList(elBet.getText().split("\n"));
-                if(!res.isEmpty() && res.size() > 1) {
-                    Bet bet = new Bet(res.get(1), Double.parseDouble(res.get(0)));
-                    bets.add(bet);
-                }
+                Bet bet = new Bet(nameBet.getText(), Double.parseDouble(rateBet.getText()));
+                bets.add(bet);
             }
 
-            Node node = new Node(nameNodeStr, bets);
-            nodes.put(codeNode, node);
+            if(nodes.containsKey(codeNode)){
+                Node node = nodes.get(codeNode);
+                node.getBets().addAll(bets);
+            } else {
+                Node node = new Node(nameNodeStr, bets);
+                nodes.put(codeNode, node);
+            }
         }
 
         driver.close();

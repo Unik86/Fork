@@ -15,18 +15,18 @@ public interface Parser {
     public void pars();
 
     public default void print() {
-        nodes.forEach((k,v) -> {
+        for (Map.Entry<Integer, Node> node : nodes.entrySet()) {
             System.out.println();
-            System.out.println("*** " + v.getName() + " ***");
+            System.out.println("*** " + node.getValue().getName() + " ***");
             System.out.println();
 
-            for (Bet bet : v.getBets()) {
+            for (Bet bet : node.getValue().getBets()) {
                 System.out.print(fixLengthStr(bet.getName() + " * " + Double.toString(bet.getRate()), 20));
                 System.out.print(" | ");
             }
 
             System.out.println();
-        });
+        }
     }
 
 }
