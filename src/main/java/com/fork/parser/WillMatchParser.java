@@ -21,7 +21,7 @@ public class WillMatchParser implements Parser{
     }
 
     @Override
-    public void pars() {
+    public Map<Integer, Node> pars() {
         List<WebElement> elements = driver.findElements(By.className("tableData"));
 
         for (WebElement element: elements) {
@@ -52,7 +52,7 @@ public class WillMatchParser implements Parser{
             }
         }
 
-        driver.close();
+        return nodes;
     }
 
 }

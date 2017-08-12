@@ -12,7 +12,7 @@ public interface Parser {
 
     Map<Integer, Node> nodes = new HashMap<>();
 
-    public void pars();
+    public Map<Integer, Node> pars();
 
     public default void print() {
         for (Map.Entry<Integer, Node> node : nodes.entrySet()) {

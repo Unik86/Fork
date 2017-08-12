@@ -26,7 +26,7 @@ public class FavMatchParser implements Parser{
     }
 
     @Override
-    public void pars() {
+    public Map<Integer, Node> pars() {
         List<WebElement> elements = driver.findElements(By.xpath("//li[contains(@class, 'markets')]"));
 
         for (WebElement element: elements) {
@@ -37,7 +37,7 @@ public class FavMatchParser implements Parser{
             if(codeNode == null)
                 continue;
 
-            List<WebElement> elementBets = element.findElements(By.xpath("ul//li[contains(@class, 'outcome')]"));
+            List<WebElement> elementBets = element.findElements(By.xpath("ul/li/div[1]//li[contains(@class, 'outcome')]"));
             List<Bet> bets = new ArrayList<>();
 
             for (WebElement elBet: elementBets) {
@@ -52,7 +52,7 @@ public class FavMatchParser implements Parser{
             nodes.put(codeNode, node);
         }
 
-        driver.close();
+        return nodes;
     }
 
 }
