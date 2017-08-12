@@ -12,9 +12,9 @@ public class Bet {
         this.right = right;
     }
 
-    public Bet(Double right, Double left) {
-        this.right = right;
+    public Bet(Double left, Double right) {
         this.left = left;
+        this.right = right;
     }
 
     public Double getLeft() {

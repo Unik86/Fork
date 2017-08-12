@@ -1,14 +1,13 @@
 package com.fork.calc;
 
 import com.fork.model.Bet;
-import java.util.Arrays;
 
 public class MaxBetBuilder {
 
     public Bet calc(Bet... bets){
         Bet maxBet = new Bet(0D, 0D);
 
-        for(Bet bet : Arrays.asList(bets)) {
+        for(Bet bet : bets) {
             if(bet.getRight() > maxBet.getRight()){
                 maxBet.setRight(bet.getRight());
             }

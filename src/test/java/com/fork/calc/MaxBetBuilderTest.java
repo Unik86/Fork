@@ -18,8 +18,8 @@ public class MaxBetBuilderTest {
 
         Bet maxBet = builder.calc(bat1, bat2, bat3);
 
-        assertThat(maxBet.getRight(), is(2.70));
-        assertThat(maxBet.getLeft(), is(1.55));
+        assertThat(maxBet.getLeft(), is(2.70));
+        assertThat(maxBet.getRight(), is(1.55));
     }
 
 }

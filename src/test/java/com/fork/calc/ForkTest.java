@@ -18,11 +18,11 @@ public class ForkTest {
         // В = 1/К1 + 1/К2 + 1/К3
         assertThat(fork.getForkRate(), is(1.07));
         // Р = (1/К/В)*С
-        assertThat(fork.getSumRight(), is(37.38));
-        assertThat(fork.getSumLeft(), is(62.31));
+        assertThat(fork.getSumLeft(), is(37.38));
+        assertThat(fork.getSumRight(), is(62.31));
 
-        assertThat(fork.getWinSumRight(), is(93.45));
-        assertThat(fork.getWinSumLeft(), is(93.47));
+        assertThat(fork.getWinSumLeft(), is(93.45));
+        assertThat(fork.getWinSumRight(), is(93.47));
     }
 
 }
