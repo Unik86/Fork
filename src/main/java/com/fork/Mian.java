@@ -1,16 +1,8 @@
 package com.fork;
 
 import com.fork.calc.Calc;
-import com.fork.model.Fork;
-import com.fork.model.Node;
-import com.fork.parser.FavMatchParser;
-import com.fork.parser.Parser;
-import com.fork.parser.WillMatchParser;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
+import com.fork.model.Bet;
+import com.fork.model.Match;
 
 public class Mian {
 
@@ -19,31 +11,36 @@ public class Mian {
 
     public static void main(String[] args) {
 
-        Parser will = new WillMatchParser(WILL_URL);
-        Parser fav = new FavMatchParser(FAV_URL);
-
-        List<Map<Integer, Node>> sites = new ArrayList<>();
-        sites.add(will.pars());
-        sites.add(fav.pars());
-
-        Calc calc = new Calc();
-        calc.calcFork(sites);
+//        Parser will = new WillMatchParser(WILL_URL);
+//        Parser fav = new FavMatchParser(FAV_URL);
+//
+//        List<Map<Integer, Node>> sites = new ArrayList<>();
+//        sites.add(will.pars());
+//        sites.add(fav.pars());
+//
+//        Calc calc = new Calc();
+//        calc.calcFork(sites);
 
 //        will.print();
 //        fav.print();
 
-//        calc();
-    }
+        Match willMatch = new Match();
 
+        Bet total05 = new Bet(4.75D, 1.25D);
+        willMatch.setTotal05(total05);
+        Bet total15 = new Bet(3.75D, 1.5D);
+        willMatch.setTotal15(total15);
 
-    public static void calc(){
-        Double rate1 = 4.75D;
-        Double rate2 = 1.25D;
-        Double allSum = 100D;
+        Match favMatch = new Match();
 
-        Fork fork = new Fork(rate1, rate2, allSum);
-        fork.calc();
-        fork.print();
+        Bet total05a = new Bet(4.6D, 1.42D);
+        favMatch.setTotal05(total05a);
+        Bet total15a = new Bet(3.5D, 1.7D);
+        favMatch.setTotal15(total15a);
+
+        Calc cl = new Calc();
+        cl.calc(willMatch, favMatch);
+
     }
 
 }
