@@ -1,6 +1,6 @@
 package com.fork;
 
-import com.fork.calc.Calc;
+import com.fork.calc.MaxBetBuilder;
 import com.fork.model.Bet;
 import com.fork.model.Match;
 
@@ -38,8 +38,8 @@ public class Mian {
         Bet total15a = new Bet(3.5D, 1.7D);
         favMatch.setTotal15(total15a);
 
-        Calc cl = new Calc();
-        cl.calc(willMatch, favMatch);
+        MaxBetBuilder cl = new MaxBetBuilder();
+//        cl.calc(willMatch, favMatch);
 
     }
 
