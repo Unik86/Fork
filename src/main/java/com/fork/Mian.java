@@ -1,5 +1,6 @@
 package com.fork;
 
+import com.fork.calc.Fork;
 import com.fork.calc.MaxBetBuilder;
 import com.fork.model.Bet;
 import com.fork.model.Match;
@@ -24,23 +25,37 @@ public class Mian {
 //        will.print();
 //        fav.print();
 
+        testCalc();
+    }
+
+    public static void testCalc(){
         Match willMatch = new Match();
 
-        Bet total05 = new Bet(4.75D, 1.25D);
+        Bet total05 = new Bet(4.75, 1.25);
+        Bet total15 = new Bet(3.75, 1.5);
         willMatch.setTotal05(total05);
-        Bet total15 = new Bet(3.75D, 1.5D);
         willMatch.setTotal15(total15);
 
         Match favMatch = new Match();
 
-        Bet total05a = new Bet(4.6D, 1.42D);
+        Bet total05a = new Bet(4.6, 1.42);
+        Bet total15a = new Bet(3.5, 1.7);
         favMatch.setTotal05(total05a);
-        Bet total15a = new Bet(3.5D, 1.7D);
         favMatch.setTotal15(total15a);
 
-        MaxBetBuilder cl = new MaxBetBuilder();
-//        cl.calc(willMatch, favMatch);
+        MaxBetBuilder builder = new MaxBetBuilder();
 
+        Bet maxTotal05 = builder.calc(willMatch.getTotal05(), favMatch.getTotal05());
+        Bet maxTotal15 = builder.calc(willMatch.getTotal15(), favMatch.getTotal15());
+
+        Fork fork05 = new Fork(maxTotal05, 100D);
+        fork05.calc();
+        fork05.print();
+
+        System.out.println("----------------");
+
+        Fork fork15 = new Fork(maxTotal15, 100D);
+        fork15.calc();
+        fork15.print();
     }
-
 }

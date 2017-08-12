@@ -1,7 +1,6 @@
 package com.fork.calc;
 
 import com.fork.model.Bet;
-import com.fork.model.Match;
 import java.util.Arrays;
 
 public class MaxBetBuilder {
