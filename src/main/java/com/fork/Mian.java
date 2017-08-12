@@ -43,6 +43,8 @@ public class Mian {
         favMatch.setTotal05(total05a);
         favMatch.setTotal15(total15a);
 
+        //////////////////////
+
         MaxBetBuilder builder = new MaxBetBuilder();
 
         Bet maxTotal05 = builder.calc(willMatch.getTotal05(), favMatch.getTotal05());
