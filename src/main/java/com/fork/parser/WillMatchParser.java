@@ -4,11 +4,17 @@ import com.fork.model.Bet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class WillMatchParser implements Parser{
 
     public WillMatchParser(String url) {
         driver.navigate().to(url);
+
+        Select select = new Select(driver.findElement(By.name("time_zone")));
+        select.selectByVisibleText("Европа/Киев (GMT+2)");
+
+        driver.findElement(By.id("yesBtn")).click();
     }
 
     @Override
@@ -27,13 +33,13 @@ public class WillMatchParser implements Parser{
         match.setTotal95(parsBet("Игра - Больше/Меньше 9.5 голов Live"));
     }
 
-    private Bet parsBet(String str) {
+    private Bet parsBet(String name) {
         try {
-            WebElement element1 = driver.findElement(By.xpath("//span[contains(text(),'" + str + "')]/ancestor::table/tbody/tr/td[1]/div/div[1]"));
-            WebElement element2 = driver.findElement(By.xpath("//span[contains(text(),'" + str + "')]/ancestor::table/tbody/tr/td[2]/div/div[1]"));
+            WebElement element1 = driver.findElement(By.xpath("//span[contains(text(),'" + name + "')]/ancestor::table/tbody/tr/td[1]/div/div[1]"));
+            WebElement element2 = driver.findElement(By.xpath("//span[contains(text(),'" + name + "')]/ancestor::table/tbody/tr/td[2]/div/div[1]"));
 
             try {
-                WebElement element3 = driver.findElement(By.xpath("//span[contains(text(),'" + str + "')]/ancestor::table/tbody/tr/td[3]/div/div[1]"));
+                WebElement element3 = driver.findElement(By.xpath("//span[contains(text(),'" + name + "')]/ancestor::table/tbody/tr/td[3]/div/div[1]"));
 
                 return new Bet(Double.parseDouble(element1.getText()),
                                Double.parseDouble(element2.getText()),
