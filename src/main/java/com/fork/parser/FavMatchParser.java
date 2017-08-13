@@ -1,6 +1,7 @@
 package com.fork.parser;
 
 import com.fork.model.Bet;
+import com.fork.model.Match;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +24,7 @@ public class FavMatchParser implements Parser{
     }
 
     @Override
-    public void pars() {
+    public Match pars() {
         match.setWinner(parsBet("Победа"));
 
         match.setTotal05(parsComplexBet("Тотал", "Больше (0.5)", "Меньше (0.5)"));
@@ -36,6 +37,8 @@ public class FavMatchParser implements Parser{
         match.setTotal75(parsComplexBet("Тотал", "Больше (7.5)", "Меньше (7.5)"));
         match.setTotal85(parsComplexBet("Тотал", "Больше (8.5)", "Меньше (8.5)"));
         match.setTotal95(parsComplexBet("Тотал", "Больше (9.5)", "Меньше (9.5)"));
+
+        return match;
     }
 
     private Bet parsComplexBet(String baseName, String LeftName, String RightName) {

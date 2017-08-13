@@ -1,6 +1,7 @@
 package com.fork.parser;
 
 import com.fork.model.Bet;
+import com.fork.model.Match;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -18,7 +19,7 @@ public class WillMatchParser implements Parser{
     }
 
     @Override
-    public void pars() {
+    public Match pars() {
         match.setWinner(parsBet("Победитель встречи Live"));
 
         match.setTotal05(parsBet("Игра - Больше/Меньше 0.5 голов Live"));
@@ -31,6 +32,8 @@ public class WillMatchParser implements Parser{
         match.setTotal75(parsBet("Игра - Больше/Меньше 7.5 голов Live"));
         match.setTotal85(parsBet("Игра - Больше/Меньше 8.5 голов Live"));
         match.setTotal95(parsBet("Игра - Больше/Меньше 9.5 голов Live"));
+
+        return match;
     }
 
     private Bet parsBet(String name) {

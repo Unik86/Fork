@@ -13,7 +13,7 @@ public interface Parser {
     WebDriver driver = new ChromeDriver();
     Match match = new Match();
 
-    public void pars();
+    public Match pars();
 
     public default void print() {
         for (Field field : match.getClass().getDeclaredFields()) {

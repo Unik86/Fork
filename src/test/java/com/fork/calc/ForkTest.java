@@ -25,4 +25,15 @@ public class ForkTest {
         assertThat(fork.getWinSumRight(), is(93.47));
     }
 
+    @Test
+    public void testCalcException() {
+        Bet bet = new Bet(null, null);
+
+        Fork fork = new Fork(bet, 100D);
+        fork.calc();
+
+        Fork fork2 = new Fork(null, null);
+        fork2.calc();
+    }
+
 }
