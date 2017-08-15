@@ -10,9 +10,13 @@ public class Fork {
     private Double allSum;
 
     private Double forkRate;
+
     private Double sumRight;
+    private Double sumCenter;
     private Double sumLeft;
+
     private Double winSumRight;
+    private Double winSumCenter;
     private Double winSumLeft;
 
     public Fork(Bet bet) {
@@ -30,7 +34,15 @@ public class Fork {
             return;
 
         // В = 1/К1 + 1/К2 + 1/К3
-        forkRate =  round(1/bet.getRight() + 1/bet.getLeft());
+        if(bet.getCenter() != null) {
+            forkRate =  round(1/bet.getRight() + 1/bet.getCenter() + 1/bet.getLeft());
+            sumCenter =  round((1/bet.getCenter()/forkRate) * allSum);
+            winSumCenter = round(sumCenter * bet.getCenter());
+        }
+        else {
+            forkRate =  round(1/bet.getRight() + 1/bet.getLeft());
+        }
+
         // Р = (1/К/В)*С
         sumRight =  round((1/bet.getRight()/forkRate) * allSum);
         sumLeft =  round((1/bet.getLeft()/forkRate) * allSum);
@@ -71,5 +83,13 @@ public class Fork {
 
     public Double getWinSumLeft() {
         return winSumLeft;
+    }
+
+    public Double getSumCenter() {
+        return sumCenter;
+    }
+
+    public Double getWinSumCenter() {
+        return winSumCenter;
     }
 }
