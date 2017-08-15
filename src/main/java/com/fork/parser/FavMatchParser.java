@@ -2,6 +2,7 @@ package com.fork.parser;
 
 import com.fork.model.Bet;
 import com.fork.model.Match;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -10,13 +11,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class FavMatchParser implements Parser{
 
-    private WebDriver driver = new ChromeDriver();
+    private final static Logger logger = Logger.getLogger(FavMatchParser.class);
 
-    public FavMatchParser(String url) {
+    private static String URL = "https://www.favbet.com";
+
+    public FavMatchParser() {
         try {
-            driver.navigate().to(url);
+            driver.navigate().to(URL);
             Thread.sleep(6000);
-            driver.navigate().to(url);
+            driver.navigate().to(URL);
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -24,21 +27,25 @@ public class FavMatchParser implements Parser{
     }
 
     @Override
-    public Match pars() {
-        match.setWinner(parsBet("Победа"));
+    public void pars() {
+        parsMatch();
+    }
 
-        match.setTotal05(parsComplexBet("Тотал", "Больше (0.5)", "Меньше (0.5)"));
-        match.setTotal15(parsComplexBet("Тотал", "Больше (1.5)", "Меньше (1.5)"));
-        match.setTotal25(parsComplexBet("Тотал", "Больше (2.5)", "Меньше (2.5)"));
-        match.setTotal35(parsComplexBet("Тотал", "Больше (3.5)", "Меньше (3.5)"));
-        match.setTotal45(parsComplexBet("Тотал", "Больше (4.5)", "Меньше (4.5)"));
-        match.setTotal55(parsComplexBet("Тотал", "Больше (5.5)", "Меньше (5.5)"));
-        match.setTotal65(parsComplexBet("Тотал", "Больше (6.5)", "Меньше (6.5)"));
-        match.setTotal75(parsComplexBet("Тотал", "Больше (7.5)", "Меньше (7.5)"));
-        match.setTotal85(parsComplexBet("Тотал", "Больше (8.5)", "Меньше (8.5)"));
-        match.setTotal95(parsComplexBet("Тотал", "Больше (9.5)", "Меньше (9.5)"));
+    private Match parsMatch() {
+//        match.setWinner(parsBet("Победа"));
+//
+//        match.setTotal05(parsComplexBet("Тотал", "Больше (0.5)", "Меньше (0.5)"));
+//        match.setTotal15(parsComplexBet("Тотал", "Больше (1.5)", "Меньше (1.5)"));
+//        match.setTotal25(parsComplexBet("Тотал", "Больше (2.5)", "Меньше (2.5)"));
+//        match.setTotal35(parsComplexBet("Тотал", "Больше (3.5)", "Меньше (3.5)"));
+//        match.setTotal45(parsComplexBet("Тотал", "Больше (4.5)", "Меньше (4.5)"));
+//        match.setTotal55(parsComplexBet("Тотал", "Больше (5.5)", "Меньше (5.5)"));
+//        match.setTotal65(parsComplexBet("Тотал", "Больше (6.5)", "Меньше (6.5)"));
+//        match.setTotal75(parsComplexBet("Тотал", "Больше (7.5)", "Меньше (7.5)"));
+//        match.setTotal85(parsComplexBet("Тотал", "Больше (8.5)", "Меньше (8.5)"));
+//        match.setTotal95(parsComplexBet("Тотал", "Больше (9.5)", "Меньше (9.5)"));
 
-        return match;
+        return null;
     }
 
     private Bet parsComplexBet(String baseName, String LeftName, String RightName) {
@@ -55,7 +62,7 @@ public class FavMatchParser implements Parser{
                            Double.parseDouble(element2.getText()));
 
         } catch (Exception e) {
-            //TODO log
+            logger.error(e.getMessage(), e);
             return null;
         }
     }
@@ -78,7 +85,7 @@ public class FavMatchParser implements Parser{
             }
 
         } catch (Exception e) {
-            //TODO log
+            logger.error(e.getMessage(), e);
             return null;
         }
     }

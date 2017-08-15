@@ -1,25 +1,66 @@
 package com.fork.parser;
 
+import com.fork.Mian;
 import com.fork.model.Bet;
 import com.fork.model.Match;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 public class WillMatchParser implements Parser{
 
-    public WillMatchParser(String url) {
-        driver.navigate().to(url);
+    private final static Logger logger = Logger.getLogger(WillMatchParser.class);
 
-        Select select = new Select(driver.findElement(By.name("time_zone")));
-        select.selectByVisibleText("Европа/Киев (GMT+2)");
+    private static String URL = "http://sports.williamhill.com/bet/ru";
 
-        driver.findElement(By.id("yesBtn")).click();
+    public WillMatchParser() {
+        logger.info("Enter the site" + URL);
+        goToLiveFootballTab();
+    }
+
+    private void goToLiveFootballTab(){
+        driver.navigate().to(URL);
+
+        try {
+            Select timeZone = new Select(driver.findElement(By.name("time_zone")));
+            timeZone.selectByVisibleText("Европа/Киев (GMT+2)");
+            driver.findElement(By.id("yesBtn")).click();
+        } catch (Exception e){
+
+        }
+
+        driver.findElement(By.linkText("Ставки Live")).click();
+
+        Select changeSport = new Select(driver.findElement(By.id("change_sport")));
+        changeSport.selectByVisibleText("Футбол");
     }
 
     @Override
-    public Match pars() {
+    public void pars() {
+        parsLiveMatches();
+        for(Match match : matchs){
+            parsMatch(match);
+        }
+        goToLiveFootballTab();
+    }
+
+    private void parsLiveMatches(){
+        logger.info("Pars live matches");
+
+        List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr/td[3]/a"));
+        for(WebElement element : elements){
+            Match match = new Match(element.getText(), element.getAttribute("href"));
+            matchs.add(match);
+        }
+    }
+
+    private Match parsMatch(Match match) {
+        driver.navigate().to(match.getUrl());
+
         match.setWinner(parsBet("Победитель встречи Live"));
 
         match.setTotal05(parsBet("Игра - Больше/Меньше 0.5 голов Live"));
@@ -53,7 +94,6 @@ public class WillMatchParser implements Parser{
             }
 
         } catch (Exception e) {
-            //TODO log
             return null;
         }
     }

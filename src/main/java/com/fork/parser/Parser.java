@@ -5,41 +5,53 @@ import com.fork.model.Match;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.fork.util.Utils.fixLengthStr;
 
 public interface Parser {
 
     WebDriver driver = new ChromeDriver();
-    Match match = new Match();
+    List<Match> matchs = new ArrayList<>();
 
-    public Match pars();
+    public void pars();
 
     public default void print() {
-        for (Field field : match.getClass().getDeclaredFields()) {
-            try {
-                field.setAccessible(true);
-                Bet bet = (Bet) field.get(match);
+        for (Match match : matchs) {
+            for (Field field : match.getClass().getDeclaredFields()) {
+                try {
+                    field.setAccessible(true);
 
-                if(bet == null)
-                    continue;
+                    Object obj = field.get(match);
 
-                System.out.println();
-                System.out.println("*** " + field.getName() + " ***");
-                System.out.println();
+                    if(obj == null)
+                        continue;
 
-                System.out.print(fixLengthStr(bet.getLeft().toString(), 5));
-                System.out.print(" | ");
+                    if(!(obj instanceof Bet)) {
+                        System.out.println("-----" + obj);
+                        continue;
+                    }
 
-                if(bet.getCenter() != null) {
-                    System.out.print(fixLengthStr(bet.getCenter().toString(), 5));
+                    Bet bet = (Bet) obj;
+
+                    System.out.println();
+                    System.out.println(field.getName());
+                    System.out.println();
+
+                    System.out.print(fixLengthStr(bet.getLeft().toString(), 5));
                     System.out.print(" | ");
-                }
-                System.out.print(fixLengthStr(bet.getRight().toString(), 5));
 
-                System.out.println();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                    if (bet.getCenter() != null) {
+                        System.out.print(fixLengthStr(bet.getCenter().toString(), 5));
+                        System.out.print(" | ");
+                    }
+                    System.out.print(fixLengthStr(bet.getRight().toString(), 5));
+
+                    System.out.println();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

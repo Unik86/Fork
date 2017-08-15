@@ -2,6 +2,9 @@ package com.fork.model;
 
 public class Match {
 
+    private String players;
+    private String url;
+
     private Bet winner;
 
     private Bet total05;
@@ -14,6 +17,19 @@ public class Match {
     private Bet total75;
     private Bet total85;
     private Bet total95;
+
+    public Match(String players, String url) {
+        this.players = players;
+        this.url = url;
+    }
+
+    public String getPlayers() {
+        return players;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 
     public Bet getWinner() {
         return winner;
