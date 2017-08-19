@@ -21,6 +21,7 @@ public class FavMatchParser implements Parser{
             Thread.sleep(6000);
             driver.navigate().to(URL);
             Thread.sleep(3000);
+            // driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

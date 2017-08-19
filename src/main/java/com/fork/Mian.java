@@ -15,7 +15,7 @@ public class Mian {
 
         Parser will = new WillMatchParser();
         will.pars();
-        will.print();
+//        will.print();
 //        Parser fav = new FavMatchParser();
 //        MatchService service = new MatchService();
 //

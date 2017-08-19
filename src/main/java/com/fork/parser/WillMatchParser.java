@@ -4,12 +4,16 @@ import com.fork.Mian;
 import com.fork.model.Bet;
 import com.fork.model.Match;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class WillMatchParser implements Parser{
 
@@ -23,7 +27,8 @@ public class WillMatchParser implements Parser{
     }
 
     private void goToLiveFootballTab(){
-        driver.navigate().to(URL);
+        driver.get(URL);
+//        driver.manage().window().maximize();
 
         try {
             Select timeZone = new Select(driver.findElement(By.name("time_zone")));
@@ -43,9 +48,22 @@ public class WillMatchParser implements Parser{
     public void pars() {
         parsLiveMatches();
         for(Match match : matchs){
+            // delete this
+            if(matchs.indexOf(match) > 2)
+                return;
+
+            openTab(match);
             parsMatch(match);
         }
         goToLiveFootballTab();
+    }
+
+    private void openTab(Match match){
+        ((JavascriptExecutor) driver).executeScript("window.open('','_blank');");
+
+        ArrayList<String> tabs = new ArrayList<> (driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(matchs.indexOf(match)) + 1);
+        driver.get(match.getUrl());
     }
 
     private void parsLiveMatches(){
@@ -59,8 +77,6 @@ public class WillMatchParser implements Parser{
     }
 
     private Match parsMatch(Match match) {
-        driver.navigate().to(match.getUrl());
-
         match.setWinner(parsBet("Победитель встречи Live"));
 
         match.setTotal05(parsBet("Игра - Больше/Меньше 0.5 голов Live"));
