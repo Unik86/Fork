@@ -14,8 +14,11 @@ public class Mian {
         logger.info("** Start **");
 
         Parser will = new WillMatchParser();
-        will.pars();
-//        will.print();
+        while (true) {
+            will.pars();
+            will.print();
+            Thread.sleep(10000);
+        }
 //        Parser fav = new FavMatchParser();
 //        MatchService service = new MatchService();
 //
@@ -25,7 +28,7 @@ public class Mian {
 //            Thread.sleep(10000);
 //        }
 
-        logger.info("** End **");
+//        logger.info("** End **");
     }
 
 }

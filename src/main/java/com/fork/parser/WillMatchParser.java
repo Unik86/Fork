@@ -1,25 +1,17 @@
 package com.fork.parser;
 
-import com.fork.Mian;
 import com.fork.model.Bet;
 import com.fork.model.Match;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-
-import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class WillMatchParser implements Parser{
+public class WillMatchParser extends Parser{
 
     private final static Logger logger = Logger.getLogger(WillMatchParser.class);
 
-    private static String URL = "http://sports.williamhill.com/bet/ru";
+    private final static String URL = "http://sports.williamhill.com/bet/ru";
 
     public WillMatchParser() {
         logger.info("Enter the site" + URL);
@@ -27,8 +19,8 @@ public class WillMatchParser implements Parser{
     }
 
     private void goToLiveFootballTab(){
+        driver.manage().window().maximize();
         driver.get(URL);
-//        driver.manage().window().maximize();
 
         try {
             Select timeZone = new Select(driver.findElement(By.name("time_zone")));
@@ -48,7 +40,7 @@ public class WillMatchParser implements Parser{
     public void pars() {
         parsLiveMatches();
         for(Match match : matchs){
-            // delete this
+            // DELETE
             if(matchs.indexOf(match) > 2)
                 return;
 
@@ -56,14 +48,6 @@ public class WillMatchParser implements Parser{
             parsMatch(match);
         }
         goToLiveFootballTab();
-    }
-
-    private void openTab(Match match){
-        ((JavascriptExecutor) driver).executeScript("window.open('','_blank');");
-
-        ArrayList<String> tabs = new ArrayList<> (driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(matchs.indexOf(match)) + 1);
-        driver.get(match.getUrl());
     }
 
     private void parsLiveMatches(){

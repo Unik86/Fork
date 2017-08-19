@@ -9,11 +9,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class FavMatchParser implements Parser{
+public class FavMatchParser extends Parser{
 
     private final static Logger logger = Logger.getLogger(FavMatchParser.class);
 
-    private static String URL = "https://www.favbet.com";
+    private final static String URL = "https://www.favbet.com";
 
     public FavMatchParser() {
         try {
