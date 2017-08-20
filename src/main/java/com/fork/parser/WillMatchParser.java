@@ -14,11 +14,17 @@ public class WillMatchParser extends Parser{
     private final static String URL = "http://sports.williamhill.com/bet/ru";
 
     public WillMatchParser() {
-        logger.info("Enter the site" + URL);
+        logger.info("Enter the site " + URL);
         goToLiveFootballTab();
     }
 
-    private void goToLiveFootballTab(){
+    @Override
+    protected void parsMainRates(){
+
+    }
+
+    @Override
+    protected void goToLiveFootballTab(){
         driver.manage().window().maximize();
         driver.get(URL);
 
@@ -37,20 +43,7 @@ public class WillMatchParser extends Parser{
     }
 
     @Override
-    public void pars() {
-        parsLiveMatches();
-        for(Match match : matchs){
-            // DELETE
-            if(matchs.indexOf(match) > 2)
-                return;
-
-            openTab(match);
-            parsMatch(match);
-        }
-        goToLiveFootballTab();
-    }
-
-    private void parsLiveMatches(){
+    protected void parsLiveMatches(){
         logger.info("Pars live matches");
 
         List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr/td[3]/a"));
@@ -60,7 +53,8 @@ public class WillMatchParser extends Parser{
         }
     }
 
-    private Match parsMatch(Match match) {
+    @Override
+    protected Match parsMatch(Match match) {
         match.setWinner(parsBet("Победитель встречи Live"));
 
         match.setTotal05(parsBet("Игра - Больше/Меньше 0.5 голов Live"));

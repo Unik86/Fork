@@ -13,12 +13,13 @@ public class Mian {
     public static void main(String[] args) throws InterruptedException {
         logger.info("** Start **");
 
-        Parser will = new WillMatchParser();
-        while (true) {
-            will.pars();
-            will.print();
-            Thread.sleep(10000);
-        }
+        Parser fav = new FavMatchParser();
+//        while (true) {
+        fav.parsAllRates();
+//        fav.print();
+//            Thread.sleep(10000);
+//        }
+
 //        Parser fav = new FavMatchParser();
 //        MatchService service = new MatchService();
 //

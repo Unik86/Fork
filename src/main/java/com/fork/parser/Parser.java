@@ -19,9 +19,30 @@ public abstract class Parser {
     protected List<Match> matchs = new ArrayList<>();
     protected Map<String, String> tabs = new HashMap<>();
 
-    public abstract void pars();
+    protected abstract void parsLiveMatches();
 
-    protected void openTab(Match match){
+    protected abstract Match parsMatch(Match match);
+
+    protected abstract void goToLiveFootballTab();
+
+    protected abstract void parsMainRates();
+
+    public void parsAllRates() {
+        parsLiveMatches();
+
+        for(Match match : matchs){
+            // DELETE
+            if(matchs.indexOf(match) > 2)
+                return;
+
+            openTab(match);
+            parsMatch(match);
+        }
+
+        goToLiveFootballTab();
+    }
+
+    private void openTab(Match match){
 
         if(tabs.containsKey(match.getUrl())) {
             driver.switchTo().window(tabs.get(match.getUrl()));
