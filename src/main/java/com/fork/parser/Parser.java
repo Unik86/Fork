@@ -25,7 +25,7 @@ public abstract class Parser {
 
     protected abstract void goToLiveFootballTab();
 
-    protected abstract void parsMainRates();
+    public abstract void parsMainRates();
 
     public void parsAllRates() {
         parsLiveMatches();
@@ -59,10 +59,6 @@ public abstract class Parser {
 
     public void print() {
         for (Match match : matchs) {
-            // DELETE
-            if(matchs.indexOf(match) > 2)
-                return;
-
             for (Field field : match.getClass().getDeclaredFields()) {
                 try {
                     field.setAccessible(true);

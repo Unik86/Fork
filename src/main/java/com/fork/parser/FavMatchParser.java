@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavMatchParser extends Parser{
@@ -20,11 +22,6 @@ public class FavMatchParser extends Parser{
     }
 
     @Override
-    protected void parsMainRates(){
-
-    }
-
-    @Override
     protected void goToLiveFootballTab(){
         try {
             driver.manage().window().maximize();
@@ -34,6 +31,35 @@ public class FavMatchParser extends Parser{
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             logger.error(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void parsMainRates(){
+        logger.info("Pars main rates");
+
+        List<WebElement> elements = driver.findElements(By.xpath("//div[contains(@class, 'event--head-block')]"));
+
+        for(WebElement element : elements){
+            WebElement elementName = element.findElement(By.className("event--name"));
+            WebElement elementRates = element.findElement(By.className("count-0"));
+
+            String[] rates = elementRates.getText().split("\n");
+            Bet bet = null;
+
+            if(rates.length == 3)
+                bet = new Bet(Double.parseDouble(rates[0]),
+                              Double.parseDouble(rates[1]),
+                              Double.parseDouble(rates[2]));
+            else if(rates.length == 2)
+                bet = new Bet(Double.parseDouble(rates[0]),
+                              Double.parseDouble(rates[1]));
+            else
+                continue;
+
+            Match match = new Match(elementName.getText(), null);
+            match.setWinner(bet);
+            matchs.add(match);
         }
     }
 

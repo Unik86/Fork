@@ -19,7 +19,7 @@ public class WillMatchParser extends Parser{
     }
 
     @Override
-    protected void parsMainRates(){
+    public void parsMainRates(){
 
     }
 
