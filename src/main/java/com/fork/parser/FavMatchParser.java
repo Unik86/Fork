@@ -7,14 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavMatchParser extends Parser{
 
     private final static Logger logger = Logger.getLogger(FavMatchParser.class);
 
-    private final static String URL = "https://www.favbet.com";
+    private final static String URL = "https://www.favbet.com/en/live/#sports=1";
 
     public FavMatchParser() {
         logger.info("Enter the site " + URL);
@@ -27,8 +26,6 @@ public class FavMatchParser extends Parser{
             driver.manage().window().maximize();
             driver.navigate().to(URL);
             Thread.sleep(6000);
-            driver.findElement(By.xpath("//span[text()='LIVE']/parent::a")).click();
-            Thread.sleep(3000);
         } catch (InterruptedException e) {
             logger.error(e.getMessage(), e);
         }

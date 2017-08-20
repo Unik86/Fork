@@ -11,16 +11,11 @@ public class WillMatchParser extends Parser{
 
     private final static Logger logger = Logger.getLogger(WillMatchParser.class);
 
-    private final static String URL = "http://sports.williamhill.com/bet/ru";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betlive/9";
 
     public WillMatchParser() {
         logger.info("Enter the site " + URL);
         goToLiveFootballTab();
-    }
-
-    @Override
-    public void parsMainRates(){
-
     }
 
     @Override
@@ -30,16 +25,41 @@ public class WillMatchParser extends Parser{
 
         try {
             Select timeZone = new Select(driver.findElement(By.name("time_zone")));
-            timeZone.selectByVisibleText("Европа/Киев (GMT+2)");
+            timeZone.selectByVisibleText("Europe/Kiev");
             driver.findElement(By.id("yesBtn")).click();
         } catch (Exception e){
 
         }
 
-        driver.findElement(By.linkText("Ставки Live")).click();
+        Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
+        rateFormat.selectByVisibleText("Decimal");
+    }
 
-        Select changeSport = new Select(driver.findElement(By.id("change_sport")));
-        changeSport.selectByVisibleText("Футбол");
+    @Override
+    public void parsMainRates(){
+        logger.info("Pars main rates");
+
+        List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr"));
+
+        for(WebElement element : elements){
+            WebElement elementName = element.findElement(By.tagName("span"));
+            List<WebElement> elementRates = element.findElements(By.className("eventprice"));
+            Bet bet = null;
+
+            if(elementRates.size() == 3)
+                bet = new Bet(Double.parseDouble(elementRates.get(0).getText()),
+                              Double.parseDouble(elementRates.get(1).getText()),
+                              Double.parseDouble(elementRates.get(2).getText()));
+            else if(elementRates.size() == 2)
+                bet = new Bet(Double.parseDouble(elementRates.get(0).getText()),
+                              Double.parseDouble(elementRates.get(1).getText()));
+            else
+                continue;
+
+            Match match = new Match(elementName.getText(), null);
+            match.setWinner(bet);
+            matchs.add(match);
+        }
     }
 
     @Override

@@ -4,7 +4,11 @@ import com.fork.calc.MatchService;
 import com.fork.parser.FavMatchParser;
 import com.fork.parser.Parser;
 import com.fork.parser.WillMatchParser;
+import info.debatty.java.stringsimilarity.JaroWinkler;
+import info.debatty.java.stringsimilarity.Levenshtein;
 import org.apache.log4j.Logger;
+
+import static java.awt.SystemColor.info;
 
 public class Mian {
 
@@ -13,12 +17,16 @@ public class Mian {
     public static void main(String[] args) throws InterruptedException {
         logger.info("** Start **");
 
-        Parser fav = new FavMatchParser();
-        while (true) {
-            fav.parsMainRates();
-            fav.print();
-            Thread.sleep(10000);
-        }
+//        JaroWinkler l = new JaroWinkler();
+//        System.out.println(l.similarity("Qingdao Jonoon", "Qingdao Jonoon"));
+
+
+        Parser will = new FavMatchParser();
+//        while (true) {
+        will.parsMainRates();
+        will.print();
+//            Thread.sleep(10000);
+//        }
 
 //        Parser fav = new FavMatchParser();
 //        MatchService service = new MatchService();
