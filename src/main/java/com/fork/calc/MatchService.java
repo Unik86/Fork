@@ -2,15 +2,47 @@ package com.fork.calc;
 
 import com.fork.model.Bet;
 import com.fork.model.Match;
+import info.debatty.java.stringsimilarity.JaroWinkler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MatchService {
 
+    public void findForkForMainRates(List<Match> ... sites){
+        List<List<Bet>> bets = rearrange(sites);
+        calcFork(bets);
+    }
+
+    private List<List<Bet>> rearrange(List<Match>[] sites){
+        JaroWinkler similar = new JaroWinkler();
+        List<List<Bet>> bets = new ArrayList<>();
+
+        // TODO for many sites
+        for(Match match1 : sites[0]){
+            for(Match match2 : sites[1]){
+                Double left = similar.similarity(match1.getPlayerLeft(), match2.getPlayerLeft());
+                Double right = similar.similarity(match1.getPlayerRight(), match2.getPlayerRight());
+
+                if(left > 0.7 || right > 0.7){
+                    List<Bet> list = new ArrayList<>();
+                    list.add(match1.getWinner());
+                    list.add(match2.getWinner());
+                    bets.add(list);
+                }
+
+            }
+        }
+
+        return bets;
+    }
+
     public void findFork(Match... matches){
         List<List<Bet>> bets = rearrange(matches);
+        calcFork(bets);
+    }
 
+    private void calcFork(List<List<Bet>> bets){
         for (List<Bet> list : bets) {
             MaxBetBuilder builder = new MaxBetBuilder();
             Bet maxBet = builder.calc(list);

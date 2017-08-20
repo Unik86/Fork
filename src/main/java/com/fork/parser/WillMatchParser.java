@@ -36,7 +36,7 @@ public class WillMatchParser extends Parser{
     }
 
     @Override
-    public void parsMainRates(){
+    public List<Match> parsMainRates(){
         logger.info("Pars main rates");
 
         List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr"));
@@ -61,11 +61,13 @@ public class WillMatchParser extends Parser{
                 continue;
 
             Match match = new Match();
-            match.setPlayerLeft(names[0]);
-            match.setPlayerRight(names[1]);
+            match.setPlayerLeft(names[0].trim());
+            match.setPlayerRight(names[1].trim());
             match.setWinner(bet);
             matchs.add(match);
         }
+
+        return matchs;
     }
 
     @Override
@@ -79,8 +81,8 @@ public class WillMatchParser extends Parser{
                 continue;
 
             Match match = new Match();
-            match.setPlayerRight(names[0]);
-            match.setPlayerLeft(names[1]);
+            match.setPlayerRight(names[0].trim());
+            match.setPlayerLeft(names[1].trim());
             matchs.add(match);
         }
     }

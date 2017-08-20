@@ -32,7 +32,7 @@ public class FavMatchParser extends Parser{
     }
 
     @Override
-    public void parsMainRates(){
+    public List<Match> parsMainRates(){
         logger.info("Pars main rates");
 
         List<WebElement> elements = driver.findElements(By.xpath("//div[contains(@class, 'event--head-block')]"));
@@ -64,6 +64,8 @@ public class FavMatchParser extends Parser{
             match.setWinner(bet);
             matchs.add(match);
         }
+
+        return matchs;
     }
 
     @Override

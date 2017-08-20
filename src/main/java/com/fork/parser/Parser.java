@@ -25,7 +25,7 @@ public abstract class Parser {
 
     protected abstract void goToLiveFootballTab();
 
-    public abstract void parsMainRates();
+    public abstract List<Match> parsMainRates();
 
     public void parsAllRates() {
         parsLiveMatches();

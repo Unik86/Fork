@@ -21,18 +21,12 @@ public class Mian {
 //        System.out.println(l.similarity("Qingdao Jonoon", "Qingdao Jonoon"));
 
 
-        Parser will = new FavMatchParser();
-//        while (true) {
-        will.parsMainRates();
-        will.print();
-//            Thread.sleep(10000);
-//        }
+        Parser will = new WillMatchParser();
+        Parser fav = new FavMatchParser();
+        MatchService service = new MatchService();
 
-//        Parser fav = new FavMatchParser();
-//        MatchService service = new MatchService();
-//
 //        while (true) {
-//            service.findFork(will.pars(), fav.pars());
+            service.findForkForMainRates(will.parsMainRates(), fav.parsMainRates());
 //            System.out.println("+++++");
 //            Thread.sleep(10000);
 //        }
