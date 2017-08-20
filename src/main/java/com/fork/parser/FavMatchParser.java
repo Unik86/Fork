@@ -41,6 +41,10 @@ public class FavMatchParser extends Parser{
             WebElement elementName = element.findElement(By.className("event--name"));
             WebElement elementRates = element.findElement(By.className("count-0"));
 
+            String[] names = elementName.getText().split("\n");
+            if(names.length < 2)
+                continue;
+
             String[] rates = elementRates.getText().split("\n");
             Bet bet = null;
 
@@ -54,7 +58,9 @@ public class FavMatchParser extends Parser{
             else
                 continue;
 
-            Match match = new Match(elementName.getText(), null);
+            Match match = new Match();
+            match.setPlayerLeft(names[0]);
+            match.setPlayerRight(names[1]);
             match.setWinner(bet);
             matchs.add(match);
         }
@@ -71,7 +77,15 @@ public class FavMatchParser extends Parser{
         try {
             for(WebElement element : elements){
                 element.click();
-                Match match = new Match(element.getText(), driver.getCurrentUrl());
+
+                String[] names = element.getText().split("\n");
+                if(names.length < 2)
+                    continue;
+
+                Match match = new Match();
+                match.setPlayerRight(names[0]);
+                match.setPlayerLeft(names[1]);
+                match.setUrl(driver.getCurrentUrl());
                 matchs.add(match);
 
                 Thread.sleep(1000);

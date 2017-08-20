@@ -2,7 +2,8 @@ package com.fork.model;
 
 public class Match {
 
-    private String players;
+    private String playerLeft;
+    private String playerRight;
     private String url;
 
     private Bet winner;
@@ -18,17 +19,28 @@ public class Match {
     private Bet total85;
     private Bet total95;
 
-    public Match(String players, String url) {
-        this.players = players;
-        this.url = url;
+    public String getPlayerLeft() {
+        return playerLeft;
     }
 
-    public String getPlayers() {
-        return players;
+    public void setPlayerLeft(String playerLeft) {
+        this.playerLeft = playerLeft;
+    }
+
+    public String getPlayerRight() {
+        return playerRight;
+    }
+
+    public void setPlayerRight(String playerRight) {
+        this.playerRight = playerRight;
     }
 
     public String getUrl() {
         return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Bet getWinner() {

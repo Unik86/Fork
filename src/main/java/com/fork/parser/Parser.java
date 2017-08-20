@@ -77,7 +77,6 @@ public abstract class Parser {
 
                     System.out.println();
                     System.out.println(field.getName());
-                    System.out.println();
 
                     System.out.print(fixLengthStr(bet.getLeft().toString(), 5));
                     System.out.print(" | ");
@@ -88,6 +87,7 @@ public abstract class Parser {
                     }
                     System.out.print(fixLengthStr(bet.getRight().toString(), 5));
 
+                    System.out.println();
                     System.out.println();
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();

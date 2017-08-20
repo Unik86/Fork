@@ -46,6 +46,10 @@ public class WillMatchParser extends Parser{
             List<WebElement> elementRates = element.findElements(By.className("eventprice"));
             Bet bet = null;
 
+            String[] names = elementName.getText().split(" v ");
+            if(names.length < 2)
+                continue;
+
             if(elementRates.size() == 3)
                 bet = new Bet(Double.parseDouble(elementRates.get(0).getText()),
                               Double.parseDouble(elementRates.get(1).getText()),
@@ -56,7 +60,9 @@ public class WillMatchParser extends Parser{
             else
                 continue;
 
-            Match match = new Match(elementName.getText(), null);
+            Match match = new Match();
+            match.setPlayerLeft(names[0]);
+            match.setPlayerRight(names[1]);
             match.setWinner(bet);
             matchs.add(match);
         }
@@ -68,7 +74,13 @@ public class WillMatchParser extends Parser{
 
         List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr/td[3]/a"));
         for(WebElement element : elements){
-            Match match = new Match(element.getText(), element.getAttribute("href"));
+            String[] names = element.getText().split(" v ");
+            if(names.length < 2)
+                continue;
+
+            Match match = new Match();
+            match.setPlayerRight(names[0]);
+            match.setPlayerLeft(names[1]);
             matchs.add(match);
         }
     }
