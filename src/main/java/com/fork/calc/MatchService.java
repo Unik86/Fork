@@ -2,21 +2,25 @@ package com.fork.calc;
 
 import com.fork.model.Bet;
 import com.fork.model.Match;
+import com.fork.parser.FavMatchParser;
 import info.debatty.java.stringsimilarity.JaroWinkler;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MatchService {
 
+    private final static Logger logger = Logger.getLogger(MatchService.class);
+
     public void findForkForMainRates(List<Match> ... sites){
-        List<List<Bet>> bets = rearrange(sites);
-        calcFork(bets);
+        List<List<Match>> mathes = rearrange(sites);
+        calcForkForMainRates(mathes);
     }
 
-    private List<List<Bet>> rearrange(List<Match>[] sites){
+    private List<List<Match>> rearrange(List<Match>[] sites){
         JaroWinkler similar = new JaroWinkler();
-        List<List<Bet>> bets = new ArrayList<>();
+        List<List<Match>> bets = new ArrayList<>();
 
         // TODO for many sites
         for(Match match1 : sites[0]){
@@ -24,17 +28,47 @@ public class MatchService {
                 Double left = similar.similarity(match1.getPlayerLeft(), match2.getPlayerLeft());
                 Double right = similar.similarity(match1.getPlayerRight(), match2.getPlayerRight());
 
-                if(left > 0.7 || right > 0.7){
-                    List<Bet> list = new ArrayList<>();
-                    list.add(match1.getWinner());
-                    list.add(match2.getWinner());
+                if(left > 0.8 && right > 0.8){
+                    List<Match> list = new ArrayList<>();
+                    list.add(match1);
+                    list.add(match2);
                     bets.add(list);
                 }
 
             }
         }
 
+        logger.info("Similar mathes = " + bets.size());
         return bets;
+    }
+
+    private void calcForkForMainRates(List<List<Match>> matches){
+        for (List<Match> list : matches) {
+            List<Bet> bets = new ArrayList<>();
+
+            for(Match match : list){
+                bets.add(match.getWinner());
+            }
+
+            MaxBetBuilder builder = new MaxBetBuilder();
+            Bet maxBet = builder.calc(bets);
+
+            Fork fork = new Fork(maxBet);
+            fork.calc();
+
+            if(fork.isHasFork()){
+                printPlayers(list);
+                fork.print();
+            }
+        }
+    }
+
+    private void printPlayers(List<Match> list){
+        for(Match match : list){
+            System.out.println("**********************************");
+            System.out.println(match.getPlayerLeft());
+            System.out.println(match.getPlayerRight());
+        }
     }
 
     public void findFork(Match... matches){

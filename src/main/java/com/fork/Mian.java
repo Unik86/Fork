@@ -25,11 +25,11 @@ public class Mian {
         Parser fav = new FavMatchParser();
         MatchService service = new MatchService();
 
-//        while (true) {
+        while (true) {
             service.findForkForMainRates(will.parsMainRates(), fav.parsMainRates());
-//            System.out.println("+++++");
-//            Thread.sleep(10000);
-//        }
+            System.out.println("=============================================================================");
+            Thread.sleep(20000);
+        }
 
 //        logger.info("** End **");
     }

@@ -5,6 +5,8 @@ import com.fork.model.Match;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class WillMatchParser extends Parser{
@@ -39,32 +41,40 @@ public class WillMatchParser extends Parser{
     public List<Match> parsMainRates(){
         logger.info("Pars main rates");
 
+        matchs = new ArrayList<>();
         List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr"));
 
         for(WebElement element : elements){
-            WebElement elementName = element.findElement(By.tagName("span"));
-            List<WebElement> elementRates = element.findElements(By.className("eventprice"));
-            Bet bet = null;
+            try {
+                WebElement elementName = element.findElement(By.tagName("span"));
+                List<WebElement> elementRates = element.findElements(By.className("eventprice"));
+                Bet bet = null;
 
-            String[] names = elementName.getText().split(" v ");
-            if(names.length < 2)
+                String[] names = elementName.getText().split(" v ");
+                if(names.length < 2)
+                    continue;
+
+
+                if (elementRates.size() == 3)
+                    bet = new Bet(Double.parseDouble(elementRates.get(0).getText()),
+                            Double.parseDouble(elementRates.get(1).getText()),
+                            Double.parseDouble(elementRates.get(2).getText()));
+                else if (elementRates.size() == 2)
+                    bet = new Bet(Double.parseDouble(elementRates.get(0).getText()),
+                            Double.parseDouble(elementRates.get(1).getText()));
+                else
+                    continue;
+
+
+                Match match = new Match();
+                match.setPlayerLeft(names[0].trim());
+                match.setPlayerRight(names[1].trim());
+                match.setWinner(bet);
+                matchs.add(match);
+            } catch (Exception e){
+                logger.error("Pars error");
                 continue;
-
-            if(elementRates.size() == 3)
-                bet = new Bet(Double.parseDouble(elementRates.get(0).getText()),
-                              Double.parseDouble(elementRates.get(1).getText()),
-                              Double.parseDouble(elementRates.get(2).getText()));
-            else if(elementRates.size() == 2)
-                bet = new Bet(Double.parseDouble(elementRates.get(0).getText()),
-                              Double.parseDouble(elementRates.get(1).getText()));
-            else
-                continue;
-
-            Match match = new Match();
-            match.setPlayerLeft(names[0].trim());
-            match.setPlayerRight(names[1].trim());
-            match.setWinner(bet);
-            matchs.add(match);
+            }
         }
 
         return matchs;

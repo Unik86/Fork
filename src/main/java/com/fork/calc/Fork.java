@@ -53,11 +53,13 @@ public class Fork {
 
     public void print(){
         System.out.println("----------");
-        System.out.println("rateRight = " + bet.getRight());
         System.out.println("rateLeft = " + bet.getLeft());
+        System.out.println("rateCenter = " + bet.getCenter());
+        System.out.println("rateRight = " + bet.getRight());
         System.out.println("forkRate = " + forkRate);
-        System.out.println("sumRight = " + sumRight + " = " + winSumRight);
         System.out.println("sumLeft = " + sumLeft + " = " + winSumLeft);
+        System.out.println("sumLeft = " + sumCenter + " = " + winSumCenter);
+        System.out.println("sumRight = " + sumRight + " = " + winSumRight);
         System.out.println("----------");
     }
 

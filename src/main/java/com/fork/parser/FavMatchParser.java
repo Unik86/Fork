@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavMatchParser extends Parser{
@@ -35,34 +36,40 @@ public class FavMatchParser extends Parser{
     public List<Match> parsMainRates(){
         logger.info("Pars main rates");
 
+        matchs = new ArrayList<>();
         List<WebElement> elements = driver.findElements(By.xpath("//div[contains(@class, 'event--head-block')]"));
 
         for(WebElement element : elements){
-            WebElement elementName = element.findElement(By.className("event--name"));
-            WebElement elementRates = element.findElement(By.className("count-0"));
+            try{
+                WebElement elementName = element.findElement(By.className("event--name"));
+                WebElement elementRates = element.findElement(By.className("count-0"));
 
-            String[] names = elementName.getText().split("\n");
-            if(names.length < 2)
+                String[] names = elementName.getText().split("\n");
+                if(names.length < 2)
+                    continue;
+
+                String[] rates = elementRates.getText().split("\n");
+                Bet bet = null;
+
+                if(rates.length == 3)
+                    bet = new Bet(Double.parseDouble(rates[0]),
+                                  Double.parseDouble(rates[1]),
+                                  Double.parseDouble(rates[2]));
+                else if(rates.length == 2)
+                    bet = new Bet(Double.parseDouble(rates[0]),
+                                  Double.parseDouble(rates[1]));
+                else
+                    continue;
+
+                Match match = new Match();
+                match.setPlayerLeft(names[0]);
+                match.setPlayerRight(names[1]);
+                match.setWinner(bet);
+                matchs.add(match);
+            } catch (Exception e){
+                logger.error("Pars error");
                 continue;
-
-            String[] rates = elementRates.getText().split("\n");
-            Bet bet = null;
-
-            if(rates.length == 3)
-                bet = new Bet(Double.parseDouble(rates[0]),
-                              Double.parseDouble(rates[1]),
-                              Double.parseDouble(rates[2]));
-            else if(rates.length == 2)
-                bet = new Bet(Double.parseDouble(rates[0]),
-                              Double.parseDouble(rates[1]));
-            else
-                continue;
-
-            Match match = new Match();
-            match.setPlayerLeft(names[0]);
-            match.setPlayerRight(names[1]);
-            match.setWinner(bet);
-            matchs.add(match);
+            }
         }
 
         return matchs;
