@@ -4,14 +4,12 @@ import com.fork.model.Bet;
 import com.fork.model.Match;
 import com.fork.parser.FavMatchParser;
 import info.debatty.java.stringsimilarity.JaroWinkler;
-import org.apache.log4j.Logger;
-
+import lombok.extern.log4j.Log4j;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j
 public class MatchService {
-
-    private final static Logger logger = Logger.getLogger(MatchService.class);
 
     public void findForkForMainRates(List<Match> ... sites){
         List<List<Match>> mathes = rearrange(sites);
@@ -38,7 +36,7 @@ public class MatchService {
             }
         }
 
-        logger.info("Similar mathes = " + bets.size());
+        log.info("Similar mathes = " + bets.size());
         return bets;
     }
 

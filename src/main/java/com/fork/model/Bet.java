@@ -1,9 +1,14 @@
 package com.fork.model;
 
+import lombok.Getter;
+
 public class Bet {
 
+    @Getter
     private Double left;
+    @Getter
     private Double center;
+    @Getter
     private Double right;
 
     public Bet(Double left, Double center, Double right) {
@@ -17,27 +22,4 @@ public class Bet {
         this.right = right;
     }
 
-    public Double getLeft() {
-        return left;
-    }
-
-    public Double getCenter() {
-        return center;
-    }
-
-    public Double getRight() {
-        return right;
-    }
-
-    public void setLeft(Double left) {
-        this.left = left;
-    }
-
-    public void setCenter(Double center) {
-        this.center = center;
-    }
-
-    public void setRight(Double right) {
-        this.right = right;
-    }
 }

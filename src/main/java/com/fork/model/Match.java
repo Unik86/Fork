@@ -1,133 +1,39 @@
 package com.fork.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Match {
 
+    @Getter @Setter
     private String playerLeft;
+    @Getter @Setter
     private String playerRight;
+    @Getter @Setter
     private String url;
 
+    @Getter @Setter
     private Bet winner;
 
+    @Getter @Setter
     private Bet total05;
+    @Getter @Setter
     private Bet total15;
+    @Getter @Setter
     private Bet total25;
+    @Getter @Setter
     private Bet total35;
+    @Getter @Setter
     private Bet total45;
+    @Getter @Setter
     private Bet total55;
+    @Getter @Setter
     private Bet total65;
+    @Getter @Setter
     private Bet total75;
+    @Getter @Setter
     private Bet total85;
+    @Getter @Setter
     private Bet total95;
 
-    public String getPlayerLeft() {
-        return playerLeft;
-    }
-
-    public void setPlayerLeft(String playerLeft) {
-        this.playerLeft = playerLeft;
-    }
-
-    public String getPlayerRight() {
-        return playerRight;
-    }
-
-    public void setPlayerRight(String playerRight) {
-        this.playerRight = playerRight;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Bet getWinner() {
-        return winner;
-    }
-
-    public void setWinner(Bet winner) {
-        this.winner = winner;
-    }
-
-    public Bet getTotal05() {
-        return total05;
-    }
-
-    public void setTotal05(Bet total05) {
-        this.total05 = total05;
-    }
-
-    public Bet getTotal15() {
-        return total15;
-    }
-
-    public void setTotal15(Bet total15) {
-        this.total15 = total15;
-    }
-
-    public Bet getTotal25() {
-        return total25;
-    }
-
-    public void setTotal25(Bet total25) {
-        this.total25 = total25;
-    }
-
-    public Bet getTotal35() {
-        return total35;
-    }
-
-    public void setTotal35(Bet total35) {
-        this.total35 = total35;
-    }
-
-    public Bet getTotal45() {
-        return total45;
-    }
-
-    public void setTotal45(Bet total45) {
-        this.total45 = total45;
-    }
-
-    public Bet getTotal55() {
-        return total55;
-    }
-
-    public void setTotal55(Bet total55) {
-        this.total55 = total55;
-    }
-
-    public Bet getTotal65() {
-        return total65;
-    }
-
-    public void setTotal65(Bet total65) {
-        this.total65 = total65;
-    }
-
-    public Bet getTotal75() {
-        return total75;
-    }
-
-    public void setTotal75(Bet total75) {
-        this.total75 = total75;
-    }
-
-    public Bet getTotal85() {
-        return total85;
-    }
-
-    public void setTotal85(Bet total85) {
-        this.total85 = total85;
-    }
-
-    public Bet getTotal95() {
-        return total95;
-    }
-
-    public void setTotal95(Bet total95) {
-        this.total95 = total95;
-    }
 }

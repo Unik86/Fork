@@ -2,26 +2,24 @@ package com.fork.parser;
 
 import com.fork.model.Bet;
 import com.fork.model.Match;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j
 public class WillMatchParser extends Parser{
 
-    private final static Logger logger = Logger.getLogger(WillMatchParser.class);
-
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betlive/9";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/1/Football.html";
 
     public WillMatchParser() {
-        logger.info("Enter the site " + URL);
-        goToLiveFootballTab();
+        log.info("Enter the site " + URL);
+        goToSite();
     }
 
-    @Override
-    protected void goToLiveFootballTab(){
+    private void goToSite(){
         driver.manage().window().maximize();
         driver.get(URL);
 
@@ -39,7 +37,7 @@ public class WillMatchParser extends Parser{
 
     @Override
     public List<Match> parsMainRates(){
-        logger.info("Pars main rates");
+        log.info("Pars main rates");
 
         matchs = new ArrayList<>();
         List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr"));
@@ -72,7 +70,7 @@ public class WillMatchParser extends Parser{
                 match.setWinner(bet);
                 matchs.add(match);
             } catch (Exception e){
-                logger.error("Pars error");
+                log.error("Pars error");
                 continue;
             }
         }
@@ -81,8 +79,23 @@ public class WillMatchParser extends Parser{
     }
 
     @Override
-    protected void parsLiveMatches(){
-        logger.info("Pars live matches");
+    public List<Match> parsAllRates() {
+        parsMatches();
+
+        for(Match match : matchs){
+            // DELETE
+            if(matchs.indexOf(match) > 2)
+                return matchs;
+
+            driver.get(match.getUrl());
+            parsMatch(match);
+        }
+
+        return matchs;
+    }
+
+    private void parsMatches(){
+        log.info("Pars matches");
 
         List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr/td[3]/a"));
         for(WebElement element : elements){
@@ -93,24 +106,26 @@ public class WillMatchParser extends Parser{
             Match match = new Match();
             match.setPlayerRight(names[0].trim());
             match.setPlayerLeft(names[1].trim());
+            match.setUrl(element.getAttribute("href"));
             matchs.add(match);
         }
+
+        log.info("Matches size = " + matchs.size());
     }
 
-    @Override
-    protected Match parsMatch(Match match) {
-        match.setWinner(parsBet("Победитель встречи Live"));
+    private Match parsMatch(Match match) {
+        match.setWinner(parsBet("90 Minutes"));
 
-        match.setTotal05(parsBet("Игра - Больше/Меньше 0.5 голов Live"));
-        match.setTotal15(parsBet("Игра - Больше/Меньше 1.5 голов Live"));
-        match.setTotal25(parsBet("Игра - Больше/Меньше 2.5 голов Live"));
-        match.setTotal35(parsBet("Игра - Больше/Меньше 3.5 голов Live"));
-        match.setTotal45(parsBet("Игра - Больше/Меньше 4.5 голов Live"));
-        match.setTotal55(parsBet("Игра - Больше/Меньше 5.5 голов Live"));
-        match.setTotal65(parsBet("Игра - Больше/Меньше 6.5 голов Live"));
-        match.setTotal75(parsBet("Игра - Больше/Меньше 7.5 голов Live"));
-        match.setTotal85(parsBet("Игра - Больше/Меньше 8.5 голов Live"));
-        match.setTotal95(parsBet("Игра - Больше/Меньше 9.5 голов Live"));
+        match.setTotal05(parsBet("Total Match Goals Over/Under 0.5 Goals"));
+        match.setTotal15(parsBet("Total Match Goals Over/Under 1.5 Goals"));
+        match.setTotal25(parsBet("Total Match Goals Over/Under 2.5 Goals"));
+        match.setTotal35(parsBet("Total Match Goals Over/Under 3.5 Goals"));
+        match.setTotal45(parsBet("Total Match Goals Over/Under 4.5 Goals"));
+        match.setTotal55(parsBet("Total Match Goals Over/Under 5.5 Goals"));
+        match.setTotal65(parsBet("Total Match Goals Over/Under 6.5 Goals"));
+        match.setTotal75(parsBet("Total Match Goals Over/Under 7.5 Goals"));
+        match.setTotal85(parsBet("Total Match Goals Over/Under 8.5 Goals"));
+        match.setTotal95(parsBet("Total Match Goals Over/Under 9.5 Goals"));
 
         return match;
     }
@@ -132,6 +147,7 @@ public class WillMatchParser extends Parser{
             }
 
         } catch (Exception e) {
+            log.error("Pars Error");
             return null;
         }
     }

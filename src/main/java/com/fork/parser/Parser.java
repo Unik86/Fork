@@ -17,45 +17,10 @@ public abstract class Parser {
 
     protected WebDriver driver = new ChromeDriver();
     protected List<Match> matchs = new ArrayList<>();
-    protected Map<String, String> tabs = new HashMap<>();
-
-    protected abstract void parsLiveMatches();
-
-    protected abstract Match parsMatch(Match match);
-
-    protected abstract void goToLiveFootballTab();
 
     public abstract List<Match> parsMainRates();
 
-    public void parsAllRates() {
-        parsLiveMatches();
-
-        for(Match match : matchs){
-            // DELETE
-            if(matchs.indexOf(match) > 2)
-                return;
-
-            openTab(match);
-            parsMatch(match);
-        }
-
-        goToLiveFootballTab();
-    }
-
-    private void openTab(Match match){
-
-        if(tabs.containsKey(match.getUrl())) {
-            driver.switchTo().window(tabs.get(match.getUrl()));
-            return;
-        }
-
-        ((JavascriptExecutor) driver).executeScript("window.open('','_blank');");
-        ArrayList<String> browserTabs = new ArrayList<> (driver.getWindowHandles());
-        String browserTab = browserTabs.get(browserTabs.size() - 1);
-        driver.switchTo().window(browserTab);
-        driver.get(match.getUrl());
-        tabs.put(match.getUrl(), browserTab);
-    }
+    public abstract List<Match> parsAllRates();
 
     public void print() {
         for (Match match : matchs) {

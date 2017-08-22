@@ -18,4 +18,6 @@ dependencies {
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     // https://mvnrepository.com/artifact/info.debatty/java-string-similarity
     compile group: 'info.debatty', name: 'java-string-similarity', version: '0.24'
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
 }

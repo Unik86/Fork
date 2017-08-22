@@ -2,7 +2,7 @@ package com.fork.parser;
 
 import com.fork.model.Bet;
 import com.fork.model.Match;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -10,31 +10,31 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j
 public class FavMatchParser extends Parser{
 
-    private final static Logger logger = Logger.getLogger(FavMatchParser.class);
-
-    private final static String URL = "https://www.favbet.com/en/live/#sports=1";
+    private final static String URL = "https://www.favbet.com/en/bets/#tours=17296";
 
     public FavMatchParser() {
-        logger.info("Enter the site " + URL);
-        goToLiveFootballTab();
+        log.info("Enter the site " + URL);
+        goToSite();
     }
 
-    @Override
-    protected void goToLiveFootballTab(){
+    protected void goToSite(){
         try {
             driver.manage().window().maximize();
             driver.navigate().to(URL);
             Thread.sleep(6000);
+            driver.navigate().to(URL);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 
     @Override
     public List<Match> parsMainRates(){
-        logger.info("Pars main rates");
+        log.info("Pars main rates");
 
         matchs = new ArrayList<>();
         List<WebElement> elements = driver.findElements(By.xpath("//div[contains(@class, 'event--head-block')]"));
@@ -67,7 +67,7 @@ public class FavMatchParser extends Parser{
                 match.setWinner(bet);
                 matchs.add(match);
             } catch (Exception e){
-                logger.error("Pars error");
+                log.error("Pars error");
                 continue;
             }
         }
@@ -76,15 +76,21 @@ public class FavMatchParser extends Parser{
     }
 
     @Override
-    protected void parsLiveMatches(){
-        logger.info("Pars live matches");
+    public List<Match> parsAllRates() {
+        parsMatches();
+        return matchs;
+    }
 
-//        List<WebElement> elements = driver.findElements(By.xpath("//div[contains(@class, 'event--head-block')]"
-//                + "//div[contains(@class, 'event--name two--name')]"));
+    private void parsMatches(){
+        log.info("Pars matches");
 
-        List<WebElement> elements = driver.findElements(By.xpath("//li[contains(@class, 'sprt sport sp_1 open')]/ul/li/div[1]"));
+        List<WebElement> elements = driver.findElements(By.xpath("//ul[contains(@class, 'category--list--block')]//div[contains(@class, 'event--name--info')]"));
         try {
             for(WebElement element : elements){
+                // DELETE
+                if(elements.indexOf(element) > 2)
+                    continue;
+
                 element.click();
 
                 String[] names = element.getText().split("\n");
@@ -92,32 +98,35 @@ public class FavMatchParser extends Parser{
                     continue;
 
                 Match match = new Match();
-                match.setPlayerRight(names[0]);
-                match.setPlayerLeft(names[1]);
+                match.setPlayerLeft(names[0]);
+                match.setPlayerRight(names[1]);
                 match.setUrl(driver.getCurrentUrl());
+
+                parsMatch(match);
                 matchs.add(match);
 
                 Thread.sleep(1000);
             }
         } catch (InterruptedException e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
+
+        log.info("Matches size = " + matchs.size());
     }
 
-    @Override
-    protected Match parsMatch(Match match) {
+    private Match parsMatch(Match match) {
         match.setWinner(parsBet("Победа"));
 
-        match.setTotal05(parsComplexBet("Тотал", "Больше (0.5)", "Меньше (0.5)"));
-        match.setTotal15(parsComplexBet("Тотал", "Больше (1.5)", "Меньше (1.5)"));
-        match.setTotal25(parsComplexBet("Тотал", "Больше (2.5)", "Меньше (2.5)"));
-        match.setTotal35(parsComplexBet("Тотал", "Больше (3.5)", "Меньше (3.5)"));
-        match.setTotal45(parsComplexBet("Тотал", "Больше (4.5)", "Меньше (4.5)"));
-        match.setTotal55(parsComplexBet("Тотал", "Больше (5.5)", "Меньше (5.5)"));
-        match.setTotal65(parsComplexBet("Тотал", "Больше (6.5)", "Меньше (6.5)"));
-        match.setTotal75(parsComplexBet("Тотал", "Больше (7.5)", "Меньше (7.5)"));
-        match.setTotal85(parsComplexBet("Тотал", "Больше (8.5)", "Меньше (8.5)"));
-        match.setTotal95(parsComplexBet("Тотал", "Больше (9.5)", "Меньше (9.5)"));
+        match.setTotal05(parsComplexBet("Over/Under", "Over (0.5)", "Under (0.5)"));
+        match.setTotal15(parsComplexBet("Over/Under", "Over (1.5)", "Under (1.5)"));
+        match.setTotal25(parsComplexBet("Over/Under", "Over (2.5)", "Under (2.5)"));
+        match.setTotal35(parsComplexBet("Over/Under", "Over (3.5)", "Under (3.5)"));
+        match.setTotal45(parsComplexBet("Over/Under", "Over (4.5)", "Under (4.5)"));
+        match.setTotal55(parsComplexBet("Over/Under", "Over (5.5)", "Under (5.5)"));
+        match.setTotal65(parsComplexBet("Over/Under", "Over (6.5)", "Under (6.5)"));
+        match.setTotal75(parsComplexBet("Over/Under", "Over (7.5)", "Under (7.5)"));
+        match.setTotal85(parsComplexBet("Over/Under", "Over (8.5)", "Under (8.5)"));
+        match.setTotal95(parsComplexBet("Over/Under", "Over (9.5)", "Under (9.5)"));
 
         return match;
     }
@@ -136,7 +145,7 @@ public class FavMatchParser extends Parser{
                            Double.parseDouble(element2.getText()));
 
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            log.error("Pars bet error");
             return null;
         }
     }
@@ -159,7 +168,7 @@ public class FavMatchParser extends Parser{
             }
 
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            log.error("Pars bet error");
             return null;
         }
     }
