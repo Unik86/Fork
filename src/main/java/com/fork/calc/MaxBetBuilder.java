@@ -15,7 +15,10 @@ public class MaxBetBuilder {
         if(bets == null)
             return null;
 
-        Bet maxBet = new Bet(0.0, 0.0, 0.0);
+        Bet maxBet = new Bet();
+        maxBet.setLeft(0.0);
+        maxBet.setCenter(0.0);
+        maxBet.setRight(0.0);
 
         for(Bet bet : bets) {
             if(bet == null || bet.getLeft() == null || bet.getRight() == null)

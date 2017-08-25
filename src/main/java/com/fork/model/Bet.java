@@ -1,25 +1,15 @@
 package com.fork.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 public class Bet {
 
-    @Getter
+    @Getter @Setter
     private Double left;
-    @Getter
+    @Getter @Setter
     private Double center;
-    @Getter
+    @Getter @Setter
     private Double right;
-
-    public Bet(Double left, Double center, Double right) {
-        this.left = left;
-        this.center = center;
-        this.right = right;
-    }
-
-    public Bet(Double left, Double right) {
-        this.left = left;
-        this.right = right;
-    }
 
 }

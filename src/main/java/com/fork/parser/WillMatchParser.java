@@ -53,14 +53,16 @@ public class WillMatchParser extends Parser{
                     continue;
 
 
-                if (elementRates.size() == 3)
-                    bet = new Bet(Double.parseDouble(elementRates.get(0).getText()),
-                            Double.parseDouble(elementRates.get(1).getText()),
-                            Double.parseDouble(elementRates.get(2).getText()));
-                else if (elementRates.size() == 2)
-                    bet = new Bet(Double.parseDouble(elementRates.get(0).getText()),
-                            Double.parseDouble(elementRates.get(1).getText()));
-                else
+                if (elementRates.size() == 3) {
+                    bet = new Bet();
+                    bet.setLeft(Double.parseDouble(elementRates.get(0).getText()));
+                    bet.setCenter(Double.parseDouble(elementRates.get(1).getText()));
+                    bet.setRight(Double.parseDouble(elementRates.get(2).getText()));
+                } else if (elementRates.size() == 2) {
+                    bet = new Bet();
+                    bet.setLeft(Double.parseDouble(elementRates.get(0).getText()));
+                    bet.setRight(Double.parseDouble(elementRates.get(1).getText()));
+                } else
                     continue;
 
 
@@ -138,12 +140,16 @@ public class WillMatchParser extends Parser{
             try {
                 WebElement element3 = driver.findElement(By.xpath("//span[contains(text(),'" + name + "')]/ancestor::table/tbody/tr/td[3]/div/div[1]"));
 
-                return new Bet(Double.parseDouble(element1.getText()),
-                               Double.parseDouble(element2.getText()),
-                               Double.parseDouble(element3.getText()));
+                Bet bet = new Bet();
+                bet.setLeft(Double.parseDouble(element1.getText()));
+                bet.setCenter(Double.parseDouble(element2.getText()));
+                bet.setRight(Double.parseDouble(element3.getText()));
+                return bet;
             } catch (NoSuchElementException e) {
-                return new Bet(Double.parseDouble(element1.getText()),
-                               Double.parseDouble(element2.getText()));
+                Bet bet = new Bet();
+                bet.setLeft(Double.parseDouble(element1.getText()));
+                bet.setRight(Double.parseDouble(element2.getText()));
+                return bet;
             }
 
         } catch (Exception e) {
