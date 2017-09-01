@@ -8,12 +8,25 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ForkController {
 
-    @RequestMapping(value = "/start", method = RequestMethod.GET)
-    public ModelAndView hello() {
+    private int cnt = 0;
+
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public ModelAndView start() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("start");
+        mav.setViewName("main");
 
         String str = "Hello World!";
+        mav.addObject("message", str);
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/get-data", method = RequestMethod.GET)
+    public ModelAndView btn() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("main");
+
+        String str = "Hello " + cnt++;
         mav.addObject("message", str);
 
         return mav;

@@ -33,7 +33,7 @@ dependencies {
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile group: 'info.debatty', name: 'java-string-similarity', version: '0.24'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
-
     compile('org.springframework.boot:spring-boot-starter-web','org.apache.tomcat.embed:tomcat-embed-jasper','javax.servlet:jstl')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
 }
