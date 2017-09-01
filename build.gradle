@@ -1,15 +1,22 @@
 group 'Fork'
-version '1.0-SNAPSHOT'
+version '5.01-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
 
-sourceCompatibility = 1.8
+war {
+    baseName = 'Fork'
+    version =  '5.01'
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    //Required dependency for JSP
+    providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
     // https://mvnrepository.com/artifact/junit/junit
     testCompile group: 'junit', name: 'junit', version: '4.12'
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
@@ -20,4 +27,8 @@ dependencies {
     compile group: 'info.debatty', name: 'java-string-similarity', version: '0.24'
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.6.RELEASE'
+    //Required dependency for JSP
+    providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
 }

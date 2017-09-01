@@ -10,7 +10,9 @@ public class ForkTest {
 
     @Test
     public void testCalcTwo() {
-        Bet bet = new Bet(2.5, 1.5);
+        Bet bet = new Bet();
+        bet.setLeft(2.5);
+        bet.setRight(1.5);
 
         Fork fork = new Fork(bet, 100D);
         fork.calc();
@@ -27,7 +29,10 @@ public class ForkTest {
 
     @Test
     public void testCalcThree() {
-        Bet bet = new Bet(2.5, 2.0,  1.5);
+        Bet bet = new Bet();
+        bet.setLeft(2.5);
+        bet.setCenter(2.0);
+        bet.setRight(1.5);
 
         Fork fork = new Fork(bet, 100D);
         fork.calc();
@@ -46,7 +51,9 @@ public class ForkTest {
 
     @Test
     public void testCalcException() {
-        Bet bet = new Bet(null, null);
+        Bet bet = new Bet();
+        bet.setLeft(null);
+        bet.setRight(null);
 
         Fork fork = new Fork(bet, 100D);
         fork.calc();
