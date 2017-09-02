@@ -10,6 +10,11 @@ public class ForkController {
 
     private int cnt = 0;
 
+    @RequestMapping("/")
+    public String index() {
+        return "Welcome to the home page!";
+    }
+
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView start() {
         ModelAndView mav = new ModelAndView();
