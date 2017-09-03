@@ -1,39 +1,53 @@
 package com.fork.controller;
 
+import com.fork.finder.FindForkService;
+import com.fork.model.Match;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
+@Log4j
 @Controller
 public class ForkController {
 
-    private int cnt = 0;
+    private FindForkService findForkService;
 
-    @RequestMapping("/")
-    public String index() {
-        return "Welcome to the home page!";
+    public ForkController(FindForkService findForkService) {
+        this.findForkService = findForkService;
     }
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public ModelAndView start() {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String main() {
+        return "main";
+    }
+
+    @RequestMapping(value = "/parse", method = RequestMethod.GET)
+    public ModelAndView parseButton() {
+        log.info("GET /parse [BEGIN]");
+
         ModelAndView mav = new ModelAndView();
         mav.setViewName("main");
 
-        String str = "Hello World!";
-        mav.addObject("message", str);
+        findForkService.findFork();
 
+        log.info("GET /parse [END]");
         return mav;
     }
 
-    @RequestMapping(value = "/get-data", method = RequestMethod.GET)
-    public ModelAndView btn() {
+    @RequestMapping(value = "/getWillMatches", method = RequestMethod.GET)
+    public ModelAndView getWillMatches() {
+        log.info("GET /getWillMatches [BEGIN]");
+
         ModelAndView mav = new ModelAndView();
         mav.setViewName("main");
 
-        String str = "Hello " + cnt++;
-        mav.addObject("message", str);
+        List<Match> matches =  findForkService.getWillMatches();
 
+        log.info("GET /getWillMatches [END]");
         return mav;
     }
 

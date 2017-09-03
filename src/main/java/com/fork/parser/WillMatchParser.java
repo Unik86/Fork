@@ -77,6 +77,7 @@ public class WillMatchParser extends Parser{
             }
         }
 
+        log.info("matchs size = " + matchs.size());
         return matchs;
     }
 
@@ -93,6 +94,7 @@ public class WillMatchParser extends Parser{
             parsMatch(match);
         }
 
+        log.info("matchs size = " + matchs.size());
         return matchs;
     }
 
@@ -111,8 +113,6 @@ public class WillMatchParser extends Parser{
             match.setUrl(element.getAttribute("href"));
             matchs.add(match);
         }
-
-        log.info("Matches size = " + matchs.size());
     }
 
     private Match parsMatch(Match match) {

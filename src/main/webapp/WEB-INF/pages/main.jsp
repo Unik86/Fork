@@ -12,9 +12,14 @@
     <div class="container">
       <div class="starter-template">
         <h1>Fork Application</h1>
-        <h2>Message: ${message}</h2>
       </div>
-      <button type="button" class="btn btn-primary" onclick="location.href='/get-data'">Get data</button>
+      <button type="button" class="btn btn-primary" onclick="location.href='/parse'">Parse</button>
+      <button type="button" class="btn btn-info" onclick="location.href='/getWillMatches'">WilliamHill</button>
+      <button type="button" class="btn btn-info">FavBet</button>
+    </div>
+
+    <div>
+
     </div>
 
   </body>

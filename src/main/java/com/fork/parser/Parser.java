@@ -19,46 +19,10 @@ public abstract class Parser {
     protected List<Match> matchs = new ArrayList<>();
 
     public abstract List<Match> parsMainRates();
-
     public abstract List<Match> parsAllRates();
 
-    public void print() {
-        for (Match match : matchs) {
-            for (Field field : match.getClass().getDeclaredFields()) {
-                try {
-                    field.setAccessible(true);
-
-                    Object obj = field.get(match);
-
-                    if(obj == null)
-                        continue;
-
-                    if(!(obj instanceof Bet)) {
-                        System.out.println("-----" + obj);
-                        continue;
-                    }
-
-                    Bet bet = (Bet) obj;
-
-                    System.out.println();
-                    System.out.println(field.getName());
-
-                    System.out.print(fixLengthStr(bet.getLeft().toString(), 5));
-                    System.out.print(" | ");
-
-                    if (bet.getCenter() != null) {
-                        System.out.print(fixLengthStr(bet.getCenter().toString(), 5));
-                        System.out.print(" | ");
-                    }
-                    System.out.print(fixLengthStr(bet.getRight().toString(), 5));
-
-                    System.out.println();
-                    System.out.println();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public void closeBrowser(){
+        driver.close();
     }
 
 }
