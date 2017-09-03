@@ -46,6 +46,7 @@ public class ForkController {
         mav.setViewName("main");
 
         List<Match> matches =  findForkService.getWillMatches();
+        mav.addObject(matches);
 
         log.info("GET /getWillMatches [END]");
         return mav;

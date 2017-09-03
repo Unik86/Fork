@@ -6,22 +6,24 @@ import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Log4j
-public class FavMatchParser extends Parser{
+@Service
+public class FavMatchParser extends BaseParser {
 
     private final static String URL = "https://www.favbet.com/en/bets/#tours=17296";
 
-    public FavMatchParser() {
+    @Override
+    public void goToSite(){
         log.info("Enter the site " + URL);
-        goToSite();
-    }
 
-    protected void goToSite(){
         try {
+            driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.navigate().to(URL);
             Thread.sleep(6000);
@@ -36,7 +38,7 @@ public class FavMatchParser extends Parser{
     public List<Match> parsMainRates(){
         log.info("Pars main rates");
 
-        matchs = new ArrayList<>();
+        matchs.clear();
         List<WebElement> elements = driver.findElements(By.xpath("//div[contains(@class, 'event--head-block')]"));
 
         for(WebElement element : elements){
@@ -180,4 +182,5 @@ public class FavMatchParser extends Parser{
             return null;
         }
     }
+
 }

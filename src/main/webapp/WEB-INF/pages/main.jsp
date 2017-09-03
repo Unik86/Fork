@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +20,9 @@
     </div>
 
     <div>
-
+      <c:forEach var="match" items="${matches}">
+        ${match.playerLeft}
+      </c:forEach>
     </div>
 
   </body>

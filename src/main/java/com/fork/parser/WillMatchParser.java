@@ -4,22 +4,24 @@ import com.fork.model.Bet;
 import com.fork.model.Match;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Log4j
-public class WillMatchParser extends Parser{
+@Service("WillMatchParser")
+public class WillMatchParser extends BaseParser{
 
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/1/Football.html";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
 
-    public WillMatchParser() {
+    @Override
+    public void goToSite(){
         log.info("Enter the site " + URL);
-        goToSite();
-    }
 
-    private void goToSite(){
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(URL);
 
@@ -39,7 +41,7 @@ public class WillMatchParser extends Parser{
     public List<Match> parsMainRates(){
         log.info("Pars main rates");
 
-        matchs = new ArrayList<>();
+        matchs.clear();
         List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr"));
 
         for(WebElement element : elements){

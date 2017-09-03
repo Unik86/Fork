@@ -1,23 +1,27 @@
 package com.fork.finder;
 
-import com.fork.calc.MatchService;
 import com.fork.model.Match;
-import com.fork.parser.FavMatchParser;
 import com.fork.parser.Parser;
-import com.fork.parser.WillMatchParser;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 @Log4j
 @Service
 public class FindForkServiceImpl implements FindForkService {
 
+    @Autowired
+    @Qualifier("WillMatchParser")
+    Parser will;
+
     @Override
     public void findFork() {
+        will.goToSite();
+        will.parsMainRates();
+        will.closeBrowser();
 
 //        Parser will = new WillMatchParser();
 //        Parser fav = new FavMatchParser();
@@ -30,10 +34,7 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public List<Match> getWillMatches() {
-        Parser will = new WillMatchParser();
-        List<Match> matches = will.parsMainRates();
-        will.closeBrowser();
-        return matches;
+        return will.getMatchs();
     }
 
 }
