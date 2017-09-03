@@ -7,13 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
+import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Service
+@Component("FavMatchParser")
 public class FavMatchParser extends BaseParser {
 
     private final static String URL = "https://www.favbet.com/en/bets/#tours=17296";

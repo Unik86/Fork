@@ -18,11 +18,32 @@
       <button type="button" class="btn btn-info" onclick="location.href='/getWillMatches'">WilliamHill</button>
       <button type="button" class="btn btn-info">FavBet</button>
     </div>
-
+    <br>
     <div>
-      <c:forEach var="match" items="${matches}">
-        ${match.playerLeft}
-      </c:forEach>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Left</th>
+            <th>Right</th>
+            <th>url</th>
+            <th>1</th>
+            <th>x</th>
+            <th>2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach var="match" items="${matches}">
+            <tr>
+              <td>${match.playerLeft}</td>
+              <td>${match.playerRight}</td>
+              <td>${match.winner.left}</td>
+              <td>${match.winner.center}</td>
+              <td>${match.winner.right}</td>
+              <td><a href="${match.url}" class="btn btn-default">url</a></td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>
     </div>
 
   </body>

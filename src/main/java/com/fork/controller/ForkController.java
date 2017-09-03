@@ -4,6 +4,7 @@ import com.fork.finder.FindForkService;
 import com.fork.model.Match;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,30 +27,24 @@ public class ForkController {
     }
 
     @RequestMapping(value = "/parse", method = RequestMethod.GET)
-    public ModelAndView parseButton() {
+    public String parseButton() {
         log.info("GET /parse [BEGIN]");
-
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("main");
 
         findForkService.findFork();
 
         log.info("GET /parse [END]");
-        return mav;
+        return "main";
     }
 
     @RequestMapping(value = "/getWillMatches", method = RequestMethod.GET)
-    public ModelAndView getWillMatches() {
+    public String getWillMatches(Model model) {
         log.info("GET /getWillMatches [BEGIN]");
 
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("main");
-
         List<Match> matches =  findForkService.getWillMatches();
-        mav.addObject(matches);
+        model.addAttribute("matches", matches);
 
         log.info("GET /getWillMatches [END]");
-        return mav;
+        return "main";
     }
 
 }

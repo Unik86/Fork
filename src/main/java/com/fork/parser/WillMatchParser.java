@@ -6,13 +6,11 @@ import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
+import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Service("WillMatchParser")
+@Component("WillMatchParser")
 public class WillMatchParser extends BaseParser{
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
