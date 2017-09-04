@@ -5,6 +5,7 @@ import com.fork.parser.Parser;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,12 @@ import java.util.List;
 public class FindForkServiceImpl implements FindForkService {
 
     @Autowired
-    @Qualifier("MockParser")
-    Parser will;
+    private ApplicationContext appContext;
 
     @Override
     public void findFork() {
+        Parser will = getParser("WillMatchParser");
+
         will.goToSite();
         will.parsMainRates();
         will.closeBrowser();
@@ -33,8 +35,13 @@ public class FindForkServiceImpl implements FindForkService {
     }
 
     @Override
-    public List<Match> getWillMatches() {
-        return will.getMatchs();
+    public List<Match> getMatches(String type) {
+        Parser pars = getParser(type);
+        return pars.getMatchs();
+    }
+
+    private Parser getParser(String type){
+        return appContext.getBean(type, Parser.class);
     }
 
 }

@@ -5,9 +5,10 @@ import com.fork.model.Match;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -36,14 +37,14 @@ public class ForkController {
         return "main";
     }
 
-    @RequestMapping(value = "/getWillMatches", method = RequestMethod.GET)
-    public String getWillMatches(Model model) {
-        log.info("GET /getWillMatches [BEGIN]");
+    @RequestMapping(value = "/getMatches", method = RequestMethod.GET)
+    public String getWillMatches(@RequestParam("type") String type, Model model) {
+        log.info("GET /getMatches " + type + " [BEGIN]");
 
-        List<Match> matches =  findForkService.getWillMatches();
+        List<Match> matches =  findForkService.getMatches(type);
         model.addAttribute("matches", matches);
 
-        log.info("GET /getWillMatches [END]");
+        log.info("GET /getMatches " + type + " [END]");
         return "main";
     }
 

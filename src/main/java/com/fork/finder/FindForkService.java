@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface FindForkService {
 
-    public void findFork();
-    public List<Match> getWillMatches();
+    void findFork();
+    List<Match> getMatches(String type);
 
 }

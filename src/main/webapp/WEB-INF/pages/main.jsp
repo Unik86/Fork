@@ -14,21 +14,29 @@
       <div class="starter-template">
         <h1>Fork Application</h1>
       </div>
-      <button type="button" class="btn btn-primary" onclick="location.href='/parse'">Parse</button>
-      <button type="button" class="btn btn-info" onclick="location.href='/getWillMatches'">WilliamHill</button>
-      <button type="button" class="btn btn-info">FavBet</button>
+      <br>
+
+      <button type="button" class="btn btn-primary"
+              onclick="location.href='/parse'">Parse</button>
+      <button type="button" class="btn btn-info"
+              onclick="location.href='/getMatches?type=WillMatchParser'">WilliamHill</button>
+      <button type="button" class="btn btn-info"
+              onclick="location.href='/getMatches?type=FavMatchParser'">FavBet</button>
+      <button type="button" class="btn btn-info"
+              onclick="location.href='/getMatches?type=MockParser'">Mock</button>
     </div>
     <br>
+
     <div>
       <table class="table table-striped">
         <thead>
           <tr>
             <th>Left</th>
             <th>Right</th>
-            <th>url</th>
             <th>1</th>
             <th>x</th>
             <th>2</th>
+            <th>Url</th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +47,7 @@
               <td>${match.winner.left}</td>
               <td>${match.winner.center}</td>
               <td>${match.winner.right}</td>
-              <td><a href="${match.url}" class="btn btn-default">url</a></td>
+              <td><a href="${match.url}" class="btn btn-default">Url</a></td>
             </tr>
           </c:forEach>
         </tbody>
