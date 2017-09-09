@@ -1,14 +1,17 @@
 package com.fork.calc;
 
 import com.fork.model.Bet;
+import com.fork.model.Fork;
 import com.fork.model.Match;
-import com.fork.parser.FavMatchParser;
 import info.debatty.java.stringsimilarity.JaroWinkler;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Log4j
+@Service
 public class MatchServiceImpl implements MatchService {
 
     private List<Fork> forks = new ArrayList<>();
@@ -20,6 +23,7 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public void findForkForMainRates(List<Match> ... sites){
+        log.info("Find Fork For Main Rates");
         List<List<Match>> mathes = rearrange(sites);
         calcForkForMainRates(mathes);
     }
@@ -66,6 +70,8 @@ public class MatchServiceImpl implements MatchService {
                 forks.add(fork);
             }
         }
+
+        log.info("Forks = " + forks);
     }
 
     @Override

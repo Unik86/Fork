@@ -1,7 +1,7 @@
 package com.fork.finder;
 
-import com.fork.calc.Fork;
-import com.fork.calc.MatchServiceImpl;
+import com.fork.model.Fork;
+import com.fork.calc.MatchService;
 import com.fork.model.Match;
 import com.fork.parser.Parser;
 import lombok.extern.log4j.Log4j;
@@ -18,22 +18,21 @@ public class FindForkServiceImpl implements FindForkService {
     @Autowired
     private ApplicationContext appContext;
     @Autowired
-    private MatchServiceImpl service;
+    private MatchService service;
 
     @Override
     public void findFork() {
         Parser will = getParser("WillMatchParser");
-        Parser bwin = getParser("BWinMatchParser");
-
         will.goToSite();
         will.parsMainRates();
         will.closeBrowser();
 
+        Parser bwin = getParser("BWinMatchParser");
         bwin.goToSite();
         bwin.parsMainRates();
         bwin.closeBrowser();
 
-        service.findForkForMainRates(will.parsMainRates(), bwin.parsMainRates());
+        service.findForkForMainRates(will.getMatchs(), bwin.getMatchs());
     }
 
     @Override

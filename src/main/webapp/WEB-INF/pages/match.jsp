@@ -10,26 +10,7 @@
   </head>
   <body>
 
-    <div class="container">
-      <div class="starter-template">
-        <h1>Fork Application</h1>
-      </div>
-      <br>
-
-      <button type="button" class="btn btn-success"
-              onclick="location.href='/fork/parse'">Parse</button>
-      <button type="button" class="btn btn-primary"
-              onclick="location.href='/fork/getForks'">Forks</button>
-      <button type="button" class="btn btn-info"
-              onclick="location.href='/fork/getMatches?type=WillMatchParser'">WilliamHill</button>
-      <button type="button" class="btn btn-info"
-              onclick="location.href='/fork/getMatches?type=BWinMatchParser'">BWin</button>
-      <button type="button" class="btn btn-info"
-              onclick="location.href='/fork/getMatches?type=FavMatchParser'">FavBet</button>
-      <button type="button" class="btn btn-info"
-              onclick="location.href='/fork/getMatches?type=MockParser'">Mock</button>
-    </div>
-    <br>
+    <jsp:include page="../pages/header.jsp" />
 
     <div>
       <table class="table table-striped">

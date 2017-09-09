@@ -1,6 +1,6 @@
 package com.fork.finder;
 
-import com.fork.calc.Fork;
+import com.fork.model.Fork;
 import com.fork.model.Match;
 import java.util.List;
 

@@ -1,6 +1,7 @@
 package com.fork.calc;
 
 import com.fork.model.Bet;
+import com.fork.model.Fork;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

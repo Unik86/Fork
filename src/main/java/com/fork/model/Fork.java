@@ -1,22 +1,30 @@
-package com.fork.calc;
+package com.fork.model;
 
-import com.fork.model.Bet;
+import lombok.Getter;
 
 import static com.fork.util.Utils.round;
 
 public class Fork {
 
+    @Getter
     private Bet bet;
+    @Getter
     private Double allSum;
-
+    @Getter
     private Double forkRate;
 
+    @Getter
     private Double sumRight;
+    @Getter
     private Double sumCenter;
+    @Getter
     private Double sumLeft;
 
+    @Getter
     private Double winSumRight;
+    @Getter
     private Double winSumCenter;
+    @Getter
     private Double winSumLeft;
 
     public Fork(Bet bet) {
@@ -52,34 +60,7 @@ public class Fork {
     }
 
     public boolean isHasFork(){
-        return forkRate < 1.0;
+        return forkRate < 1.04;
     }
 
-    public Double getForkRate() {
-        return forkRate;
-    }
-
-    public Double getSumRight() {
-        return sumRight;
-    }
-
-    public Double getSumLeft() {
-        return sumLeft;
-    }
-
-    public Double getWinSumRight() {
-        return winSumRight;
-    }
-
-    public Double getWinSumLeft() {
-        return winSumLeft;
-    }
-
-    public Double getSumCenter() {
-        return sumCenter;
-    }
-
-    public Double getWinSumCenter() {
-        return winSumCenter;
-    }
 }
