@@ -1,7 +1,10 @@
 package com.fork.finder;
 
+import com.fork.calc.MatchService;
 import com.fork.model.Match;
+import com.fork.parser.FavMatchParser;
 import com.fork.parser.Parser;
+import com.fork.parser.WillMatchParser;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,19 +22,19 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public void findFork() {
+        MatchService service = new MatchService();
         Parser will = getParser("WillMatchParser");
+        Parser bwin = getParser("BWinMatchParser");
 
         will.goToSite();
         will.parsMainRates();
         will.closeBrowser();
 
-//        Parser will = new WillMatchParser();
-//        Parser fav = new FavMatchParser();
-//        MatchService service = new MatchService();
-//
-//        fav.parsAllRates();
-//
-//        service.findForkForMainRates(will.parsMainRates(), fav.parsMainRates());
+        bwin.goToSite();
+        bwin.parsMainRates();
+        bwin.closeBrowser();
+
+        service.findForkForMainRates(will.parsMainRates(), bwin.parsMainRates());
     }
 
     @Override

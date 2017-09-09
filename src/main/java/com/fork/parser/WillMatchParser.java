@@ -17,17 +17,15 @@ public class WillMatchParser extends BaseParser{
     private final static String PAGES = "//span[contains(@class, 'rn_PageLinks')]/a";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
-    private int cntPages;
-
     @Override
     public void goToSite(){
         log.info("Enter the site " + URL);
 
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(URL);
-
         try {
+            driver = new ChromeDriver();
+            driver.manage().window().maximize();
+            driver.get(URL);
+
             Select timeZone = new Select(driver.findElement(By.name("time_zone")));
             timeZone.selectByVisibleText("Europe/Kiev");
             driver.findElement(By.id("yesBtn")).click();
@@ -39,7 +37,6 @@ public class WillMatchParser extends BaseParser{
             changeOrder.selectByVisibleText("Time");
 
             Thread.sleep(1000);
-            cntPages = driver.findElements(By.xpath(PAGES)).size();
         } catch (Exception e){
             driver.close();
             log.error("Enter the site failure");
@@ -50,6 +47,8 @@ public class WillMatchParser extends BaseParser{
     public List<Match> parsMainRates(){
         log.info("Pars main rates");
         matchs.clear();
+
+        int cntPages = driver.findElements(By.xpath(PAGES)).size();
 
         log.info("page = " + 1);
         parsOnePageMainRates();
