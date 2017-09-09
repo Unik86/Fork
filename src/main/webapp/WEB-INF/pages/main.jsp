@@ -16,8 +16,10 @@
       </div>
       <br>
 
-      <button type="button" class="btn btn-primary"
+      <button type="button" class="btn btn-success"
               onclick="location.href='/fork/parse'">Parse</button>
+      <button type="button" class="btn btn-primary"
+              onclick="location.href='/fork/getForks'">Forks</button>
       <button type="button" class="btn btn-info"
               onclick="location.href='/fork/getMatches?type=WillMatchParser'">WilliamHill</button>
       <button type="button" class="btn btn-info"

@@ -1,5 +1,6 @@
 package com.fork.controller;
 
+import com.fork.calc.Fork;
 import com.fork.finder.FindForkService;
 import com.fork.model.Match;
 import lombok.extern.log4j.Log4j;
@@ -31,6 +32,17 @@ public class ForkController {
         findForkService.findFork();
 
         log.info("GET /parse [END]");
+        return "main";
+    }
+
+    @GetMapping(value = "/getForks")
+    public String getWillMatches(Model model) {
+        log.info("GET /getForks [BEGIN]");
+
+        List<Fork> forks =  findForkService.getForks();
+        model.addAttribute("forks", forks);
+
+        log.info("GET /getForks [END]");
         return "main";
     }
 

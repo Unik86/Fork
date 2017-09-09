@@ -1,13 +1,11 @@
 package com.fork.finder;
 
-import com.fork.calc.MatchService;
+import com.fork.calc.Fork;
+import com.fork.calc.MatchServiceImpl;
 import com.fork.model.Match;
-import com.fork.parser.FavMatchParser;
 import com.fork.parser.Parser;
-import com.fork.parser.WillMatchParser;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +17,11 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Autowired
     private ApplicationContext appContext;
+    @Autowired
+    private MatchServiceImpl service;
 
     @Override
     public void findFork() {
-        MatchService service = new MatchService();
         Parser will = getParser("WillMatchParser");
         Parser bwin = getParser("BWinMatchParser");
 
@@ -41,6 +40,11 @@ public class FindForkServiceImpl implements FindForkService {
     public List<Match> getMatches(String type) {
         Parser pars = getParser(type);
         return pars.getMatchs();
+    }
+
+    @Override
+    public List<Fork> getForks(){
+        return service.getForks();
     }
 
     private Parser getParser(String type){
