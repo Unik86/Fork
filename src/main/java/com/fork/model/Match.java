@@ -11,6 +11,8 @@ public class Match {
     private String playerRight;
     @Getter @Setter
     private String url;
+    @Getter @Setter
+    private String time;
 
     @Getter @Setter
     private Bet winner;

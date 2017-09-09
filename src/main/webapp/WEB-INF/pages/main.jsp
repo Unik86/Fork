@@ -31,6 +31,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th>Time</th>
             <th>Left</th>
             <th>Right</th>
             <th>1</th>
@@ -42,6 +43,7 @@
         <tbody>
           <c:forEach var="match" items="${matches}">
             <tr>
+              <td>${match.time}</td>
               <td>${match.playerLeft}</td>
               <td>${match.playerRight}</td>
               <td>${match.winner.left}</td>

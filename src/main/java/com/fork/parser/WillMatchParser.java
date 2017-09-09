@@ -14,6 +14,10 @@ import java.util.List;
 public class WillMatchParser extends BaseParser{
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
+    private final static String PAGES = "//span[contains(@class, 'rn_PageLinks')]/a";
+    private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
+
+    private int cntPages;
 
     @Override
     public void goToSite(){
@@ -27,25 +31,65 @@ public class WillMatchParser extends BaseParser{
             Select timeZone = new Select(driver.findElement(By.name("time_zone")));
             timeZone.selectByVisibleText("Europe/Kiev");
             driver.findElement(By.id("yesBtn")).click();
+
+            Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
+            rateFormat.selectByVisibleText("Decimal");
+
+            Select changeOrder = new Select(driver.findElement(By.id("changeOrder")));
+            changeOrder.selectByVisibleText("Time");
+
+            Thread.sleep(1000);
+            cntPages = driver.findElements(By.xpath(PAGES)).size();
         } catch (Exception e){
-
+            driver.close();
+            log.error("Enter the site failure");
         }
-
-        Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
-        rateFormat.selectByVisibleText("Decimal");
     }
 
     @Override
     public List<Match> parsMainRates(){
         log.info("Pars main rates");
-
         matchs.clear();
-        List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr"));
 
-        for(WebElement element : elements){
+        log.info("page = " + 1);
+        parsOnePageMainRates();
+
+        for(int i = 0; i < cntPages; i++){
             try {
+                driver.findElements(By.xpath(PAGES)).get(i).click();
+                log.info("page = " + (i + 2));
+                Thread.sleep(3000);
+                parsOnePageMainRates();
+            } catch (Exception e){
+
+            }
+        }
+
+        log.info("matchs size = " + matchs.size());
+        return matchs;
+    }
+
+    private void parsOnePageMainRates(){
+        int cntIds = driver.findElements(By.xpath(MATCHES)).size();
+
+        log.info("matches on page = " + cntIds);
+
+        for(int i = 0; i < cntIds; i++){
+            try {
+                WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
+
                 WebElement elementName = element.findElement(By.tagName("span"));
                 List<WebElement> elementRates = element.findElements(By.className("eventprice"));
+                List<WebElement> leftPadCols = element.findElements(By.className("leftPad"));
+
+                String time = leftPadCols.get(1).getText();
+                if(!time.contains("EEST"))
+                    continue;
+
+                WebElement urlElement = leftPadCols.get(2);
+                String url = urlElement.getAttribute("href");
+
+
                 Bet bet = null;
 
                 String[] names = elementName.getText().split(" v ");
@@ -69,6 +113,9 @@ public class WillMatchParser extends BaseParser{
                 Match match = new Match();
                 match.setPlayerLeft(names[0].trim());
                 match.setPlayerRight(names[1].trim());
+                match.setTime(time);
+                match.setUrl(url);
+
                 match.setWinner(bet);
                 matchs.add(match);
             } catch (Exception e){
@@ -76,9 +123,6 @@ public class WillMatchParser extends BaseParser{
                 continue;
             }
         }
-
-        log.info("matchs size = " + matchs.size());
-        return matchs;
     }
 
     @Override
