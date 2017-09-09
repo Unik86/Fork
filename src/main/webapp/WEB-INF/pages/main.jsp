@@ -17,13 +17,13 @@
       <br>
 
       <button type="button" class="btn btn-primary"
-              onclick="location.href='/parse'">Parse</button>
+              onclick="location.href='/fork/parse'">Parse</button>
       <button type="button" class="btn btn-info"
-              onclick="location.href='/getMatches?type=WillMatchParser'">WilliamHill</button>
+              onclick="location.href='/fork/getMatches?type=WillMatchParser'">WilliamHill</button>
       <button type="button" class="btn btn-info"
-              onclick="location.href='/getMatches?type=FavMatchParser'">FavBet</button>
+              onclick="location.href='/fork/getMatches?type=FavMatchParser'">FavBet</button>
       <button type="button" class="btn btn-info"
-              onclick="location.href='/getMatches?type=MockParser'">Mock</button>
+              onclick="location.href='/fork/getMatches?type=MockParser'">Mock</button>
     </div>
     <br>
 

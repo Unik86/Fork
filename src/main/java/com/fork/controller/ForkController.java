@@ -5,10 +5,7 @@ import com.fork.model.Match;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,12 +19,12 @@ public class ForkController {
         this.findForkService = findForkService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/")
     public String main() {
         return "main";
     }
 
-    @RequestMapping(value = "/parse", method = RequestMethod.GET)
+    @GetMapping(value = "/parse")
     public String parseButton() {
         log.info("GET /parse [BEGIN]");
 
@@ -37,7 +34,7 @@ public class ForkController {
         return "main";
     }
 
-    @RequestMapping(value = "/getMatches", method = RequestMethod.GET)
+    @GetMapping(value = "/getMatches")
     public String getWillMatches(@RequestParam("type") String type, Model model) {
         log.info("GET /getMatches " + type + " [BEGIN]");
 
