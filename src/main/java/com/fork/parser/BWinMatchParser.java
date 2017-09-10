@@ -17,8 +17,11 @@ import java.util.List;
 public class BWinMatchParser extends BaseParser{
 
     private final static String URL = "https://sports.bwin.com/en/sports#sportId=4";
-    private final static String PAGES = "//span[contains(@class, 'rn_PageLinks')]/a";
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
+
+    public BWinMatchParser() {
+        pagesStr = "//li[contains(@class, 'page-link')]/a";
+    }
 
     @Override
     public void goToSite(){
@@ -29,7 +32,7 @@ public class BWinMatchParser extends BaseParser{
             driver.manage().window().maximize();
             driver.get(URL);
 
-            driver.findElement(By.xpath("//li[contains(@title, 'Today')]/a")).click();
+            driver.findElement(By.xpath("//li[contains(@class, 'ui-state-default ui-corner-top pm-tab pm-tab--marketboard')]/a")).click();
 
             Thread.sleep(1000);
         } catch (Exception e){
@@ -38,32 +41,7 @@ public class BWinMatchParser extends BaseParser{
         }
     }
 
-    @Override
-    public List<Match> parsMainRates(){
-        log.info("Pars main rates");
-        matchs.clear();
-
-        int cntPages = driver.findElements(By.xpath(PAGES)).size();
-
-        log.info("page = " + 1);
-        parsOnePageMainRates();
-
-//        for(int i = 0; i < cntPages; i++){
-//            try {
-//                driver.findElements(By.xpath(PAGES)).get(i).click();
-//                log.info("page = " + (i + 2));
-//                Thread.sleep(3000);
-//                parsOnePageMainRates();
-//            } catch (Exception e){
-//
-//            }
-//        }
-
-        log.info("matchs size = " + matchs.size());
-        return matchs;
-    }
-
-    private void parsOnePageMainRates(){
+    protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
 
         log.info("matches on page = " + cntIds);
@@ -71,6 +49,9 @@ public class BWinMatchParser extends BaseParser{
         for(int i = 0; i < cntIds; i++){
             try {
                 WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
+
+                String time = element.findElement(By.tagName("div")).getText();
+                String url = element.findElement(By.tagName("a")).getAttribute("href");
 
                 List<WebElement> columns = element.findElements(By.tagName("button"));
 
@@ -87,8 +68,8 @@ public class BWinMatchParser extends BaseParser{
                 Match match = new Match();
                 match.setPlayerLeft(columnLeft.get(0).getText());
                 match.setPlayerRight(columnRight.get(0).getText());
-//                match.setTime(time);
-//                match.setUrl(url);
+                match.setTime(time);
+                match.setUrl(url);
 
                 match.setWinner(bet);
                 matchs.add(match);

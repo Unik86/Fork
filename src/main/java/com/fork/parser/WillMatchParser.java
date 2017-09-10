@@ -13,9 +13,12 @@ import java.util.List;
 @Component("WillMatchParser")
 public class WillMatchParser extends BaseParser{
 
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
-    private final static String PAGES = "//span[contains(@class, 'rn_PageLinks')]/a";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/1/Football.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
+
+    public WillMatchParser() {
+        pagesStr = "//span[contains(@class, 'rn_PageLinks')]/a";
+    }
 
     @Override
     public void goToSite(){
@@ -44,31 +47,7 @@ public class WillMatchParser extends BaseParser{
     }
 
     @Override
-    public List<Match> parsMainRates(){
-        log.info("Pars main rates");
-        matchs.clear();
-
-        int cntPages = driver.findElements(By.xpath(PAGES)).size();
-
-        log.info("page = " + 1);
-        parsOnePageMainRates();
-
-        for(int i = 0; i < cntPages; i++){
-            try {
-                driver.findElements(By.xpath(PAGES)).get(i).click();
-                log.info("page = " + (i + 2));
-                Thread.sleep(3000);
-                parsOnePageMainRates();
-            } catch (Exception e){
-
-            }
-        }
-
-        log.info("matchs size = " + matchs.size());
-        return matchs;
-    }
-
-    private void parsOnePageMainRates(){
+    protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
 
         log.info("matches on page = " + cntIds);
@@ -77,7 +56,6 @@ public class WillMatchParser extends BaseParser{
             try {
                 WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
 
-                WebElement elementName = element.findElement(By.tagName("span"));
                 List<WebElement> elementRates = element.findElements(By.className("eventprice"));
                 List<WebElement> leftPadCols = element.findElements(By.className("leftPad"));
 
@@ -85,13 +63,12 @@ public class WillMatchParser extends BaseParser{
                 if(!time.contains("EEST"))
                     continue;
 
-                WebElement urlElement = leftPadCols.get(2);
+                WebElement urlElement = leftPadCols.get(2).findElement(By.tagName("a"));
                 String url = urlElement.getAttribute("href");
-
 
                 Bet bet = null;
 
-                String[] names = elementName.getText().split(" v ");
+                String[] names = leftPadCols.get(2).getText().split(" v ");
                 if(names.length < 2)
                     continue;
 

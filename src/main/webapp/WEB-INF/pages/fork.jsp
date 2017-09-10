@@ -25,20 +25,32 @@
 
             <th>Rate</th>
 
-            <th>Sum 1</th>
-            <th>Sum x</th>
-            <th>Sum 2</th>
-
-            <th>Win Sum 1</th>
-            <th>Win Sum x</th>
-            <th>Win Sum 2</th>
+            <th>Url</th>
+            <th>Forks</th>
+            <th>Parse</th>
           </tr>
         </thead>
         <tbody>
           <c:forEach var="fork" items="${forks}">
-            <tr>
-              <td>playerLeft</td>
-              <td>playerRight</td>
+            <c:forEach var="match" items="${fork.matches}">
+              <tr>
+                <td>${match.playerLeft}</td>
+                <td>${match.playerRight}</td>
+
+                <td>${match.winner.left}</td>
+                <td>${match.winner.center}</td>
+                <td>${match.winner.right}</td>
+
+                <td></td>
+
+                <td><a href="${match.url}" class="btn btn-default">Url</a></td>
+                <td><a href="${match.url}" class="btn btn-primary">Forks</a></td>
+                <td><a href="${match.url}" class="btn btn-success">Parse</a></td>
+              </tr>
+            </c:forEach>
+            <tr class="info">
+              <td></td>
+              <td></td>
 
               <td>${fork.bet.left}</td>
               <td>${fork.bet.center}</td>
@@ -46,13 +58,9 @@
 
               <td>${fork.forkRate}</td>
 
-              <td>${fork.sumRight}</td>
-              <td>${fork.sumCenter}</td>
-              <td>${fork.sumLeft}</td>
-
-              <td>${fork.winSumRight}</td>
-              <td>${fork.winSumCenter}</td>
-              <td>${fork.winSumLeft}</td>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
           </c:forEach>
         </tbody>

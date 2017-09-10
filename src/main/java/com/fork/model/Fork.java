@@ -1,11 +1,16 @@
 package com.fork.model;
 
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 import static com.fork.util.Utils.round;
 
 public class Fork {
 
+    @Getter @Setter
+    private List<Match> matches;
     @Getter
     private Bet bet;
     @Getter
@@ -60,7 +65,7 @@ public class Fork {
     }
 
     public boolean isHasFork(){
-        return forkRate < 1.04;
+        return forkRate < 1.05;
     }
 
 }

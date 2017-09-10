@@ -23,10 +23,6 @@
               onclick="location.href='/fork/getMatches?type=WillMatchParser'">WilliamHill</button>
       <button type="button" class="btn btn-info"
               onclick="location.href='/fork/getMatches?type=BWinMatchParser'">BWin</button>
-      <button type="button" class="btn btn-info"
-              onclick="location.href='/fork/getMatches?type=FavMatchParser'">FavBet</button>
-      <button type="button" class="btn btn-info"
-              onclick="location.href='/fork/getMatches?type=MockParser'">Mock</button>
     </div>
     <br>
 

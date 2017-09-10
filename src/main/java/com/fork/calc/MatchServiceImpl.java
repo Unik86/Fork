@@ -67,11 +67,12 @@ public class MatchServiceImpl implements MatchService {
             fork.calc();
 
             if(fork.isHasFork()){
+                fork.setMatches(list);
                 forks.add(fork);
             }
         }
 
-        log.info("Forks = " + forks);
+        log.info("Forks = " + forks.size());
     }
 
     @Override

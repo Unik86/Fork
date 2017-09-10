@@ -38,6 +38,7 @@ public class FindForkServiceImpl implements FindForkService {
     @Override
     public List<Match> getMatches(String type) {
         Parser pars = getParser(type);
+        log.info("matchs size = " + pars.getMatchs());
         return pars.getMatchs();
     }
 

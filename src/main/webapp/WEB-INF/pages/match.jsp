@@ -29,11 +29,14 @@
           <c:forEach var="match" items="${matches}">
             <tr>
               <td>${match.time}</td>
+
               <td>${match.playerLeft}</td>
               <td>${match.playerRight}</td>
+
               <td>${match.winner.left}</td>
               <td>${match.winner.center}</td>
               <td>${match.winner.right}</td>
+
               <td><a href="${match.url}" class="btn btn-default">Url</a></td>
             </tr>
           </c:forEach>
