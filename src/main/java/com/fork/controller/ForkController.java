@@ -3,6 +3,7 @@ package com.fork.controller;
 import com.fork.model.Fork;
 import com.fork.finder.FindForkService;
 import com.fork.model.Match;
+import com.fork.model.TwoOfThree;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +26,23 @@ public class ForkController {
         return "header";
     }
 
-    @GetMapping(value = "/parse")
-    public String parseButton() {
-        log.info("GET /parse [BEGIN]");
+    @GetMapping(value = "/parseAll")
+    public String parseAllButton() {
+        log.info("GET /parseAll [BEGIN]");
 
         findForkService.findFork();
 
-        log.info("GET /parse [END]");
+        log.info("GET /parseAll [END]");
+        return "fork";
+    }
+
+    @GetMapping(value = "/parseMatch")
+    public String parseMatchButton(@RequestParam("fork") Fork fork) {
+        log.info("GET /parseMatch [BEGIN]");
+
+        findForkService.findMatchFork(fork);
+
+        log.info("GET /parseMatch [END]");
         return "fork";
     }
 
@@ -44,6 +55,17 @@ public class ForkController {
 
         log.info("GET /getForks [END]");
         return "fork";
+    }
+
+    @GetMapping(value = "/getTwoOfThree")
+    public String getTwoOfThree(Model model) {
+        log.info("GET /getTwoOfThree [BEGIN]");
+
+        List<TwoOfThree> twoOfThrees =  findForkService.getTwoOfThrees();
+        model.addAttribute("twoOfThrees", twoOfThrees);
+
+        log.info("GET /getTwoOfThree [END]");
+        return "twoOfThree";
     }
 
     @GetMapping(value = "/getMatches")

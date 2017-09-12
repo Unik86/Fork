@@ -16,13 +16,15 @@
       <br>
 
       <button type="button" class="btn btn-success"
-              onclick="location.href='/fork/parse'">Parse</button>
+              onclick="location.href='/fork/parseAll'">Parse</button>
       <button type="button" class="btn btn-primary"
               onclick="location.href='/fork/getForks'">Forks</button>
+      <button type="button" class="btn btn-primary"
+              onclick="location.href='/fork/getTwoOfThree'">TwoOfThree</button>
       <button type="button" class="btn btn-info"
-              onclick="location.href='/fork/getMatches?type=WillMatchParser'">WilliamHill</button>
+              onclick="location.href='/fork/getMatches?type=WilliamHill'">WilliamHill</button>
       <button type="button" class="btn btn-info"
-              onclick="location.href='/fork/getMatches?type=BWinMatchParser'">BWin</button>
+              onclick="location.href='/fork/getMatches?type=BWin'">BWin</button>
     </div>
     <br>
 

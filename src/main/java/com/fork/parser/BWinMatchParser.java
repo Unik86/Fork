@@ -2,6 +2,7 @@ package com.fork.parser;
 
 import com.fork.model.Bet;
 import com.fork.model.Match;
+import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,14 +14,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Component("BWinMatchParser")
+@Component(Constants.BWIN)
 public class BWinMatchParser extends BaseParser{
 
     private final static String URL = "https://sports.bwin.com/en/sports#sportId=4";
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
     public BWinMatchParser() {
-        pagesStr = "//li[contains(@class, 'page-link')]/a";
+        pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
     }
 
     @Override

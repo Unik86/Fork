@@ -24,15 +24,12 @@
             <th>2</th>
 
             <th>Rate</th>
-
             <th>Url</th>
-            <th>Forks</th>
-            <th>Parse</th>
           </tr>
         </thead>
         <tbody>
-          <c:forEach var="fork" items="${forks}">
-            <c:forEach var="match" items="${fork.matches}">
+          <c:forEach var="twoOfThree" items="${twoOfThrees}">
+            <c:forEach var="match" items="${twoOfThree.matches}">
               <tr>
                 <td>${match.playerLeft}</td>
                 <td>${match.playerRight}</td>
@@ -42,25 +39,19 @@
                 <td>${match.winner.right}</td>
 
                 <td></td>
-
                 <td><a href="${match.url}" class="btn btn-default">Url</a></td>
-                <td></td>
-                <td></td>
               </tr>
             </c:forEach>
             <tr class="info">
               <td></td>
               <td></td>
 
-              <td>${fork.bet.left}</td>
-              <td>${fork.bet.center}</td>
-              <td>${fork.bet.right}</td>
+              <td>${twoOfThree.bet.left}</td>
+              <td>${twoOfThree.bet.center}</td>
+              <td>${twoOfThree.bet.right}</td>
 
-              <td>${fork.forkRate}</td>
-
+              <td>${twoOfThree.rate}</td>
               <td></td>
-              <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-primary">Forks</a></td>
-              <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-success">Parse</a></td>
             </tr>
           </c:forEach>
         </tbody>

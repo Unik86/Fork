@@ -33,7 +33,7 @@ public abstract class BaseParser implements Parser{
         matchs.clear();
 
         int cntPages = driver.findElements(By.xpath(pagesStr)).size();
-        log.info("count pages = " + cntPages);
+        log.info("count pages = " + (cntPages + 1));
 
         log.info("page = " + 1);
         parsOnePageMainRates();

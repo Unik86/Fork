@@ -3,6 +3,7 @@ package com.fork.calc;
 import com.fork.model.Bet;
 import com.fork.model.Fork;
 import com.fork.model.Match;
+import com.fork.model.TwoOfThree;
 import info.debatty.java.stringsimilarity.JaroWinkler;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MatchServiceImpl implements MatchService {
 
     private List<Fork> forks = new ArrayList<>();
+    private List<TwoOfThree> twoOfThrees = new ArrayList<>();
 
     @Override
     public List<Fork> getForks() {
@@ -22,19 +24,29 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public List<TwoOfThree> getTwoOfThrees() {
+        return twoOfThrees;
+    }
+
+    @Override
     public void findForkForMainRates(List<Match> ... sites){
         log.info("Find Fork For Main Rates");
         List<List<Match>> mathes = rearrange(sites);
         calcForkForMainRates(mathes);
+        calcTwoOfThreeForMainRates(mathes);
     }
 
     private List<List<Match>> rearrange(List<Match>[] sites){
         JaroWinkler similar = new JaroWinkler();
         List<List<Match>> bets = new ArrayList<>();
 
+        int cnt1 = 0;
+        int cnt2 = 0;
         // TODO for many sites
         for(Match match1 : sites[0]){
+            cnt1++;
             for(Match match2 : sites[1]){
+                cnt2++;
                 Double left = similar.similarity(match1.getPlayerLeft(), match2.getPlayerLeft());
                 Double right = similar.similarity(match1.getPlayerRight(), match2.getPlayerRight());
 
@@ -44,7 +56,6 @@ public class MatchServiceImpl implements MatchService {
                     list.add(match2);
                     bets.add(list);
                 }
-
             }
         }
 
@@ -73,6 +84,29 @@ public class MatchServiceImpl implements MatchService {
         }
 
         log.info("Forks = " + forks.size());
+    }
+
+    private void calcTwoOfThreeForMainRates(List<List<Match>> matches){
+        for (List<Match> list : matches) {
+            List<Bet> bets = new ArrayList<>();
+
+            for(Match match : list){
+                bets.add(match.getWinner());
+            }
+
+            MaxBetBuilder builder = new MaxBetBuilder();
+            Bet maxBet = builder.calc(bets);
+
+            TwoOfThree twoOfThree = new TwoOfThree(maxBet);
+            twoOfThree.calc();
+
+            if(twoOfThree.isHasGoodRate()){
+                twoOfThree.setMatches(list);
+                twoOfThrees.add(twoOfThree);
+            }
+        }
+
+        log.info("TwoOfThrees = " + twoOfThrees.size());
     }
 
     @Override

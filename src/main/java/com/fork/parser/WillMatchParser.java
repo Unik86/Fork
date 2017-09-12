@@ -2,6 +2,7 @@ package com.fork.parser;
 
 import com.fork.model.Bet;
 import com.fork.model.Match;
+import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Component("WillMatchParser")
+@Component(Constants.WILL)
 public class WillMatchParser extends BaseParser{
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/1/Football.html";
@@ -103,8 +104,6 @@ public class WillMatchParser extends BaseParser{
 
     @Override
     public List<Match> parsAllRates() {
-        parsMatches();
-
         for(Match match : matchs){
             // DELETE
             if(matchs.indexOf(match) > 2)
@@ -116,23 +115,6 @@ public class WillMatchParser extends BaseParser{
 
         log.info("matchs size = " + matchs.size());
         return matchs;
-    }
-
-    private void parsMatches(){
-        log.info("Pars matches");
-
-        List<WebElement> elements = driver.findElements(By.xpath("//table[contains(@class, 'tableData')]/tbody/tr/td[3]/a"));
-        for(WebElement element : elements){
-            String[] names = element.getText().split(" v ");
-            if(names.length < 2)
-                continue;
-
-            Match match = new Match();
-            match.setPlayerRight(names[0].trim());
-            match.setPlayerLeft(names[1].trim());
-            match.setUrl(element.getAttribute("href"));
-            matchs.add(match);
-        }
     }
 
     private Match parsMatch(Match match) {
