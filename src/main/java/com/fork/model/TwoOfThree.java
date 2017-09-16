@@ -37,7 +37,7 @@ public class TwoOfThree {
     }
 
     public boolean isHasGoodRate(){
-        return rate != null && rate < 0.85;
+        return rate != null && rate < 0.83;
     }
 
 }
