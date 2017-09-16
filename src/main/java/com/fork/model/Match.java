@@ -8,10 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Match")
 public class Match {
 
-    @Id
-    @Getter @Setter
-    private long id;
-
     @Getter @Setter
     private String playerLeft;
     @Getter @Setter

@@ -12,10 +12,6 @@ import static com.fork.util.Utils.round;
 @Document(collection = "TwoOfThree")
 public class TwoOfThree {
 
-    @Id
-    @Getter @Setter
-    private long id;
-
     @Getter @Setter
     private List<Match> matches;
 
@@ -24,6 +20,10 @@ public class TwoOfThree {
 
     @Getter
     private Double rate;
+
+    public TwoOfThree() {
+
+    }
 
     public TwoOfThree(Bet bet) {
         this.bet = bet;

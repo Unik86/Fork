@@ -52,7 +52,10 @@ public class FindForkServiceImpl implements FindForkService {
         List<BookMaker> bookMakers = bookMakerRepository.findAll();
         service.findForkForMainRates(bookMakers.get(0).getMatches(), bookMakers.get(1).getMatches());
 
+        forkRepository.deleteAll();
         forkRepository.save(service.getForks());
+
+        twoOfTnreeRepository.deleteAll();
         twoOfTnreeRepository.save(service.getTwoOfThrees());
     }
 

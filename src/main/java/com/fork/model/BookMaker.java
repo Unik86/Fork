@@ -19,6 +19,10 @@ public class BookMaker {
     @Getter @Setter
     private List<Match> matches = new ArrayList<>();
 
+    public BookMaker() {
+
+    }
+
     public BookMaker(String name) {
         this.name = name;
     }

@@ -56,7 +56,7 @@
               <td>${fork.bet.center}</td>
               <td>${fork.bet.right}</td>
 
-              <td>${fork.forkRate}</td>
+              <td>${fork.rate}</td>
 
               <td></td>
               <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-primary">Forks</a></td>

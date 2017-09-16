@@ -12,10 +12,6 @@ import static com.fork.util.Utils.round;
 @Document(collection = "Fork")
 public class Fork {
 
-    @Id
-    @Getter @Setter
-    private long id;
-
     @Getter @Setter
     private List<Match> matches;
     @Getter
@@ -38,6 +34,10 @@ public class Fork {
     private Double winSumCenter;
     @Getter
     private Double winSumLeft;
+
+    public Fork() {
+
+    }
 
     public Fork(Bet bet) {
         this.bet = bet;
