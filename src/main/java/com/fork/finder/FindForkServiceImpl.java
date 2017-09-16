@@ -9,7 +9,7 @@ import com.fork.parser.Parser;
 import com.fork.repository.BookMakerRepository;
 import com.fork.repository.ForkRepository;
 import com.fork.repository.TwoOfThreeRepository;
-import com.fork.util.Constants;
+import com.fork.model.BookMakers;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -34,23 +34,19 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public void parseAll() {
-        Parser will = getParser(Constants.WILL);
-        will.goToSite();
-        will.parsMainRates();
-        will.closeBrowser();
-        bookMakerRepository.save(will.getBookMaker());
-
-        Parser bwin = getParser(Constants.BWIN);
-        bwin.goToSite();
-        bwin.parsMainRates();
-        bwin.closeBrowser();
-        bookMakerRepository.save(bwin.getBookMaker());
+        for(BookMakers bookMaker : BookMakers.values()){
+            Parser parser = getParser(bookMaker.getName());
+            parser.goToSite();
+            parser.parsMainRates();
+            parser.closeBrowser();
+            bookMakerRepository.save(parser.getBookMaker());
+        }
     }
 
     @Override
     public void countUp() {
         List<BookMaker> bookMakers = bookMakerRepository.findAll();
-        service.findForkForMainRates(bookMakers.get(0).getMatches(), bookMakers.get(1).getMatches());
+        service.findForkForMainRates(bookMakers);
 
         forkRepository.deleteAll();
         forkRepository.save(service.getForks());
@@ -61,10 +57,10 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public void findMatchFork(Fork fork) {
-        Parser will = getParser(Constants.WILL);
+        Parser will = getParser(BookMakers.WILL.getName());
 //        will.parsAllRates();
 
-        Parser bwin = getParser(Constants.BWIN);
+        Parser bwin = getParser(BookMakers.BWIN.getName());
 //        bwin.parsAllRates();
     }
 
@@ -72,7 +68,7 @@ public class FindForkServiceImpl implements FindForkService {
     public List<Match> getMatches(String type) {
         BookMaker bookMaker = bookMakerRepository.findOne(type);
 
-        log.info("Matches size = " + bookMaker.getMatches().size());
+        log.info("matches size = " + bookMaker.getMatches().size());
         return bookMaker.getMatches();
     }
 
@@ -80,7 +76,7 @@ public class FindForkServiceImpl implements FindForkService {
     public List<Fork> getForks(){
         List<Fork> forks = forkRepository.findAll();
 
-        log.info("Forks size = " + forks.size());
+        log.info("forks size = " + forks.size());
         return forks;
     }
 
@@ -88,7 +84,7 @@ public class FindForkServiceImpl implements FindForkService {
     public List<TwoOfThree> getTwoOfThrees(){
         List<TwoOfThree> twoOfThrees = twoOfTnreeRepository.findAll();
 
-        log.info("TwoOfThrees size = " + twoOfThrees.size());
+        log.info("twoOfThrees size = " + twoOfThrees.size());
         return twoOfThrees;
     }
 

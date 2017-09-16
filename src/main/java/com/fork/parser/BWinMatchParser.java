@@ -3,19 +3,17 @@ package com.fork.parser;
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
 import com.fork.model.Match;
-import com.fork.util.Constants;
+import com.fork.model.BookMakers;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Log4j
-@Component(Constants.BWIN)
+@Component("BWin")
 public class BWinMatchParser extends BaseParser{
 
     private final static String URL = "https://sports.bwin.com/en/sports#sportId=4";
@@ -23,7 +21,7 @@ public class BWinMatchParser extends BaseParser{
 
     public BWinMatchParser() {
         pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
-        bookMaker = new BookMaker(Constants.BWIN);
+        bookMaker = new BookMaker(BookMakers.BWIN.getName());
     }
 
     @Override
@@ -69,6 +67,7 @@ public class BWinMatchParser extends BaseParser{
 
 
                 Match match = new Match();
+                match.setBookMaker(BookMakers.BWIN.getName());
                 match.setPlayerLeft(columnLeft.get(0).getText());
                 match.setPlayerRight(columnRight.get(0).getText());
                 match.setTime(time);

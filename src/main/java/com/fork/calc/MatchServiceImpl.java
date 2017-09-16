@@ -1,9 +1,6 @@
 package com.fork.calc;
 
-import com.fork.model.Bet;
-import com.fork.model.Fork;
-import com.fork.model.Match;
-import com.fork.model.TwoOfThree;
+import com.fork.model.*;
 import info.debatty.java.stringsimilarity.JaroWinkler;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
@@ -14,6 +11,8 @@ import java.util.List;
 @Log4j
 @Service
 public class MatchServiceImpl implements MatchService {
+
+    private static double SIMILARITY_FACTOR = 0.8;
 
     private List<Fork> forks = new ArrayList<>();
     private List<TwoOfThree> twoOfThrees = new ArrayList<>();
@@ -29,38 +28,54 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public void findForkForMainRates(List<Match> ... sites){
+    public void findForkForMainRates(List<BookMaker> bookMakers){
         log.info("Find Fork For Main Rates");
-        List<List<Match>> mathes = rearrange(sites);
+        List<List<Match>> mathes = rearrange(bookMakers);
         calcForkForMainRates(mathes);
         calcTwoOfThreeForMainRates(mathes);
     }
 
-    private List<List<Match>> rearrange(List<Match>[] sites){
+    private List<List<Match>> rearrange(List<BookMaker> bookMakers){
         JaroWinkler similar = new JaroWinkler();
-        List<List<Match>> bets = new ArrayList<>();
+        List<Match> allMatches = new ArrayList<>();
+        List<Match> allMatches2 = new ArrayList<>();
+        List<List<Match>> similarMatches = new ArrayList<>();
+        List<List<Match>> result = new ArrayList<>();
 
-        int cnt1 = 0;
-        int cnt2 = 0;
-        // TODO for many sites
-        for(Match match1 : sites[0]){
-            cnt1++;
-            for(Match match2 : sites[1]){
-                cnt2++;
+        for(BookMaker bookMaker : bookMakers){
+            allMatches.addAll(bookMaker.getMatches());
+        }
+
+        allMatches2.addAll(allMatches);
+
+        for(Match match1 : allMatches){
+            allMatches2.remove(match1);
+            List<Match> list = new ArrayList<>();
+            list.add(match1);
+
+            for(Match match2 : allMatches2){
                 Double left = similar.similarity(match1.getPlayerLeft(), match2.getPlayerLeft());
                 Double right = similar.similarity(match1.getPlayerRight(), match2.getPlayerRight());
 
-                if(left > 0.8 && right > 0.8){
-                    List<Match> list = new ArrayList<>();
-                    list.add(match1);
+                if(left > SIMILARITY_FACTOR && right > SIMILARITY_FACTOR){
                     list.add(match2);
-                    bets.add(list);
                 }
             }
+
+            for(Match match : list){
+                allMatches2.remove(match);
+            }
+
+            similarMatches.add(list);
         }
 
-        log.info("Similar mathes = " + bets.size());
-        return bets;
+        for(List<Match> matches : similarMatches){
+            if(matches.size() > 1)
+                result.add(matches);
+        }
+
+        log.info("Similar mathes = " + result.size());
+        return result;
     }
 
     private void calcForkForMainRates(List<List<Match>> matches){

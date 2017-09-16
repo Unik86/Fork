@@ -24,6 +24,7 @@
             <th>2</th>
 
             <th>Rate</th>
+            <th>BookMaker</th>
             <th>Url</th>
           </tr>
         </thead>
@@ -39,6 +40,7 @@
                 <td>${match.winner.right}</td>
 
                 <td></td>
+                <td>${match.bookMaker}</td>
                 <td><a href="${match.url}" class="btn btn-default">Url</a></td>
               </tr>
             </c:forEach>
@@ -51,6 +53,7 @@
               <td>${twoOfThree.bet.right}</td>
 
               <td>${twoOfThree.rate}</td>
+              <td></td>
               <td></td>
             </tr>
           </c:forEach>

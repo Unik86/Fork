@@ -25,6 +25,7 @@
 
             <th>Rate</th>
 
+            <th>BookMaker</th>
             <th>Url</th>
             <th>Forks</th>
             <th>Parse</th>
@@ -43,6 +44,7 @@
 
                 <td></td>
 
+                <td>${match.bookMaker}</td>
                 <td><a href="${match.url}" class="btn btn-default">Url</a></td>
                 <td></td>
                 <td></td>
@@ -58,6 +60,7 @@
 
               <td>${fork.rate}</td>
 
+              <td></td>
               <td></td>
               <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-primary">Forks</a></td>
               <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-success">Parse</a></td>

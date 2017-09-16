@@ -3,7 +3,7 @@ package com.fork.parser;
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
 import com.fork.model.Match;
-import com.fork.util.Constants;
+import com.fork.model.BookMakers;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Component(Constants.WILL)
+@Component("WilliamHill")
 public class WillMatchParser extends BaseParser{
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/1/Football.html";
@@ -20,7 +20,7 @@ public class WillMatchParser extends BaseParser{
 
     public WillMatchParser() {
         pagesStr = "//span[contains(@class, 'rn_PageLinks')]/a";
-        bookMaker = new BookMaker(Constants.WILL);
+        bookMaker = new BookMaker(BookMakers.WILL.getName());
     }
 
     @Override
@@ -90,6 +90,7 @@ public class WillMatchParser extends BaseParser{
 
 
                 Match match = new Match();
+                match.setBookMaker(BookMakers.WILL.getName());
                 match.setPlayerLeft(names[0].trim());
                 match.setPlayerRight(names[1].trim());
                 match.setTime(time);

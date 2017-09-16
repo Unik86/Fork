@@ -13,6 +13,8 @@ public class Match {
     @Getter @Setter
     private String playerRight;
     @Getter @Setter
+    private String bookMaker;
+    @Getter @Setter
     private String url;
     @Getter @Setter
     private String time;
