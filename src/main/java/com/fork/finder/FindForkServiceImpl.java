@@ -8,7 +8,7 @@ import com.fork.model.TwoOfThree;
 import com.fork.parser.Parser;
 import com.fork.repository.BookMakerRepository;
 import com.fork.repository.ForkRepository;
-import com.fork.repository.TwoOfTnreeRepository;
+import com.fork.repository.TwoOfThreeRepository;
 import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class FindForkServiceImpl implements FindForkService {
     @Autowired
     private ForkRepository forkRepository;
     @Autowired
-    private TwoOfTnreeRepository twoOfTnreeRepository;
+    private TwoOfThreeRepository twoOfTnreeRepository;
 
     @Override
     public void parseAll() {
@@ -67,19 +67,26 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public List<Match> getMatches(String type) {
-        Parser pars = getParser(type);
-        log.info("matchs size = " + pars.getBookMaker().getMatches());
-        return pars.getBookMaker().getMatches();
+        BookMaker bookMaker = bookMakerRepository.findOne(type);
+
+        log.info("Matches size = " + bookMaker.getMatches().size());
+        return bookMaker.getMatches();
     }
 
     @Override
     public List<Fork> getForks(){
-        return service.getForks();
+        List<Fork> forks = forkRepository.findAll();
+
+        log.info("Forks size = " + forks.size());
+        return forks;
     }
 
     @Override
     public List<TwoOfThree> getTwoOfThrees(){
-        return service.getTwoOfThrees();
+        List<TwoOfThree> twoOfThrees = twoOfTnreeRepository.findAll();
+
+        log.info("TwoOfThrees size = " + twoOfThrees.size());
+        return twoOfThrees;
     }
 
     private Parser getParser(String type){
