@@ -1,6 +1,7 @@
 package com.fork.parser;
 
 import com.fork.model.Bet;
+import com.fork.model.BookMaker;
 import com.fork.model.Match;
 import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
@@ -22,6 +23,7 @@ public class BWinMatchParser extends BaseParser{
 
     public BWinMatchParser() {
         pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
+        bookMaker = new BookMaker(Constants.BWIN);
     }
 
     @Override
@@ -73,7 +75,7 @@ public class BWinMatchParser extends BaseParser{
                 match.setUrl(url);
 
                 match.setWinner(bet);
-                matchs.add(match);
+                bookMaker.getMatches().add(match);
             } catch (Exception e){
                 log.error("Pars error");
                 continue;
@@ -82,8 +84,8 @@ public class BWinMatchParser extends BaseParser{
     }
 
     @Override
-    public List<Match> parsAllRates() {
-        return null;
+    public void parsAllRates() {
+
     }
 
 }

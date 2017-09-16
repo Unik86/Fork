@@ -1,6 +1,7 @@
 package com.fork.parser;
 
 import com.fork.model.Bet;
+import com.fork.model.BookMaker;
 import com.fork.model.Match;
 import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
@@ -19,6 +20,7 @@ public class WillMatchParser extends BaseParser{
 
     public WillMatchParser() {
         pagesStr = "//span[contains(@class, 'rn_PageLinks')]/a";
+        bookMaker = new BookMaker(Constants.WILL);
     }
 
     @Override
@@ -94,7 +96,7 @@ public class WillMatchParser extends BaseParser{
                 match.setUrl(url);
 
                 match.setWinner(bet);
-                matchs.add(match);
+                bookMaker.getMatches().add(match);
             } catch (Exception e){
                 log.error("Pars error");
                 continue;
@@ -103,18 +105,15 @@ public class WillMatchParser extends BaseParser{
     }
 
     @Override
-    public List<Match> parsAllRates() {
-        for(Match match : matchs){
-            // DELETE
-            if(matchs.indexOf(match) > 2)
-                return matchs;
+    public void parsAllRates() {
+        List<Match> matches = bookMaker.getMatches();
 
+        for(Match match : matches){
             driver.get(match.getUrl());
             parsMatch(match);
         }
 
-        log.info("matchs size = " + matchs.size());
-        return matchs;
+        log.info("matchs size = " + matches.size());
     }
 
     private Match parsMatch(Match match) {
@@ -136,11 +135,14 @@ public class WillMatchParser extends BaseParser{
 
     private Bet parsBet(String name) {
         try {
-            WebElement element1 = driver.findElement(By.xpath("//span[contains(text(),'" + name + "')]/ancestor::table/tbody/tr/td[1]/div/div[1]"));
-            WebElement element2 = driver.findElement(By.xpath("//span[contains(text(),'" + name + "')]/ancestor::table/tbody/tr/td[2]/div/div[1]"));
+            WebElement element1 = driver.findElement(By.xpath("//span[contains(text(),'"
+                    + name + "')]/ancestor::table/tbody/tr/td[1]/div/div[1]"));
+            WebElement element2 = driver.findElement(By.xpath("//span[contains(text(),'"
+                    + name + "')]/ancestor::table/tbody/tr/td[2]/div/div[1]"));
 
             try {
-                WebElement element3 = driver.findElement(By.xpath("//span[contains(text(),'" + name + "')]/ancestor::table/tbody/tr/td[3]/div/div[1]"));
+                WebElement element3 = driver.findElement(By.xpath("//span[contains(text(),'"
+                        + name + "')]/ancestor::table/tbody/tr/td[3]/div/div[1]"));
 
                 Bet bet = new Bet();
                 bet.setLeft(Double.parseDouble(element1.getText()));

@@ -17,6 +17,8 @@
 
       <button type="button" class="btn btn-success"
               onclick="location.href='/fork/parseAll'">Parse</button>
+      <button type="button" class="btn btn-success"
+              onclick="location.href='/fork/countUp'">CountUp</button>
       <button type="button" class="btn btn-primary"
               onclick="location.href='/fork/getForks'">Forks</button>
       <button type="button" class="btn btn-primary"

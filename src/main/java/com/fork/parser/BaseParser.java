@@ -1,5 +1,6 @@
 package com.fork.parser;
 
+import com.fork.model.BookMaker;
 import com.fork.model.Match;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
@@ -11,7 +12,7 @@ import java.util.List;
 public abstract class BaseParser implements Parser{
 
     protected WebDriver driver;
-    protected List<Match> matchs = new ArrayList<>();
+    protected BookMaker bookMaker;
 
     protected String pagesStr;
 
@@ -23,14 +24,14 @@ public abstract class BaseParser implements Parser{
     }
 
     @Override
-    public List<Match> getMatchs() {
-        return matchs;
+    public BookMaker getBookMaker() {
+        return bookMaker;
     }
 
     @Override
-    public List<Match> parsMainRates(){
+    public void parsMainRates(){
         log.info("Pars main rates");
-        matchs.clear();
+        bookMaker.getMatches().clear();
 
         int cntPages = driver.findElements(By.xpath(pagesStr)).size();
         log.info("count pages = " + (cntPages + 1));
@@ -49,8 +50,7 @@ public abstract class BaseParser implements Parser{
             }
         }
 
-        log.info("matchs size = " + matchs.size());
-        return matchs;
+        log.info("matchs size = " + bookMaker.getMatches().size());
     }
 
     protected abstract void parsOnePageMainRates();

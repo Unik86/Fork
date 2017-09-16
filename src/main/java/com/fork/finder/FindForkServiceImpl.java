@@ -1,10 +1,14 @@
 package com.fork.finder;
 
+import com.fork.model.BookMaker;
 import com.fork.model.Fork;
 import com.fork.calc.MatchService;
 import com.fork.model.Match;
 import com.fork.model.TwoOfThree;
 import com.fork.parser.Parser;
+import com.fork.repository.BookMakerRepository;
+import com.fork.repository.ForkRepository;
+import com.fork.repository.TwoOfTnreeRepository;
 import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +25,35 @@ public class FindForkServiceImpl implements FindForkService {
     private ApplicationContext appContext;
     @Autowired
     private MatchService service;
+    @Autowired
+    private BookMakerRepository bookMakerRepository;
+    @Autowired
+    private ForkRepository forkRepository;
+    @Autowired
+    private TwoOfTnreeRepository twoOfTnreeRepository;
 
     @Override
-    public void findFork() {
+    public void parseAll() {
         Parser will = getParser(Constants.WILL);
         will.goToSite();
         will.parsMainRates();
         will.closeBrowser();
+        bookMakerRepository.save(will.getBookMaker());
 
         Parser bwin = getParser(Constants.BWIN);
         bwin.goToSite();
         bwin.parsMainRates();
         bwin.closeBrowser();
+        bookMakerRepository.save(bwin.getBookMaker());
+    }
 
-        service.findForkForMainRates(will.getMatchs(), bwin.getMatchs());
+    @Override
+    public void countUp() {
+        List<BookMaker> bookMakers = bookMakerRepository.findAll();
+        service.findForkForMainRates(bookMakers.get(0).getMatches(), bookMakers.get(1).getMatches());
+
+        forkRepository.save(service.getForks());
+        twoOfTnreeRepository.save(service.getTwoOfThrees());
     }
 
     @Override
@@ -49,8 +68,8 @@ public class FindForkServiceImpl implements FindForkService {
     @Override
     public List<Match> getMatches(String type) {
         Parser pars = getParser(type);
-        log.info("matchs size = " + pars.getMatchs());
-        return pars.getMatchs();
+        log.info("matchs size = " + pars.getBookMaker().getMatches());
+        return pars.getBookMaker().getMatches();
     }
 
     @Override

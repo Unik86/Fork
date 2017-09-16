@@ -2,17 +2,26 @@ package com.fork.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 import static com.fork.util.Utils.round;
 
+@Document(collection = "TwoOfThree")
 public class TwoOfThree {
+
+    @Id
+    @Getter @Setter
+    private long id;
 
     @Getter @Setter
     private List<Match> matches;
+
     @Getter
     private Bet bet;
+
     @Getter
     private Double rate;
 

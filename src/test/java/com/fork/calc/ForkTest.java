@@ -19,7 +19,7 @@ public class ForkTest {
         fork.calc();
 
         // В = 1/К1 + 1/К2 + 1/К3
-        assertThat(fork.getForkRate(), is(1.07));
+        assertThat(fork.getRate(), is(1.07));
         // Р = (1/К/В)*С
         assertThat(fork.getSumLeft(), is(37.38));
         assertThat(fork.getSumRight(), is(62.31));
@@ -39,7 +39,7 @@ public class ForkTest {
         fork.calc();
 
         // В = 1/К1 + 1/К2 + 1/К3
-        assertThat(fork.getForkRate(), is(1.57));
+        assertThat(fork.getRate(), is(1.57));
         // Р = (1/К/В)*С
         assertThat(fork.getSumLeft(), is(25.48));
         assertThat(fork.getSumCenter(), is(31.85));

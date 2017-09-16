@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface FindForkService {
 
-    void findFork();
+    void parseAll();
+    void countUp();
     void findMatchFork(Fork fork);
     List<Match> getMatches(String type);
     List<Fork> getForks();

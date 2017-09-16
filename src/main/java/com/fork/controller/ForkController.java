@@ -27,17 +27,27 @@ public class ForkController {
     }
 
     @GetMapping(value = "/parseAll")
-    public String parseAllButton() {
+    public String parseAll() {
         log.info("GET /parseAll [BEGIN]");
 
-        findForkService.findFork();
+        findForkService.parseAll();
 
         log.info("GET /parseAll [END]");
         return "fork";
     }
 
+    @GetMapping(value = "/countUp")
+    public String countUp() {
+        log.info("GET /countUp [BEGIN]");
+
+        findForkService.countUp();
+
+        log.info("GET /countUp [END]");
+        return "fork";
+    }
+
     @GetMapping(value = "/parseMatch")
-    public String parseMatchButton(@RequestParam("fork") Fork fork) {
+    public String parseMatch(@RequestParam("fork") Fork fork) {
         log.info("GET /parseMatch [BEGIN]");
 
         findForkService.findMatchFork(fork);

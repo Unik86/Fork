@@ -2,8 +2,15 @@ package com.fork.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "Match")
 public class Match {
+
+    @Id
+    @Getter @Setter
+    private long id;
 
     @Getter @Setter
     private String playerLeft;
