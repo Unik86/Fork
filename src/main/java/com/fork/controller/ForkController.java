@@ -23,7 +23,7 @@ public class ForkController {
 
     @RequestMapping(value = "/")
     public String main() {
-        return "header";
+        return "main";
     }
 
     @GetMapping(value = "/parseAll")
@@ -36,13 +36,13 @@ public class ForkController {
         return "fork";
     }
 
-    @GetMapping(value = "/countUp")
-    public String countUp() {
-        log.info("GET /countUp [BEGIN]");
+    @GetMapping(value = "/parseBookMaker")
+    public String parseMatch(@RequestParam("type") String type) {
+        log.info("GET /parseBookMaker " + type + "[BEGIN]");
 
-        findForkService.countUp();
+        findForkService.parseBookMaker(type);
 
-        log.info("GET /countUp [END]");
+        log.info("GET /parseBookMaker " + type + "[END]");
         return "fork";
     }
 
@@ -53,6 +53,16 @@ public class ForkController {
         findForkService.findMatchFork(fork);
 
         log.info("GET /parseMatch [END]");
+        return "fork";
+    }
+
+    @GetMapping(value = "/countUp")
+    public String countUp() {
+        log.info("GET /countUp [BEGIN]");
+
+        findForkService.countUp();
+
+        log.info("GET /countUp [END]");
         return "fork";
     }
 

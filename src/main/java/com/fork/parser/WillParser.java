@@ -13,12 +13,12 @@ import java.util.List;
 
 @Log4j
 @Component("WilliamHill")
-public class WillMatchParser extends BaseParser{
+public class WillParser extends BaseParser{
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/1/Football.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
-    public WillMatchParser() {
+    public WillParser() {
         pagesStr = "//span[contains(@class, 'rn_PageLinks')]/a";
         bookMaker = new BookMaker(BookMakers.WILL.getName());
     }

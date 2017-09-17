@@ -35,12 +35,17 @@ public class FindForkServiceImpl implements FindForkService {
     @Override
     public void parseAll() {
         for(BookMakers bookMaker : BookMakers.values()){
-            Parser parser = getParser(bookMaker.getName());
-            parser.goToSite();
-            parser.parsMainRates();
-            parser.closeBrowser();
-            bookMakerRepository.save(parser.getBookMaker());
+            parseBookMaker(bookMaker.getName());
         }
+    }
+
+    @Override
+    public void parseBookMaker(String bookMaker) {
+        Parser parser = getParser(bookMaker);
+        parser.goToSite();
+        parser.parsMainRates();
+        parser.closeBrowser();
+        bookMakerRepository.save(parser.getBookMaker());
     }
 
     @Override

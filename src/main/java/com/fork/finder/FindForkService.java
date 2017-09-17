@@ -9,6 +9,7 @@ import java.util.List;
 public interface FindForkService {
 
     void parseAll();
+    void parseBookMaker(String type);
     void countUp();
     void findMatchFork(Fork fork);
     List<Match> getMatches(String type);
