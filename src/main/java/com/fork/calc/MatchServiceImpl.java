@@ -51,14 +51,26 @@ public class MatchServiceImpl implements MatchService {
         for(Match match1 : allMatches){
             allMatches2.remove(match1);
             List<Match> list = new ArrayList<>();
-            list.add(match1);
+            List<Match> listU = new ArrayList<>();
+
+            if(match1.getPlayerLeft().contains("U19")
+                    || match1.getPlayerLeft().contains("U20")
+                    || match1.getPlayerLeft().contains("U21"))
+                listU.add(match1);
+            else
+                list.add(match1);
 
             for(Match match2 : allMatches2){
                 Double left = similar.similarity(match1.getPlayerLeft(), match2.getPlayerLeft());
                 Double right = similar.similarity(match1.getPlayerRight(), match2.getPlayerRight());
 
                 if(left > SIMILARITY_FACTOR && right > SIMILARITY_FACTOR){
-                    list.add(match2);
+                    if(match2.getPlayerLeft().contains("U19")
+                            || match2.getPlayerLeft().contains("U20")
+                            || match2.getPlayerLeft().contains("U21"))
+                        listU.add(match2);
+                    else
+                        list.add(match2);
                 }
             }
 
@@ -66,7 +78,12 @@ public class MatchServiceImpl implements MatchService {
                 allMatches2.remove(match);
             }
 
+            for(Match match : listU){
+                allMatches2.remove(match);
+            }
+
             similarMatches.add(list);
+            similarMatches.add(listU);
         }
 
         for(List<Match> matches : similarMatches){

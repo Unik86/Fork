@@ -13,6 +13,8 @@
 
     <jsp:include page="../pages/header.jsp" />
 
+    <div class="well">Count: ${matches.size()}</div>
+
     <div>
       <table class="table table-striped">
         <thead>

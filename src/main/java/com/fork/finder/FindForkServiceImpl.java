@@ -79,7 +79,7 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public List<Fork> getForks(){
-        List<Fork> forks = forkRepository.findAll();
+        List<Fork> forks = forkRepository.findAllByOrderByRate();
 
         log.info("forks size = " + forks.size());
         return forks;
@@ -87,7 +87,7 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public List<TwoOfThree> getTwoOfThrees(){
-        List<TwoOfThree> twoOfThrees = twoOfTnreeRepository.findAll();
+        List<TwoOfThree> twoOfThrees = twoOfTnreeRepository.findAllByOrderByRate();
 
         log.info("twoOfThrees size = " + twoOfThrees.size());
         return twoOfThrees;
