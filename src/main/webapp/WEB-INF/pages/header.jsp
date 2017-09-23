@@ -23,6 +23,9 @@
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?type=BWin">BWin</a>
           </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?type=Bet365">Bet365</a>
+          </li>
         </ul>
       </div>
 
@@ -45,6 +48,9 @@
           </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?type=BWin">BWin</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?type=Bet365">Bet365</a>
           </li>
         </ul>
       </div>

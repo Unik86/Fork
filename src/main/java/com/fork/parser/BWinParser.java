@@ -33,7 +33,7 @@ public class BWinParser extends BaseParser{
             driver.manage().window().maximize();
             driver.get(URL);
 
-            driver.findElement(By.xpath("//li[contains(@class, 'ui-state-default ui-corner-top pm-tab pm-tab--marketboard')]/a")).click();
+            driver.findElement(By.xpath("//li[contains(@title, 'Today')]/a")).click();
 
             Thread.sleep(1000);
         } catch (Exception e){
@@ -44,7 +44,6 @@ public class BWinParser extends BaseParser{
 
     protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
-
         log.info("matches on page = " + cntIds);
 
         for(int i = 0; i < cntIds; i++){

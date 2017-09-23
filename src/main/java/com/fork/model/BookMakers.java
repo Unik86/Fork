@@ -3,7 +3,8 @@ package com.fork.model;
 public enum BookMakers {
 
     WILL("WilliamHill"),
-    BWIN("BWin");
+    BWIN("BWin"),
+    BET365("Bet365");
 
     private String name;
 

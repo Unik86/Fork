@@ -4,6 +4,7 @@ import com.fork.model.Bet;
 import com.fork.model.BookMaker;
 import com.fork.model.Match;
 import com.fork.model.BookMakers;
+import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,7 +16,7 @@ import java.util.List;
 @Component("WilliamHill")
 public class WillParser extends BaseParser{
 
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/1/Football.html";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
     public WillParser() {
@@ -52,7 +53,6 @@ public class WillParser extends BaseParser{
     @Override
     protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
-
         log.info("matches on page = " + cntIds);
 
         for(int i = 0; i < cntIds; i++){
@@ -66,12 +66,12 @@ public class WillParser extends BaseParser{
                 if(!time.contains("EEST"))
                     continue;
 
-                WebElement urlElement = leftPadCols.get(2).findElement(By.tagName("a"));
+                WebElement urlElement = leftPadCols.get(3).findElement(By.tagName("a"));
                 String url = urlElement.getAttribute("href");
 
                 Bet bet = null;
 
-                String[] names = leftPadCols.get(2).getText().split(" v ");
+                String[] names = leftPadCols.get(3).getText().split(Constants.SEPARATOR_NAME);
                 if(names.length < 2)
                     continue;
 

@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
 @Log4j
 public abstract class BaseParser implements Parser{
 
@@ -19,7 +22,7 @@ public abstract class BaseParser implements Parser{
     @Override
     public void closeBrowser() {
         log.info("Close browser");
-        if(driver != null)
+        if(nonNull(driver))
             driver.close();
     }
 
@@ -32,18 +35,21 @@ public abstract class BaseParser implements Parser{
     public void parsMainRates(){
         log.info("Pars main rates");
         bookMaker.getMatches().clear();
+        int cntPages = 0;
 
-        int cntPages = driver.findElements(By.xpath(pagesStr)).size();
-        log.info("count pages = " + (cntPages + 1));
+        if(nonNull(pagesStr))
+            cntPages = driver.findElements(By.xpath(pagesStr)).size();
 
-        log.info("page = " + 1);
-        parsOnePageMainRates();
+        cntPages += 1;
+        log.info("count pages = " + cntPages);
 
-        for(int i = 0; i < cntPages; i++){
+        for(int i = 1; i <= cntPages; i++){
             try {
-                driver.findElements(By.xpath(pagesStr)).get(i).click();
-                log.info("page = " + (i + 2));
+                if(i != 1 && nonNull(pagesStr))
+                    driver.findElements(By.xpath(pagesStr)).get(i-2).click();
+
                 Thread.sleep(3000);
+                log.info("page = " + i);
                 parsOnePageMainRates();
             } catch (Exception e){
 
