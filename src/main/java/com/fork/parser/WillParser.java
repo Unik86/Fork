@@ -60,18 +60,18 @@ public class WillParser extends BaseParser{
                 WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
 
                 List<WebElement> elementRates = element.findElements(By.className("eventprice"));
-                List<WebElement> leftPadCols = element.findElements(By.className("leftPad"));
+                List<WebElement> tdCols = element.findElements(By.tagName("td"));
 
-                String time = leftPadCols.get(1).getText();
+                String time = tdCols.get(1).getText();
                 if(!time.contains("EEST"))
                     continue;
 
-                WebElement urlElement = leftPadCols.get(3).findElement(By.tagName("a"));
+                WebElement urlElement = tdCols.get(2).findElement(By.tagName("a"));
                 String url = urlElement.getAttribute("href");
 
                 Bet bet = null;
 
-                String[] names = leftPadCols.get(3).getText().split(Constants.SEPARATOR_NAME);
+                String[] names = tdCols.get(2).getText().split(Constants.SEPARATOR_NAME);
                 if(names.length < 2)
                     continue;
 
