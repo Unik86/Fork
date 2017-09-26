@@ -55,7 +55,8 @@ public class MatchServiceImpl implements MatchService {
 
             if(match1.getPlayerLeft().contains("U19")
                     || match1.getPlayerLeft().contains("U20")
-                    || match1.getPlayerLeft().contains("U21"))
+                    || match1.getPlayerLeft().contains("U21")
+                    || match1.getPlayerLeft().contains("Reserves"))
                 listU.add(match1);
             else
                 list.add(match1);
@@ -67,7 +68,8 @@ public class MatchServiceImpl implements MatchService {
                 if(left > SIMILARITY_FACTOR && right > SIMILARITY_FACTOR){
                     if(match2.getPlayerLeft().contains("U19")
                             || match2.getPlayerLeft().contains("U20")
-                            || match2.getPlayerLeft().contains("U21"))
+                            || match2.getPlayerLeft().contains("U21")
+                            || match2.getPlayerLeft().contains("Reserves"))
                         listU.add(match2);
                     else
                         list.add(match2);
