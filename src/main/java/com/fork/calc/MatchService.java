@@ -1,16 +1,13 @@
 package com.fork.calc;
 
-import com.fork.model.BookMaker;
-import com.fork.model.Fork;
-import com.fork.model.Match;
-import com.fork.model.TwoOfThree;
+import com.fork.model.*;
 
 import java.util.List;
 
 public interface MatchService {
 
     void findForkForMainRates(List<BookMaker> bookMakers);
-    void findFork(Match... matches);
+    void findFork(FullMatch... matches);
     List<Fork> getForks();
     List<TwoOfThree> getTwoOfThrees();
 

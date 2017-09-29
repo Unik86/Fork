@@ -56,7 +56,8 @@ public class MatchServiceImpl implements MatchService {
             if(match1.getPlayerLeft().contains("U19")
                     || match1.getPlayerLeft().contains("U20")
                     || match1.getPlayerLeft().contains("U21")
-                    || match1.getPlayerLeft().contains("Reserves"))
+                    || match1.getPlayerLeft().contains("Reserves")
+                    || match1.getPlayerLeft().contains("Youth"))
                 listU.add(match1);
             else
                 list.add(match1);
@@ -69,7 +70,8 @@ public class MatchServiceImpl implements MatchService {
                     if(match2.getPlayerLeft().contains("U19")
                             || match2.getPlayerLeft().contains("U20")
                             || match2.getPlayerLeft().contains("U21")
-                            || match2.getPlayerLeft().contains("Reserves"))
+                            || match2.getPlayerLeft().contains("Reserves")
+                            || match2.getPlayerLeft().contains("Youth"))
                         listU.add(match2);
                     else
                         list.add(match2);
@@ -144,7 +146,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public void findFork(Match... matches){
+    public void findFork(FullMatch... matches){
         List<List<Bet>> bets = rearrange(matches);
         calcFork(bets);
     }
@@ -163,7 +165,7 @@ public class MatchServiceImpl implements MatchService {
         }
     }
 
-    private List<List<Bet>> rearrange(Match[] matches){
+    private List<List<Bet>> rearrange(FullMatch[] matches){
         List<List<Bet>> bets = new ArrayList<>();
         List<Bet> winners = new ArrayList<>();
 
@@ -178,7 +180,7 @@ public class MatchServiceImpl implements MatchService {
         List<Bet> total85s = new ArrayList<>();
         List<Bet> total95s = new ArrayList<>();
 
-        for (Match match : matches) {
+        for (FullMatch match : matches) {
             winners.add(match.getWinner());
 
             total05s.add(match.getTotal05());

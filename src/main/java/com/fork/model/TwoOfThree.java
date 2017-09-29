@@ -33,9 +33,9 @@ public class TwoOfThree {
         if (bet == null || bet.getRight() == null || bet.getLeft() == null)
             return;
 
-        if (bet.getLeft() < 2.2)
+        if (bet.getLeft() < 2.1)
             calcRate(bet.getLeft(), bet.getCenter());
-        else if (bet.getRight() < 2.2)
+        else if (bet.getRight() < 2.1)
             calcRate(bet.getRight(), bet.getCenter());
 
     }

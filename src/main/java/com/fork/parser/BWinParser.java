@@ -81,9 +81,4 @@ public class BWinParser extends BaseParser{
         }
     }
 
-    @Override
-    public void parsAllRates() {
-
-    }
-
 }

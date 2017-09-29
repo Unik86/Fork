@@ -95,9 +95,4 @@ public class PinnacleParser extends BaseParser{
         }
     }
 
-    @Override
-    public void parsAllRates() {
-
-    }
-
 }

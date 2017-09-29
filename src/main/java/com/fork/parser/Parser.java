@@ -7,7 +7,6 @@ import java.util.List;
 public interface Parser {
 
     void parsMainRates();
-    void parsAllRates();
     BookMaker getBookMaker();
 
     void goToSite();

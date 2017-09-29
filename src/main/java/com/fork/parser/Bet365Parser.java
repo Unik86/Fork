@@ -132,9 +132,4 @@ public class Bet365Parser extends BaseParser{
         }
     }
 
-    @Override
-    public void parsAllRates() {
-
-    }
-
 }

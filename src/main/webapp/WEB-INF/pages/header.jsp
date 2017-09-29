@@ -8,7 +8,7 @@
       </div>
       <br>
 
-      <div class="dropdown pull-left" style="margin-right: 5px">
+      <div class="dropdown pull-left">
         <button class="btn btn-success dropdown-toggle" type="button" id="menu1"
                 data-toggle="dropdown">Parse</button>
 
@@ -32,7 +32,7 @@
         </ul>
       </div>
 
-      <div class="pull-left" style="margin-right: 5px">
+      <div class="pull-left" style="margin-left: 5px">
         <button type="button" class="btn btn-success"
                 onclick="location.href='/fork/countUp'">CountUp</button>
         <button type="button" class="btn btn-primary"
@@ -41,7 +41,7 @@
                 onclick="location.href='/fork/getTwoOfThree'">TwoOfThree</button>
       </div>
 
-      <div class="dropdown pull-left">
+      <div class="dropdown pull-left" style="margin-left: 5px">
         <button class="btn btn-success dropdown-toggle" type="button" id="menu2"
                 data-toggle="dropdown">BookMakers</button>
 
@@ -59,6 +59,11 @@
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?type=Pinnacle">Pinnacle</a>
           </li>
         </ul>
+      </div>
+
+      <div class="pull-left" style="margin-left: 5px">
+        <button type="button" class="btn btn-info"
+                onclick="location.href='/fork/live'">Live</button>
       </div>
 
     </div>
