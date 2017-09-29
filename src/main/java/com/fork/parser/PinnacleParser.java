@@ -2,19 +2,15 @@ package com.fork.parser;
 
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
-import com.fork.model.BookMakers;
+import com.fork.model.enums.BookMakers;
 import com.fork.model.Match;
-import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.pagefactory.ByAll;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-import static java.util.Objects.nonNull;
 
 @Log4j
 @Component("Pinnacle")

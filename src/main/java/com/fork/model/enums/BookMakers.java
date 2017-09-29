@@ -1,4 +1,4 @@
-package com.fork.model;
+package com.fork.model.enums;
 
 public enum BookMakers {
 

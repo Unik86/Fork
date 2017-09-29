@@ -151,6 +151,8 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public void findFork(List<FullMatch> matches){
         log.info("Find Fork");
+        forks.clear();
+
         List<List<Bet>> bets = rearrangeFullMatches(matches);
         calcFork(bets);
 

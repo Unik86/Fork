@@ -1,17 +1,15 @@
-package com.fork.parser;
+package com.fork.parser.match;
 
 import com.fork.model.*;
-import com.fork.util.Constants;
+import com.fork.model.enums.BookMakers;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
@@ -20,7 +18,7 @@ import static java.util.Objects.nonNull;
 @Component("WilliamHillMatch")
 public class WillMatchParser implements MatchParser{
 
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/e/11779567/Amal+Bou+Saada+U21+v+El+Eulma+U21.html";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/e/11728281/Ingolstadt+v+Darmstadt.html";
 
     private WebDriver driver;
 

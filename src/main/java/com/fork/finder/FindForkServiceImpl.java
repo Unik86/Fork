@@ -9,7 +9,7 @@ import com.fork.parser.Parser;
 import com.fork.repository.BookMakerRepository;
 import com.fork.repository.ForkRepository;
 import com.fork.repository.TwoOfThreeRepository;
-import com.fork.model.BookMakers;
+import com.fork.model.enums.BookMakers;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

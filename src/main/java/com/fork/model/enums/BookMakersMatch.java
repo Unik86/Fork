@@ -1,8 +1,9 @@
-package com.fork.model;
+package com.fork.model.enums;
 
 public enum BookMakersMatch {
 
-    WILL("WilliamHillMatch");
+    WILL("WilliamHillMatch"),
+    BWIN("BWinMatch");
 
     private String name;
 

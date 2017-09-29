@@ -3,7 +3,7 @@ package com.fork.parser;
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
 import com.fork.model.Match;
-import com.fork.model.BookMakers;
+import com.fork.model.enums.BookMakers;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
