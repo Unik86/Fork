@@ -14,8 +14,11 @@ public class Fork {
 
     @Getter @Setter
     private List<Match> matches;
+    @Getter @Setter
+    private List<Bet> bets;
+
     @Getter
-    private Bet bet;
+    private Bet forkBet;
     @Getter
     private Double allSum;
     @Getter
@@ -39,36 +42,36 @@ public class Fork {
 
     }
 
-    public Fork(Bet bet) {
-        this.bet = bet;
+    public Fork(Bet forkBet) {
+        this.forkBet = forkBet;
         this.allSum = 100D;
     }
 
-    public Fork(Bet bet, Double allSum) {
-        this.bet = bet;
+    public Fork(Bet forkBet, Double allSum) {
+        this.forkBet = forkBet;
         this.allSum = allSum;
     }
 
     public void calc(){
-        if(bet == null || bet.getRight() == null || bet.getLeft() == null)
+        if(forkBet == null || forkBet.getRight() == null || forkBet.getLeft() == null)
             return;
 
         // В = 1/К1 + 1/К2 + 1/К3
-        if(bet.getCenter() != null) {
-            rate =  round(1/bet.getRight() + 1/bet.getCenter() + 1/bet.getLeft());
-            sumCenter =  round((1/bet.getCenter()/ rate) * allSum);
-            winSumCenter = round(sumCenter * bet.getCenter());
+        if(forkBet.getCenter() != null) {
+            rate =  round(1/forkBet.getRight() + 1/forkBet.getCenter() + 1/forkBet.getLeft());
+            sumCenter =  round((1/forkBet.getCenter()/ rate) * allSum);
+            winSumCenter = round(sumCenter * forkBet.getCenter());
         }
         else {
-            rate =  round(1/bet.getRight() + 1/bet.getLeft());
+            rate =  round(1/forkBet.getRight() + 1/forkBet.getLeft());
         }
 
         // Р = (1/К/В)*С
-        sumRight =  round((1/bet.getRight()/ rate) * allSum);
-        sumLeft =  round((1/bet.getLeft()/ rate) * allSum);
+        sumRight =  round((1/forkBet.getRight()/ rate) * allSum);
+        sumLeft =  round((1/forkBet.getLeft()/ rate) * allSum);
 
-        winSumRight = round(sumRight * bet.getRight());
-        winSumLeft = round(sumLeft * bet.getLeft());
+        winSumRight = round(sumRight * forkBet.getRight());
+        winSumLeft = round(sumLeft * forkBet.getLeft());
     }
 
     public boolean isHasFork(){

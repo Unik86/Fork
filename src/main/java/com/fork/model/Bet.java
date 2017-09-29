@@ -9,6 +9,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Bet {
 
     @Getter @Setter
+    private String bookMaker;
+
+    @Getter @Setter
+    private String name;
+
+    @Getter @Setter
     private Double left;
 
     @Getter @Setter

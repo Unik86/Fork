@@ -7,7 +7,7 @@ import java.util.List;
 public interface MatchService {
 
     void findForkForMainRates(List<BookMaker> bookMakers);
-    void findFork(FullMatch... matches);
+    void findFork(List<FullMatch> matches);
     List<Fork> getForks();
     List<TwoOfThree> getTwoOfThrees();
 

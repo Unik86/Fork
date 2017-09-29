@@ -37,7 +37,7 @@ public class ForkController {
     }
 
     @GetMapping(value = "/parseBookMaker")
-    public String parseMatch(@RequestParam("type") String type) {
+    public String parseBookMaker(@RequestParam("type") String type) {
         log.info("GET /parseBookMaker " + type + "[BEGIN]");
 
         findForkService.parseBookMaker(type);
@@ -67,7 +67,7 @@ public class ForkController {
     }
 
     @GetMapping(value = "/getForks")
-    public String getWillMatches(Model model) {
+    public String getForks(Model model) {
         log.info("GET /getForks [BEGIN]");
 
         List<Fork> forks =  findForkService.getForks();
@@ -89,7 +89,7 @@ public class ForkController {
     }
 
     @GetMapping(value = "/getMatches")
-    public String getWillMatches(@RequestParam("type") String type, Model model) {
+    public String getMatches(@RequestParam("type") String type, Model model) {
         log.info("GET /getMatches " + type + " [BEGIN]");
 
         List<Match> matches =  findForkService.getMatches(type);

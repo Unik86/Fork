@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
 @Log4j
 @Service
 public class MatchServiceImpl implements MatchService {
@@ -30,12 +33,12 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public void findForkForMainRates(List<BookMaker> bookMakers){
         log.info("Find Fork For Main Rates");
-        List<List<Match>> mathes = rearrange(bookMakers);
+        List<List<Match>> mathes = rearrangeBookMakers(bookMakers);
         calcForkForMainRates(mathes);
         calcTwoOfThreeForMainRates(mathes);
     }
 
-    private List<List<Match>> rearrange(List<BookMaker> bookMakers){
+    private List<List<Match>> rearrangeBookMakers(List<BookMaker> bookMakers){
         JaroWinkler similar = new JaroWinkler();
         List<Match> allMatches = new ArrayList<>();
         List<Match> allMatches2 = new ArrayList<>();
@@ -146,26 +149,31 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public void findFork(FullMatch... matches){
-        List<List<Bet>> bets = rearrange(matches);
+    public void findFork(List<FullMatch> matches){
+        log.info("Find Fork");
+        List<List<Bet>> bets = rearrangeFullMatches(matches);
         calcFork(bets);
+
+        log.info("Forks = " + forks.size());
     }
 
     private void calcFork(List<List<Bet>> bets){
         for (List<Bet> list : bets) {
+            if(isNull(list) || list.isEmpty())
+                continue;
+
             MaxBetBuilder builder = new MaxBetBuilder();
             Bet maxBet = builder.calc(list);
 
             Fork fork = new Fork(maxBet);
+            fork.setBets(list);
             fork.calc();
 
-            if(fork.isHasFork()){
-
-            }
+            forks.add(fork);
         }
     }
 
-    private List<List<Bet>> rearrange(FullMatch[] matches){
+    private List<List<Bet>> rearrangeFullMatches(List<FullMatch> matches){
         List<List<Bet>> bets = new ArrayList<>();
         List<Bet> winners = new ArrayList<>();
 
@@ -183,16 +191,16 @@ public class MatchServiceImpl implements MatchService {
         for (FullMatch match : matches) {
             winners.add(match.getWinner());
 
-            total05s.add(match.getTotal05());
-            total15s.add(match.getTotal15());
-            total25s.add(match.getTotal25());
-            total35s.add(match.getTotal35());
-            total45s.add(match.getTotal45());
-            total55s.add(match.getTotal55());
-            total65s.add(match.getTotal65());
-            total75s.add(match.getTotal75());
-            total85s.add(match.getTotal85());
-            total95s.add(match.getTotal95());
+            addBet(total05s, match.getTotal05());
+            addBet(total15s, match.getTotal15());
+            addBet(total25s, match.getTotal25());
+            addBet(total35s, match.getTotal35());
+            addBet(total45s, match.getTotal45());
+            addBet(total55s, match.getTotal55());
+            addBet(total65s, match.getTotal65());
+            addBet(total75s, match.getTotal75());
+            addBet(total85s, match.getTotal85());
+            addBet(total95s, match.getTotal95());
         }
 
         addList(bets, winners);
@@ -216,4 +224,8 @@ public class MatchServiceImpl implements MatchService {
             bets.add(list);
     }
 
+    private void addBet(List<Bet> list, Bet bet){
+        if(nonNull(bet))
+            list.add(bet);
+    }
 }

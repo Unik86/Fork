@@ -24,7 +24,7 @@ public class FindForkServiceImpl implements FindForkService {
     @Autowired
     private ApplicationContext appContext;
     @Autowired
-    private MatchService service;
+    private MatchService matchService;
     @Autowired
     private BookMakerRepository bookMakerRepository;
     @Autowired
@@ -51,13 +51,13 @@ public class FindForkServiceImpl implements FindForkService {
     @Override
     public void countUp() {
         List<BookMaker> bookMakers = bookMakerRepository.findAll();
-        service.findForkForMainRates(bookMakers);
+        matchService.findForkForMainRates(bookMakers);
 
         forkRepository.deleteAll();
-        forkRepository.save(service.getForks());
+        forkRepository.save(matchService.getForks());
 
         twoOfTnreeRepository.deleteAll();
-        twoOfTnreeRepository.save(service.getTwoOfThrees());
+        twoOfTnreeRepository.save(matchService.getTwoOfThrees());
     }
 
     @Override
