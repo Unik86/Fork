@@ -15,13 +15,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Log4j
 @Component("BWinMatch")
 public class BWinMatchParser implements MatchParser{
 
-    private final static String URL = "https://livebetting.bwin.com/en/live#/6481914";
+    private final static String URL = "https://livebetting.bwin.com/en/live#/6480569";
 
     private WebDriver driver;
 
@@ -73,11 +74,21 @@ public class BWinMatchParser implements MatchParser{
             Bet bet = new Bet();
             bet.setBookMaker(getBookMakerName());
 
+            if(nonNull(subName)){
+                bet.setName(name + " " + subName);
+
+                elements = findBetRates(elements, subName);
+
+                if(isNull(elements) || elements.size() < 2)
+                    return null;
+
+                bet.setLeft(Double.parseDouble(getBetRate(elements.get(1))));
+                bet.setRight(Double.parseDouble(getBetRate(elements.get(0))));
+
+                return bet;
+            }
+
             switch (elements.size()) {
-                case 0:
-                case 1:
-                    bet = null;
-                    break;
                 case 2:
                     bet.setName(name);
 
@@ -92,12 +103,9 @@ public class BWinMatchParser implements MatchParser{
                     bet.setRight(Double.parseDouble(getBetRate(elements.get(2))));
                     break;
                 default:
-                    bet.setName(name + " " + subName);
-
-                    elements = findBetRates(elements, subName);
-                    bet.setLeft(Double.parseDouble(getBetRate(elements.get(1))));
-                    bet.setRight(Double.parseDouble(getBetRate(elements.get(0))));
+                    return null;
             }
+
             return bet;
         } catch (Exception e) {
             log.error("Pars Error");

@@ -23,6 +23,11 @@
       </div>
 
       <div class="pull-left" style="margin-left: 5px">
+        <button type="button" class="btn btn-success"
+                onclick="location.href='/fork/stopLive'">Stop</button>
+      </div>
+
+      <div class="pull-left" style="margin-left: 5px">
         <button type="button" class="btn btn-primary"
                 onclick="location.href='/fork/getLives'">Lives</button>
       </div>

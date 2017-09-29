@@ -38,6 +38,16 @@ public class LiveController {
         return "live";
     }
 
+    @GetMapping(value = "/stopLive")
+    public String stopLive() {
+        log.info("GET /stopLive [BEGIN]");
+
+        liveService.stopLive();
+
+        log.info("GET /stopLive [END]");
+        return "live";
+    }
+
     @GetMapping(value = "/getLives")
     public String getLives(Model model) {
         log.info("GET /getLives [BEGIN]");

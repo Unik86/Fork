@@ -8,6 +8,7 @@ public interface LiveService {
 
     List<Live> getLives();
     void startLive();
+    void stopLive();
     void clearLives();
 
 }

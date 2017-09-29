@@ -18,7 +18,7 @@ import static java.util.Objects.nonNull;
 @Component("WilliamHillMatch")
 public class WillMatchParser implements MatchParser{
 
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/e/11728281/Ingolstadt+v+Darmstadt.html";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/e/11722834/Twente+v+Heracles.html";
 
     private WebDriver driver;
 
