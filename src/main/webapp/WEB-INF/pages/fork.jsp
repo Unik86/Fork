@@ -57,9 +57,9 @@
               <td></td>
               <td></td>
 
-              <td>${fork.bet.left}</td>
-              <td>${fork.bet.center}</td>
-              <td>${fork.bet.right}</td>
+              <td>${fork.forkBet.left}</td>
+              <td>${fork.forkBet.center}</td>
+              <td>${fork.forkBet.right}</td>
 
               <td>${fork.rate}</td>
 

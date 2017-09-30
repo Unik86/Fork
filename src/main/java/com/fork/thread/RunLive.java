@@ -30,8 +30,8 @@ public class RunLive implements Runnable {
     public void run() {
         while (isRunning) {
             try {
+                Thread.sleep(20000);
                 log.info("New circle");
-                Thread.sleep(20*1000);
 
                 List<FullMatch> matches = new ArrayList();
 
