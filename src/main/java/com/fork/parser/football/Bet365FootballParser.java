@@ -1,4 +1,4 @@
-package com.fork.parser;
+package com.fork.parser.football;
 
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
@@ -16,14 +16,14 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("Bet365")
-public class Bet365Parser extends BaseParser{
+@Component("Bet365Football")
+public class Bet365FootballParser extends BaseFootballParser {
 
     private final static String URL = "https://www.bet365.com";
     private final static String MATCHES = "//div[contains(@class, 'gl-MarketGroupContainer')]";
     private final static String SOCCER_LINK = "//div[contains(@class, 'wn-Classification') and contains(text(),'Soccer')]";
 
-    public Bet365Parser() {
+    public Bet365FootballParser() {
         pagesStr = "//div[contains(@class, 'sm-CouponLink_Label') and contains(text(),'s Matches')]";
         bookMaker = new BookMaker(BookMakers.BET365.getName());
     }

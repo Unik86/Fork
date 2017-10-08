@@ -5,6 +5,7 @@ import com.fork.model.Fork;
 import com.fork.calc.MatchService;
 import com.fork.model.Match;
 import com.fork.model.TwoOfThree;
+import com.fork.model.enums.SportTypes;
 import com.fork.parser.Parser;
 import com.fork.repository.BookMakerRepository;
 import com.fork.repository.ForkRepository;
@@ -23,6 +24,8 @@ import java.util.List;
 @Service
 public class FindForkServiceImpl implements FindForkService {
 
+    private SportTypes sportType;
+
     @Autowired
     private ApplicationContext appContext;
     @Autowired
@@ -33,6 +36,11 @@ public class FindForkServiceImpl implements FindForkService {
     private ForkRepository forkRepository;
     @Autowired
     private TwoOfThreeRepository twoOfTnreeRepository;
+
+    @Override
+    public void setSportType(SportTypes type){
+        sportType = type;
+    }
 
     @Override
     public void parseAll() {
@@ -51,10 +59,10 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public void countUp() {
-        List<BookMaker> bookMakers = bookMakerRepository.findAll();
+        List<BookMaker> bookMakers = bookMakerRepository.findBySportType(sportType);
         matchService.findForkForMainRates(bookMakers);
 
-        forkRepository.deleteAll();
+        forkRepository.deleteBySportType(sportType);
         forkRepository.save(matchService.getForks());
 
         twoOfTnreeRepository.deleteAll();
@@ -63,16 +71,16 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public void findMatchFork(Fork fork) {
-        Parser will = getParser(BookMakers.WILL.getName());
+//        Parser will = getParser(BookMakers.WILL.getName());
 //        will.parsAllRates();
 
-        Parser bwin = getParser(BookMakers.BWIN.getName());
+//        Parser bwin = getParser(BookMakers.BWIN.getName());
 //        bwin.parsAllRates();
     }
 
     @Override
-    public List<Match> getMatches(String type) {
-        BookMaker bookMaker = bookMakerRepository.findOne(type);
+    public List<Match> getMatches(String name) {
+        BookMaker bookMaker = bookMakerRepository.findOneByNameAndSportType(name, sportType);
 
         log.info("matches size = " + bookMaker.getMatches().size());
         return bookMaker.getMatches();
@@ -80,7 +88,7 @@ public class FindForkServiceImpl implements FindForkService {
 
     @Override
     public List<Fork> getForks(){
-        List<Fork> forks = forkRepository.findAllByOrderByRate();
+        List<Fork> forks = forkRepository.findBySportTypeAndOrderByRate(sportType);
 
         log.info("forks size = " + forks.size());
         return forks;
@@ -95,7 +103,7 @@ public class FindForkServiceImpl implements FindForkService {
     }
 
     private Parser getParser(String type){
-        return appContext.getBean(type, Parser.class);
+        return appContext.getBean(type + sportType.getType(), Parser.class);
     }
 
 }

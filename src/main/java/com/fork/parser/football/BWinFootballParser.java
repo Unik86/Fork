@@ -1,4 +1,4 @@
-package com.fork.parser;
+package com.fork.parser.football;
 
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Component("BWin")
-public class BWinParser extends BaseParser{
+@Component("BWinFootball")
+public class BWinFootballParser extends BaseFootballParser {
 
     private final static String URL = "https://sports.bwin.com/en/sports#sportId=4";
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
-    public BWinParser() {
+    public BWinFootballParser() {
         pagesStr = "//div[contains(@id, 'sports-navigation')]//a";
         bookMaker = new BookMaker(BookMakers.BWIN.getName());
     }

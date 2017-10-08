@@ -1,5 +1,6 @@
 package com.fork.model;
 
+import com.fork.model.enums.SportTypes;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -12,10 +13,10 @@ import java.util.List;
 public class BookMaker {
 
     @Id
-    @Getter
-    @Setter
+    @Getter @Setter
     private String name;
-
+    @Getter @Setter
+    private SportTypes sportType;
     @Getter @Setter
     private List<Match> matches = new ArrayList<>();
 

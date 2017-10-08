@@ -3,7 +3,7 @@ package com.fork.finder;
 import com.fork.calc.MatchService;
 import com.fork.model.enums.BookMakersMatch;
 import com.fork.model.Live;
-import com.fork.parser.match.MatchParser;
+import com.fork.parser.MatchParser;
 import com.fork.repository.LiveRepository;
 import com.fork.thread.RunLive;
 import lombok.extern.log4j.Log4j;

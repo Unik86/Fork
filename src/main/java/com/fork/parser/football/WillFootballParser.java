@@ -1,4 +1,4 @@
-package com.fork.parser;
+package com.fork.parser.football;
 
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Component("WilliamHill")
-public class WillParser extends BaseParser{
+@Component("WilliamHillFootball")
+public class WillFootballParser extends BaseFootballParser {
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/Football.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
-    public WillParser() {
+    public WillFootballParser() {
         pagesStr = "//ul[contains(@class, 'matrixB')]//a";
         bookMaker = new BookMaker(BookMakers.WILL.getName());
     }

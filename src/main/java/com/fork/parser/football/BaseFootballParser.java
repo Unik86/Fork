@@ -1,7 +1,8 @@
-package com.fork.parser;
+package com.fork.parser.football;
 
 import com.fork.model.BookMaker;
 import com.fork.model.Match;
+import com.fork.parser.Parser;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Log4j
-public abstract class BaseParser implements Parser{
+public abstract class BaseFootballParser implements Parser {
 
     protected WebDriver driver;
     protected BookMaker bookMaker;

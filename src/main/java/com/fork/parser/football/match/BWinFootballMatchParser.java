@@ -1,8 +1,9 @@
-package com.fork.parser.match;
+package com.fork.parser.football.match;
 
 import com.fork.model.Bet;
 import com.fork.model.enums.BookMakers;
 import com.fork.model.FullMatch;
+import com.fork.parser.MatchParser;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,16 +12,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("BWinMatch")
-public class BWinMatchParser implements MatchParser{
+@Component("BWinMatchFootball")
+public class BWinFootballMatchParser implements MatchParser {
 
     private final static String URL = "https://livebetting.bwin.com/en/live#/6480569";
 

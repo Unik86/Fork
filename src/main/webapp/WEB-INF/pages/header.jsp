@@ -5,6 +5,13 @@
     <div class="container">
       <div class="starter-template">
         <h1>Fork Application</h1>
+
+        <div class="pull-left" style="margin-left: 5px">
+          <button type="button" class="btn btn-primary"
+                  onclick="location.href='/fork/sportType?type=Football'">Football</button>
+          <button type="button" class="btn btn-primary"
+                  onclick="location.href='/fork/sportType?type=Tennis'">Tennis</button>
+        </div>
       </div>
       <br>
 
@@ -47,16 +54,16 @@
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?type=WilliamHill">WilliamHill</a>
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=WilliamHill">WilliamHill</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?type=BWin">BWin</a>
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=BWin">BWin</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?type=Bet365">Bet365</a>
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet365">Bet365</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?type=Pinnacle">Pinnacle</a>
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Pinnacle">Pinnacle</a>
           </li>
         </ul>
       </div>

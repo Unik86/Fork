@@ -1,4 +1,4 @@
-package com.fork.parser.match;
+package com.fork.parser;
 
 import com.fork.model.FullMatch;
 

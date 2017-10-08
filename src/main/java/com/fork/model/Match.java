@@ -1,5 +1,6 @@
 package com.fork.model;
 
+import com.fork.model.enums.SportTypes;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -14,6 +15,8 @@ public class Match {
     private String playerRight;
     @Getter @Setter
     private String bookMaker;
+    @Getter @Setter
+    private SportTypes sportType;
     @Getter @Setter
     private String url;
     @Getter @Setter

@@ -1,4 +1,4 @@
-package com.fork.parser;
+package com.fork.parser.football;
 
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Component("Pinnacle")
-public class PinnacleParser extends BaseParser{
+@Component("PinnacleFootball")
+public class PinnacleFootballParser extends BaseFootballParser {
 
     private final static String URL = "https://www.pinnacle.com/en/odds/today/soccer";
     private final static String MATCHES = "//table[contains(@class, 'odds-data') and not(contains(@class, 'ng-scope'))]/tbody";
 
-    public PinnacleParser() {
+    public PinnacleFootballParser() {
         bookMaker = new BookMaker(BookMakers.PINNACLE.getName());
     }
 

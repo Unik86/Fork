@@ -1,7 +1,8 @@
-package com.fork.parser.match;
+package com.fork.parser.football.match;
 
 import com.fork.model.*;
 import com.fork.model.enums.BookMakers;
+import com.fork.parser.MatchParser;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,8 +16,8 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("WilliamHillMatch")
-public class WillMatchParser implements MatchParser{
+@Component("WilliamHillMatchFootball")
+public class WillFootballMatchParser implements MatchParser {
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/e/11722834/Twente+v+Heracles.html";
 

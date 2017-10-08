@@ -4,6 +4,7 @@ import com.fork.model.Fork;
 import com.fork.finder.FindForkService;
 import com.fork.model.Match;
 import com.fork.model.TwoOfThree;
+import com.fork.model.enums.SportTypes;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,16 @@ public class ForkController {
         return "main";
     }
 
+    @GetMapping(value = "/sportType")
+    public String sportType(@RequestParam("type") String type) {
+        log.info("GET /sportType " + type + "[BEGIN]");
+
+        findForkService.setSportType(SportTypes.getSportType(type));
+
+        log.info("GET /sportType " + type + "[END]");
+        return "main";
+    }
+
     @GetMapping(value = "/parseAll")
     public String parseAll() {
         log.info("GET /parseAll [BEGIN]");
@@ -37,12 +48,12 @@ public class ForkController {
     }
 
     @GetMapping(value = "/parseBookMaker")
-    public String parseBookMaker(@RequestParam("type") String type) {
-        log.info("GET /parseBookMaker " + type + "[BEGIN]");
+    public String parseBookMaker(@RequestParam("name") String name) {
+        log.info("GET /parseBookMaker " + name + "[BEGIN]");
 
-        findForkService.parseBookMaker(type);
+        findForkService.parseBookMaker(name);
 
-        log.info("GET /parseBookMaker " + type + "[END]");
+        log.info("GET /parseBookMaker " + name + "[END]");
         return "fork";
     }
 
@@ -89,13 +100,13 @@ public class ForkController {
     }
 
     @GetMapping(value = "/getMatches")
-    public String getMatches(@RequestParam("type") String type, Model model) {
-        log.info("GET /getMatches " + type + " [BEGIN]");
+    public String getMatches(@RequestParam("name") String name, Model model) {
+        log.info("GET /getMatches " + name + " [BEGIN]");
 
-        List<Match> matches =  findForkService.getMatches(type);
+        List<Match> matches =  findForkService.getMatches(name);
         model.addAttribute("matches", matches);
 
-        log.info("GET /getMatches " + type + " [END]");
+        log.info("GET /getMatches " + name + " [END]");
         return "match";
     }
 
