@@ -130,5 +130,4 @@ public class Bet365Parser extends BaseParser{
             }
         }
     }
-
 }

@@ -10,6 +10,8 @@ import com.fork.repository.BookMakerRepository;
 import com.fork.repository.ForkRepository;
 import com.fork.repository.TwoOfThreeRepository;
 import com.fork.model.enums.BookMakers;
+import com.fork.thread.RunLive;
+import com.fork.thread.RunParser;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -42,10 +44,9 @@ public class FindForkServiceImpl implements FindForkService {
     @Override
     public void parseBookMaker(String bookMaker) {
         Parser parser = getParser(bookMaker);
-        parser.goToSite();
-        parser.parsMainRates();
-        parser.closeBrowser();
-        bookMakerRepository.save(parser.getBookMaker());
+        RunParser runParser = new RunParser(parser, bookMakerRepository);
+        Thread thread = new Thread(runParser);
+        thread.start();
     }
 
     @Override

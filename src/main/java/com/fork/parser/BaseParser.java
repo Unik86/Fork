@@ -7,6 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -35,28 +38,33 @@ public abstract class BaseParser implements Parser{
     public void parsMainRates(){
         log.info("Pars main rates");
         bookMaker.getMatches().clear();
-        int cntPages = 0;
+        List<String> leagues = new ArrayList<>();
 
         if(nonNull(pagesStr))
-            cntPages = driver.findElements(By.xpath(pagesStr)).size();
+            leagues = driver.findElements(By.xpath(pagesStr))
+                    .stream()
+                    .map(r -> r.getAttribute("href"))
+                    .collect(Collectors.toList());
 
-        cntPages += 1;
-        log.info("count pages = " + cntPages);
+        log.info("count pages = " + leagues.size());
 
-        for(int i = 1; i <= cntPages; i++){
+        leagues.forEach(url -> {
             try {
-                if(i != 1 && nonNull(pagesStr))
-                    driver.findElements(By.xpath(pagesStr)).get(i-2).click();
-
-                Thread.sleep(3000);
-                log.info("page = " + i);
+                driver.get(url);
+                Thread.sleep(getRandomInt());
+                log.info("page = " + url);
                 parsOnePageMainRates();
             } catch (Exception e){
 
             }
-        }
+        });
 
         log.info("matchs size = " + bookMaker.getMatches().size());
+    }
+
+    private int getRandomInt(){
+        Random rand = new Random();
+        return rand.nextInt(7000) + 2000;
     }
 
     protected abstract void parsOnePageMainRates();

@@ -16,11 +16,11 @@ import java.util.List;
 @Component("WilliamHill")
 public class WillParser extends BaseParser{
 
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/Football.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
     public WillParser() {
-        pagesStr = "//span[contains(@class, 'rn_PageLinks')]/a";
+        pagesStr = "//ul[contains(@class, 'matrixB')]//a";
         bookMaker = new BookMaker(BookMakers.WILL.getName());
     }
 
@@ -39,9 +39,6 @@ public class WillParser extends BaseParser{
 
             Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
             rateFormat.selectByVisibleText("Decimal");
-
-            Select changeOrder = new Select(driver.findElement(By.id("changeOrder")));
-            changeOrder.selectByVisibleText("Time");
 
             Thread.sleep(1000);
         } catch (Exception e){

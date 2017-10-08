@@ -20,7 +20,7 @@ public class BWinParser extends BaseParser{
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
     public BWinParser() {
-        pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
+        pagesStr = "//div[contains(@id, 'sports-navigation')]//a";
         bookMaker = new BookMaker(BookMakers.BWIN.getName());
     }
 
@@ -80,5 +80,4 @@ public class BWinParser extends BaseParser{
             }
         }
     }
-
 }
