@@ -18,7 +18,7 @@ public class Fork {
     @Getter @Setter
     private List<Bet> bets;
     @Getter @Setter
-    private SportTypes sportType;
+    private String sportType;
 
     @Getter
     private Bet forkBet;

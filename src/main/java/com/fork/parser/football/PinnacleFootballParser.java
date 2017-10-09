@@ -4,6 +4,7 @@ import com.fork.model.Bet;
 import com.fork.model.BookMaker;
 import com.fork.model.enums.BookMakers;
 import com.fork.model.Match;
+import com.fork.model.enums.SportTypes;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,7 +21,7 @@ public class PinnacleFootballParser extends BaseFootballParser {
     private final static String MATCHES = "//table[contains(@class, 'odds-data') and not(contains(@class, 'ng-scope'))]/tbody";
 
     public PinnacleFootballParser() {
-        bookMaker = new BookMaker(BookMakers.PINNACLE.getName());
+        bookMaker = new BookMaker(BookMakers.PINNACLE.getName(), SportTypes.FOOTBALL.getType());
     }
 
     @Override

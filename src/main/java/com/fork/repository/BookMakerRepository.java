@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface BookMakerRepository extends MongoRepository<BookMaker, String> {
 
-    List<BookMaker> findBySportType(SportTypes sportType);
-    BookMaker findOneByNameAndSportType(String name, SportTypes sportType);
+    List<BookMaker> findBySportType(String sportType);
+    BookMaker findOneByNameAndSportType(String name, String sportType);
 
 }

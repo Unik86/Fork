@@ -4,6 +4,7 @@ import com.fork.model.Bet;
 import com.fork.model.BookMaker;
 import com.fork.model.Match;
 import com.fork.model.enums.BookMakers;
+import com.fork.model.enums.SportTypes;
 import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
@@ -21,7 +22,7 @@ public class WillFootballParser extends BaseFootballParser {
 
     public WillFootballParser() {
         pagesStr = "//ul[contains(@class, 'matrixB')]//a";
-        bookMaker = new BookMaker(BookMakers.WILL.getName());
+        bookMaker = new BookMaker(BookMakers.WILL.getName(), SportTypes.FOOTBALL.getType());
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.fork.model.Bet;
 import com.fork.model.BookMaker;
 import com.fork.model.Match;
 import com.fork.model.enums.BookMakers;
+import com.fork.model.enums.SportTypes;
 import com.fork.parser.football.BaseFootballParser;
 import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
@@ -17,14 +18,13 @@ import java.util.List;
 
 @Log4j
 @Component("WilliamHillTennis")
-public class WillTennisParser extends BaseFootballParser {
+public class WillTennisParser extends BaseTennisParser {
 
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/Football.html";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/17/mh/Tennis.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
     public WillTennisParser() {
-        pagesStr = "//ul[contains(@class, 'matrixB')]//a";
-        bookMaker = new BookMaker(BookMakers.WILL.getName());
+        bookMaker = new BookMaker(BookMakers.WILL.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -43,6 +43,9 @@ public class WillTennisParser extends BaseFootballParser {
             Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
             rateFormat.selectByVisibleText("Decimal");
 
+            Select orderFormat = new Select(driver.findElement(By.id("changeOrder")));
+            orderFormat.selectByVisibleText("Time");
+
             Thread.sleep(1000);
         } catch (Exception e){
             driver.close();
@@ -60,18 +63,19 @@ public class WillTennisParser extends BaseFootballParser {
                 WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
 
                 List<WebElement> elementRates = element.findElements(By.className("eventprice"));
-                List<WebElement> tdCols = element.findElements(By.tagName("td"));
+                WebElement elementName = element.findElement(By.className("CentrePad"));
+                List<WebElement> leftPad = element.findElements(By.className("leftPad"));
 
-                String time = tdCols.get(1).getText();
+                String time = leftPad.get(1).getText();
                 if(!time.contains("EEST"))
                     continue;
 
-                WebElement urlElement = tdCols.get(2).findElement(By.tagName("a"));
+                WebElement urlElement = elementName.findElement(By.tagName("a"));
                 String url = urlElement.getAttribute("href");
 
                 Bet bet = null;
 
-                String[] names = tdCols.get(2).getText().split(Constants.SEPARATOR_NAME);
+                String[] names = elementName.getText().split(Constants.SEPARATOR_NAME);
                 if(names.length < 2)
                     continue;
 
@@ -91,6 +95,7 @@ public class WillTennisParser extends BaseFootballParser {
 
                 Match match = new Match();
                 match.setBookMaker(BookMakers.WILL.getName());
+                match.setSportType(SportTypes.TENNIS.getType());
                 match.setPlayerLeft(names[0].trim());
                 match.setPlayerRight(names[1].trim());
                 match.setTime(time);

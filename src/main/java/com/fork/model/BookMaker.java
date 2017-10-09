@@ -16,7 +16,7 @@ public class BookMaker {
     @Getter @Setter
     private String name;
     @Getter @Setter
-    private SportTypes sportType;
+    private String sportType;
     @Getter @Setter
     private List<Match> matches = new ArrayList<>();
 
@@ -24,7 +24,8 @@ public class BookMaker {
 
     }
 
-    public BookMaker(String name) {
+    public BookMaker(String name, String type) {
         this.name = name;
+        this.sportType = type;
     }
 }

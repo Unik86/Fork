@@ -4,14 +4,11 @@
 
     <div class="container">
       <div class="starter-template">
-        <h1>Fork Application</h1>
-
-        <div class="pull-left" style="margin-left: 5px">
-          <button type="button" class="btn btn-primary"
-                  onclick="location.href='/fork/sportType?type=Football'">Football</button>
-          <button type="button" class="btn btn-primary"
-                  onclick="location.href='/fork/sportType?type=Tennis'">Tennis</button>
-        </div>
+        <h1>Fork Application ${sportType}</h1>
+        <button type="button" class="btn btn-default"
+                onclick="location.href='/fork/sportType?type=Football'">Football</button>
+        <button type="button" class="btn btn-default"
+                onclick="location.href='/fork/sportType?type=Tennis'">Tennis</button>
       </div>
       <br>
 
@@ -25,16 +22,16 @@
           </li>
           <li role="presentation" class="divider"></li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?type=WilliamHill">WilliamHill</a>
+            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=WilliamHill">WilliamHill</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?type=BWin">BWin</a>
+            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=BWin">BWin</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?type=Bet365">Bet365</a>
+            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=Bet365">Bet365</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?type=Pinnacle">Pinnacle</a>
+            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=Pinnacle">Pinnacle</a>
           </li>
         </ul>
       </div>

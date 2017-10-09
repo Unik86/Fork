@@ -16,7 +16,7 @@ public class Match {
     @Getter @Setter
     private String bookMaker;
     @Getter @Setter
-    private SportTypes sportType;
+    private String sportType;
     @Getter @Setter
     private String url;
     @Getter @Setter

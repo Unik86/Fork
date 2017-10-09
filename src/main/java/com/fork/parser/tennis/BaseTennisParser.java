@@ -36,27 +36,8 @@ public abstract class BaseTennisParser implements Parser {
     @Override
     public void parsMainRates(){
         log.info("Pars main rates");
-        bookMaker.getMatches().clear();
-        List<String> leagues = new ArrayList<>();
 
-        if(nonNull(pagesStr))
-            leagues = driver.findElements(By.xpath(pagesStr))
-                    .stream()
-                    .map(r -> r.getAttribute("href"))
-                    .collect(Collectors.toList());
-
-        log.info("count pages = " + leagues.size());
-
-        leagues.forEach(url -> {
-            try {
-                driver.get(url);
-                Thread.sleep(getRandomInt());
-                log.info("page = " + url);
-                parsOnePageMainRates();
-            } catch (Exception e){
-
-            }
-        });
+        parsOnePageMainRates();
 
         log.info("matchs size = " + bookMaker.getMatches().size());
     }

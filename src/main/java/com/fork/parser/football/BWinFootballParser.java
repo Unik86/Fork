@@ -4,6 +4,7 @@ import com.fork.model.Bet;
 import com.fork.model.BookMaker;
 import com.fork.model.Match;
 import com.fork.model.enums.BookMakers;
+import com.fork.model.enums.SportTypes;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,7 @@ public class BWinFootballParser extends BaseFootballParser {
 
     public BWinFootballParser() {
         pagesStr = "//div[contains(@id, 'sports-navigation')]//a";
-        bookMaker = new BookMaker(BookMakers.BWIN.getName());
+        bookMaker = new BookMaker(BookMakers.BWIN.getName(), SportTypes.FOOTBALL.getType());
     }
 
     @Override
