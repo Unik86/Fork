@@ -114,6 +114,7 @@ public class MatchServiceImpl implements MatchService {
             Bet maxBet = builder.calc(bets);
 
             Fork fork = new Fork(maxBet);
+            fork.setSportType(getSportType(list));
             fork.calc();
 
             if(fork.isHasFork()){
@@ -123,6 +124,14 @@ public class MatchServiceImpl implements MatchService {
         }
 
         log.info("Forks = " + forks.size());
+    }
+
+    private String getSportType(List<Match> list){
+        for(Match match : list)
+            if(nonNull(match.getSportType()))
+                return match.getSportType();
+
+        return null;
     }
 
     private void calcTwoOfThreeForMainRates(List<List<Match>> matches){

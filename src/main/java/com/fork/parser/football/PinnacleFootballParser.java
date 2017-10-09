@@ -15,7 +15,7 @@ import java.util.List;
 
 @Log4j
 @Component("PinnacleFootball")
-public class PinnacleFootballParser extends BaseFootballParser {
+public class PinnacleFootballParser extends BaseFootballParser{
 
     private final static String URL = "https://www.pinnacle.com/en/odds/today/soccer";
     private final static String MATCHES = "//table[contains(@class, 'odds-data') and not(contains(@class, 'ng-scope'))]/tbody";
@@ -78,6 +78,7 @@ public class PinnacleFootballParser extends BaseFootballParser {
 
                 Match match = new Match();
                 match.setBookMaker(BookMakers.PINNACLE.getName());
+                match.setSportType(SportTypes.FOOTBALL.getType());
                 match.setPlayerLeft(leftName);
                 match.setPlayerRight(rightName);
                 match.setTime(time.getText());
@@ -91,4 +92,5 @@ public class PinnacleFootballParser extends BaseFootballParser {
             }
         }
     }
+
 }

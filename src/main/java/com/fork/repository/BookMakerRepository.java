@@ -11,5 +11,6 @@ public interface BookMakerRepository extends MongoRepository<BookMaker, String> 
 
     List<BookMaker> findBySportType(String sportType);
     BookMaker findOneByNameAndSportType(String name, String sportType);
+    void deleteByNameAndSportType(String name, String sportType);
 
 }

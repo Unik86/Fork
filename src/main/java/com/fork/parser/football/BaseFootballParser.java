@@ -1,18 +1,11 @@
 package com.fork.parser.football;
 
 import com.fork.model.BookMaker;
-import com.fork.model.Match;
 import com.fork.parser.Parser;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Log4j
@@ -39,33 +32,28 @@ public abstract class BaseFootballParser implements Parser {
     public void parsMainRates(){
         log.info("Pars main rates");
         bookMaker.getMatches().clear();
-        List<String> leagues = new ArrayList<>();
+        int cntPages = 0;
 
         if(nonNull(pagesStr))
-            leagues = driver.findElements(By.xpath(pagesStr))
-                    .stream()
-                    .map(r -> r.getAttribute("href"))
-                    .collect(Collectors.toList());
+            cntPages = driver.findElements(By.xpath(pagesStr)).size();
 
-        log.info("count pages = " + leagues.size());
+        cntPages += 1;
+        log.info("count pages = " + cntPages);
 
-        leagues.forEach(url -> {
+        for(int i = 1; i <= cntPages; i++){
             try {
-                driver.get(url);
-                Thread.sleep(getRandomInt());
-                log.info("page = " + url);
+                if(i != 1 && nonNull(pagesStr))
+                    driver.findElements(By.xpath(pagesStr)).get(i-2).click();
+
+                Thread.sleep(3000);
+                log.info("page = " + i);
                 parsOnePageMainRates();
             } catch (Exception e){
 
             }
-        });
+        }
 
         log.info("matchs size = " + bookMaker.getMatches().size());
-    }
-
-    private int getRandomInt(){
-        Random rand = new Random();
-        return rand.nextInt(7000) + 2000;
     }
 
     protected abstract void parsOnePageMainRates();

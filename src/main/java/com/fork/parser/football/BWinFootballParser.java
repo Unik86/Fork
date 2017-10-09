@@ -15,13 +15,13 @@ import java.util.List;
 
 @Log4j
 @Component("BWinFootball")
-public class BWinFootballParser extends BaseFootballParser {
+public class BWinFootballParser extends BaseFootballParser{
 
     private final static String URL = "https://sports.bwin.com/en/sports#sportId=4";
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
     public BWinFootballParser() {
-        pagesStr = "//div[contains(@id, 'sports-navigation')]//a";
+        pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
         bookMaker = new BookMaker(BookMakers.BWIN.getName(), SportTypes.FOOTBALL.getType());
     }
 
@@ -68,6 +68,7 @@ public class BWinFootballParser extends BaseFootballParser {
 
                 Match match = new Match();
                 match.setBookMaker(BookMakers.BWIN.getName());
+                match.setSportType(SportTypes.FOOTBALL.getType());
                 match.setPlayerLeft(columnLeft.get(0).getText());
                 match.setPlayerRight(columnRight.get(0).getText());
                 match.setTime(time);
@@ -81,4 +82,5 @@ public class BWinFootballParser extends BaseFootballParser {
             }
         }
     }
+
 }

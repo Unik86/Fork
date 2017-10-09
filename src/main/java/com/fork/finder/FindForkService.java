@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Log4j
 @Service
 public class FindForkService {
@@ -73,21 +75,21 @@ public class FindForkService {
     public List<Match> getMatches(String name) {
         BookMaker bookMaker = bookMakerRepository.findOneByNameAndSportType(name, sportType);
 
-        log.info("matches size = " + bookMaker.getMatches().size());
-        return bookMaker.getMatches();
+        log.info("matches size = " + getMatchSize(bookMaker));
+        return isNull(bookMaker) ? null : bookMaker.getMatches();
     }
 
     public List<Fork> getForks(){
         List<Fork> forks = forkRepository.findBySportTypeOrderByRate(sportType);
 
-        log.info("forks size = " + forks.size());
+        log.info("forks size = " + (isNull(forks) ? 0 : forks.size()));
         return forks;
     }
 
     public List<TwoOfThree> getTwoOfThrees(){
         List<TwoOfThree> twoOfThrees = twoOfTnreeRepository.findAllByOrderByRate();
 
-        log.info("twoOfThrees size = " + twoOfThrees.size());
+        log.info("twoOfThrees size = " + (isNull(twoOfThrees) ? 0 : twoOfThrees.size()));
         return twoOfThrees;
     }
 
@@ -95,4 +97,10 @@ public class FindForkService {
         return appContext.getBean(bookMaker + sportType, Parser.class);
     }
 
+    private int getMatchSize(BookMaker bookMaker){
+        if(isNull(bookMaker) || isNull(bookMaker.getMatches()))
+            return 0;
+        else
+            return bookMaker.getMatches().size();
+    }
 }

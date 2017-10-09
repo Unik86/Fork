@@ -15,13 +15,13 @@ import java.util.List;
 
 @Log4j
 @Component("WilliamHillFootball")
-public class WillFootballParser extends BaseFootballParser {
+public class WillFootballParser extends BaseFootballParser{
 
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/Football.html";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
     public WillFootballParser() {
-        pagesStr = "//ul[contains(@class, 'matrixB')]//a";
+        pagesStr = "//span[contains(@class, 'rn_PageLinks')]/a";
         bookMaker = new BookMaker(BookMakers.WILL.getName(), SportTypes.FOOTBALL.getType());
     }
 
@@ -40,6 +40,9 @@ public class WillFootballParser extends BaseFootballParser {
 
             Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
             rateFormat.selectByVisibleText("Decimal");
+
+            Select changeOrder = new Select(driver.findElement(By.id("changeOrder")));
+            changeOrder.selectByVisibleText("Time");
 
             Thread.sleep(1000);
         } catch (Exception e){
@@ -89,6 +92,7 @@ public class WillFootballParser extends BaseFootballParser {
 
                 Match match = new Match();
                 match.setBookMaker(BookMakers.WILL.getName());
+                match.setSportType(SportTypes.FOOTBALL.getType());
                 match.setPlayerLeft(names[0].trim());
                 match.setPlayerRight(names[1].trim());
                 match.setTime(time);

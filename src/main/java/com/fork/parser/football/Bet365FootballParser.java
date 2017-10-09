@@ -18,7 +18,7 @@ import static java.util.Objects.nonNull;
 
 @Log4j
 @Component("Bet365Football")
-public class Bet365FootballParser extends BaseFootballParser {
+public class Bet365FootballParser extends BaseFootballParser{
 
     private final static String URL = "https://www.bet365.com";
     private final static String MATCHES = "//div[contains(@class, 'gl-MarketGroupContainer')]";
@@ -117,6 +117,7 @@ public class Bet365FootballParser extends BaseFootballParser {
 
                     Match match = new Match();
                     match.setBookMaker(BookMakers.BET365.getName());
+                    match.setSportType(SportTypes.FOOTBALL.getType());
                     match.setPlayerLeft(namesStr[0].trim());
                     match.setPlayerRight(namesStr[1].trim());
                     match.setTime(times.get(j).getText());
@@ -131,4 +132,5 @@ public class Bet365FootballParser extends BaseFootballParser {
             }
         }
     }
+
 }
