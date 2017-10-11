@@ -1,9 +1,9 @@
-package com.fork.parser.football;
+package com.fork.parser.tennis;
 
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
-import com.fork.model.enums.BookMakers;
 import com.fork.model.Match;
+import com.fork.model.enums.BookMakers;
 import com.fork.model.enums.SportTypes;
 import com.fork.parser.BaseParser;
 import lombok.extern.log4j.Log4j;
@@ -15,14 +15,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Component("PinnacleFootball")
-public class PinnacleFootballParser extends BaseParser {
+@Component("PinnacleTennis")
+public class PinnacleTennisParser extends BaseParser {
 
-    private final static String URL = "https://www.pinnacle.com/en/odds/today/soccer";
+    private final static String URL = "https://www.pinnacle.com/ru/odds/today/tennis";
     private final static String MATCHES = "//table[contains(@class, 'odds-data') and not(contains(@class, 'ng-scope'))]/tbody";
 
-    public PinnacleFootballParser() {
-        bookMaker = new BookMaker(BookMakers.PINNACLE.getName(), SportTypes.FOOTBALL.getType());
+    public PinnacleTennisParser() {
+        bookMaker = new BookMaker(BookMakers.PINNACLE.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -34,7 +34,7 @@ public class PinnacleFootballParser extends BaseParser {
             driver.manage().window().maximize();
             driver.get(URL);
 
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (Exception e){
             driver.close();
             log.error(getLog("Enter the site failure"));
@@ -51,35 +51,35 @@ public class PinnacleFootballParser extends BaseParser {
                 WebElement base = driver.findElements(By.xpath(MATCHES)).get(i);
                 List<WebElement> rows = base.findElements(By.tagName("tr"));
 
-                if(rows.size() < 3)
+                if(rows.size() < 2)
                     continue;
 
                 WebElement left = rows.get(0);
                 WebElement right = rows.get(1);
-                WebElement center = rows.get(2);
 
                 WebElement time = left.findElement(By.className("game-time"));
 
-                if(time.findElements(By.tagName("img")).size() != 0) {
-                    continue;
-                }
+//                if(time.findElements(By.tagName("img")).size() != 0) {
+//                    continue;
+//                }
 
                 String leftName = left.findElement(By.className("game-name")).getText();
                 String rightName = right.findElement(By.className("game-name")).getText();
 
+                if(isSimilarMatch(leftName, rightName))
+                    continue;
+
                 String leftRate = left.findElement(By.className("game-moneyline")).getText();
                 String rightRate = right.findElement(By.className("game-moneyline")).getText();
-                String centerRate = center.findElement(By.className("game-moneyline")).getText();
 
                 Bet bet = new Bet();
                 bet.setLeft(Double.parseDouble(leftRate));
-                bet.setCenter(Double.parseDouble(centerRate));
                 bet.setRight(Double.parseDouble(rightRate));
 
 
                 Match match = new Match();
                 match.setBookMaker(BookMakers.PINNACLE.getName());
-                match.setSportType(SportTypes.FOOTBALL.getType());
+                match.setSportType(SportTypes.TENNIS.getType());
                 match.setPlayerLeft(leftName);
                 match.setPlayerRight(rightName);
                 match.setTime(time.getText());
@@ -94,4 +94,15 @@ public class PinnacleFootballParser extends BaseParser {
         }
     }
 
+    private boolean isSimilarMatch(String leftName, String rightName){
+        if(leftName.contains("Sets)") && rightName.contains("Sets)"))
+            return true;
+
+        for(Match match : bookMaker.getMatches())
+            if(leftName.contains(match.getPlayerLeft())
+                    && rightName.contains(match.getPlayerRight()))
+                return true;
+
+        return false;
+    }
 }

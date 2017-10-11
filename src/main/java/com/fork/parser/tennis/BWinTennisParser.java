@@ -1,4 +1,4 @@
-package com.fork.parser.football;
+package com.fork.parser.tennis;
 
 import com.fork.model.Bet;
 import com.fork.model.BookMaker;
@@ -15,15 +15,15 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Log4j
-@Component("BWinFootball")
-public class BWinFootballParser extends BaseParser {
+@Component("BWinTennis")
+public class BWinTennisParser extends BaseParser {
 
-    private final static String URL = "https://sports.bwin.com/en/sports#sportId=4";
+    private final static String URL = "https://sports.bwin.com/en/sports#sportId=5";
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
-    public BWinFootballParser() {
+    public BWinTennisParser() {
         pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
-        bookMaker = new BookMaker(BookMakers.BWIN.getName(), SportTypes.FOOTBALL.getType());
+        bookMaker = new BookMaker(BookMakers.BWIN.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -34,8 +34,6 @@ public class BWinFootballParser extends BaseParser {
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.get(URL);
-
-            driver.findElement(By.xpath("//li[contains(@title, 'Today')]/a")).click();
 
             Thread.sleep(1000);
         } catch (Exception e){
@@ -53,23 +51,24 @@ public class BWinFootballParser extends BaseParser {
                 WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
 
                 String time = element.findElement(By.tagName("div")).getText();
-                String url = element.findElement(By.tagName("a")).getAttribute("href");
+
+                String url = null;
+                if(element.findElements(By.tagName("a")).size() != 0)
+                    url = element.findElement(By.tagName("a")).getAttribute("href");
 
                 List<WebElement> columns = element.findElements(By.tagName("button"));
 
                 List<WebElement>  columnLeft = columns.get(0).findElements(By.tagName("div"));
-                List<WebElement>  columnCenter = columns.get(1).findElements(By.tagName("div"));
-                List<WebElement>  columnRight = columns.get(2).findElements(By.tagName("div"));
+                List<WebElement>  columnRight = columns.get(1).findElements(By.tagName("div"));
 
                 Bet bet = new Bet();
                 bet.setLeft(Double.parseDouble(columnLeft.get(1).getText()));
-                bet.setCenter(Double.parseDouble(columnCenter.get(1).getText()));
                 bet.setRight(Double.parseDouble(columnRight.get(1).getText()));
 
 
                 Match match = new Match();
                 match.setBookMaker(BookMakers.BWIN.getName());
-                match.setSportType(SportTypes.FOOTBALL.getType());
+                match.setSportType(SportTypes.TENNIS.getType());
                 match.setPlayerLeft(columnLeft.get(0).getText());
                 match.setPlayerRight(columnRight.get(0).getText());
                 match.setTime(time);

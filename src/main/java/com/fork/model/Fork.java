@@ -76,7 +76,7 @@ public class Fork {
     }
 
     public boolean isHasFork(){
-        return rate != null && rate < 1.05;
+        return rate != null && rate <= 1.03;
     }
 
 }

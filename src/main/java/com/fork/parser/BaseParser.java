@@ -1,4 +1,4 @@
-package com.fork.parser.football;
+package com.fork.parser;
 
 import com.fork.model.BookMaker;
 import com.fork.parser.Parser;
@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import static java.util.Objects.nonNull;
 
 @Log4j
-public abstract class BaseFootballParser implements Parser {
+public abstract class BaseParser implements Parser {
 
     protected WebDriver driver;
     protected BookMaker bookMaker;
@@ -18,7 +18,7 @@ public abstract class BaseFootballParser implements Parser {
 
     @Override
     public void closeBrowser() {
-        log.info("Close browser");
+        log.info(getLog("Close browser"));
         if(nonNull(driver))
             driver.close();
     }
@@ -30,7 +30,7 @@ public abstract class BaseFootballParser implements Parser {
 
     @Override
     public void parsMainRates(){
-        log.info("Pars main rates");
+        log.info(getLog("Pars main rates"));
         bookMaker.getMatches().clear();
         int cntPages = 0;
 
@@ -38,7 +38,7 @@ public abstract class BaseFootballParser implements Parser {
             cntPages = driver.findElements(By.xpath(pagesStr)).size();
 
         cntPages += 1;
-        log.info("count pages = " + cntPages);
+        log.info(getLog("count pages = " + cntPages));
 
         for(int i = 1; i <= cntPages; i++){
             try {
@@ -46,14 +46,18 @@ public abstract class BaseFootballParser implements Parser {
                     driver.findElements(By.xpath(pagesStr)).get(i-2).click();
 
                 Thread.sleep(3000);
-                log.info("page = " + i);
+                log.info(getLog("page = " + i));
                 parsOnePageMainRates();
             } catch (Exception e){
 
             }
         }
 
-        log.info("matchs size = " + bookMaker.getMatches().size());
+        log.info(getLog("matches size = " + bookMaker.getMatches().size()));
+    }
+
+    protected String getLog(String message){
+        return "{" + bookMaker.getSportType() + "}" + message;
     }
 
     protected abstract void parsOnePageMainRates();

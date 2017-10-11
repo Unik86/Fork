@@ -35,7 +35,7 @@ public class MatchServiceImpl implements MatchService {
         log.info("Find Fork For Main Rates");
         List<List<Match>> mathes = rearrangeBookMakers(bookMakers);
         calcForkForMainRates(mathes);
-        calcTwoOfThreeForMainRates(mathes);
+//        calcTwoOfThreeForMainRates(mathes);
     }
 
     private List<List<Match>> rearrangeBookMakers(List<BookMaker> bookMakers){

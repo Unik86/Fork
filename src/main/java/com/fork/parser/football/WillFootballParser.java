@@ -5,6 +5,7 @@ import com.fork.model.BookMaker;
 import com.fork.model.Match;
 import com.fork.model.enums.BookMakers;
 import com.fork.model.enums.SportTypes;
+import com.fork.parser.BaseParser;
 import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Log4j
 @Component("WilliamHillFootball")
-public class WillFootballParser extends BaseFootballParser{
+public class WillFootballParser extends BaseParser {
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
@@ -27,7 +28,7 @@ public class WillFootballParser extends BaseFootballParser{
 
     @Override
     public void goToSite(){
-        log.info("Enter the site " + URL);
+        log.info(getLog("Enter the site " + URL));
 
         try {
             driver = new ChromeDriver();
@@ -47,14 +48,14 @@ public class WillFootballParser extends BaseFootballParser{
             Thread.sleep(1000);
         } catch (Exception e){
             driver.close();
-            log.error("Enter the site failure");
+            log.error(getLog("Enter the site failure"));
         }
     }
 
     @Override
     protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
-        log.info("matches on page = " + cntIds);
+        log.info(getLog("matches on page = " + cntIds));
 
         for(int i = 0; i < cntIds; i++){
             try {
@@ -101,7 +102,7 @@ public class WillFootballParser extends BaseFootballParser{
                 match.setWinner(bet);
                 bookMaker.getMatches().add(match);
             } catch (Exception e){
-                log.error("Pars error");
+                log.error(getLog("Pars error"));
                 continue;
             }
         }
