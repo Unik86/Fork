@@ -11,13 +11,6 @@
   </head>
   <body>
 
-    <jsp:include page="../pages/header.jsp" />
-
-    <div class="well">
-      Count: ${forks.size()}
-      <a style="float: right" onclick="location.href='/fork/exportExcel.xlsx'" class="btn btn-default">Export</a>
-    </div>
-
     <div>
       <table class="table table-striped">
         <thead>
@@ -71,8 +64,8 @@
 
               <td></td>
               <td></td>
-              <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Forks</a></td>
-              <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Parse</a></td>
+              <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-primary">Forks</a></td>
+              <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-success">Parse</a></td>
             </tr>
           </c:forEach>
         </tbody>

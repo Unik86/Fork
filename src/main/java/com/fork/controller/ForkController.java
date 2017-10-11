@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Log4j
@@ -123,14 +125,22 @@ public class ForkController {
     }
 
     @GetMapping(value = "/exportExcel")
-    public ModelAndView exportExcel(HttpServletResponse response) {
+    public String exportExcel(HttpServletResponse response, Model model) {
         log.info("GET /exportExcel [BEGIN]");
 
-        response.setHeader("Content-disposition", "attachment; filename=" + "forks" + ".xlsx");
+        response.setHeader(
+                "Content-disposition",
+                "attachment; filename=" + "Forks_" + getNowDate() + ".xlsx"
+        );
         List<Fork> forks =  findForkService.getForks();
+        model.addAttribute("forks", forks);
 
         log.info("GET /exportExcel [END]");
-        return new ModelAndView("fork", "forks", forks);
+        return "export";
+    }
+
+    private String getNowDate(){
+        return new SimpleDateFormat("yyyy-MM-dd_HH:mm").format(new Date());
     }
 
     private void addSportType(Model model){
