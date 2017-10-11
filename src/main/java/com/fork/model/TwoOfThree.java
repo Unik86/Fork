@@ -42,7 +42,8 @@ public class TwoOfThree {
 
     private void calcRate(Double winner, Double center){
         // В = 1/К1 + 1/К2
-        rate = round(1 / winner + 1 / center);
+        rate = 1 / winner + 1 / center;
+        rate = round(rate, 1000);
     }
 
     public boolean isHasGoodRate(){

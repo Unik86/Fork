@@ -57,7 +57,7 @@ public abstract class BaseParser implements Parser {
     }
 
     protected String getLog(String message){
-        return "{" + bookMaker.getSportType() + "}" + message;
+        return "{" + bookMaker.getName() + "} - " + message;
     }
 
     protected abstract void parsOnePageMainRates();

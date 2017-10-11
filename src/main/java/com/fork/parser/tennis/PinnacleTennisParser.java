@@ -18,7 +18,7 @@ import java.util.List;
 @Component("PinnacleTennis")
 public class PinnacleTennisParser extends BaseParser {
 
-    private final static String URL = "https://www.pinnacle.com/ru/odds/today/tennis";
+    private final static String URL = "https://www.pinnacle.com/en/odds/today/tennis";
     private final static String MATCHES = "//table[contains(@class, 'odds-data') and not(contains(@class, 'ng-scope'))]/tbody";
 
     public PinnacleTennisParser() {
@@ -59,9 +59,9 @@ public class PinnacleTennisParser extends BaseParser {
 
                 WebElement time = left.findElement(By.className("game-time"));
 
-//                if(time.findElements(By.tagName("img")).size() != 0) {
-//                    continue;
-//                }
+                if(time.findElements(By.tagName("img")).size() != 0) {
+                    continue;
+                }
 
                 String leftName = left.findElement(By.className("game-name")).getText();
                 String rightName = right.findElement(By.className("game-name")).getText();

@@ -9,7 +9,10 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j
@@ -22,7 +25,7 @@ public class ForkController {
         this.findForkService = findForkService;
     }
 
-    @RequestMapping(value = "/")
+    @GetMapping(value = "/")
     public String main(Model model) {
         addSportType(model);
         return "main";
@@ -117,6 +120,17 @@ public class ForkController {
 
         log.info("GET /getMatches " + name + " [END]");
         return "match";
+    }
+
+    @GetMapping(value = "/exportExcel")
+    public ModelAndView exportExcel(HttpServletResponse response) {
+        log.info("GET /exportExcel [BEGIN]");
+
+        response.setHeader("Content-disposition", "attachment; filename=" + "forks" + ".xlsx");
+        List<Fork> forks =  findForkService.getForks();
+
+        log.info("GET /exportExcel [END]");
+        return new ModelAndView("fork", "forks", forks);
     }
 
     private void addSportType(Model model){

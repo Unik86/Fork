@@ -21,23 +21,9 @@ public class Fork {
     @Getter
     private Bet forkBet;
     @Getter
-    private Double allSum;
-    @Getter
     private Double rate;
-
     @Getter
-    private Double sumRight;
-    @Getter
-    private Double sumCenter;
-    @Getter
-    private Double sumLeft;
-
-    @Getter
-    private Double winSumRight;
-    @Getter
-    private Double winSumCenter;
-    @Getter
-    private Double winSumLeft;
+    private Double percent;
 
     public Fork() {
 
@@ -45,12 +31,6 @@ public class Fork {
 
     public Fork(Bet forkBet) {
         this.forkBet = forkBet;
-        this.allSum = 100D;
-    }
-
-    public Fork(Bet forkBet, Double allSum) {
-        this.forkBet = forkBet;
-        this.allSum = allSum;
     }
 
     public void calc(){
@@ -59,20 +39,28 @@ public class Fork {
 
         // В = 1/К1 + 1/К2 + 1/К3
         if(forkBet.getCenter() != null) {
-            rate =  round(1/forkBet.getRight() + 1/forkBet.getCenter() + 1/forkBet.getLeft());
-            sumCenter =  round((1/forkBet.getCenter()/ rate) * allSum);
-            winSumCenter = round(sumCenter * forkBet.getCenter());
-        }
-        else {
-            rate =  round(1/forkBet.getRight() + 1/forkBet.getLeft());
+            rate = 1 / forkBet.getRight() + 1 / forkBet.getCenter() + 1 / forkBet.getLeft();
+            calcPercent(rate);
+            rate = round(rate, 1000);
+        } else {
+            rate = 1 / forkBet.getRight() + 1 / forkBet.getLeft();
+            calcPercent(rate);
+            rate = round(rate, 1000);
         }
 
         // Р = (1/К/В)*С
+        /*
         sumRight =  round((1/forkBet.getRight()/ rate) * allSum);
         sumLeft =  round((1/forkBet.getLeft()/ rate) * allSum);
 
         winSumRight = round(sumRight * forkBet.getRight());
         winSumLeft = round(sumLeft * forkBet.getLeft());
+        */
+    }
+
+    private void calcPercent(Double notRoundRate) {
+        percent = (1 - notRoundRate) * 100;
+        percent = round(percent, 100);
     }
 
     public boolean isHasFork(){

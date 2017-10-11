@@ -13,7 +13,10 @@
 
     <jsp:include page="../pages/header.jsp" />
 
-    <div class="well">Count: ${forks.size()}</div>
+    <div class="well">
+      Count: ${forks.size()}
+      <a style="float: right" onclick="location.href='/fork/exportExcel.xlsx'" class="btn btn-default">Export</a>
+    </div>
 
     <div>
       <table class="table table-striped">
@@ -27,6 +30,7 @@
             <th>2</th>
 
             <th>Rate</th>
+            <th>Percent</th>
 
             <th>BookMaker</th>
             <th>Url</th>
@@ -46,6 +50,7 @@
                 <td>${match.winner.right}</td>
 
                 <td></td>
+                <td></td>
 
                 <td>${match.bookMaker}</td>
                 <td><a href="${match.url}" class="btn btn-default">Url</a></td>
@@ -62,6 +67,7 @@
               <td>${fork.forkBet.right}</td>
 
               <td>${fork.rate}</td>
+              <td>${fork.percent}</td>
 
               <td></td>
               <td></td>

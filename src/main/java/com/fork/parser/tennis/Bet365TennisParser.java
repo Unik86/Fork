@@ -86,6 +86,9 @@ public class Bet365TennisParser extends BaseParser {
                     if(!nameStr.contains(Constants.SEPARATOR_NAME_2))
                         continue;
 
+                    if(times.get(j).getText().contains("Live"))
+                        continue;
+
                     String[] namesStr = nameStr.split(Constants.SEPARATOR_NAME_2);
 //                    String url = base.findElement(By.tagName("a")).getAttribute("href");
 
