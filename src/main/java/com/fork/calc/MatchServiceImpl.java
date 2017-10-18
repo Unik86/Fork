@@ -1,6 +1,7 @@
 package com.fork.calc;
 
 import com.fork.model.*;
+import com.fork.model.enums.SportTypes;
 import info.debatty.java.stringsimilarity.JaroWinkler;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,8 @@ public class MatchServiceImpl implements MatchService {
         log.info("Find Fork For Main Rates");
         List<List<Match>> mathes = rearrangeBookMakers(bookMakers);
         calcForkForMainRates(mathes);
-//        calcTwoOfThreeForMainRates(mathes);
+        if(SportTypes.FOOTBALL.getType().equals(getSportTypeFromBookMaker(bookMakers)))
+            calcTwoOfThreeForMainRates(mathes);
     }
 
     private List<List<Match>> rearrangeBookMakers(List<BookMaker> bookMakers){
@@ -114,7 +116,7 @@ public class MatchServiceImpl implements MatchService {
             Bet maxBet = builder.calc(bets);
 
             Fork fork = new Fork(maxBet);
-            fork.setSportType(getSportType(list));
+            fork.setSportType(getSportTypeFromMatch(list));
             fork.calc();
 
             if(fork.isHasFork()){
@@ -126,10 +128,18 @@ public class MatchServiceImpl implements MatchService {
         log.info("Forks = " + forks.size());
     }
 
-    private String getSportType(List<Match> list){
+    private String getSportTypeFromMatch(List<Match> list){
         for(Match match : list)
             if(nonNull(match.getSportType()))
                 return match.getSportType();
+
+        return null;
+    }
+
+    private String getSportTypeFromBookMaker(List<BookMaker> list){
+        for(BookMaker bookMaker : list)
+            if(nonNull(bookMaker.getSportType()))
+                return bookMaker.getSportType();
 
         return null;
     }

@@ -17,7 +17,7 @@ public class RunParser implements Runnable {
 
     @Override
     public void run() {
-        log.info("Run parser -> " + getBookMakerName());
+        log.info("Run parser >>>> " + getBookMakerName());
 
         parser.goToSite();
         parser.parsMainRates();
@@ -28,7 +28,7 @@ public class RunParser implements Runnable {
                 parser.getBookMaker().getSportType()
         );
         bookMakerRepository.save(parser.getBookMaker());
-        log.info("Finish parser -> " + getBookMakerName());
+        log.info("Finish parser >>>>>>>>>> " + getBookMakerName());
     }
 
     private String getBookMakerName(){
