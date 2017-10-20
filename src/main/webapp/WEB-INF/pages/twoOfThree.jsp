@@ -27,6 +27,8 @@
             <th>2</th>
 
             <th>Rate</th>
+            <th>Percent</th>
+
             <th>BookMaker</th>
             <th>Url</th>
           </tr>
@@ -43,6 +45,8 @@
                 <td>${match.winner.right}</td>
 
                 <td></td>
+                <td></td>
+
                 <td>${match.bookMaker}</td>
                 <td><a href="${match.url}" class="btn btn-default">Url</a></td>
               </tr>
@@ -56,6 +60,22 @@
               <td>${twoOfThree.bet.right}</td>
 
               <td>${twoOfThree.rate}</td>
+              <td>${twoOfThree.percent}%</td>
+
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="info">
+              <td></td>
+              <td></td>
+
+              <td>${twoOfThree.percentBet.left}%</td>
+              <td>${twoOfThree.percentBet.center}%</td>
+              <td>${twoOfThree.percentBet.right}%</td>
+
+              <td>${twoOfThree.sumPercentBet}%</td>
+              <td></td>
+
               <td></td>
               <td></td>
             </tr>

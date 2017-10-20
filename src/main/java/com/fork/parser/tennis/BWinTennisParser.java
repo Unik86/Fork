@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Log4j
 @Component("BWinTennis")
 public class BWinTennisParser extends BaseParser {
@@ -56,6 +58,9 @@ public class BWinTennisParser extends BaseParser {
                 if(element.findElements(By.tagName("a")).size() != 0)
                     url = element.findElement(By.tagName("a")).getAttribute("href");
 
+                if(isNull(url) || url.isEmpty())
+                    url = driver.getCurrentUrl();
+
                 List<WebElement> columns = element.findElements(By.tagName("button"));
 
                 List<WebElement>  columnLeft = columns.get(0).findElements(By.tagName("div"));
@@ -69,10 +74,10 @@ public class BWinTennisParser extends BaseParser {
                 Match match = new Match();
                 match.setBookMaker(BookMakers.BWIN.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
+                match.setUrl(url);
                 match.setPlayerLeft(columnLeft.get(0).getText());
                 match.setPlayerRight(columnRight.get(0).getText());
                 match.setTime(time);
-                match.setUrl(url);
 
                 match.setWinner(bet);
                 bookMaker.getMatches().add(match);

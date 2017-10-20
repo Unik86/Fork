@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Log4j
 @Component("WilliamHillFootball")
 public class WillFootballParser extends BaseParser {
@@ -71,7 +73,10 @@ public class WillFootballParser extends BaseParser {
                 WebElement urlElement = tdCols.get(2).findElement(By.tagName("a"));
                 String url = urlElement.getAttribute("href");
 
-                Bet bet = null;
+                if(isNull(url) || url.isEmpty())
+                    url = driver.getCurrentUrl();
+
+                Bet bet = new Bet();
 
                 String[] names = tdCols.get(2).getText().split(Constants.SEPARATOR_NAME);
                 if(names.length < 2)
@@ -79,12 +84,10 @@ public class WillFootballParser extends BaseParser {
 
 
                 if (elementRates.size() == 3) {
-                    bet = new Bet();
                     bet.setLeft(Double.parseDouble(elementRates.get(0).getText()));
                     bet.setCenter(Double.parseDouble(elementRates.get(1).getText()));
                     bet.setRight(Double.parseDouble(elementRates.get(2).getText()));
                 } else if (elementRates.size() == 2) {
-                    bet = new Bet();
                     bet.setLeft(Double.parseDouble(elementRates.get(0).getText()));
                     bet.setRight(Double.parseDouble(elementRates.get(1).getText()));
                 } else
@@ -94,10 +97,10 @@ public class WillFootballParser extends BaseParser {
                 Match match = new Match();
                 match.setBookMaker(BookMakers.WILL.getName());
                 match.setSportType(SportTypes.FOOTBALL.getType());
+                match.setUrl(url);
                 match.setPlayerLeft(names[0].trim());
                 match.setPlayerRight(names[1].trim());
                 match.setTime(time);
-                match.setUrl(url);
 
                 match.setWinner(bet);
                 bookMaker.getMatches().add(match);

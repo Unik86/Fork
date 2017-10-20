@@ -64,6 +64,8 @@ public class PinnacleFootballParser extends BaseParser {
                     continue;
                 }
 
+                String url = driver.getCurrentUrl();
+
                 String leftName = left.findElement(By.className("game-name")).getText();
                 String rightName = right.findElement(By.className("game-name")).getText();
 
@@ -80,10 +82,10 @@ public class PinnacleFootballParser extends BaseParser {
                 Match match = new Match();
                 match.setBookMaker(BookMakers.PINNACLE.getName());
                 match.setSportType(SportTypes.FOOTBALL.getType());
+                match.setUrl(url);
                 match.setPlayerLeft(leftName);
                 match.setPlayerRight(rightName);
                 match.setTime(time.getText());
-                match.setUrl(null);
 
                 match.setWinner(bet);
                 bookMaker.getMatches().add(match);

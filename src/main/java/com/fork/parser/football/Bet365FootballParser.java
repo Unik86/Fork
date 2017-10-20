@@ -108,7 +108,7 @@ public class Bet365FootballParser extends BaseParser {
                         continue;
 
                     String[] namesStr = nameStr.split(Constants.SEPARATOR_NAME);
-//                    String url = base.findElement(By.tagName("a")).getAttribute("href");
+                    String url = driver.getCurrentUrl();
 
                     Bet bet = new Bet();
                     bet.setLeft(Double.parseDouble(leftRates.get(j).getText()));
@@ -119,10 +119,10 @@ public class Bet365FootballParser extends BaseParser {
                     Match match = new Match();
                     match.setBookMaker(BookMakers.BET365.getName());
                     match.setSportType(SportTypes.FOOTBALL.getType());
+                    match.setUrl(url);
                     match.setPlayerLeft(namesStr[0].trim());
                     match.setPlayerRight(namesStr[1].trim());
                     match.setTime(times.get(j).getText());
-                    match.setUrl(null);
 
                     match.setWinner(bet);
                     bookMaker.getMatches().add(match);

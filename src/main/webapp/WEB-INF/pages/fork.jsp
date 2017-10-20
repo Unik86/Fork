@@ -13,9 +13,21 @@
 
     <jsp:include page="../pages/header.jsp" />
 
-    <div class="well">
+    <div class="dropdown well">
       Count: ${forks.size()}
-      <a style="float: right" onclick="location.href='/fork/exportExcel.xlsx'" class="btn btn-default">Export</a>
+      <div class="pull-right">
+        <button class="btn btn-default dropdown-toggle" type="button" id="menu3"
+                data-toggle="dropdown">Export</button>
+
+        <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportExcel.xlsx'">Excel</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportPdf.pdf'">PDF</a>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div>
@@ -67,12 +79,28 @@
               <td>${fork.forkBet.right}</td>
 
               <td>${fork.rate}</td>
-              <td>${fork.percent}</td>
+              <td>${fork.percent}%</td>
 
               <td></td>
               <td></td>
               <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Forks</a></td>
               <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Parse</a></td>
+            </tr>
+            <tr class="info">
+              <td></td>
+              <td></td>
+
+              <td>${fork.percentBet.left}%</td>
+              <td>${fork.percentBet.center}%</td>
+              <td>${fork.percentBet.right}%</td>
+
+              <td>${fork.sumPercentBet}%</td>
+              <td></td>
+
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
           </c:forEach>
         </tbody>

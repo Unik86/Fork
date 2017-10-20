@@ -14,13 +14,13 @@ public class MaxBetBuilder {
     }
 
     public Bet calc(List<Bet> bets){
-        if(bets == null)
+        if(isNull(bets))
             return null;
 
         Bet maxBet = new Bet();
 
         for(Bet bet : bets) {
-            if(bet == null || bet.getLeft() == null || bet.getRight() == null)
+            if(isNull(bet) || isNull(bet.getLeft()) || isNull(bet.getRight()))
                 continue;
 
             if(isNull(maxBet.getLeft()) || bet.getLeft() > maxBet.getLeft()){

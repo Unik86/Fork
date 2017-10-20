@@ -124,25 +124,6 @@ public class ForkController {
         return "match";
     }
 
-    @GetMapping(value = "/exportExcel")
-    public String exportExcel(HttpServletResponse response, Model model) {
-        log.info("GET /exportExcel [BEGIN]");
-
-        response.setHeader(
-                "Content-disposition",
-                "attachment; filename=" + "Forks_" + getNowDate() + ".xlsx"
-        );
-        List<Fork> forks =  findForkService.getForks();
-        model.addAttribute("forks", forks);
-
-        log.info("GET /exportExcel [END]");
-        return "export";
-    }
-
-    private String getNowDate(){
-        return new SimpleDateFormat("yyyy-MM-dd_HH:mm").format(new Date());
-    }
-
     private void addSportType(Model model){
         model.addAttribute("sportType", findForkService.getSportType());
     }

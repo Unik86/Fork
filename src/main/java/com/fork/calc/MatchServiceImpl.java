@@ -16,7 +16,7 @@ import static java.util.Objects.nonNull;
 @Service
 public class MatchServiceImpl implements MatchService {
 
-    private static double SIMILARITY_FACTOR = 0.8;
+    private static double SIMILARITY_FACTOR = 0.80;
 
     private List<Fork> forks = new ArrayList<>();
     private List<TwoOfThree> twoOfThrees = new ArrayList<>();

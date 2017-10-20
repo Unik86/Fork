@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Log4j
 @Component("PinnacleTennis")
 public class PinnacleTennisParser extends BaseParser {
@@ -69,6 +71,8 @@ public class PinnacleTennisParser extends BaseParser {
                 if(isSimilarMatch(leftName, rightName))
                     continue;
 
+                String url = driver.getCurrentUrl();
+
                 String leftRate = left.findElement(By.className("game-moneyline")).getText();
                 String rightRate = right.findElement(By.className("game-moneyline")).getText();
 
@@ -80,10 +84,10 @@ public class PinnacleTennisParser extends BaseParser {
                 Match match = new Match();
                 match.setBookMaker(BookMakers.PINNACLE.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
+                match.setUrl(url);
                 match.setPlayerLeft(leftName);
                 match.setPlayerRight(rightName);
                 match.setTime(time.getText());
-                match.setUrl(null);
 
                 match.setWinner(bet);
                 bookMaker.getMatches().add(match);

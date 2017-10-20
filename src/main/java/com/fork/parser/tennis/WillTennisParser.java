@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Log4j
 @Component("WilliamHillTennis")
 public class WillTennisParser extends BaseParser {
@@ -74,6 +76,9 @@ public class WillTennisParser extends BaseParser {
                 WebElement urlElement = elementName.findElement(By.tagName("a"));
                 String url = urlElement.getAttribute("href");
 
+                if(isNull(url) || url.isEmpty())
+                    url = driver.getCurrentUrl();
+
                 String[] names = elementName.getText().split(Constants.SEPARATOR_NAME);
                 if(names.length < 2)
                     continue;
@@ -90,10 +95,10 @@ public class WillTennisParser extends BaseParser {
                 Match match = new Match();
                 match.setBookMaker(BookMakers.WILL.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
+                match.setUrl(url);
                 match.setPlayerLeft(names[0].trim());
                 match.setPlayerRight(names[1].trim());
                 match.setTime(time);
-                match.setUrl(url);
 
                 match.setWinner(bet);
                 bookMaker.getMatches().add(match);
