@@ -81,7 +81,7 @@ public class TwoOfThree {
 
     public boolean isHasGoodRate(){
         return nonNull(percent) && percent > 10.0
-                && nonNull(sumPercentBet) && sumPercentBet < 110.0;
+                && nonNull(sumPercentBet) && sumPercentBet < 105.0;
     }
 
 }

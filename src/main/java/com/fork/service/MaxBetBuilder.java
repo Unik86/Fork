@@ -1,4 +1,4 @@
-package com.fork.calc;
+package com.fork.service;
 
 import com.fork.model.Bet;
 

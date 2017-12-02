@@ -1,7 +1,6 @@
 package com.fork.controller;
 
-import com.fork.finder.LiveService;
-import com.fork.model.FullMatch;
+import com.fork.service.LiveService;
 import com.fork.model.Live;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;

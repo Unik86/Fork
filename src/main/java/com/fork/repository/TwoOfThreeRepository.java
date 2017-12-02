@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TwoOfThreeRepository extends MongoRepository<TwoOfThree, Long> {
 
-    List<TwoOfThree> findAllByOrderByRate();
+    List<TwoOfThree> findAllByOrderBySumPercentBet();
     
 }

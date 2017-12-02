@@ -13,18 +13,18 @@
 
     <jsp:include page="../pages/header.jsp" />
 
-    <div class="dropdown well">
+    <div class="well">
       Count: ${forks.size()}
-      <div class="pull-right">
+      <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle" type="button" id="menu3"
                 data-toggle="dropdown">Export</button>
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportExcel.xlsx'">Excel</a>
+            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportForksToExcel.xlsx'">Excel</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportPdf.pdf'">PDF</a>
+            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportForksToPdf.pdf'">PDF</a>
           </li>
         </ul>
       </div>
@@ -34,6 +34,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th>Time</th>
             <th>Left</th>
             <th>Right</th>
 
@@ -54,6 +55,7 @@
           <c:forEach var="fork" items="${forks}">
             <c:forEach var="match" items="${fork.matches}">
               <tr>
+                <td>${match.time}</td>
                 <td>${match.playerLeft}</td>
                 <td>${match.playerRight}</td>
 
@@ -73,6 +75,7 @@
             <tr class="info">
               <td></td>
               <td></td>
+              <td></td>
 
               <td>${fork.forkBet.left}</td>
               <td>${fork.forkBet.center}</td>
@@ -87,6 +90,7 @@
               <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Parse</a></td>
             </tr>
             <tr class="info">
+              <td></td>
               <td></td>
               <td></td>
 

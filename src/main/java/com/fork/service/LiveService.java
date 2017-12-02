@@ -1,6 +1,5 @@
-package com.fork.finder;
+package com.fork.service;
 
-import com.fork.calc.MatchService;
 import com.fork.model.enums.BookMakersMatch;
 import com.fork.model.Live;
 import com.fork.parser.MatchParser;
@@ -25,7 +24,7 @@ public class LiveService {
     @Autowired
     private LiveRepository liveRepository;
     @Autowired
-    private MatchService matchService;
+    private FindForkService findForkService;
 
     private RunLive runLive;
     private List<MatchParser> parsers;
@@ -55,7 +54,7 @@ public class LiveService {
             parsers.add(startSite(bookMaker.getName()));
         }
 
-        runLive = new RunLive(liveRepository, matchService, parsers);
+        runLive = new RunLive(liveRepository, findForkService, parsers);
 
         Thread thread = new Thread(runLive);
         thread.start();

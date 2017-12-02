@@ -60,9 +60,8 @@ public class PinnacleFootballParser extends BaseParser {
 
                 WebElement time = left.findElement(By.className("game-time"));
 
-                if(time.findElements(By.tagName("img")).size() != 0) {
-                    continue;
-                }
+//                if(time.findElements(By.tagName("img")).size() != 0)
+//                    continue;
 
                 String url = driver.getCurrentUrl();
 

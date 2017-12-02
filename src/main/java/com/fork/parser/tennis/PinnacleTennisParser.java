@@ -61,9 +61,8 @@ public class PinnacleTennisParser extends BaseParser {
 
                 WebElement time = left.findElement(By.className("game-time"));
 
-                if(time.findElements(By.tagName("img")).size() != 0) {
-                    continue;
-                }
+//                if(time.findElements(By.tagName("img")).size() != 0)
+//                    continue;
 
                 String leftName = left.findElement(By.className("game-name")).getText();
                 String rightName = right.findElement(By.className("game-name")).getText();

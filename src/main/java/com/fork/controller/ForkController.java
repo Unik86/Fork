@@ -1,30 +1,24 @@
 package com.fork.controller;
 
 import com.fork.model.Fork;
-import com.fork.finder.FindForkService;
+import com.fork.service.ForkService;
 import com.fork.model.Match;
 import com.fork.model.TwoOfThree;
-import com.fork.model.enums.SportTypes;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Log4j
 @Controller
 public class ForkController {
 
-    private FindForkService findForkService;
+    private ForkService forkService;
 
-    public ForkController(FindForkService findForkService) {
-        this.findForkService = findForkService;
+    public ForkController(ForkService forkService) {
+        this.forkService = forkService;
     }
 
     @GetMapping(value = "/")
@@ -37,7 +31,7 @@ public class ForkController {
     public String sportType(@RequestParam("type") String type, Model model) {
         log.info("GET /sportType " + type + "[BEGIN]");
 
-        findForkService.setSportType(type);
+        forkService.setSportType(type);
         addSportType(model);
 
         log.info("GET /sportType " + type + "[END]");
@@ -48,7 +42,7 @@ public class ForkController {
     public String parseAll(Model model) {
         log.info("GET /parseAll [BEGIN]");
 
-        findForkService.parseAll();
+        forkService.parseAll();
         addSportType(model);
 
         log.info("GET /parseAll [END]");
@@ -59,7 +53,7 @@ public class ForkController {
     public String parseBookMaker(@RequestParam("name") String name, Model model) {
         log.info("GET /parseBookMaker " + name + "[BEGIN]");
 
-        findForkService.parseBookMaker(name);
+        forkService.parseBookMaker(name);
         addSportType(model);
 
         log.info("GET /parseBookMaker " + name + "[END]");
@@ -70,7 +64,7 @@ public class ForkController {
     public String parseMatch(@RequestParam("fork") Fork fork, Model model) {
         log.info("GET /parseMatch [BEGIN]");
 
-        findForkService.findMatchFork(fork);
+        forkService.findMatchFork(fork);
         addSportType(model);
 
         log.info("GET /parseMatch [END]");
@@ -81,7 +75,7 @@ public class ForkController {
     public String countUp(Model model) {
         log.info("GET /countUp [BEGIN]");
 
-        findForkService.countUp();
+        forkService.countUp();
         addSportType(model);
 
         log.info("GET /countUp [END]");
@@ -92,7 +86,7 @@ public class ForkController {
     public String getForks(Model model) {
         log.info("GET /getForks [BEGIN]");
 
-        List<Fork> forks =  findForkService.getForks();
+        List<Fork> forks =  forkService.getForks();
         model.addAttribute("forks", forks);
         addSportType(model);
 
@@ -104,7 +98,7 @@ public class ForkController {
     public String getTwoOfThree(Model model) {
         log.info("GET /getTwoOfThree [BEGIN]");
 
-        List<TwoOfThree> twoOfThrees =  findForkService.getTwoOfThrees();
+        List<TwoOfThree> twoOfThrees =  forkService.getTwoOfThrees();
         model.addAttribute("twoOfThrees", twoOfThrees);
         addSportType(model);
 
@@ -116,7 +110,7 @@ public class ForkController {
     public String getMatches(@RequestParam("name") String name, Model model) {
         log.info("GET /getMatches " + name + " [BEGIN]");
 
-        List<Match> matches =  findForkService.getMatches(name);
+        List<Match> matches =  forkService.getMatches(name);
         model.addAttribute("matches", matches);
         addSportType(model);
 
@@ -125,6 +119,6 @@ public class ForkController {
     }
 
     private void addSportType(Model model){
-        model.addAttribute("sportType", findForkService.getSportType());
+        model.addAttribute("sportType", forkService.getSportType());
     }
 }

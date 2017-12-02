@@ -1,4 +1,4 @@
-package com.fork.calc;
+package com.fork.service;
 
 import com.fork.model.*;
 import com.fork.model.enums.SportTypes;
@@ -14,30 +14,24 @@ import static java.util.Objects.nonNull;
 
 @Log4j
 @Service
-public class MatchServiceImpl implements MatchService {
+public class FindForkService {
 
     private static double SIMILARITY_FACTOR = 0.80;
 
-    private List<Fork> forks = new ArrayList<>();
-    private List<TwoOfThree> twoOfThrees = new ArrayList<>();
-
-    @Override
-    public List<Fork> getForks() {
-        return forks;
-    }
-
-    @Override
-    public List<TwoOfThree> getTwoOfThrees() {
-        return twoOfThrees;
-    }
-
-    @Override
-    public void findForkForMainRates(List<BookMaker> bookMakers){
+    public ForkResult findForkForMainRates(List<BookMaker> bookMakers){
         log.info("Find Fork For Main Rates");
+
+        ForkResult forkResult = new ForkResult();
+        forkResult.setForks(new ArrayList<>());
+        forkResult.setTwoOfThrees(new ArrayList<>());
+
         List<List<Match>> mathes = rearrangeBookMakers(bookMakers);
-        calcForkForMainRates(mathes);
+        calcForkForMainRates(forkResult.getForks(), mathes);
+
         if(SportTypes.FOOTBALL.getType().equals(getSportTypeFromBookMaker(bookMakers)))
-            calcTwoOfThreeForMainRates(mathes);
+            calcTwoOfThreeForMainRates(forkResult.getTwoOfThrees(), mathes);
+
+        return forkResult;
     }
 
     private List<List<Match>> rearrangeBookMakers(List<BookMaker> bookMakers){
@@ -104,7 +98,7 @@ public class MatchServiceImpl implements MatchService {
         return result;
     }
 
-    private void calcForkForMainRates(List<List<Match>> matches){
+    private void calcForkForMainRates(List<Fork> forks, List<List<Match>> matches){
         for (List<Match> list : matches) {
             List<Bet> bets = new ArrayList<>();
 
@@ -144,7 +138,7 @@ public class MatchServiceImpl implements MatchService {
         return null;
     }
 
-    private void calcTwoOfThreeForMainRates(List<List<Match>> matches){
+    private void calcTwoOfThreeForMainRates(List<TwoOfThree> twoOfThrees, List<List<Match>> matches){
         for (List<Match> list : matches) {
             List<Bet> bets = new ArrayList<>();
 
@@ -167,18 +161,20 @@ public class MatchServiceImpl implements MatchService {
         log.info("TwoOfThrees = " + twoOfThrees.size());
     }
 
-    @Override
-    public void findFork(List<FullMatch> matches){
+    public ForkResult findFork(List<FullMatch> matches){
         log.info("Find Fork");
-        forks.clear();
+
+        ForkResult forkResult = new ForkResult();
+        forkResult.setForks(new ArrayList<>());
 
         List<List<Bet>> bets = rearrangeFullMatches(matches);
-        calcFork(bets);
+        calcFork(forkResult.getForks(), bets);
 
-        log.info("Forks = " + forks.size());
+        log.info("Forks = " + forkResult.getForks().size());
+        return forkResult;
     }
 
-    private void calcFork(List<List<Bet>> bets){
+    private void calcFork(List<Fork> forks, List<List<Bet>> bets){
         for (List<Bet> list : bets) {
             if(isNull(list) || list.isEmpty())
                 continue;

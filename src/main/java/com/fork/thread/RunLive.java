@@ -1,10 +1,11 @@
 package com.fork.thread;
 
-import com.fork.calc.MatchService;
 import com.fork.model.FullMatch;
 import com.fork.model.Live;
 import com.fork.parser.MatchParser;
 import com.fork.repository.LiveRepository;
+import com.fork.service.FindForkService;
+import com.fork.service.ForkResult;
 import lombok.extern.log4j.Log4j;
 
 import java.util.ArrayList;
@@ -15,14 +16,14 @@ import java.util.List;
 public class RunLive implements Runnable {
 
     private LiveRepository liveRepository;
-    private MatchService matchService;
+    private FindForkService findForkService;
     private List<MatchParser> parsers;
 
     private volatile boolean isRunning = true;
 
-    public RunLive(LiveRepository liveRepository, MatchService matchService, List<MatchParser> parsers) {
+    public RunLive(LiveRepository liveRepository, FindForkService findForkService, List<MatchParser> parsers) {
         this.liveRepository = liveRepository;
-        this.matchService = matchService;
+        this.findForkService = findForkService;
         this.parsers = parsers;
     }
 
@@ -39,12 +40,12 @@ public class RunLive implements Runnable {
                     matches.add(parser.parsMatch());
                 }
 
-                matchService.findFork(matches);
+                ForkResult forkResult = findForkService.findFork(matches);
 
                 Live live = new Live();
                 live.setTime(new Date());
 
-                live.setForks(matchService.getForks());
+                live.setForks(forkResult.getForks());
                 liveRepository.save(live);
             } catch (Exception e){
                 log.error("While failure");

@@ -1,15 +1,12 @@
 package com.fork.calc;
 
 import com.fork.model.Bet;
-import org.junit.Rule;
+import com.fork.service.MaxBetBuilder;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.fail;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

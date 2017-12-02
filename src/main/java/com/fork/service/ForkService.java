@@ -1,8 +1,7 @@
-package com.fork.finder;
+package com.fork.service;
 
 import com.fork.model.BookMaker;
 import com.fork.model.Fork;
-import com.fork.calc.MatchService;
 import com.fork.model.Match;
 import com.fork.model.TwoOfThree;
 import com.fork.model.enums.SportTypes;
@@ -25,7 +24,7 @@ import static java.util.Objects.isNull;
 
 @Log4j
 @Service
-public class FindForkService {
+public class ForkService {
 
     @Getter @Setter
     private String sportType = SportTypes.TENNIS.getType();
@@ -33,7 +32,7 @@ public class FindForkService {
     @Autowired
     private ApplicationContext appContext;
     @Autowired
-    private MatchService matchService;
+    private FindForkService findForkService;
     @Autowired
     private BookMakerRepository bookMakerRepository;
     @Autowired
@@ -56,13 +55,13 @@ public class FindForkService {
 
     public void countUp() {
         List<BookMaker> bookMakers = bookMakerRepository.findBySportType(sportType);
-        matchService.findForkForMainRates(bookMakers);
+        ForkResult forkResult = findForkService.findForkForMainRates(bookMakers);
 
         forkRepository.deleteBySportType(sportType);
-        forkRepository.save(matchService.getForks());
+        forkRepository.save(forkResult.getForks());
 
         twoOfTnreeRepository.deleteAll();
-        twoOfTnreeRepository.save(matchService.getTwoOfThrees());
+        twoOfTnreeRepository.save(forkResult.getTwoOfThrees());
     }
 
     public void findMatchFork(Fork fork) {
@@ -87,7 +86,7 @@ public class FindForkService {
     }
 
     public List<TwoOfThree> getTwoOfThrees(){
-        List<TwoOfThree> twoOfThrees = twoOfTnreeRepository.findAllByOrderByRate();
+        List<TwoOfThree> twoOfThrees = twoOfTnreeRepository.findAllByOrderBySumPercentBet();
 
         log.info("twoOfThrees size = " + (isNull(twoOfThrees) ? 0 : twoOfThrees.size()));
         return twoOfThrees;

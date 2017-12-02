@@ -13,12 +13,28 @@
 
     <jsp:include page="../pages/header.jsp" />
 
-    <div class="well">Count: ${twoOfThrees.size()}</div>
+    <div class="well">
+      Count: ${twoOfThrees.size()}
+      <div class="dropdown pull-right">
+        <button class="btn btn-default dropdown-toggle" type="button" id="menu3"
+                data-toggle="dropdown">Export</button>
+
+        <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportTwoOfThreesToExcel.xlsx'">Excel</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportTwoOfThreesToPdf.pdf'">PDF</a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <div>
       <table class="table table-striped">
         <thead>
           <tr>
+            <th>Time</th>
             <th>Left</th>
             <th>Right</th>
 
@@ -37,6 +53,7 @@
           <c:forEach var="twoOfThree" items="${twoOfThrees}">
             <c:forEach var="match" items="${twoOfThree.matches}">
               <tr>
+                <td>${match.time}</td>
                 <td>${match.playerLeft}</td>
                 <td>${match.playerRight}</td>
 
@@ -54,6 +71,7 @@
             <tr class="info">
               <td></td>
               <td></td>
+              <td></td>
 
               <td>${twoOfThree.bet.left}</td>
               <td>${twoOfThree.bet.center}</td>
@@ -66,6 +84,7 @@
               <td></td>
             </tr>
             <tr class="info">
+              <td></td>
               <td></td>
               <td></td>
 
