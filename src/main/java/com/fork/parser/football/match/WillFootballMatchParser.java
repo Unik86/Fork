@@ -7,7 +7,7 @@ import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class WillFootballMatchParser implements MatchParser {
         log.info("Enter the site " + getBookMakerName());
 
         try {
-            driver = new ChromeDriver();
+            driver = new FirefoxDriver();
             driver.manage().window().maximize();
             driver.get(URL);
 

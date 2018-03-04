@@ -10,13 +10,10 @@ import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 
 @Log4j
 @Component("Bet365Tennis")
@@ -36,7 +33,7 @@ public class Bet365TennisParser extends BaseParser {
         log.info(getLog("Enter the site " + URL));
 
         try {
-            driver = new ChromeDriver();
+            driver = new FirefoxDriver();
             driver.manage().window().maximize();
             driver.get(URL);
 
