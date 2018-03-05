@@ -5,6 +5,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.fork.util.Utils.*;
@@ -18,6 +20,8 @@ public class TwoOfThree {
 
     @Getter @Setter
     private List<Match> matches;
+    @Getter @Setter
+    private LocalDateTime parsDate = LocalDateTime.now();
 
     @Getter
     private Bet bet;
@@ -32,7 +36,6 @@ public class TwoOfThree {
     private Double percent;
 
     public TwoOfThree() {
-
     }
 
     public TwoOfThree(Bet bet) {
@@ -84,4 +87,7 @@ public class TwoOfThree {
                 && nonNull(sumPercentBet) && sumPercentBet < 105.0;
     }
 
+    public String getParsDateStr(){
+        return dateFormater(parsDate);
+    }
 }

@@ -1,7 +1,6 @@
 package com.fork.parser;
 
 import com.fork.model.BookMaker;
-import com.fork.parser.Parser;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

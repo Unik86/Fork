@@ -20,7 +20,7 @@ apply plugin: 'org.springframework.boot'
 
 war {
     baseName = 'Fork'
-    version =  '9.02'
+    version =  '10.01'
 }
 
 repositories {

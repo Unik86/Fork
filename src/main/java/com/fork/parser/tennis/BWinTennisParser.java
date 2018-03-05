@@ -9,7 +9,7 @@ import com.fork.parser.BaseParser;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class BWinTennisParser extends BaseParser {
         log.info(getLog("Enter the site " + URL));
 
         try {
-            driver = new FirefoxDriver();
+            driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.get(URL);
 

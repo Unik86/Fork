@@ -14,7 +14,8 @@
     <jsp:include page="../pages/header.jsp" />
 
     <div class="well">
-      Count: ${forks.size()}
+      Count: ${forks.size()} |
+      Date: ${forks.size() > 0 ? forks.get(0).getParsDateStr() : null}
       <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle" type="button" id="menu3"
                 data-toggle="dropdown">Export</button>

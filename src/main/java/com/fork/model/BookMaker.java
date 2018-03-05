@@ -14,11 +14,11 @@ public class BookMaker {
     private String name;
     @Getter @Setter
     private String sportType;
+
     @Getter @Setter
     private List<Match> matches = new ArrayList<>();
 
     public BookMaker() {
-
     }
 
     public BookMaker(String name, String type) {

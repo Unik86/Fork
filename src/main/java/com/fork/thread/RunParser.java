@@ -27,6 +27,7 @@ public class RunParser implements Runnable {
                 parser.getBookMaker().getName(),
                 parser.getBookMaker().getSportType()
         );
+
         bookMakerRepository.save(parser.getBookMaker());
         log.info("Finish parser >>>>>>>>>> " + getBookMakerName());
     }

@@ -13,7 +13,10 @@
 
     <jsp:include page="../pages/header.jsp" />
 
-    <div class="well">Count: ${matches.size()}</div>
+    <div class="well">
+      Count: ${matches.size()} |
+      Date: ${matches.size() > 0 ? matches.get(0).getParsDateStr() : null}
+    </div>
 
     <div>
       <table class="table table-striped">

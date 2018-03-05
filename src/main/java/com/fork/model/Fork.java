@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.fork.util.Utils.*;
@@ -19,6 +21,8 @@ public class Fork {
     private List<Bet> bets;
     @Getter @Setter
     private String sportType;
+    @Getter @Setter
+    private LocalDateTime parsDate = LocalDateTime.now();
 
     @Getter
     private Bet forkBet;
@@ -33,7 +37,6 @@ public class Fork {
     private Double percent;
 
     public Fork() {
-
     }
 
     public Fork(Bet forkBet) {
@@ -71,4 +74,7 @@ public class Fork {
         return nonNull(rate) && rate <= 1.03;
     }
 
+    public String getParsDateStr(){
+        return dateFormater(parsDate);
+    }
 }

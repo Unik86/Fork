@@ -9,7 +9,7 @@ import com.fork.parser.BaseParser;
 import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -33,7 +33,7 @@ public class WillFootballParser extends BaseParser {
         log.info(getLog("Enter the site " + URL));
 
         try {
-            driver = new FirefoxDriver();
+            driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.get(URL);
 
@@ -67,7 +67,7 @@ public class WillFootballParser extends BaseParser {
                 List<WebElement> tdCols = element.findElements(By.tagName("td"));
 
                 String time = tdCols.get(1).getText();
-                if(!time.contains("EEST"))
+                if(!time.contains("EEST") && !time.contains("EET"))
                     continue;
 
                 WebElement urlElement = tdCols.get(2).findElement(By.tagName("a"));

@@ -10,7 +10,7 @@ import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +35,7 @@ public class WillTennisParser extends BaseParser {
         log.info(getLog("Enter the site " + URL));
 
         try {
-            driver = new FirefoxDriver();
+            driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.get(URL);
 
@@ -70,7 +70,7 @@ public class WillTennisParser extends BaseParser {
                 List<WebElement> leftPad = element.findElements(By.className("leftPad"));
 
                 String time = leftPad.get(1).getText();
-                if(!time.contains("EEST"))
+                if(!time.contains("EEST") && !time.contains("EET"))
                     continue;
 
                 WebElement urlElement = elementName.findElement(By.tagName("a"));
