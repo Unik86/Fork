@@ -12,6 +12,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -97,6 +99,7 @@ public class WillFootballParser extends BaseParser {
                 Match match = new Match();
                 match.setBookMaker(BookMakers.WILL.getName());
                 match.setSportType(SportTypes.FOOTBALL.getType());
+                match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);
                 match.setPlayerLeft(names[0].trim());
                 match.setPlayerRight(names[1].trim());

@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Log4j
@@ -81,6 +82,7 @@ public class PinnacleTennisParser extends BaseParser {
                 Match match = new Match();
                 match.setBookMaker(BookMakers.PINNACLE.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
+                match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);
                 match.setPlayerLeft(leftName);
                 match.setPlayerRight(rightName);

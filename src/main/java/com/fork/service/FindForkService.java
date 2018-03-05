@@ -6,6 +6,7 @@ import info.debatty.java.stringsimilarity.JaroWinkler;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,6 +112,7 @@ public class FindForkService {
 
             Fork fork = new Fork(maxBet);
             fork.setSportType(getSportTypeFromMatch(list));
+            fork.setParsDate(LocalDateTime.now());
             fork.calc();
 
             if(fork.isHasFork()){
@@ -150,6 +152,7 @@ public class FindForkService {
             Bet maxBet = builder.calc(bets);
 
             TwoOfThree twoOfThree = new TwoOfThree(maxBet);
+            twoOfThree.setParsDate(LocalDateTime.now());
             twoOfThree.calc();
 
             if(twoOfThree.isHasGoodRate()){
@@ -184,6 +187,7 @@ public class FindForkService {
 
             Fork fork = new Fork(maxBet);
             fork.setBets(list);
+            fork.setParsDate(LocalDateTime.now());
             fork.calc();
 
             forks.add(fork);

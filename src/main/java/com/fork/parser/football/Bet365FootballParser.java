@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
@@ -119,6 +120,7 @@ public class Bet365FootballParser extends BaseParser {
                     Match match = new Match();
                     match.setBookMaker(BookMakers.BET365.getName());
                     match.setSportType(SportTypes.FOOTBALL.getType());
+                    match.setParsDate(LocalDateTime.now());
                     match.setUrl(url);
                     match.setPlayerLeft(namesStr[0].trim());
                     match.setPlayerRight(namesStr[1].trim());

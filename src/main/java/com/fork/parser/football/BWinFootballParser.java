@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -75,6 +76,7 @@ public class BWinFootballParser extends BaseParser {
                 Match match = new Match();
                 match.setBookMaker(BookMakers.BWIN.getName());
                 match.setSportType(SportTypes.FOOTBALL.getType());
+                match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);
                 match.setPlayerLeft(columnLeft.get(0).getText());
                 match.setPlayerRight(columnRight.get(0).getText());

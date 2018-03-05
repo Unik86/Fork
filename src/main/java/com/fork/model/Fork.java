@@ -22,7 +22,7 @@ public class Fork {
     @Getter @Setter
     private String sportType;
     @Getter @Setter
-    private LocalDateTime parsDate = LocalDateTime.now();
+    private LocalDateTime parsDate;
 
     @Getter
     private Bet forkBet;
