@@ -33,6 +33,9 @@
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=Pinnacle">Pinnacle</a>
           </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=Unibet">Unibet</a>
+          </li>
         </ul>
       </div>
 
@@ -61,6 +64,9 @@
           </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Pinnacle">Pinnacle</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Unibet">Unibet</a>
           </li>
         </ul>
       </div>
