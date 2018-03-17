@@ -60,16 +60,16 @@ public class ForkController {
         return "fork";
     }
 
-    @GetMapping(value = "/parseMatch")
-    public String parseMatch(@RequestParam("fork") Fork fork, Model model) {
-        log.info("GET /parseMatch [BEGIN]");
-
-        forkService.findMatchFork(fork);
-        addSportType(model);
-
-        log.info("GET /parseMatch [END]");
-        return "fork";
-    }
+//    @GetMapping(value = "/parseMatch")
+//    public String parseMatch(@RequestParam("fork") Fork fork, Model model) {
+//        log.info("GET /parseMatch [BEGIN]");
+//
+//        forkService.findMatchFork(fork);
+//        addSportType(model);
+//
+//        log.info("GET /parseMatch [END]");
+//        return "fork";
+//    }
 
     @GetMapping(value = "/countUp")
     public String countUp(Model model) {

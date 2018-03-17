@@ -1,6 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../fork/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../fork/js/script.js"></script>
+  </head>
+
+  <body onload="stopSpinner()">
 
     <div class="container">
       <div class="starter-template">
@@ -18,26 +27,40 @@
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseAll">All</a>
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll">
+              All
+            </a>
           </li>
           <li role="presentation" class="divider"></li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=WilliamHill">WilliamHill</a>
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=WilliamHill">
+              WilliamHill
+            </a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=BWin">BWin</a>
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=BWin">
+              BWin
+            </a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=Bet365">Bet365</a>
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet365">
+              Bet365
+            </a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=Pinnacle">Pinnacle</a>
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Pinnacle">
+              Pinnacle
+            </a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=Unibet">Unibet</a>
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Unibet">
+              Unibet
+            </a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/parseBookMaker?name=Parimatch">Parimatch</a>
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Parimatch">
+              Parimatch
+            </a>
           </li>
         </ul>
       </div>
@@ -84,6 +107,8 @@
 
     </div>
     <br>
+
+    <div id="spinner"></div>
 
   </body>
 </html>

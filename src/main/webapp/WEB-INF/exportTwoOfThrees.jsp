@@ -3,10 +3,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../pages/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Fork</title>
   </head>
   <body>
@@ -28,13 +25,11 @@
 
         <th>BookMaker</th>
         <th>Url</th>
-        <th>Forks</th>
-        <th>Parse</th>
       </tr>
       </thead>
       <tbody>
-      <c:forEach var="fork" items="${forks}">
-        <c:forEach var="match" items="${fork.matches}">
+      <c:forEach var="twoOfThree" items="${twoOfThrees}">
+        <c:forEach var="match" items="${twoOfThree.matches}">
           <tr>
             <td>${match.time}</td>
             <td>${match.playerLeft}</td>
@@ -49,8 +44,6 @@
 
             <td>${match.bookMaker}</td>
             <td><a href="${match.url}" class="btn btn-default">Url</a></td>
-            <td></td>
-            <td></td>
           </tr>
         </c:forEach>
         <tr class="info">
@@ -58,32 +51,28 @@
           <td></td>
           <td></td>
 
-          <td>${fork.forkBet.left}</td>
-          <td>${fork.forkBet.center}</td>
-          <td>${fork.forkBet.right}</td>
+          <td>${twoOfThree.bet.left}</td>
+          <td>${twoOfThree.bet.center}</td>
+          <td>${twoOfThree.bet.right}</td>
 
-          <td>${fork.rate}</td>
-          <td>${fork.percent}%</td>
+          <td>${twoOfThree.rate}</td>
+          <td>${twoOfThree.percent}%</td>
 
           <td></td>
           <td></td>
-          <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Forks</a></td>
-          <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Parse</a></td>
         </tr>
         <tr class="info">
           <td></td>
           <td></td>
           <td></td>
 
-          <td>${fork.percentBet.left}%</td>
-          <td>${fork.percentBet.center}%</td>
-          <td>${fork.percentBet.right}%</td>
+          <td>${twoOfThree.percentBet.left}%</td>
+          <td>${twoOfThree.percentBet.center}%</td>
+          <td>${twoOfThree.percentBet.right}%</td>
 
-          <td>${fork.sumPercentBet}%</td>
+          <td>${twoOfThree.sumPercentBet}%</td>
           <td></td>
 
-          <td></td>
-          <td></td>
           <td></td>
           <td></td>
         </tr>

@@ -10,7 +10,6 @@ import com.fork.repository.BookMakerRepository;
 import com.fork.repository.ForkRepository;
 import com.fork.repository.TwoOfThreeRepository;
 import com.fork.model.enums.BookMakers;
-import com.fork.thread.RunParser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -47,10 +46,20 @@ public class ForkService {
     }
 
     public void parseBookMaker(String bookMaker) {
+        log.info("Run parser >>>> " + bookMaker);
+
         Parser parser = getParser(bookMaker);
-        RunParser runParser = new RunParser(parser, bookMakerRepository);
-        Thread thread = new Thread(runParser);
-        thread.start();
+        parser.goToSite();
+        parser.parsMainRates();
+        parser.closeBrowser();
+
+        bookMakerRepository.deleteByNameAndSportType(
+                parser.getBookMaker().getName(),
+                parser.getBookMaker().getSportType()
+        );
+
+        bookMakerRepository.save(parser.getBookMaker());
+        log.info("Finish parser >>>>>>>>>> " + bookMaker);
     }
 
     public void countUp() {
