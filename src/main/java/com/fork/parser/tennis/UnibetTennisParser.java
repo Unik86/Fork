@@ -62,16 +62,15 @@ public class UnibetTennisParser extends BaseParser {
             try {
                 WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
 
-                List<WebElement> rates = element.findElements(By.className("KambiBC-mod-outcome__odds"));
-                List<WebElement> names = element.findElements(By.className("KambiBC-event-participants__name"));
                 List<WebElement> times = element.findElements(By.className("KambiBC-event-item__start-time--time"));
+                List<WebElement> names = element.findElements(By.className("KambiBC-event-participants__name"));
+                List<WebElement> rates = element.findElements(By.className("KambiBC-mod-outcome__odds"));
 
-
-                if (names.size() != 2) {
+                if (times.isEmpty()) {
                     continue;
                 }
 
-                if (times.isEmpty()) {
+                if (names.size() != 2) {
                     continue;
                 }
 

@@ -17,7 +17,7 @@ import static java.util.Objects.nonNull;
 @Service
 public class FindForkService {
 
-    private static double SIMILARITY_FACTOR = 0.80;
+    private static double SIMILARITY_FACTOR = 0.85;
 
     public ForkResult findForkForMainRates(List<BookMaker> bookMakers){
         log.info("Find Fork For Main Rates");

@@ -6,7 +6,8 @@ public enum BookMakers {
     BWIN("BWin"),
     BET365("Bet365"),
     PINNACLE("Pinnacle"),
-    UNIBET("Unibet");
+    UNIBET("Unibet"),
+    PARIMATCH("Parimatch");
 
     private String name;
 

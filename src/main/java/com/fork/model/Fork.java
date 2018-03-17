@@ -71,7 +71,7 @@ public class Fork {
     }
 
     public boolean isHasFork(){
-        return nonNull(rate) && rate <= 1.03;
+        return nonNull(rate) && rate <= 1.02;
     }
 
     public String getParsDateStr(){

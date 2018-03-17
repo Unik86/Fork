@@ -32,4 +32,19 @@ public class Utils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return date.format(formatter);
     }
+
+    public static String reverseWords(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+
+        String[] arr = str.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int i = arr.length - 1; i >= 0; --i) {
+            if (!arr[i].equals("")) {
+                sb.append(arr[i]).append(" ");
+            }
+        }
+        return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
+    }
 }

@@ -64,13 +64,6 @@ public class ForkService {
         twoOfTnreeRepository.save(forkResult.getTwoOfThrees());
     }
 
-    public void findMatchFork(Fork fork) {
-//        Parser will = getParser(BookMakers.WILL.getName());
-//        will.parsAllRates();
-//        Parser bwin = getParser(BookMakers.BWIN.getName());
-//        bwin.parsAllRates();
-    }
-
     public List<Match> getMatches(String name) {
         BookMaker bookMaker = bookMakerRepository.findOneByNameAndSportType(name, sportType);
 
