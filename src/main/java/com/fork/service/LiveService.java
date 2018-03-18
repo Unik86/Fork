@@ -62,7 +62,7 @@ public class LiveService {
 
     private MatchParser startSite(String bookMaker) {
         MatchParser parser = getParser(bookMaker);
-        parser.goToSite();
+//        parser.goToSite();
         return parser;
     }
 

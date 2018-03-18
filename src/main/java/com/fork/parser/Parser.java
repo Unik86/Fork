@@ -9,7 +9,7 @@ public interface Parser {
     void parsMainRates();
     BookMaker getBookMaker();
 
-    void goToSite();
+    void goToSite() throws Exception;
     void closeBrowser();
 
 }

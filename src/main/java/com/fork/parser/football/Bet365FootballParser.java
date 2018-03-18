@@ -32,25 +32,20 @@ public class Bet365FootballParser extends BaseParser {
     }
 
     @Override
-    public void goToSite(){
+    public void goToSite() throws Exception{
         log.info(getLog("Enter the site " + URL));
 
-        try {
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.get(URL);
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(URL);
 
-            driver.findElement(By.xpath("//a[contains(@class, 'lpdgl') and contains(text(),'English')]")).click();
-            Thread.sleep(2000);
-            driver.findElement(By.xpath(SOCCER_LINK)).click();
-            Thread.sleep(2000);
-            driver.findElement(By.xpath("//a[contains(@class, 'hm-DropDownSelections_DropLink') and contains(text(),'Odds')]")).click();
-            driver.findElement(By.xpath("//a[contains(@class, 'hm-DropDownSelections_Item') and contains(text(),'Decimal')]")).click();
-            Thread.sleep(2000);
-        } catch (Exception e){
-            driver.close();
-            log.error(getLog("Enter the site failure"));
-        }
+        driver.findElement(By.xpath("//a[contains(@class, 'lpdgl') and contains(text(),'English')]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath(SOCCER_LINK)).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//a[contains(@class, 'hm-DropDownSelections_DropLink') and contains(text(),'Odds')]")).click();
+        driver.findElement(By.xpath("//a[contains(@class, 'hm-DropDownSelections_Item') and contains(text(),'Decimal')]")).click();
+        Thread.sleep(2000);
     }
 
     @Override

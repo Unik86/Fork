@@ -29,28 +29,23 @@ public class UnibetTennisParser extends BaseParser {
     }
 
     @Override
-    public void goToSite(){
+    public void goToSite() throws Exception{
         log.info(getLog("Enter the site " + URL));
 
-        try {
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.get(URL);
-            Thread.sleep(2000);
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(URL);
+        Thread.sleep(2000);
 
-            List<WebElement> tabs = driver.findElements(By.className("KambiBC-collapsible-header"));
-            for(WebElement element : tabs){
-                if(element.findElements(By.className("KambiBC-mod-event-group-header__event-count")).size() > 0){
-                    element.click();
-                    Thread.sleep(1000);
-                }
+        List<WebElement> tabs = driver.findElements(By.className("KambiBC-collapsible-header"));
+        for(WebElement element : tabs){
+            if(element.findElements(By.className("KambiBC-mod-event-group-header__event-count")).size() > 0){
+                element.click();
+                Thread.sleep(1000);
             }
-
-            Thread.sleep(1000);
-        } catch (Exception e){
-            driver.close();
-            log.error(getLog("Enter the site failure"));
         }
+
+        Thread.sleep(1000);
     }
 
     @Override

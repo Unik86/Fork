@@ -46,9 +46,9 @@ public class ForkService {
     }
 
     public ParseResult parseBookMaker(String bookMakerName) {
-        try {
-            log.info("Run parser >>>> " + bookMakerName);
+        log.info("Run parser >>>> " + bookMakerName);
 
+        try {
             Parser parser = getParser(bookMakerName);
             parser.goToSite();
             parser.parsMainRates();
@@ -71,22 +71,29 @@ public class ForkService {
             );
         } catch (Exception e){
             log.error("Error parser >>>>>>>>>> " + bookMakerName);
+
             return new ParseResult(
                     bookMakerName,
-                    "Error!!!"
+                    "Error"
             );
         }
     }
 
-    public void countUp() {
-        List<BookMaker> bookMakers = bookMakerRepository.findBySportType(sportType);
-        ForkResult forkResult = findForkService.findForkForMainRates(bookMakers);
+    public String countUp() {
+        try {
+            List<BookMaker> bookMakers = bookMakerRepository.findBySportType(sportType);
+            ForkResult forkResult = findForkService.findForkForMainRates(bookMakers);
 
-        forkRepository.deleteBySportType(sportType);
-        forkRepository.save(forkResult.getForks());
+            forkRepository.deleteBySportType(sportType);
+            forkRepository.save(forkResult.getForks());
 
-        twoOfTnreeRepository.deleteAll();
-        twoOfTnreeRepository.save(forkResult.getTwoOfThrees());
+            twoOfTnreeRepository.deleteAll();
+            twoOfTnreeRepository.save(forkResult.getTwoOfThrees());
+
+            return "Count up success!";
+        } catch (Exception e) {
+            return "Count up Error!";
+        }
     }
 
     public List<Match> getMatches(String name) {

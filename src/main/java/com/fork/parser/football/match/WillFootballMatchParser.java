@@ -23,26 +23,22 @@ public class WillFootballMatchParser implements MatchParser {
 
     private WebDriver driver;
 
-    public void goToSite() {
+    @Override
+    public void goToSite() throws Exception{
         log.info("Enter the site " + getBookMakerName());
 
-        try {
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.get(URL);
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(URL);
 
-            Select timeZone = new Select(driver.findElement(By.name("time_zone")));
-            timeZone.selectByVisibleText("Europe/Kiev");
-            driver.findElement(By.id("yesBtn")).click();
+        Select timeZone = new Select(driver.findElement(By.name("time_zone")));
+        timeZone.selectByVisibleText("Europe/Kiev");
+        driver.findElement(By.id("yesBtn")).click();
 
-            Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
-            rateFormat.selectByVisibleText("Decimal");
+        Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
+        rateFormat.selectByVisibleText("Decimal");
 
-            Thread.sleep(1000);
-        } catch (Exception e){
-            driver.close();
-            log.error("Enter the site failure");
-        }
+        Thread.sleep(1000);
     }
 
     @Override

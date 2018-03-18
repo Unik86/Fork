@@ -30,21 +30,16 @@ public class BWinFootballParser extends BaseParser {
     }
 
     @Override
-    public void goToSite(){
+    public void goToSite() throws Exception{
         log.info(getLog("Enter the site " + URL));
 
-        try {
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.get(URL);
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(URL);
 
-            driver.findElement(By.xpath("//li[contains(@title, 'Today')]/a")).click();
+        driver.findElement(By.xpath("//li[contains(@title, 'Today')]/a")).click();
 
-            Thread.sleep(1000);
-        } catch (Exception e){
-            driver.close();
-            log.error(getLog("Enter the site failure"));
-        }
+        Thread.sleep(1000);
     }
 
     protected void parsOnePageMainRates(){

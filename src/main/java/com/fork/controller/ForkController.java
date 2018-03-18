@@ -80,7 +80,8 @@ public class ForkController {
     public String countUp(Model model) {
         log.info("GET /countUp [BEGIN]");
 
-        forkService.countUp();
+        String result = forkService.countUp();
+        model.addAttribute("result", result);
         addSportType(model);
 
         log.info("GET /countUp [END]");

@@ -31,29 +31,24 @@ public class WillFootballParser extends BaseParser {
     }
 
     @Override
-    public void goToSite(){
+    public void goToSite() throws Exception{
         log.info(getLog("Enter the site " + URL));
 
-        try {
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.get(URL);
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(URL);
 
-            Select timeZone = new Select(driver.findElement(By.name("time_zone")));
-            timeZone.selectByVisibleText("Europe/Kiev");
-            driver.findElement(By.id("yesBtn")).click();
+        Select timeZone = new Select(driver.findElement(By.name("time_zone")));
+        timeZone.selectByVisibleText("Europe/Kiev");
+        driver.findElement(By.id("yesBtn")).click();
 
-            Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
-            rateFormat.selectByVisibleText("Decimal");
+        Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
+        rateFormat.selectByVisibleText("Decimal");
 
-            Select changeOrder = new Select(driver.findElement(By.id("changeOrder")));
-            changeOrder.selectByVisibleText("Time");
+        Select changeOrder = new Select(driver.findElement(By.id("changeOrder")));
+        changeOrder.selectByVisibleText("Time");
 
-            Thread.sleep(1000);
-        } catch (Exception e){
-            driver.close();
-            log.error(getLog("Enter the site failure"));
-        }
+        Thread.sleep(1000);
     }
 
     @Override

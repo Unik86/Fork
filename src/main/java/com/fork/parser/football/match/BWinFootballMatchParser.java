@@ -25,19 +25,14 @@ public class BWinFootballMatchParser implements MatchParser {
 
     private WebDriver driver;
 
-    public void goToSite() {
+    public void goToSite() throws Exception{
         log.info("Enter the site " + getBookMakerName());
 
-        try {
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.get(URL);
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(URL);
 
-            Thread.sleep(1000);
-        } catch (Exception e){
-            driver.close();
-            log.error("Enter the site failure");
-        }
+        Thread.sleep(1000);
     }
 
     @Override

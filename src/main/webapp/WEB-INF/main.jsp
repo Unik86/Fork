@@ -10,5 +10,7 @@
 
     <jsp:include page="header.jsp" />
 
+    <div class="well">${result}</div>
+
   </body>
 </html>
