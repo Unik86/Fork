@@ -1,9 +1,6 @@
 package com.fork.service;
 
-import com.fork.model.BookMaker;
-import com.fork.model.Fork;
-import com.fork.model.Match;
-import com.fork.model.TwoOfThree;
+import com.fork.model.*;
 import com.fork.model.enums.SportTypes;
 import com.fork.parser.Parser;
 import com.fork.repository.BookMakerRepository;
@@ -17,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.Objects.isNull;
 
@@ -39,27 +39,43 @@ public class ForkService {
     @Autowired
     private TwoOfThreeRepository twoOfTnreeRepository;
 
-    public void parseAll() {
-        for(BookMakers bookMaker : BookMakers.values()){
-            parseBookMaker(bookMaker.getName());
-        }
+    public List<ParseResult> parseAll() {
+        return Stream.of(BookMakers.values())
+            .map(bm -> parseBookMaker(bm.getName()))
+            .collect(Collectors.toList());
     }
 
-    public void parseBookMaker(String bookMaker) {
-        log.info("Run parser >>>> " + bookMaker);
+    public ParseResult parseBookMaker(String bookMakerName) {
+        try {
+            log.info("Run parser >>>> " + bookMakerName);
 
-        Parser parser = getParser(bookMaker);
-        parser.goToSite();
-        parser.parsMainRates();
-        parser.closeBrowser();
+            Parser parser = getParser(bookMakerName);
+            parser.goToSite();
+            parser.parsMainRates();
+            parser.closeBrowser();
 
-        bookMakerRepository.deleteByNameAndSportType(
-                parser.getBookMaker().getName(),
-                parser.getBookMaker().getSportType()
-        );
+            BookMaker bookMaker = parser.getBookMaker();
 
-        bookMakerRepository.save(parser.getBookMaker());
-        log.info("Finish parser >>>>>>>>>> " + bookMaker);
+            bookMakerRepository.deleteByNameAndSportType(
+                    bookMaker.getName(),
+                    bookMaker.getSportType()
+            );
+
+            bookMakerRepository.save(bookMaker);
+
+            log.info("Finish parser >>>>>>>>>> " + bookMakerName);
+
+            return new ParseResult(
+                    bookMakerName,
+                    String.valueOf(bookMaker.getMatches().size())
+            );
+        } catch (Exception e){
+            log.error("Error parser >>>>>>>>>> " + bookMakerName);
+            return new ParseResult(
+                    bookMakerName,
+                    "Error!!!"
+            );
+        }
     }
 
     public void countUp() {

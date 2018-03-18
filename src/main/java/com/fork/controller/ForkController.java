@@ -1,9 +1,12 @@
 package com.fork.controller;
 
 import com.fork.model.Fork;
+import com.fork.model.ParseResult;
 import com.fork.service.ForkService;
 import com.fork.model.Match;
 import com.fork.model.TwoOfThree;
+import com.google.common.collect.ImmutableList;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,22 +45,24 @@ public class ForkController {
     public String parseAll(Model model) {
         log.info("GET /parseAll [BEGIN]");
 
-        forkService.parseAll();
+        List<ParseResult> parseResults = forkService.parseAll();
+        model.addAttribute("results", parseResults);
         addSportType(model);
 
         log.info("GET /parseAll [END]");
-        return "fork";
+        return "parseResult";
     }
 
     @GetMapping(value = "/parseBookMaker")
     public String parseBookMaker(@RequestParam("name") String name, Model model) {
         log.info("GET /parseBookMaker " + name + "[BEGIN]");
 
-        forkService.parseBookMaker(name);
+        ParseResult parseResult = forkService.parseBookMaker(name);
+        model.addAttribute("results", ImmutableList.of(parseResult));
         addSportType(model);
 
         log.info("GET /parseBookMaker " + name + "[END]");
-        return "fork";
+        return "parseResult";
     }
 
 //    @GetMapping(value = "/parseMatch")
@@ -79,7 +84,7 @@ public class ForkController {
         addSportType(model);
 
         log.info("GET /countUp [END]");
-        return "fork";
+        return "main";
     }
 
     @GetMapping(value = "/getForks")
