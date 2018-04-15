@@ -1,7 +1,7 @@
 package com.fork.calc;
 
-import com.fork.model.Bet;
-import com.fork.service.MaxBetBuilder;
+import com.fork.base.model.Bet;
+import com.fork.base.model.MaxBetBuilder;
 import org.junit.Test;
 
 import java.util.List;
