@@ -1,9 +1,8 @@
-package com.fork.live.old;
+package com.fork.live.parser;
 
 import com.fork.base.model.Bet;
 import com.fork.base.model.enums.BookMakers;
-import com.fork.base.parser.MatchParser;
-import com.fork.live.model.FullMatch;
+import com.fork.live.model.LiveMatch;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +18,7 @@ import static java.util.Objects.nonNull;
 
 @Log4j
 @Component("BWinMatchFootball")
-public class BWinFootballMatchParser implements MatchParser {
+public class BWinFootballLiveParser implements LiveParser {
 
     private final static String URL = "https://livebetting.bwin.com/en/live#/6480569";
 
@@ -36,10 +35,10 @@ public class BWinFootballMatchParser implements MatchParser {
     }
 
     @Override
-    public FullMatch parsMatch() {
+    public LiveMatch parsMatch() {
         log.info("Pars Match");
 
-        FullMatch match = new FullMatch(getBookMakerName());
+        LiveMatch match = new LiveMatch(getBookMakerName());
 
         match.setWinner(parsBet("Match Result"));
 

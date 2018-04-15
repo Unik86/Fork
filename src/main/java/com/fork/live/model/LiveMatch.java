@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "FullMatch")
-public class FullMatch {
+@Document(collection = "LiveMatch")
+public class LiveMatch {
 
     @Getter @Setter
     private String bookMaker;
@@ -35,7 +35,7 @@ public class FullMatch {
     @Getter @Setter
     private Bet total95;
 
-    public FullMatch(String bookMaker) {
+    public LiveMatch(String bookMaker) {
         this.bookMaker = bookMaker;
     }
 

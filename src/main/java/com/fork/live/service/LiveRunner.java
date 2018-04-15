@@ -1,9 +1,9 @@
-package com.fork.live.old;
+package com.fork.live.service;
 
-import com.fork.base.parser.MatchParser;
+import com.fork.live.parser.LiveParser;
 import com.fork.base.service.FindForkService;
 import com.fork.base.model.ForkResult;
-import com.fork.live.model.FullMatch;
+import com.fork.live.model.LiveMatch;
 import com.fork.live.model.Live;
 import com.fork.live.repository.LiveRepository;
 import lombok.extern.log4j.Log4j;
@@ -13,15 +13,15 @@ import java.util.Date;
 import java.util.List;
 
 @Log4j
-public class RunLive implements Runnable {
+public class LiveRunner implements Runnable {
 
     private LiveRepository liveRepository;
     private FindForkService findForkService;
-    private List<MatchParser> parsers;
+    private List<LiveParser> parsers;
 
     private volatile boolean isRunning = true;
 
-    public RunLive(LiveRepository liveRepository, FindForkService findForkService, List<MatchParser> parsers) {
+    public LiveRunner(LiveRepository liveRepository, FindForkService findForkService, List<LiveParser> parsers) {
         this.liveRepository = liveRepository;
         this.findForkService = findForkService;
         this.parsers = parsers;
@@ -34,9 +34,9 @@ public class RunLive implements Runnable {
                 Thread.sleep(20000);
                 log.info("New circle");
 
-                List<FullMatch> matches = new ArrayList();
+                List<LiveMatch> matches = new ArrayList();
 
-                for (MatchParser parser : parsers) {
+                for (LiveParser parser : parsers) {
                     matches.add(parser.parsMatch());
                 }
 

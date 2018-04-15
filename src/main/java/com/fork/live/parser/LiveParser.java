@@ -1,10 +1,10 @@
-package com.fork.base.parser;
+package com.fork.live.parser;
 
-import com.fork.live.model.FullMatch;
+import com.fork.live.model.LiveMatch;
 
-public interface MatchParser {
+public interface LiveParser {
 
-    FullMatch parsMatch();
+    LiveMatch parsMatch();
     void goToSite() throws Exception;
     void closeBrowser();
 

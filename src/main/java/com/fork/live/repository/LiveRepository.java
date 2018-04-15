@@ -1,6 +1,6 @@
 package com.fork.live.repository;
 
-import com.fork.live.old.Live;
+import com.fork.live.model.Live;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

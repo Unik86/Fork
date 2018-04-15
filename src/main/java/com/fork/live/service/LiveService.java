@@ -1,7 +1,7 @@
-package com.fork.live.old;
+package com.fork.live.service;
 
 import com.fork.base.model.enums.BookMakersMatch;
-import com.fork.base.parser.MatchParser;
+import com.fork.live.parser.LiveParser;
 import com.fork.base.service.FindForkService;
 import com.fork.live.model.Live;
 import com.fork.live.repository.LiveRepository;
@@ -26,8 +26,8 @@ public class LiveService {
     @Autowired
     private FindForkService findForkService;
 
-    private RunLive runLive;
-    private List<MatchParser> parsers;
+    private LiveRunner liveRunner;
+    private List<LiveParser> parsers;
 
     public List<Live> getLives() {
         return liveRepository.findAllByOrderByTimeDesc();
@@ -38,11 +38,11 @@ public class LiveService {
     }
 
     public void stopLive() {
-        if(nonNull(runLive))
-            runLive.kill();
+        if(nonNull(liveRunner))
+            liveRunner.kill();
 
         if(nonNull(parsers) && !parsers.isEmpty() )
-            for(MatchParser parser : parsers){
+            for(LiveParser parser : parsers){
                 parser.closeBrowser();
             }
     }
@@ -54,19 +54,19 @@ public class LiveService {
             parsers.add(startSite(bookMaker.getName()));
         }
 
-        runLive = new RunLive(liveRepository, findForkService, parsers);
+        liveRunner = new LiveRunner(liveRepository, findForkService, parsers);
 
-        Thread thread = new Thread(runLive);
+        Thread thread = new Thread(liveRunner);
         thread.start();
     }
 
-    private MatchParser startSite(String bookMaker) {
-        MatchParser parser = getParser(bookMaker);
+    private LiveParser startSite(String bookMaker) {
+        LiveParser parser = getParser(bookMaker);
 //        parser.goToSite();
         return parser;
     }
 
-    private MatchParser getParser(String type){
-        return appContext.getBean(type, MatchParser.class);
+    private LiveParser getParser(String type){
+        return appContext.getBean(type, LiveParser.class);
     }
 }

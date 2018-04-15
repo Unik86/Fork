@@ -1,6 +1,6 @@
 package com.fork.base.service;
 
-import com.fork.live.old.FullMatch;
+import com.fork.live.model.LiveMatch;
 import com.fork.base.model.*;
 import com.fork.base.model.enums.SportTypes;
 import info.debatty.java.stringsimilarity.JaroWinkler;
@@ -165,7 +165,7 @@ public class FindForkService {
         log.info("TwoOfThrees = " + twoOfThrees.size());
     }
 
-    public ForkResult findFork(List<FullMatch> matches){
+    public ForkResult findFork(List<LiveMatch> matches){
         log.info("Find Fork");
 
         ForkResult forkResult = new ForkResult();
@@ -195,7 +195,7 @@ public class FindForkService {
         }
     }
 
-    private List<List<Bet>> rearrangeFullMatches(List<FullMatch> matches){
+    private List<List<Bet>> rearrangeFullMatches(List<LiveMatch> matches){
         List<List<Bet>> bets = new ArrayList<>();
         List<Bet> winners = new ArrayList<>();
 
@@ -210,7 +210,7 @@ public class FindForkService {
         List<Bet> total85s = new ArrayList<>();
         List<Bet> total95s = new ArrayList<>();
 
-        for (FullMatch match : matches) {
+        for (LiveMatch match : matches) {
             winners.add(match.getWinner());
 
             addBet(total05s, match.getTotal05());

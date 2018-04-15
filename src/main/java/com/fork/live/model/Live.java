@@ -1,4 +1,4 @@
-package com.fork.live.old;
+package com.fork.live.model;
 
 import com.fork.base.model.Fork;
 import lombok.Getter;
