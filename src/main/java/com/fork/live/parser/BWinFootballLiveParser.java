@@ -3,6 +3,7 @@ package com.fork.live.old;
 import com.fork.base.model.Bet;
 import com.fork.base.model.enums.BookMakers;
 import com.fork.base.parser.MatchParser;
+import com.fork.live.model.FullMatch;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

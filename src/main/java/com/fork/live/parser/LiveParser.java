@@ -1,6 +1,6 @@
 package com.fork.base.parser;
 
-import com.fork.live.old.FullMatch;
+import com.fork.live.model.FullMatch;
 
 public interface MatchParser {
 
