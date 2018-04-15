@@ -11,6 +11,9 @@ import lombok.extern.log4j.Log4j;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
+
+import static com.fork.util.Utils.randomInt;
 
 @Log4j
 public class LiveRunner implements Runnable {
@@ -29,9 +32,11 @@ public class LiveRunner implements Runnable {
 
     @Override
     public void run() {
+        liveRepository.deleteAll();
+
         while (isRunning) {
             try {
-                Thread.sleep(20000);
+                Thread.sleep(randomInt(20_000, 40_000));
                 log.info("New circle");
 
                 List<LiveMatch> matches = new ArrayList();

@@ -16,10 +16,10 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("WilliamHillMatchFootball")
+@Component("WillFootballLive")
 public class WillFootballLiveParser implements LiveParser {
 
-    private final static String URL = "http://sports.williamhill.com/bet/ru/betting/e/12638965/%D0%A3%D1%80%D0%B0%D0%BB+v+%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA.html";
+    private final static String URL = "http://sports.williamhill.com/bet/ru/betting/e/12718307/%D0%9E%D0%BB%D0%B8%D0%BC%D0%BF%D0%B8%D0%BA+v+%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D1%8F.html";
 
     private WebDriver driver;
 
@@ -32,11 +32,11 @@ public class WillFootballLiveParser implements LiveParser {
         driver.get(URL);
 
         Select timeZone = new Select(driver.findElement(By.name("time_zone")));
-        timeZone.selectByVisibleText("Europe/Kiev");
+        timeZone.selectByVisibleText("Европа/Киев (GMT+2)");
         driver.findElement(By.id("yesBtn")).click();
 
         Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
-        rateFormat.selectByVisibleText("Decimal");
+        rateFormat.selectByVisibleText("Десятичный");
 
         Thread.sleep(1000);
     }
@@ -47,18 +47,18 @@ public class WillFootballLiveParser implements LiveParser {
 
         LiveMatch match = new LiveMatch(getBookMakerName());
 
-        match.setWinner(parsBet("Match Betting Live"));
+        match.setWinner(parsBet("Победитель встречи Live"));
 
-        match.setTotal05(parsBet("Match Under/Over 0.5 Goals Live"));
-        match.setTotal15(parsBet("Match Under/Over 1.5 Goals Live"));
-        match.setTotal25(parsBet("Match Under/Over 2.5 Goals Live"));
-        match.setTotal35(parsBet("Match Under/Over 3.5 Goals Live"));
-        match.setTotal45(parsBet("Match Under/Over 4.5 Goals Live"));
-        match.setTotal55(parsBet("Match Under/Over 5.5 Goals Live"));
-        match.setTotal65(parsBet("Match Under/Over 6.5 Goals Live"));
-        match.setTotal75(parsBet("Match Under/Over 7.5 Goals Live"));
-        match.setTotal85(parsBet("Match Under/Over 8.5 Goals Live"));
-        match.setTotal95(parsBet("Match Under/Over 9.5 Goals Live"));
+        match.setTotal05(parsBet("Игра - Больше/Меньше 0.5 голов Live"));
+        match.setTotal15(parsBet("Игра - Больше/Меньше 1.5 голов Live"));
+        match.setTotal25(parsBet("Игра - Больше/Меньше 2.5 голов Live"));
+        match.setTotal35(parsBet("Игра - Больше/Меньше 3.5 голов Live"));
+        match.setTotal45(parsBet("Игра - Больше/Меньше 4.5 голов Live"));
+        match.setTotal55(parsBet("Игра - Больше/Меньше 5.5 голов Live"));
+        match.setTotal65(parsBet("Игра - Больше/Меньше 6.5 голов Live"));
+        match.setTotal75(parsBet("Игра - Больше/Меньше 7.5 голов Live"));
+        match.setTotal85(parsBet("Игра - Больше/Меньше 8.5 голов Live"));
+        match.setTotal95(parsBet("Игра - Больше/Меньше 9.5 голов Live"));
 
         return match;
     }

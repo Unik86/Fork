@@ -1,6 +1,6 @@
 package com.fork.live.service;
 
-import com.fork.base.model.enums.BookMakersMatch;
+import com.fork.live.model.BookMakersLive;
 import com.fork.live.parser.LiveParser;
 import com.fork.base.service.FindForkService;
 import com.fork.live.model.Live;
@@ -29,12 +29,17 @@ public class LiveService {
     private LiveRunner liveRunner;
     private List<LiveParser> parsers;
 
-    public List<Live> getLives() {
-        return liveRepository.findAllByOrderByTimeDesc();
-    }
+    public void startLive() {
+        parsers = new ArrayList();
 
-    public void clearLives() {
-        liveRepository.deleteAll();
+        for(BookMakersLive bookMaker : BookMakersLive.values()){
+            parsers.add(startSite(bookMaker.getName()));
+        }
+
+        liveRunner = new LiveRunner(liveRepository, findForkService, parsers);
+
+        Thread thread = new Thread(liveRunner);
+        thread.start();
     }
 
     public void stopLive() {
@@ -47,22 +52,23 @@ public class LiveService {
             }
     }
 
-    public void startLive() {
-        parsers = new ArrayList();
-
-        for(BookMakersMatch bookMaker : BookMakersMatch.values()){
-            parsers.add(startSite(bookMaker.getName()));
-        }
-
-        liveRunner = new LiveRunner(liveRepository, findForkService, parsers);
-
-        Thread thread = new Thread(liveRunner);
-        thread.start();
+    public List<Live> getLives() {
+        return liveRepository.findAllByOrderByTimeDesc();
     }
 
-    private LiveParser startSite(String bookMaker) {
-        LiveParser parser = getParser(bookMaker);
-//        parser.goToSite();
+    public void clearLives() {
+        liveRepository.deleteAll();
+    }
+
+    private LiveParser startSite(String bookMakerName) {
+        LiveParser parser = getParser(bookMakerName);
+
+        try {
+            parser.goToSite();
+        } catch (Exception e) {
+            log.error("Error parser >>>>>>>>>> " + bookMakerName);
+        }
+
         return parser;
     }
 

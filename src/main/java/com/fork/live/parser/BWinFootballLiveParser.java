@@ -17,10 +17,10 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("BWinMatchFootball")
+@Component("BWinFootballLive")
 public class BWinFootballLiveParser implements LiveParser {
 
-    private final static String URL = "https://livebetting.bwin.com/en/live#/6480569";
+    private final static String URL = "https://livebetting.bwin.com/ru/live#/7162987";
 
     private WebDriver driver;
 

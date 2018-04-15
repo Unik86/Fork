@@ -2,6 +2,7 @@ package com.fork.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 import static java.util.Objects.isNull;
 
@@ -46,5 +47,10 @@ public class Utils {
             }
         }
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
+    }
+
+    public static int randomInt(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min + 1) + min;
     }
 }
