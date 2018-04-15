@@ -8,7 +8,7 @@
   </head>
   <body>
 
-    <jsp:include page="header.jsp" />
+    <jsp:include page="../header.jsp" />
 
     <div>
       <table class="table table-striped">

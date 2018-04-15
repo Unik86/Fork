@@ -20,7 +20,7 @@ public class LiveController {
 
     @RequestMapping(value = "/live")
     public String main() {
-        return "live";
+        return "live/live";
     }
 
     @GetMapping(value = "/startLive")
@@ -32,7 +32,7 @@ public class LiveController {
         model.addAttribute("lives", lives);
 
         log.info("GET /startLive [END]");
-        return "live";
+        return "live/live";
     }
 
     @GetMapping(value = "/stopLive")
@@ -42,7 +42,7 @@ public class LiveController {
         liveService.stopLive();
 
         log.info("GET /stopLive [END]");
-        return "live";
+        return "live/live";
     }
 
     @GetMapping(value = "/getLives")
@@ -53,7 +53,7 @@ public class LiveController {
         model.addAttribute("lives", lives);
 
         log.info("GET /getLives [END]");
-        return "live";
+        return "live/live";
     }
 
     @GetMapping(value = "/clearLives")
@@ -63,6 +63,6 @@ public class LiveController {
         liveService.clearLives();
 
         log.info("GET /clearLives [END]");
-        return "live";
+        return "live/live";
     }
 }

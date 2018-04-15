@@ -35,7 +35,7 @@ public class ExportController {
         model.addAttribute("forks", forks);
 
         log.info("GET /exportForksToExcel [END]");
-        return "exportForks";
+        return "base/exportForks";
     }
 
     @GetMapping(value = "/exportForksToPdf")
@@ -51,7 +51,7 @@ public class ExportController {
         model.addAttribute("forks", forks);
 
         log.info("GET /exportForksToPdf [END]");
-        return "exportForks";
+        return "base/exportForks";
     }
 
     @GetMapping(value = "/exportTwoOfThreesToExcel")
@@ -66,7 +66,7 @@ public class ExportController {
         model.addAttribute("twoOfThrees", twoOfThrees);
 
         log.info("GET /exportTwoOfThreesToExcel [END]");
-        return "exportTwoOfThrees";
+        return "base/exportTwoOfThrees";
     }
 
     @GetMapping(value = "/exportTwoOfThreesToPdf")
@@ -82,7 +82,7 @@ public class ExportController {
         model.addAttribute("twoOfThrees", twoOfThrees);
 
         log.info("GET /exportTwoOfThreesToPdf [END]");
-        return "exportTwoOfThrees";
+        return "base/exportTwoOfThrees";
     }
 
     private String getNowDate(){

@@ -49,7 +49,7 @@ public class ForkController {
         addSportType(model);
 
         log.info("GET /parseAll [END]");
-        return "parseResult";
+        return "base/parseResult";
     }
 
     @GetMapping(value = "/parseBookMaker")
@@ -61,7 +61,7 @@ public class ForkController {
         addSportType(model);
 
         log.info("GET /parseBookMaker " + name + "[END]");
-        return "parseResult";
+        return "base/parseResult";
     }
 
 //    @GetMapping(value = "/parseMatch")
@@ -72,7 +72,7 @@ public class ForkController {
 //        addSportType(model);
 //
 //        log.info("GET /parseMatch [END]");
-//        return "fork";
+//        return "base/fork";
 //    }
 
     @GetMapping(value = "/countUp")
@@ -96,7 +96,7 @@ public class ForkController {
         addSportType(model);
 
         log.info("GET /getForks [END]");
-        return "fork";
+        return "base/fork";
     }
 
     @GetMapping(value = "/getTwoOfThree")
@@ -108,7 +108,7 @@ public class ForkController {
         addSportType(model);
 
         log.info("GET /getTwoOfThree [END]");
-        return "twoOfThree";
+        return "base/twoOfThree";
     }
 
     @GetMapping(value = "/getMatches")
@@ -120,7 +120,7 @@ public class ForkController {
         addSportType(model);
 
         log.info("GET /getMatches " + name + " [END]");
-        return "match";
+        return "base/match";
     }
 
     private void addSportType(Model model){
