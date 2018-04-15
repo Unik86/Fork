@@ -27,7 +27,7 @@ public class ParimatchTennisParser extends BaseParser {
     private final static String MATCHES = "//tbody[contains(@class, 'row1 processed')]";
 
     public ParimatchTennisParser() {
-        bookMaker = new BookMaker(BookMakers.PARIMATCH.getName(), SportTypes.TENNIS.getType());
+//        bookMaker = new BookMaker(BookMakers.PARIMATCH.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -69,7 +69,7 @@ public class ParimatchTennisParser extends BaseParser {
                 }
 
                 Match match = new Match();
-                match.setBookMaker(BookMakers.PARIMATCH.getName());
+//                match.setBookMaker(BookMakers.PARIMATCH.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(driver.getCurrentUrl());

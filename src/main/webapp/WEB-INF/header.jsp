@@ -57,11 +57,6 @@
               Unibet
             </a>
           </li>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Parimatch">
-              Parimatch
-            </a>
-          </li>
         </ul>
       </div>
 
@@ -93,9 +88,6 @@
           </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Unibet">Unibet</a>
-          </li>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Parimatch">Parimatch</a>
           </li>
         </ul>
       </div>
