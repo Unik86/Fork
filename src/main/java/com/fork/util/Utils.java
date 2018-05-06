@@ -49,13 +49,13 @@ public class Utils {
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
     }
 
-    public static int randomInt(int min, int max) {
-        Random random = new Random();
-        return random.nextInt(max - min + 1) + min;
-    }
-
     public static String revertName(String name, String separator){
         String[] strArray = name.split(separator);
         return strArray.length > 1 ? strArray[1].trim() + " " + strArray[0].trim() : name;
+    }
+
+    public static int randomInt(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min + 1) + min;
     }
 }

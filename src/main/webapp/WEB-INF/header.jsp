@@ -13,7 +13,9 @@
 
     <div class="container">
       <div class="starter-template">
-        <h1>Fork Application ${sportType}</h1>
+        <a href="/fork" style="color: black;text-decoration: none;">
+          <h1>Fork Application ${sportType}</h1>
+        </a>
         <button type="button" class="btn btn-default"
                 onclick="location.href='/fork/sportType?type=Football'">Football</button>
         <button type="button" class="btn btn-default"
@@ -43,6 +45,11 @@
             </a>
           </li>
           <li role="presentation">
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=GameBookers">
+              GameBookers
+            </a>
+          </li>
+          <li role="presentation">
             <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet365">
               Bet365
             </a>
@@ -60,6 +67,16 @@
           <li role="presentation">
             <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Unibet">
               Unibet
+            </a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Sport888">
+              888Sport
+            </a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Parimatch">
+              Parimatch
             </a>
           </li>
         </ul>
@@ -86,6 +103,9 @@
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=BWin">BWin</a>
           </li>
           <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=GameBookers">GameBookers</a>
+          </li>
+          <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet365">Bet365</a>
           </li>
           <li role="presentation">
@@ -96,6 +116,12 @@
           </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Unibet">Unibet</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Sport888">888Sport</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Parimatch">Parimatch</a>
           </li>
         </ul>
       </div>

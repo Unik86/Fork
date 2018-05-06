@@ -17,7 +17,7 @@ import static java.util.Objects.nonNull;
 
 @Log4j
 @Component("WillFootballLive")
-public class WillFootballLiveParser implements LiveParser {
+public class WilliamHillFootballLiveParser implements LiveParser {
 
     private final static String URL = "http://sports.williamhill.com/bet/ru/betting/e/12718307/%D0%9E%D0%BB%D0%B8%D0%BC%D0%BF%D0%B8%D0%BA+v+%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D1%8F.html";
 
@@ -102,7 +102,7 @@ public class WillFootballLiveParser implements LiveParser {
     }
 
     private String getBookMakerName(){
-        return BookMakers.WILL.getName();
+        return BookMakers.WILLIAM_HILL.getName();
     }
 
 }

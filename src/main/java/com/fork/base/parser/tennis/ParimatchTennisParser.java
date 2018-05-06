@@ -1,7 +1,9 @@
 package com.fork.base.parser.tennis;
 
 import com.fork.base.model.Bet;
+import com.fork.base.model.BookMaker;
 import com.fork.base.model.Match;
+import com.fork.base.model.enums.BookMakers;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
 import com.fork.util.Constants;
@@ -24,7 +26,7 @@ public class ParimatchTennisParser extends BaseParser {
     private final static String MATCHES = "//tbody[contains(@class, 'row1 processed')]";
 
     public ParimatchTennisParser() {
-//        bookMaker = new BookMaker(BookMakers.PARIMATCH.getName(), SportTypes.TENNIS.getType());
+        bookMaker = new BookMaker(BookMakers.PARIMATCH.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -66,7 +68,7 @@ public class ParimatchTennisParser extends BaseParser {
                 }
 
                 Match match = new Match();
-//                match.setBookMaker(BookMakers.PARIMATCH.getName());
+                match.setBookMaker(BookMakers.PARIMATCH.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(driver.getCurrentUrl());

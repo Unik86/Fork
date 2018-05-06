@@ -1,4 +1,4 @@
-package com.fork.base.parser.football;
+package com.fork.base.parser.tennis;
 
 import com.fork.base.model.Bet;
 import com.fork.base.model.BookMaker;
@@ -8,7 +8,8 @@ import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
 import com.fork.util.Constants;
 import lombok.extern.log4j.Log4j;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
@@ -19,15 +20,15 @@ import java.util.List;
 import static java.util.Objects.isNull;
 
 @Log4j
-@Component("WilliamHillFootball")
-public class WillFootballParser extends BaseParser {
+@Component("WilliamHillTennis")
+public class WilliamHillTennisParser extends BaseParser {
 
-    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
+    private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/17/mh/Tennis.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
-    public WillFootballParser() {
+    public WilliamHillTennisParser() {
         pagesStr = "//span[contains(@class, 'rn_PageLinks')]/a";
-        bookMaker = new BookMaker(BookMakers.WILL.getName(), SportTypes.FOOTBALL.getType());
+        bookMaker = new BookMaker(BookMakers.WILLIAM_HILL.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -45,8 +46,8 @@ public class WillFootballParser extends BaseParser {
         Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
         rateFormat.selectByVisibleText("Decimal");
 
-        Select changeOrder = new Select(driver.findElement(By.id("changeOrder")));
-        changeOrder.selectByVisibleText("Time");
+        Select orderFormat = new Select(driver.findElement(By.id("changeOrder")));
+        orderFormat.selectByVisibleText("Time");
 
         Thread.sleep(1000);
     }
@@ -61,39 +62,35 @@ public class WillFootballParser extends BaseParser {
                 WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
 
                 List<WebElement> elementRates = element.findElements(By.className("eventprice"));
-                List<WebElement> tdCols = element.findElements(By.tagName("td"));
+                WebElement elementName = element.findElement(By.className("CentrePad"));
+                List<WebElement> leftPad = element.findElements(By.className("leftPad"));
 
-                String time = tdCols.get(1).getText();
+                String time = leftPad.get(1).getText();
                 if(!time.contains("EEST") && !time.contains("EET"))
                     continue;
 
-                WebElement urlElement = tdCols.get(2).findElement(By.tagName("a"));
+                WebElement urlElement = elementName.findElement(By.tagName("a"));
                 String url = urlElement.getAttribute("href");
 
                 if(isNull(url) || url.isEmpty())
                     url = driver.getCurrentUrl();
 
-                Bet bet = new Bet();
-
-                String[] names = tdCols.get(2).getText().split(Constants.SEPARATOR_NAME);
+                String[] names = elementName.getText().split(Constants.SEPARATOR_NAME);
                 if(names.length < 2)
                     continue;
 
 
-                if (elementRates.size() == 3) {
-                    bet.setLeft(Double.parseDouble(elementRates.get(0).getText()));
-                    bet.setCenter(Double.parseDouble(elementRates.get(1).getText()));
-                    bet.setRight(Double.parseDouble(elementRates.get(2).getText()));
-                } else if (elementRates.size() == 2) {
-                    bet.setLeft(Double.parseDouble(elementRates.get(0).getText()));
-                    bet.setRight(Double.parseDouble(elementRates.get(1).getText()));
-                } else
+                if (elementRates.size() != 2)
                     continue;
+
+                Bet bet = new Bet();
+                bet.setLeft(Double.parseDouble(elementRates.get(0).getText()));
+                bet.setRight(Double.parseDouble(elementRates.get(1).getText()));
 
 
                 Match match = new Match();
-                match.setBookMaker(BookMakers.WILL.getName());
-                match.setSportType(SportTypes.FOOTBALL.getType());
+                match.setBookMaker(BookMakers.WILLIAM_HILL.getName());
+                match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);
                 match.setPlayerLeft(names[0].trim());

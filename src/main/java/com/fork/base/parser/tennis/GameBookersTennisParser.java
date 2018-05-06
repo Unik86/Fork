@@ -15,18 +15,18 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.fork.util.Utils.randomInt;
 import static java.util.Objects.isNull;
 
 @Log4j
-@Component("Bet10Tennis")
-public class Bet10TennisParser extends BaseParser {
+@Component("GameBookersTennis")
+public class GameBookersTennisParser extends BaseParser {
 
-    private final static String URL = "https://www.10bet.com/sports/";
-    private final static String MATCHES = "//div[contains(@class, 'event-upcoming')]";
+    private final static String URL = "https://sports.gamebookers.com/en/sports#sportId=5";
+    private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
-    public Bet10TennisParser() {
-        bookMaker = new BookMaker(BookMakers.BET10.getName(), SportTypes.TENNIS.getType());
+    public GameBookersTennisParser() {
+        pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
+        bookMaker = new BookMaker(BookMakers.GAME_BOOKERS.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -37,26 +37,9 @@ public class Bet10TennisParser extends BaseParser {
         driver.manage().window().maximize();
         driver.get(URL);
 
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//a[@href='/resp-todays-events/']")).click();
         Thread.sleep(1000);
-        driver.findElement(By.xpath("//div[@id='Center_TodaysEventsResponsiveBlock_49846sport_6']")).click();
-        Thread.sleep(1000);
-
-        List<WebElement> tabs = driver.findElements(
-                By.xpath("//h3[contains(@id, 'league-heading_') and not(contains(@class, 'expanded'))]")
-        );
-        for(WebElement element : tabs){
-            try {
-                element.click();
-                Thread.sleep(randomInt(500, 2000));
-            } catch (Exception e) {
-                log.error("Expand Error : " + e.getMessage());
-            }
-        }
     }
 
-    @Override
     protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
         log.info(getLog("matches on page = " + cntIds));
@@ -65,11 +48,7 @@ public class Bet10TennisParser extends BaseParser {
             try {
                 WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
 
-                List<WebElement> timeElements = element.findElements(By.className("event-details-game-time"));
-                String time = timeElements.get(1).getText();
-
-                String playerLeft = element.findElement(By.className("event-details-team-a")).getText();
-                String playerRight = element.findElement(By.className("event-details-team-b")).getText();
+                String time = element.findElement(By.tagName("div")).getText();
 
                 String url = null;
                 if(element.findElements(By.tagName("a")).size() != 0)
@@ -78,20 +57,23 @@ public class Bet10TennisParser extends BaseParser {
                 if(isNull(url) || url.isEmpty())
                     url = driver.getCurrentUrl();
 
-                List<WebElement> bets = element.findElements(By.className("bet-odds-number"));
+                List<WebElement> columns = element.findElements(By.tagName("button"));
+
+                List<WebElement>  columnLeft = columns.get(0).findElements(By.tagName("div"));
+                List<WebElement>  columnRight = columns.get(1).findElements(By.tagName("div"));
 
                 Bet bet = new Bet();
-                bet.setLeft(Double.parseDouble(bets.get(0).getText()));
-                bet.setRight(Double.parseDouble(bets.get(1).getText()));
+                bet.setLeft(Double.parseDouble(columnLeft.get(1).getText()));
+                bet.setRight(Double.parseDouble(columnRight.get(1).getText()));
 
 
                 Match match = new Match();
-                match.setBookMaker(BookMakers.BET10.getName());
+                match.setBookMaker(BookMakers.GAME_BOOKERS.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);
-                match.setPlayerLeft(playerLeft);
-                match.setPlayerRight(playerRight);
+                match.setPlayerLeft(columnLeft.get(0).getText());
+                match.setPlayerRight(columnRight.get(0).getText());
                 match.setTime(time);
 
                 match.setWinner(bet);
@@ -102,4 +84,5 @@ public class Bet10TennisParser extends BaseParser {
             }
         }
     }
+
 }
