@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.fork.util.Utils.randomInt;
+import static com.fork.util.Utils.revertName;
 import static java.util.Objects.isNull;
 
 @Log4j
@@ -41,7 +43,7 @@ public class UnibetTennisParser extends BaseParser {
         for(WebElement element : tabs){
             if(element.findElements(By.className("KambiBC-mod-event-group-header__event-count")).size() > 0){
                 element.click();
-                Thread.sleep(1000);
+                Thread.sleep(randomInt(500, 2000));
             }
         }
 
@@ -75,7 +77,6 @@ public class UnibetTennisParser extends BaseParser {
                     url = driver.getCurrentUrl();
                 }
 
-
                 Bet bet = new Bet();
                 bet.setLeft(Double.parseDouble(rates.get(0).getText()));
                 bet.setRight(Double.parseDouble(rates.get(1).getText()));
@@ -86,8 +87,8 @@ public class UnibetTennisParser extends BaseParser {
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);
-                match.setPlayerLeft(names.get(0).getText());
-                match.setPlayerRight(names.get(1).getText());
+                match.setPlayerLeft(revertName(names.get(0).getText(), ","));
+                match.setPlayerRight(revertName(names.get(1).getText(), ","));
                 match.setTime(times.get(0).getText());
 
                 match.setWinner(bet);

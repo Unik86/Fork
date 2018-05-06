@@ -48,6 +48,11 @@
             </a>
           </li>
           <li role="presentation">
+            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet10">
+              10Bet
+            </a>
+          </li>
+          <li role="presentation">
             <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Pinnacle">
               Pinnacle
             </a>
@@ -82,6 +87,9 @@
           </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet365">Bet365</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet10">10Bet</a>
           </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Pinnacle">Pinnacle</a>

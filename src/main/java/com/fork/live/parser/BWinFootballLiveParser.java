@@ -40,18 +40,18 @@ public class BWinFootballLiveParser implements LiveParser {
 
         LiveMatch match = new LiveMatch(getBookMakerName());
 
-        match.setWinner(parsBet("Match Result"));
+        match.setWinner(parsBet("1 Х 2"));
 
-        match.setTotal05(parsBet("Total Goals - Over/Under", "0,5"));
-        match.setTotal15(parsBet("Total Goals - Over/Under", "1,5"));
-        match.setTotal25(parsBet("Total Goals - Over/Under", "2,5"));
-        match.setTotal35(parsBet("Total Goals - Over/Under", "3,5"));
-        match.setTotal45(parsBet("Total Goals - Over/Under", "4,5"));
-        match.setTotal55(parsBet("Total Goals - Over/Under", "5,5"));
-        match.setTotal65(parsBet("Total Goals - Over/Under", "6,5"));
-        match.setTotal75(parsBet("Total Goals - Over/Under", "7,5"));
-        match.setTotal85(parsBet("Total Goals - Over/Under", "8,5"));
-        match.setTotal95(parsBet("Total Goals - Over/Under", "9,5"));
+        match.setTotal05(parsBet("Сколько голов будет забито?", "0,5"));
+        match.setTotal15(parsBet("Сколько голов будет забито?", "1,5"));
+        match.setTotal25(parsBet("Сколько голов будет забито?", "2,5"));
+        match.setTotal35(parsBet("Сколько голов будет забито?", "3,5"));
+        match.setTotal45(parsBet("Сколько голов будет забито?", "4,5"));
+        match.setTotal55(parsBet("Сколько голов будет забито?", "5,5"));
+        match.setTotal65(parsBet("Сколько голов будет забито?", "6,5"));
+        match.setTotal75(parsBet("Сколько голов будет забито?", "7,5"));
+        match.setTotal85(parsBet("Сколько голов будет забито?", "8,5"));
+        match.setTotal95(parsBet("Сколько голов будет забито?", "9,5"));
 
         return match;
     }
