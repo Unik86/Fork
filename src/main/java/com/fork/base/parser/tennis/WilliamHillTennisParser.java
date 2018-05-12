@@ -4,6 +4,7 @@ import com.fork.base.model.Bet;
 import com.fork.base.model.BookMaker;
 import com.fork.base.model.Match;
 import com.fork.base.model.enums.BookMakers;
+import com.fork.base.model.enums.ParseType;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
 import com.fork.util.Constants;
@@ -24,7 +25,7 @@ import static java.util.Objects.isNull;
 public class WilliamHillTennisParser extends BaseParser {
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/17/mh/Tennis.html";
-    private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
+    private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr";
 
     public WilliamHillTennisParser() {
         bookMaker = new BookMaker(BookMakers.WILLIAMHILL.getName(), SportTypes.TENNIS.getType());
@@ -57,7 +58,7 @@ public class WilliamHillTennisParser extends BaseParser {
     }
 
     @Override
-    protected void parsOnePageMainRates(){
+    protected void parsOnePageMainRates(String parseType){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
         log.info(getLog("matches on page = " + cntIds));
 
@@ -70,8 +71,17 @@ public class WilliamHillTennisParser extends BaseParser {
                 List<WebElement> leftPad = element.findElements(By.className("leftPad"));
 
                 String time = leftPad.get(1).getText();
-                if(!time.contains("EEST") && !time.contains("EET"))
+                boolean isLive = !time.contains("EEST") && !time.contains("EET");
+
+                if(isLive) {
+                    time = "Live";
+                }
+                if(isLive && ParseType.WITHOUT_LIVE.isEquals(parseType)) {
                     continue;
+                }
+                if(!isLive && ParseType.ONLY_LIVE.isEquals(parseType)) {
+                    continue;
+                }
 
                 WebElement urlElement = elementName.findElement(By.tagName("a"));
                 String url = urlElement.getAttribute("href");

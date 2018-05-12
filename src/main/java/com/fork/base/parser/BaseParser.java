@@ -34,7 +34,7 @@ public abstract class BaseParser implements Parser {
     }
 
     @Override
-    public void parsMainRates(){
+    public void parsMainRates(String parseType){
         log.info(getLog("Pars main rates"));
         bookMaker.getMatches().clear();
 
@@ -51,7 +51,7 @@ public abstract class BaseParser implements Parser {
                 Thread.sleep(randomInt(3000, 4000));
                 log.info(getLog("page = " + i));
 
-                parsOnePageMainRates();
+                parsOnePageMainRates(parseType);
             } catch (Exception e){
                 log.error("Page error : " + e);
             }
@@ -64,5 +64,5 @@ public abstract class BaseParser implements Parser {
         return "{" + bookMaker.getName() + "} - " + message;
     }
 
-    protected abstract void parsOnePageMainRates();
+    protected abstract void parsOnePageMainRates(String parseType);
 }

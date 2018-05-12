@@ -40,6 +40,14 @@ public class ForkController {
         return "main";
     }
 
+    @GetMapping(value = "/clearAll")
+    public String clearAll() {
+        log.info("GET /clearAll [BEGIN]");
+        forkService.clearAll();
+        log.info("GET /clearAll [END]");
+        return "main";
+    }
+
     @GetMapping(value = "/parseAll")
     public String parseAll(String parseType, Model model) {
         log.info("GET /parseAll [BEGIN]");

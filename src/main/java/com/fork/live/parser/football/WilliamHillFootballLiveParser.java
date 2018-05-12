@@ -1,8 +1,9 @@
-package com.fork.live.parser;
+package com.fork.live.parser.football;
 
 import com.fork.base.model.*;
 import com.fork.base.model.enums.BookMakers;
 import com.fork.live.model.LiveMatch;
+import com.fork.live.parser.LiveParser;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

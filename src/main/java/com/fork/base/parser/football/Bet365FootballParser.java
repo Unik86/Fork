@@ -4,6 +4,7 @@ import com.fork.base.model.Bet;
 import com.fork.base.model.BookMaker;
 import com.fork.base.model.enums.BookMakers;
 import com.fork.base.model.Match;
+import com.fork.base.model.enums.ParseType;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
 import com.fork.util.Constants;
@@ -49,7 +50,7 @@ public class Bet365FootballParser extends BaseParser {
     }
 
     @Override
-    public void parsMainRates(){
+    public void parsMainRates(String parseType){
         log.info(getLog("Pars main rates"));
         bookMaker.getMatches().clear();
         int cntPages = 0;
@@ -66,7 +67,7 @@ public class Bet365FootballParser extends BaseParser {
                 Thread.sleep(2000);
                 log.info(getLog("page = " + (i+1)));
 
-                parsOnePageMainRates();
+                parsOnePageMainRates(parseType);
 
                 driver.findElement(By.xpath(SOCCER_LINK)).click();
                 Thread.sleep(1000);
@@ -78,7 +79,7 @@ public class Bet365FootballParser extends BaseParser {
         log.info(getLog("matches size = " + bookMaker.getMatches().size()));
     }
 
-    protected void parsOnePageMainRates(){
+    protected void parsOnePageMainRates(String parseType){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
         log.info(getLog("matches on page = " + cntIds));
 
@@ -103,6 +104,16 @@ public class Bet365FootballParser extends BaseParser {
                     if(!nameStr.contains(Constants.SEPARATOR_NAME))
                         continue;
 
+                    String time = times.get(j).getText();
+                    boolean isLive = time.contains("Live");
+
+                    if(isLive && ParseType.WITHOUT_LIVE.isEquals(parseType)) {
+                        continue;
+                    }
+                    if(!isLive && ParseType.ONLY_LIVE.isEquals(parseType)) {
+                        continue;
+                    }
+
                     String[] namesStr = nameStr.split(Constants.SEPARATOR_NAME);
                     String url = driver.getCurrentUrl();
 
@@ -119,7 +130,7 @@ public class Bet365FootballParser extends BaseParser {
                     match.setUrl(url);
                     match.setPlayerLeft(namesStr[0].trim());
                     match.setPlayerRight(namesStr[1].trim());
-                    match.setTime(times.get(j).getText());
+                    match.setTime(time);
 
                     match.setWinner(bet);
                     bookMaker.getMatches().add(match);

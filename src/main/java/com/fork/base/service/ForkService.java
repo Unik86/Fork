@@ -1,6 +1,7 @@
 package com.fork.base.service;
 
 import com.fork.base.model.*;
+import com.fork.base.model.enums.ParseType;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.Parser;
 import com.fork.base.repository.BookMakerRepository;
@@ -44,13 +45,23 @@ public class ForkService {
             .collect(Collectors.toList());
     }
 
+    public void clearAll() {
+        bookMakerRepository.deleteAll();
+    }
+
     public ParseResult parseBookMaker(String bookMakerName, String parseType) {
+        if(ParseType.ONLY_LIVE.isEquals(parseType)
+                && !BookMakers.WILLIAMHILL.isEquals(bookMakerName)
+                && !BookMakers.BET365.isEquals(bookMakerName)) {
+            return null;
+        }
+
         log.info("Run parser >>>> " + bookMakerName);
 
         try {
             Parser parser = getParser(bookMakerName);
             parser.goToSite();
-            parser.parsMainRates();
+            parser.parsMainRates(parseType);
             parser.closeBrowser();
 
             BookMaker bookMaker = parser.getBookMaker();

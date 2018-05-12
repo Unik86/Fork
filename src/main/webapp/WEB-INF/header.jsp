@@ -24,13 +24,13 @@
       <br>
 
       <div>
-        <input type="radio" id="type1" name="type" value="all">
+        <input type="radio" id="type1" name="type" value="All">
         <label for="type1">All</label>
 
-        <input type="radio" id="type2" name="type" value="onlyLive">
+        <input type="radio" id="type2" name="type" value="OnlyLive">
         <label for="type2">Only Live</label>
 
-        <input type="radio" id="type3" name="type" value="withoutLive" checked="checked">
+        <input type="radio" id="type3" name="type" value="WithoutLive" checked="checked">
         <label for="type3">Without Live</label>
       </div>
 
@@ -40,13 +40,13 @@
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll?name=All">
               All
             </a>
           </li>
           <li role="presentation" class="divider"></li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=WilliamHill&">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=WilliamHill">
               WilliamHill
             </a>
           </li>
@@ -99,6 +99,8 @@
       </div>
 
       <div class="pull-left" style="margin-left: 5px">
+        <button type="button" class="btn btn-warning"
+                onclick="location.href='/fork/clearAll'">Clear all</button>
         <button type="button" class="btn btn-success"
                 onclick="location.href='/fork/countUp'">CountUp</button>
         <button type="button" class="btn btn-primary"

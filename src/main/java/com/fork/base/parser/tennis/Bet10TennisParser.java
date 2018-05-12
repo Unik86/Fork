@@ -57,7 +57,7 @@ public class Bet10TennisParser extends BaseParser {
     }
 
     @Override
-    protected void parsOnePageMainRates(){
+    protected void parsOnePageMainRates(String parseType){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
         log.info(getLog("matches on page = " + cntIds));
 

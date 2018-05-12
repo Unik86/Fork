@@ -23,4 +23,7 @@ public enum BookMakers {
         return name;
     }
 
+    public boolean isEquals(String name) {
+        return this.name.equals(name);
+    }
 }

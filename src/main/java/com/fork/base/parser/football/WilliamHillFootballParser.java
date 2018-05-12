@@ -4,6 +4,7 @@ import com.fork.base.model.Bet;
 import com.fork.base.model.BookMaker;
 import com.fork.base.model.Match;
 import com.fork.base.model.enums.BookMakers;
+import com.fork.base.model.enums.ParseType;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
 import com.fork.util.Constants;
@@ -23,7 +24,7 @@ import static java.util.Objects.isNull;
 public class WilliamHillFootballParser extends BaseParser {
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
-    private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
+    private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr";
 
     public WilliamHillFootballParser() {
         bookMaker = new BookMaker(BookMakers.WILLIAMHILL.getName(), SportTypes.FOOTBALL.getType());
@@ -57,7 +58,7 @@ public class WilliamHillFootballParser extends BaseParser {
     }
 
     @Override
-    protected void parsOnePageMainRates(){
+    protected void parsOnePageMainRates(String parseType){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
         log.info(getLog("matches on page = " + cntIds));
 
@@ -69,8 +70,17 @@ public class WilliamHillFootballParser extends BaseParser {
                 List<WebElement> tdCols = element.findElements(By.tagName("td"));
 
                 String time = tdCols.get(1).getText();
-                if(!time.contains("EEST") && !time.contains("EET"))
+                boolean isLive = !time.contains("EEST") && !time.contains("EET");
+
+                if(isLive) {
+                    time = "Live";
+                }
+                if(isLive && ParseType.WITHOUT_LIVE.isEquals(parseType)) {
                     continue;
+                }
+                if(!isLive && ParseType.ONLY_LIVE.isEquals(parseType)) {
+                    continue;
+                }
 
                 WebElement urlElement = tdCols.get(2).findElement(By.tagName("a"));
                 String url = urlElement.getAttribute("href");
@@ -81,9 +91,9 @@ public class WilliamHillFootballParser extends BaseParser {
                 Bet bet = new Bet();
 
                 String[] names = tdCols.get(2).getText().split(Constants.SEPARATOR_NAME);
-                if(names.length < 2)
+                if(names.length < 2) {
                     continue;
-
+                }
 
                 if (elementRates.size() == 3) {
                     bet.setLeft(Double.parseDouble(elementRates.get(0).getText()));
@@ -92,9 +102,9 @@ public class WilliamHillFootballParser extends BaseParser {
                 } else if (elementRates.size() == 2) {
                     bet.setLeft(Double.parseDouble(elementRates.get(0).getText()));
                     bet.setRight(Double.parseDouble(elementRates.get(1).getText()));
-                } else
+                } else {
                     continue;
-
+                }
 
                 Match match = new Match();
                 match.setBookMaker(BookMakers.WILLIAMHILL.getName());
