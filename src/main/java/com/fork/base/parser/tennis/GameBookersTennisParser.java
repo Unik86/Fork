@@ -25,8 +25,7 @@ public class GameBookersTennisParser extends BaseParser {
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
     public GameBookersTennisParser() {
-        pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
-        bookMaker = new BookMaker(BookMakers.GAME_BOOKERS.getName(), SportTypes.TENNIS.getType());
+//        bookMaker = new BookMaker(BookMakers.GAMEBOOKERS.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -36,6 +35,13 @@ public class GameBookersTennisParser extends BaseParser {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(URL);
+
+        Thread.sleep(1000);
+
+        nextPageXpath = "//a[contains(@href, '?page=') and contains(@rel,'next') and contains(@class, 'active-page-arrow')]";
+        countPages = driver.findElements(
+                By.xpath("//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]")
+        ).size() + 1;
 
         Thread.sleep(1000);
     }
@@ -68,7 +74,7 @@ public class GameBookersTennisParser extends BaseParser {
 
 
                 Match match = new Match();
-                match.setBookMaker(BookMakers.GAME_BOOKERS.getName());
+//                match.setBookMaker(BookMakers.GAMEBOOKERS.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);

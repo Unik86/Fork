@@ -27,7 +27,7 @@ public class Bet365FootballParser extends BaseParser {
     private final static String SOCCER_LINK = "//div[contains(@class, 'wn-Classification') and contains(text(),'Soccer')]";
 
     public Bet365FootballParser() {
-        pagesStr = "//div[contains(@class, 'sm-CouponLink_Label') and contains(text(),'s Matches')]";
+        nextPageXpath = "//div[contains(@class, 'sm-CouponLink_Label') and contains(text(),'s Matches')]";
         bookMaker = new BookMaker(BookMakers.BET365.getName(), SportTypes.FOOTBALL.getType());
     }
 
@@ -54,14 +54,14 @@ public class Bet365FootballParser extends BaseParser {
         bookMaker.getMatches().clear();
         int cntPages = 0;
 
-        if(nonNull(pagesStr))
-            cntPages = driver.findElements(By.xpath(pagesStr)).size();
+        if(nonNull(nextPageXpath))
+            cntPages = driver.findElements(By.xpath(nextPageXpath)).size();
 
         log.info(getLog("count pages = " + cntPages));
 
         for(int i = 0; i < cntPages; i++){
             try {
-                driver.findElements(By.xpath(pagesStr)).get(i).click();
+                driver.findElements(By.xpath(nextPageXpath)).get(i).click();
 
                 Thread.sleep(2000);
                 log.info(getLog("page = " + (i+1)));

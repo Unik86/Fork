@@ -25,7 +25,7 @@ public class Bet365TennisParser extends BaseParser {
     private final static String TENNIS_LINK = "//div[contains(@class, 'wn-Classification') and contains(text(),'Tennis')]";
 
     public Bet365TennisParser() {
-        pagesStr = "//div[contains(@class, 'sm-CouponLink_Label') and contains(text(),'s Matches')]";
+        nextPageXpath = "//div[contains(@class, 'sm-CouponLink_Label') and contains(text(),'s Matches')]";
         bookMaker = new BookMaker(BookMakers.BET365.getName(), SportTypes.TENNIS.getType());
     }
 

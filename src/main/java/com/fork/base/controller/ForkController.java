@@ -41,10 +41,10 @@ public class ForkController {
     }
 
     @GetMapping(value = "/parseAll")
-    public String parseAll(Model model) {
+    public String parseAll(String parseType, Model model) {
         log.info("GET /parseAll [BEGIN]");
 
-        List<ParseResult> parseResults = forkService.parseAll();
+        List<ParseResult> parseResults = forkService.parseAll(parseType);
         model.addAttribute("results", parseResults);
         addSportType(model);
 
@@ -53,10 +53,10 @@ public class ForkController {
     }
 
     @GetMapping(value = "/parseBookMaker")
-    public String parseBookMaker(@RequestParam("name") String name, Model model) {
+    public String parseBookMaker(@RequestParam("name") String name, String parseType, Model model) {
         log.info("GET /parseBookMaker " + name + "[BEGIN]");
 
-        ParseResult parseResult = forkService.parseBookMaker(name);
+        ParseResult parseResult = forkService.parseBookMaker(name, parseType);
         model.addAttribute("results", ImmutableList.of(parseResult));
         addSportType(model);
 

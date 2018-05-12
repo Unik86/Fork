@@ -38,13 +38,13 @@ public class ForkService {
     @Autowired
     private TwoOfThreeRepository twoOfTnreeRepository;
 
-    public List<ParseResult> parseAll() {
+    public List<ParseResult> parseAll(String parseType) {
         return Stream.of(BookMakers.values())
-            .map(bm -> parseBookMaker(bm.getName()))
+            .map(bm -> parseBookMaker(bm.getName(), parseType))
             .collect(Collectors.toList());
     }
 
-    public ParseResult parseBookMaker(String bookMakerName) {
+    public ParseResult parseBookMaker(String bookMakerName, String parseType) {
         log.info("Run parser >>>> " + bookMakerName);
 
         try {
@@ -69,12 +69,9 @@ public class ForkService {
                     String.valueOf(bookMaker.getMatches().size())
             );
         } catch (Exception e){
-            log.error("Error parser >>>>>>>>>> " + bookMakerName);
+            log.error("Error parser >>>>>>>>>> " + e);
 
-            return new ParseResult(
-                    bookMakerName,
-                    "Error"
-            );
+            return new ParseResult(bookMakerName,"Error");
         }
     }
 

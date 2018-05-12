@@ -23,60 +23,76 @@
       </div>
       <br>
 
+      <div>
+        <input type="radio" id="type1" name="type" value="all">
+        <label for="type1">All</label>
+
+        <input type="radio" id="type2" name="type" value="onlyLive">
+        <label for="type2">Only Live</label>
+
+        <input type="radio" id="type3" name="type" value="withoutLive" checked="checked">
+        <label for="type3">Without Live</label>
+      </div>
+
       <div class="dropdown pull-left">
         <button class="btn btn-success dropdown-toggle" type="button" id="menu1"
                 data-toggle="dropdown">Parse</button>
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll">
               All
             </a>
           </li>
           <li role="presentation" class="divider"></li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=WilliamHill">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=WilliamHill&">
               WilliamHill
             </a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=BWin">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=BWin">
               BWin
             </a>
           </li>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=GameBookers">
+          <!--li role="presentation">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=GameBookers">
               GameBookers
             </a>
-          </li>
+          </li-->
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet365">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet365">
               Bet365
             </a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet10">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet10">
               10Bet
             </a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Pinnacle">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Pinnacle">
               Pinnacle
             </a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Unibet">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Unibet">
               Unibet
             </a>
           </li>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Sport888">
+          <!--li role="presentation">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Sport888">
               888Sport
             </a>
+          </li->
+          <!--li role="presentation">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Parimatch">
+              Parimatch
+            </a-->
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Parimatch">
-              Parimatch
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=TitanBet">
+              TitanBet
             </a>
           </li>
         </ul>
@@ -102,9 +118,9 @@
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=BWin">BWin</a>
           </li>
-          <li role="presentation">
+          <!--li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=GameBookers">GameBookers</a>
-          </li>
+          </li-->
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet365">Bet365</a>
           </li>
@@ -117,11 +133,14 @@
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Unibet">Unibet</a>
           </li>
-          <li role="presentation">
+          <!--li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Sport888">888Sport</a>
-          </li>
-          <li role="presentation">
+          </li-->
+          <!--li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Parimatch">Parimatch</a>
+          </li-->
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=TitanBet">TitanBet</a>
           </li>
         </ul>
       </div>

@@ -102,7 +102,7 @@ public class WilliamHillFootballLiveParser implements LiveParser {
     }
 
     private String getBookMakerName(){
-        return BookMakers.WILLIAM_HILL.getName();
+        return BookMakers.WILLIAMHILL.getName();
     }
 
 }

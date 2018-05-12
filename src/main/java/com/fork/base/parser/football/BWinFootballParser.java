@@ -25,7 +25,6 @@ public class BWinFootballParser extends BaseParser {
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
     public BWinFootballParser() {
-        pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
         bookMaker = new BookMaker(BookMakers.BWIN.getName(), SportTypes.FOOTBALL.getType());
     }
 
@@ -38,6 +37,13 @@ public class BWinFootballParser extends BaseParser {
         driver.get(URL);
 
         driver.findElement(By.xpath("//li[contains(@title, 'Today')]/a")).click();
+
+        Thread.sleep(1000);
+
+        nextPageXpath = "//a[contains(@href, '?page=') and contains(@rel,'next') and contains(@class, 'active-page-arrow')]";
+        countPages = driver.findElements(
+                By.xpath("//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]")
+        ).size() + 1;
 
         Thread.sleep(1000);
     }

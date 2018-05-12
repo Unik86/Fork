@@ -2,9 +2,11 @@ package com.fork.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Random;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 public class Utils {
 
@@ -57,5 +59,13 @@ public class Utils {
     public static int randomInt(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min + 1) + min;
+    }
+
+    public static boolean isEmpty(List list){
+        return isNull(list) || list.isEmpty();
+    }
+
+    public static boolean isNotEmpty(List list){
+        return nonNull(list) && !list.isEmpty();
     }
 }

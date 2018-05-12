@@ -4,7 +4,11 @@ import com.fork.base.model.BookMaker;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
+import static com.fork.util.Utils.randomInt;
 import static java.util.Objects.nonNull;
 
 @Log4j
@@ -13,7 +17,9 @@ public abstract class BaseParser implements Parser {
     protected WebDriver driver;
     protected BookMaker bookMaker;
 
-    protected String pagesStr;
+    protected String nextPageXpath;
+    protected int countPages = 1;
+    protected int pageNumber;
 
     @Override
     public void closeBrowser() {
@@ -31,24 +37,23 @@ public abstract class BaseParser implements Parser {
     public void parsMainRates(){
         log.info(getLog("Pars main rates"));
         bookMaker.getMatches().clear();
-        int cntPages = 0;
 
-        if(nonNull(pagesStr))
-            cntPages = driver.findElements(By.xpath(pagesStr)).size();
+        log.info(getLog("count pages = " + countPages));
 
-        cntPages += 1;
-        log.info(getLog("count pages = " + cntPages));
-
-        for(int i = 1; i <= cntPages; i++){
+        for(int i = 1; i <= countPages; i++){
             try {
-                if(i != 1 && nonNull(pagesStr))
-                    driver.findElements(By.xpath(pagesStr)).get(i-2).click();
+                pageNumber = i;
 
-                Thread.sleep(3000);
+                if(i != 1 && nonNull(nextPageXpath)) {
+                    driver.findElement(By.xpath(nextPageXpath)).click();
+                }
+
+                Thread.sleep(randomInt(3000, 4000));
                 log.info(getLog("page = " + i));
+
                 parsOnePageMainRates();
             } catch (Exception e){
-
+                log.error("Page error : " + e);
             }
         }
 

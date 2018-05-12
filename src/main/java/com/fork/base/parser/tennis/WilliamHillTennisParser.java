@@ -27,8 +27,7 @@ public class WilliamHillTennisParser extends BaseParser {
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
     public WilliamHillTennisParser() {
-        pagesStr = "//span[contains(@class, 'rn_PageLinks')]/a";
-        bookMaker = new BookMaker(BookMakers.WILLIAM_HILL.getName(), SportTypes.TENNIS.getType());
+        bookMaker = new BookMaker(BookMakers.WILLIAMHILL.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -48,6 +47,11 @@ public class WilliamHillTennisParser extends BaseParser {
 
         Select orderFormat = new Select(driver.findElement(By.id("changeOrder")));
         orderFormat.selectByVisibleText("Time");
+
+        Thread.sleep(1000);
+
+        nextPageXpath = "//a[contains(@class, 'rn_whPaginator_last')]";
+        countPages = driver.findElements(By.xpath("//span[contains(@class, 'rn_PageLinks')]/a")).size() + 1;
 
         Thread.sleep(1000);
     }
@@ -89,7 +93,7 @@ public class WilliamHillTennisParser extends BaseParser {
 
 
                 Match match = new Match();
-                match.setBookMaker(BookMakers.WILLIAM_HILL.getName());
+                match.setBookMaker(BookMakers.WILLIAMHILL.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);

@@ -26,8 +26,7 @@ public class WilliamHillFootballParser extends BaseParser {
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr[contains(@class, 'rowOdd')]";
 
     public WilliamHillFootballParser() {
-        pagesStr = "//span[contains(@class, 'rn_PageLinks')]/a";
-        bookMaker = new BookMaker(BookMakers.WILLIAM_HILL.getName(), SportTypes.FOOTBALL.getType());
+        bookMaker = new BookMaker(BookMakers.WILLIAMHILL.getName(), SportTypes.FOOTBALL.getType());
     }
 
     @Override
@@ -35,6 +34,7 @@ public class WilliamHillFootballParser extends BaseParser {
         log.info(getLog("Enter the site " + URL));
 
         driver = new ChromeDriver();
+
         driver.manage().window().maximize();
         driver.get(URL);
 
@@ -47,6 +47,11 @@ public class WilliamHillFootballParser extends BaseParser {
 
         Select changeOrder = new Select(driver.findElement(By.id("changeOrder")));
         changeOrder.selectByVisibleText("Time");
+
+        Thread.sleep(1000);
+
+        nextPageXpath = "//a[contains(@class, 'rn_whPaginator_last')]";
+        countPages = driver.findElements(By.xpath("//span[contains(@class, 'rn_PageLinks')]/a")).size() + 1;
 
         Thread.sleep(1000);
     }
@@ -92,7 +97,7 @@ public class WilliamHillFootballParser extends BaseParser {
 
 
                 Match match = new Match();
-                match.setBookMaker(BookMakers.WILLIAM_HILL.getName());
+                match.setBookMaker(BookMakers.WILLIAMHILL.getName());
                 match.setSportType(SportTypes.FOOTBALL.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);

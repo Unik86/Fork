@@ -2,15 +2,16 @@ package com.fork.base.model.enums;
 
 public enum BookMakers {
 
-    WILLIAM_HILL("WilliamHill"),
+    WILLIAMHILL("WilliamHill"),
     BWIN("BWin"),
-    GAME_BOOKERS("GameBookers"),
+//    GAMEBOOKERS("GameBookers"),
     BET365("Bet365"),
     BET10("Bet10"),
     PINNACLE("Pinnacle"),
-    PARIMATCH("Parimatch"),
+//    PARIMATCH("Parimatch"),
     UNIBET("Unibet"),
-    SPORT888("Sport888");
+//    SPORT888("Sport888"),
+    TITANBET("TitanBet");
 
     private String name;
 

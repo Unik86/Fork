@@ -25,7 +25,6 @@ public class BWinTennisParser extends BaseParser {
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
     public BWinTennisParser() {
-        pagesStr = "//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]";
         bookMaker = new BookMaker(BookMakers.BWIN.getName(), SportTypes.TENNIS.getType());
     }
 
@@ -36,6 +35,13 @@ public class BWinTennisParser extends BaseParser {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(URL);
+
+        Thread.sleep(1000);
+
+        nextPageXpath = "//a[contains(@href, '?page=') and contains(@rel,'next') and contains(@class, 'active-page-arrow')]";
+        countPages = driver.findElements(
+                By.xpath("//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]")
+        ).size() + 1;
 
         Thread.sleep(1000);
     }
