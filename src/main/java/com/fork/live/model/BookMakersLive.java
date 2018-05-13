@@ -2,8 +2,9 @@ package com.fork.live.model;
 
 public enum BookMakersLive {
 
-    WILL("WilliamHillLive"),
-    BWIN("BWinLive");
+    WILLIAMHILL("WilliamHill"),
+//    BWIN("BWinLive"),
+    BET365("Bet365");
 
     private String name;
 

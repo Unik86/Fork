@@ -3,7 +3,11 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../fork/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../fork/js/script.js"></script>
     <title>Fork</title>
   </head>
   <body>
@@ -22,7 +26,7 @@
 
       <div class="pull-left">
         <button type="button" class="btn btn-success"
-                onclick="location.href='/fork/startLive'">Start</button>
+                onclick="runLive()">Start</button>
       </div>
 
       <div class="pull-left" style="margin-left: 5px">
@@ -55,8 +59,8 @@
         <input type="text" class="form-control" name="WilliamHill">
       </div>
       <div class="input-group">
-        <span class="input-group-addon">BWin</span>
-        <input type="text" class="form-control" name="BWin">
+        <span class="input-group-addon">Bet365&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input type="text" class="form-control" name="Bet365">
       </div>
     </div>
     <br>

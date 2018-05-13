@@ -5,9 +5,7 @@ import com.fork.live.service.LiveService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,11 +36,14 @@ public class LiveController {
         return "live/live";
     }
 
-    @GetMapping(value = "/startLive")
-    public String startLive(Model model) {
+    @PostMapping(value = "/startLive")
+    public String startLive(
+            @RequestBody List<String> urls,
+            Model model
+    ) {
         log.info("GET /startLive [BEGIN]");
 
-        liveService.startLive();
+        liveService.startLive(urls);
         List<Live> lives =  liveService.getLives();
         model.addAttribute("lives", lives);
 

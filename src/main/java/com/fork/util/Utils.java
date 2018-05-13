@@ -66,6 +66,24 @@ public class Utils {
     }
 
     public static boolean isNotEmpty(List list){
-        return nonNull(list) && !list.isEmpty();
+        return !isEmpty(list);
+    }
+
+    public static boolean isEmpty(String str){
+        return isNull(str) || str.isEmpty();
+    }
+
+    public static boolean isNotEmpty(String str){
+        return !isEmpty(str);
+    }
+
+    public static String getUrlByDomain(List<String> urls, String domain) {
+        for(String url : urls) {
+            if(url.contains(domain)) {
+                return url;
+            }
+        }
+
+        return null;
     }
 }

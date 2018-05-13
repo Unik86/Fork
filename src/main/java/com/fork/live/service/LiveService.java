@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.fork.util.Utils.getUrlByDomain;
+import static com.fork.util.Utils.isNotEmpty;
 import static java.util.Objects.nonNull;
 
 @Log4j
@@ -36,14 +38,18 @@ public class LiveService {
     private LiveRunner liveRunner;
     private List<LiveParser> parsers;
 
-    public void startLive() {
+    public void startLive(List<String> urls) {
         parsers = new ArrayList<>();
 
         for(BookMakersLive bookMaker : BookMakersLive.values()){
-            parsers.add(startSite(
-                    bookMaker.getName() + sportType,
-                    null
-            ));
+            String url = getUrlByDomain(urls, bookMaker.getName().toLowerCase());
+
+            if(isNotEmpty(url)) {
+                parsers.add(startSite(
+                        bookMaker.getName() + "Live" + sportType,
+                        url
+                ));
+            }
         }
 
         liveRunner = new LiveRunner(liveRepository, findForkService, parsers);
