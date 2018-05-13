@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,7 +22,19 @@ public class LiveController {
     }
 
     @RequestMapping(value = "/live")
-    public String main() {
+    public String main(Model model) {
+        addSportType(model);
+        return "live/live";
+    }
+
+    @GetMapping(value = "/liveSportType")
+    public String sportType(@RequestParam("type") String type, Model model) {
+        log.info("GET /liveSportType " + type + "[BEGIN]");
+
+        liveService.setSportType(type);
+        addSportType(model);
+
+        log.info("GET /liveSportType " + type + "[END]");
         return "live/live";
     }
 
@@ -66,5 +79,9 @@ public class LiveController {
 
         log.info("GET /clearLives [END]");
         return "live/live";
+    }
+
+    private void addSportType(Model model){
+        model.addAttribute("liveSportType", liveService.getSportType());
     }
 }

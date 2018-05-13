@@ -2,8 +2,8 @@ package com.fork.live.model;
 
 public enum BookMakersLive {
 
-    WILL("WillFootballLive"),
-    BWIN("BWinFootballLive");
+    WILL("WilliamHillLive"),
+    BWIN("BWinLive");
 
     private String name;
 

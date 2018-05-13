@@ -53,6 +53,7 @@ public class Bet365TennisParser extends BaseParser {
     public void parsMainRates(String parseType){
         log.info(getLog("Pars main rates"));
 
+        bookMaker.getMatches().clear();
         parsOnePageMainRates(parseType);
 
         log.info(getLog("matches size = " + bookMaker.getMatches().size()));

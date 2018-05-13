@@ -1,6 +1,6 @@
-package com.fork.live.parser.football;
+package com.fork.live.parser.tennis;
 
-import com.fork.base.model.*;
+import com.fork.base.model.Bet;
 import com.fork.base.model.enums.BookMakers;
 import com.fork.live.model.LiveMatch;
 import com.fork.live.parser.LiveParser;
@@ -17,8 +17,8 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("WilliamHillLiveFootball")
-public class WilliamHillFootballLiveParser implements LiveParser {
+@Component("WilliamHillLiveTennis")
+public class WilliamHillTennisLiveParser implements LiveParser {
 
     private WebDriver driver;
 

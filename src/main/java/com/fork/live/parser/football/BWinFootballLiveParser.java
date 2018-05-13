@@ -18,19 +18,17 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("BWinFootballLive")
+@Component("BWinLiveFootball")
 public class BWinFootballLiveParser implements LiveParser {
-
-    private final static String URL = "https://livebetting.bwin.com/ru/live#/7162987";
 
     private WebDriver driver;
 
-    public void goToSite() throws Exception{
+    public void goToSite(String url) throws Exception{
         log.info("Enter the site " + getBookMakerName());
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get(URL);
+        driver.get(url);
 
         Thread.sleep(1000);
     }

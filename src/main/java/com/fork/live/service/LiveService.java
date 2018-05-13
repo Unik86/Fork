@@ -1,10 +1,13 @@
 package com.fork.live.service;
 
+import com.fork.base.model.enums.SportTypes;
 import com.fork.live.model.BookMakersLive;
 import com.fork.live.parser.LiveParser;
 import com.fork.base.service.FindForkService;
 import com.fork.live.model.Live;
 import com.fork.live.repository.LiveRepository;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -19,6 +22,10 @@ import static java.util.Objects.nonNull;
 @Service
 public class LiveService {
 
+    @Getter
+    @Setter
+    private String sportType = SportTypes.TENNIS.getType();
+
     @Autowired
     private ApplicationContext appContext;
     @Autowired
@@ -30,10 +37,13 @@ public class LiveService {
     private List<LiveParser> parsers;
 
     public void startLive() {
-        parsers = new ArrayList();
+        parsers = new ArrayList<>();
 
         for(BookMakersLive bookMaker : BookMakersLive.values()){
-            parsers.add(startSite(bookMaker.getName()));
+            parsers.add(startSite(
+                    bookMaker.getName() + sportType,
+                    null
+            ));
         }
 
         liveRunner = new LiveRunner(liveRepository, findForkService, parsers);
@@ -60,11 +70,11 @@ public class LiveService {
         liveRepository.deleteAll();
     }
 
-    private LiveParser startSite(String bookMakerName) {
+    private LiveParser startSite(String bookMakerName, String url) {
         LiveParser parser = getParser(bookMakerName);
 
         try {
-            parser.goToSite();
+            parser.goToSite(url);
         } catch (Exception e) {
             log.error("Error parser >>>>>>>>>> " + bookMakerName);
         }
@@ -74,5 +84,13 @@ public class LiveService {
 
     private LiveParser getParser(String type){
         return appContext.getBean(type, LiveParser.class);
+    }
+
+    public String getSportType() {
+        return sportType;
+    }
+
+    public void setSportType(String sportType) {
+        this.sportType = sportType;
     }
 }

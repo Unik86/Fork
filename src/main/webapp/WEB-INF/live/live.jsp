@@ -10,7 +10,13 @@
 
     <div class="container">
       <div class="starter-template">
-        <h1>Fork Application (Live)</h1>
+        <a href="/fork" style="color: black;text-decoration: none;">
+          <h1>Fork Application ${liveSportType}</h1>
+        </a>
+        <button type="button" class="btn btn-default"
+                onclick="location.href='/fork/liveSportType?type=Football'">Football</button>
+        <button type="button" class="btn btn-default"
+                onclick="location.href='/fork/liveSportType?type=Tennis'">Tennis</button>
       </div>
       <br>
 
@@ -41,7 +47,19 @@
       <br><br>
 
     </div>
-    <br><br>
+    <br>
+
+    <div class="container">
+      <div class="input-group">
+        <span class="input-group-addon">WilliamHill</span>
+        <input type="text" class="form-control" name="WilliamHill">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">BWin</span>
+        <input type="text" class="form-control" name="BWin">
+      </div>
+    </div>
+    <br>
 
     <div class="well">Count: ${lives.size()}</div>
 

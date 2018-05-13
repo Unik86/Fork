@@ -39,14 +39,15 @@ public class ForkService {
     @Autowired
     private TwoOfThreeRepository twoOfTnreeRepository;
 
-    public List<ParseResult> parseAll(String parseType) {
-        return Stream.of(BookMakers.values())
-            .map(bm -> parseBookMaker(bm.getName(), parseType))
-            .collect(Collectors.toList());
-    }
-
     public void clearAll() {
         bookMakerRepository.deleteAll();
+        forkRepository.deleteAll();
+    }
+
+    public List<ParseResult> parseAll(String parseType) {
+        return Stream.of(BookMakers.values())
+                .map(bm -> parseBookMaker(bm.getName(), parseType))
+                .collect(Collectors.toList());
     }
 
     public ParseResult parseBookMaker(String bookMakerName, String parseType) {
