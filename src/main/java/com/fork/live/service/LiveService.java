@@ -1,11 +1,11 @@
 package com.fork.live.service;
 
+import com.fork.base.model.Fork;
 import com.fork.base.model.enums.SportTypes;
+import com.fork.base.repository.ForkRepository;
 import com.fork.live.model.BookMakersLive;
 import com.fork.live.parser.LiveParser;
 import com.fork.base.service.FindForkService;
-import com.fork.live.model.Live;
-import com.fork.live.repository.LiveRepository;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -31,7 +31,7 @@ public class LiveService {
     @Autowired
     private ApplicationContext appContext;
     @Autowired
-    private LiveRepository liveRepository;
+    private ForkRepository forkRepository;
     @Autowired
     private FindForkService findForkService;
 
@@ -52,7 +52,7 @@ public class LiveService {
             }
         }
 
-        liveRunner = new LiveRunner(liveRepository, findForkService, parsers);
+        liveRunner = new LiveRunner(forkRepository, findForkService, parsers);
 
         Thread thread = new Thread(liveRunner);
         thread.start();
@@ -68,12 +68,12 @@ public class LiveService {
             }
     }
 
-    public List<Live> getLives() {
-        return liveRepository.findAllByOrderByTimeDesc();
+    public List<Fork> getForks() {
+        return forkRepository.findAllByOrderByForkBet();
     }
 
-    public void clearLives() {
-        liveRepository.deleteAll();
+    public void clearForks() {
+        forkRepository.deleteAll();
     }
 
     private LiveParser startSite(String bookMakerName, String url) {

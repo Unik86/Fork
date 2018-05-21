@@ -1,45 +1,46 @@
 package com.fork.live.service;
 
+import com.fork.base.repository.ForkRepository;
 import com.fork.live.parser.LiveParser;
 import com.fork.base.service.FindForkService;
 import com.fork.base.model.ForkResult;
 import com.fork.live.model.LiveMatch;
-import com.fork.live.model.Live;
-import com.fork.live.repository.LiveRepository;
 import lombok.extern.log4j.Log4j;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import static com.fork.util.Utils.randomInt;
 
 @Log4j
 public class LiveRunner implements Runnable {
 
-    private LiveRepository liveRepository;
+    private ForkRepository forkRepository;
     private FindForkService findForkService;
     private List<LiveParser> parsers;
 
     private volatile boolean isRunning = true;
 
-    public LiveRunner(LiveRepository liveRepository, FindForkService findForkService, List<LiveParser> parsers) {
-        this.liveRepository = liveRepository;
+    public LiveRunner(
+            ForkRepository forkRepository,
+            FindForkService findForkService,
+            List<LiveParser> parsers
+    ) {
+        this.forkRepository = forkRepository;
         this.findForkService = findForkService;
         this.parsers = parsers;
     }
 
     @Override
     public void run() {
-        liveRepository.deleteAll();
+        forkRepository.deleteAll();
 
         while (isRunning) {
             try {
                 Thread.sleep(randomInt(20_000, 40_000));
                 log.info("New circle");
 
-                List<LiveMatch> matches = new ArrayList();
+                List<LiveMatch> matches = new ArrayList<>();
 
                 for (LiveParser parser : parsers) {
                     matches.add(parser.parsMatch());
@@ -47,11 +48,7 @@ public class LiveRunner implements Runnable {
 
                 ForkResult forkResult = findForkService.findFork(matches);
 
-                Live live = new Live();
-                live.setTime(new Date());
-
-                live.setForks(forkResult.getForks());
-                liveRepository.save(live);
+                forkRepository.save(forkResult.getForks());
             } catch (Exception e){
                 log.error("While failure");
             }

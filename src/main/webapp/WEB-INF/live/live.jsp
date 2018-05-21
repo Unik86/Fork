@@ -73,7 +73,7 @@
     </div>
     <br>
 
-    <div class="well">Count: ${lives.size()}</div>
+    <div class="well">Count: ${forks.size()}</div>
 
     <div>
       <table class="table table-striped">
@@ -91,22 +91,10 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="live" items="${lives}">
-          <tr class="success">
-            <td>${live.timeStr}</td>
-
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <c:forEach var="fork" items="${live.forks}">
+          <c:forEach var="fork" items="${forks}">
             <c:forEach var="bet" items="${fork.bets}">
               <tr>
                 <td></td>
-
                 <td>${bet.bookMaker}</td>
 
                 <td>${bet.left}</td>
@@ -117,9 +105,9 @@
               </tr>
             </c:forEach>
             <tr class="info">
-              <td></td>
-
+              <td>${fork.parsDateStr}</td>
               <td>${fork.forkBet.name}</td>
+
               <td>${fork.forkBet.left}</td>
               <td>${fork.forkBet.center}</td>
               <td>${fork.forkBet.right}</td>
@@ -127,7 +115,6 @@
               <td>${fork.rate}</td>
             </tr>
           </c:forEach>
-        </c:forEach>
         </tbody>
       </table>
     </div>

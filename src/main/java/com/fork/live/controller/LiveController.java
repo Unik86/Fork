@@ -1,6 +1,6 @@
 package com.fork.live.controller;
 
-import com.fork.live.model.Live;
+import com.fork.base.model.Fork;
 import com.fork.live.service.LiveService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
@@ -44,8 +44,8 @@ public class LiveController {
         log.info("GET /startLive [BEGIN]");
 
         liveService.startLive(urls);
-        List<Live> lives =  liveService.getLives();
-        model.addAttribute("lives", lives);
+        List<Fork> forks =  liveService.getForks();
+        model.addAttribute("forks", forks);
 
         log.info("GET /startLive [END]");
         return "live/live";
@@ -65,8 +65,8 @@ public class LiveController {
     public String getLives(Model model) {
         log.info("GET /getLives [BEGIN]");
 
-        List<Live> lives =  liveService.getLives();
-        model.addAttribute("lives", lives);
+        List<Fork> forks =  liveService.getForks();
+        model.addAttribute("forks", forks);
 
         log.info("GET /getLives [END]");
         return "live/live";
@@ -76,7 +76,7 @@ public class LiveController {
     public String clearLives() {
         log.info("GET /clearLives [BEGIN]");
 
-        liveService.clearLives();
+        liveService.clearForks();
 
         log.info("GET /clearLives [END]");
         return "live/live";
