@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,8 +16,8 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("WilliamHillTennisLive")
-public class WilliamHillTennisLiveParser implements LiveParser {
+@Component("Bet365TennisLive")
+public class Bet365TennisLiveParser implements LiveParser {
 
     private WebDriver driver;
 
@@ -30,14 +29,11 @@ public class WilliamHillTennisLiveParser implements LiveParser {
         driver.manage().window().maximize();
         driver.get(url);
 
-        Select timeZone = new Select(driver.findElement(By.name("time_zone")));
-        timeZone.selectByVisibleText("Europe/Kiev");
-        driver.findElement(By.id("yesBtn")).click();
-
+        driver.findElement(By.xpath("//a[contains(@class, 'lpdgl') and contains(text(),'English')]")).click();
         Thread.sleep(1000);
-
-        Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
-        rateFormat.selectByVisibleText("Decimal");
+        driver.findElement(By.xpath("//a[contains(@class, 'hm-DropDownSelections_DropLink') and contains(text(),'Odds')]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//a[contains(@class, 'hm-DropDownSelections_Item') and contains(text(),'Decimal')]")).click();
 
         Thread.sleep(1000);
     }
@@ -131,7 +127,7 @@ public class WilliamHillTennisLiveParser implements LiveParser {
     }
 
     private String getBookMakerName(){
-        return BookMakersLive.WILLIAMHILL.getName();
+        return BookMakersLive.BET365.getName();
     }
 
 }

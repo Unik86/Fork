@@ -11,7 +11,7 @@ $(document).on("click",".parse-btn", function () {
 });
 
 function runLive() {
-    var inputValues = $('.form-control').map(function() {
+    var inputValues = $("input[name='input-url']").map(function() {
         return $(this).val();
     }).toArray();
 

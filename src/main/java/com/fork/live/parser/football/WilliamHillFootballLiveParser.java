@@ -17,7 +17,7 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("WilliamHillLiveFootball")
+@Component("WilliamHillFootballLive")
 public class WilliamHillFootballLiveParser implements LiveParser {
 
     private WebDriver driver;

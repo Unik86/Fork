@@ -70,11 +70,11 @@
               10Bet
             </a>
           </li>
-          <li role="presentation">
+          <!--li role="presentation">
             <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Pinnacle">
               Pinnacle
             </a>
-          </li>
+          </li-->
           <li role="presentation">
             <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Unibet">
               Unibet
@@ -129,9 +129,9 @@
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet10">10Bet</a>
           </li>
-          <li role="presentation">
+          <!--li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Pinnacle">Pinnacle</a>
-          </li>
+          </li-->
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Unibet">Unibet</a>
           </li>

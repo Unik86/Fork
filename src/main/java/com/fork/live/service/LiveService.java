@@ -46,7 +46,7 @@ public class LiveService {
 
             if(isNotEmpty(url)) {
                 parsers.add(startSite(
-                        bookMaker.getName() + "Live" + sportType,
+                        bookMaker.getName() + sportType + "Live",
                         url
                 ));
             }

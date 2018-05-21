@@ -23,7 +23,7 @@ public class PinnacleFootballParser extends BaseParser {
     private final static String MATCHES = "//table[contains(@class, 'odds-data') and not(contains(@class, 'ng-scope'))]/tbody";
 
     public PinnacleFootballParser() {
-        bookMaker = new BookMaker(BookMakers.PINNACLE.getName(), SportTypes.FOOTBALL.getType());
+//        bookMaker = new BookMaker(BookMakers.PINNACLE.getName(), SportTypes.FOOTBALL.getType());
     }
 
     @Override
@@ -75,7 +75,7 @@ public class PinnacleFootballParser extends BaseParser {
 
 
                 Match match = new Match();
-                match.setBookMaker(BookMakers.PINNACLE.getName());
+//                match.setBookMaker(BookMakers.PINNACLE.getName());
                 match.setSportType(SportTypes.FOOTBALL.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);

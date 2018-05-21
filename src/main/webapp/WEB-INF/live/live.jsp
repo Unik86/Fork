@@ -55,12 +55,20 @@
 
     <div class="container">
       <div class="input-group">
-        <span class="input-group-addon">WilliamHill</span>
-        <input type="text" class="form-control" name="WilliamHill">
+        <span class="input-group-addon">Url</span>
+        <input type="text" class="form-control" name="input-url">
       </div>
       <div class="input-group">
-        <span class="input-group-addon">Bet365&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <input type="text" class="form-control" name="Bet365">
+        <span class="input-group-addon">Url</span>
+        <input type="text" class="form-control" name="input-url">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Url</span>
+        <input type="text" class="form-control" name="input-url">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Url</span>
+        <input type="text" class="form-control" name="input-url">
       </div>
     </div>
     <br>

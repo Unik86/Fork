@@ -18,7 +18,7 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("BWinLiveFootball")
+@Component("BWinFootballLive")
 public class BWinFootballLiveParser implements LiveParser {
 
     private WebDriver driver;

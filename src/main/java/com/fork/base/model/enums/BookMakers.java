@@ -7,7 +7,7 @@ public enum BookMakers {
 //    GAMEBOOKERS("GameBookers"),
     BET365("Bet365"),
     BET10("Bet10"),
-    PINNACLE("Pinnacle"),
+//    PINNACLE("Pinnacle"),
 //    PARIMATCH("Parimatch"),
     UNIBET("Unibet"),
 //    SPORT888("Sport888"),
