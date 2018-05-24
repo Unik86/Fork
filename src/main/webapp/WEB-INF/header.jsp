@@ -95,6 +95,11 @@
               TitanBet
             </a>
           </li>
+          <li role="presentation">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=FanSport">
+              FanSport
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -143,6 +148,9 @@
           </li-->
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=TitanBet">TitanBet</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=FanSport">FanSport</a>
           </li>
         </ul>
       </div>

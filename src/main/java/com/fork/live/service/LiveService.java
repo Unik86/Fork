@@ -77,7 +77,7 @@ public class LiveService {
     }
 
     private LiveParser startSite(String bookMakerName, String url) {
-        LiveParser parser = getParser(bookMakerName);
+        LiveParser parser = getParser(bookMakerName.replaceAll("-", ""));
 
         try {
             parser.goToSite(url);

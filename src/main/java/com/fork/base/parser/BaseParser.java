@@ -4,9 +4,6 @@ import com.fork.base.model.BookMaker;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 import static com.fork.util.Utils.randomInt;
 import static java.util.Objects.nonNull;
@@ -16,6 +13,7 @@ public abstract class BaseParser implements Parser {
 
     protected WebDriver driver;
     protected BookMaker bookMaker;
+    protected String parseType;
 
     protected String nextPageXpath;
     protected int countPages = 1;
@@ -34,7 +32,7 @@ public abstract class BaseParser implements Parser {
     }
 
     @Override
-    public void parsMainRates(String parseType){
+    public void parsMainRates(){
         log.info(getLog("Pars main rates"));
         bookMaker.getMatches().clear();
 
@@ -51,7 +49,7 @@ public abstract class BaseParser implements Parser {
                 Thread.sleep(randomInt(3000, 4000));
                 log.info(getLog("page = " + i));
 
-                parsOnePageMainRates(parseType);
+                parsOnePageMainRates();
             } catch (Exception e){
                 log.error("Page error : " + e);
             }
@@ -64,5 +62,10 @@ public abstract class BaseParser implements Parser {
         return "{" + bookMaker.getName() + "} - " + message;
     }
 
-    protected abstract void parsOnePageMainRates(String parseType);
+    protected abstract void parsOnePageMainRates();
+
+    @Override
+    public void setParseType(String parseType) {
+        this.parseType = parseType;
+    }
 }

@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,8 +16,8 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @Log4j
-@Component("WilliamHillTennisLive")
-public class WilliamHillTennisLiveParser implements LiveParser {
+@Component("FanSportTennisLive")
+public class FanSportTennisLiveParser implements LiveParser {
 
     private WebDriver driver;
 
@@ -30,14 +29,10 @@ public class WilliamHillTennisLiveParser implements LiveParser {
         driver.manage().window().maximize();
         driver.get(url);
 
-        Select timeZone = new Select(driver.findElement(By.name("time_zone")));
-        timeZone.selectByVisibleText("Europe/Kiev");
-        driver.findElement(By.id("yesBtn")).click();
-
         Thread.sleep(1000);
 
-        Select rateFormat = new Select(driver.findElement(By.name("oddsType")));
-        rateFormat.selectByVisibleText("Decimal");
+        driver.findElement(By.className("labelFdropAct")).click();
+        driver.findElement(By.xpath("//div[@data-type='500']")).click();
 
         Thread.sleep(1000);
     }
@@ -48,7 +43,7 @@ public class WilliamHillTennisLiveParser implements LiveParser {
 
         LiveMatch match = new LiveMatch(getBookMakerName());
 
-        match.setWinner(parsBet("Match Betting Live"));
+        match.setWinner(parsBet("1x2"));
 
 //        match.setSet1Game1(parsBet("1nd Set - Game 1"));
 //        match.setSet1Game2(parsBet("1nd Set - Game 2"));
@@ -94,33 +89,19 @@ public class WilliamHillTennisLiveParser implements LiveParser {
 
     private Bet parsBet(String name) {
         try {
-            List<WebElement> elements = driver.findElements(By.xpath("//span[text()='" + name + "']/ancestor::table/tbody/tr/td"));
+            List<WebElement> baseElements = driver.findElements(By.xpath("//div[contains(text(), '" + name + "')]/ancestor::div"));
+            List<WebElement> bets = baseElements.get(0).findElements(By.className("koeff"));
+
             Bet bet = new Bet();
             bet.setName(name);
             bet.setBookMaker(getBookMakerName());
-
-            switch (elements.size()) {
-                case 2:
-                    bet.setLeft(Double.parseDouble(getBetRate(elements.get(0))));
-                    bet.setRight(Double.parseDouble(getBetRate(elements.get(1))));
-                    break;
-                case 3:
-                    bet.setLeft(Double.parseDouble(getBetRate(elements.get(0))));
-                    bet.setCenter(Double.parseDouble(getBetRate(elements.get(1))));
-                    bet.setRight(Double.parseDouble(getBetRate(elements.get(2))));
-                    break;
-                default:
-                    bet = null;
-            }
+            bet.setLeft(Double.parseDouble(bets.get(0).getText()));
+            bet.setRight(Double.parseDouble(bets.get(1).getText()));
             return bet;
         } catch (Exception e) {
             log.error("Pars Error");
             return null;
         }
-    }
-
-    private String getBetRate(WebElement element){
-        return element.findElement(By.className("eventprice")).getText();
     }
 
     @Override
@@ -131,6 +112,6 @@ public class WilliamHillTennisLiveParser implements LiveParser {
     }
 
     private String getBookMakerName(){
-        return BookMakersLive.WILLIAMHILL.getName();
+        return BookMakersLive.FANSPORT.getName();
     }
 }

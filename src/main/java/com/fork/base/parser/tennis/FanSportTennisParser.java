@@ -4,6 +4,7 @@ import com.fork.base.model.Bet;
 import com.fork.base.model.BookMaker;
 import com.fork.base.model.Match;
 import com.fork.base.model.enums.BookMakers;
+import com.fork.base.model.enums.ParseType;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
 import lombok.extern.log4j.Log4j;
@@ -18,14 +19,15 @@ import java.util.List;
 import static java.util.Objects.isNull;
 
 @Log4j
-@Component("BWinTennis")
-public class BWinTennisParser extends BaseParser {
+@Component("FanSportTennis")
+public class FanSportTennisParser extends BaseParser {
 
-    private final static String URL = "https://sports.bwin.com/en/sports#sportId=5";
-    private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
+    private final static String URL = "https://fan-sport.com.ua/en/line/Tennis/";
+    private final static String URL_LIVE = "https://fan-sport.com.ua/en/live/Tennis/";
+    private final static String MATCHES = "//div[contains(@class, 'c-events__item_col')]";
 
-    public BWinTennisParser() {
-        bookMaker = new BookMaker(BookMakers.BWIN.getName(), SportTypes.TENNIS.getType());
+    public FanSportTennisParser() {
+        bookMaker = new BookMaker(BookMakers.FANSPORT.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -34,18 +36,22 @@ public class BWinTennisParser extends BaseParser {
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get(URL);
+
+        if(ParseType.WITHOUT_LIVE.isEquals(parseType)) {
+            driver.get(URL);
+        } else if(ParseType.ONLY_LIVE.isEquals(parseType)) {
+            driver.get(URL_LIVE);
+        }
 
         Thread.sleep(1000);
 
-        nextPageXpath = "//a[contains(@href, '?page=') and contains(@rel,'next') and contains(@class, 'active-page-arrow')]";
-        countPages = driver.findElements(
-                By.xpath("//a[contains(@href, '?page=') and not(contains(@class,'active-page-arrow'))]")
-        ).size() + 1;
+        driver.findElement(By.className("labelFdropAct")).click();
+        driver.findElement(By.xpath("//div[@data-type='500']")).click();
 
         Thread.sleep(1000);
     }
 
+    @Override
     protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
         log.info(getLog("matches on page = " + cntIds));
@@ -54,33 +60,28 @@ public class BWinTennisParser extends BaseParser {
             try {
                 WebElement element = driver.findElements(By.xpath(MATCHES)).get(i);
 
-                String time = element.findElement(By.tagName("div")).getText();
+                WebElement time = element.findElement(By.className("c-events__time"));
+                List<WebElement> players = element.findElements(By.className("c-events__team"));
+                List<WebElement> bets = element.findElements(By.className("c-bets__bet_sm"));
 
-                String url = null;
-                if(element.findElements(By.tagName("a")).size() != 0)
-                    url = element.findElement(By.tagName("a")).getAttribute("href");
+                WebElement urlElement = element.findElement(By.className("c-events__name"));
+                String url = urlElement.getAttribute("href");
 
                 if(isNull(url) || url.isEmpty())
                     url = driver.getCurrentUrl();
 
-                List<WebElement> columns = element.findElements(By.tagName("button"));
-
-                List<WebElement>  columnLeft = columns.get(0).findElements(By.tagName("div"));
-                List<WebElement>  columnRight = columns.get(1).findElements(By.tagName("div"));
-
                 Bet bet = new Bet();
-                bet.setLeft(Double.parseDouble(columnLeft.get(1).getText()));
-                bet.setRight(Double.parseDouble(columnRight.get(1).getText()));
-
+                bet.setLeft(Double.parseDouble(bets.get(0).getText()));
+                bet.setRight(Double.parseDouble(bets.get(2).getText()));
 
                 Match match = new Match();
-                match.setBookMaker(BookMakers.BWIN.getName());
+                match.setBookMaker(BookMakers.FANSPORT.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);
-                match.setPlayerLeft(columnLeft.get(0).getText());
-                match.setPlayerRight(columnRight.get(0).getText());
-                match.setTime(time);
+                match.setPlayerLeft(players.get(0).getText());
+                match.setPlayerRight(players.get(1).getText());
+                match.setTime(time.getText());
 
                 match.setWinner(bet);
                 bookMaker.getMatches().add(match);
@@ -90,5 +91,4 @@ public class BWinTennisParser extends BaseParser {
             }
         }
     }
-
 }

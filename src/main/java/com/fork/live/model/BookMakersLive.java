@@ -4,7 +4,8 @@ public enum BookMakersLive {
 
     WILLIAMHILL("WilliamHill"),
 //    BWIN("BWinLive"),
-    BET365("Bet365");
+    BET365("Bet365"),
+    FANSPORT("Fan-Sport");
 
     private String name;
 

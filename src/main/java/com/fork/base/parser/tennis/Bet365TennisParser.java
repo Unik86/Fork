@@ -50,16 +50,16 @@ public class Bet365TennisParser extends BaseParser {
     }
 
     @Override
-    public void parsMainRates(String parseType){
+    public void parsMainRates(){
         log.info(getLog("Pars main rates"));
 
         bookMaker.getMatches().clear();
-        parsOnePageMainRates(parseType);
+        parsOnePageMainRates();
 
         log.info(getLog("matches size = " + bookMaker.getMatches().size()));
     }
 
-    protected void parsOnePageMainRates(String parseType){
+    protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
         log.info(getLog("matches on page = " + cntIds));
 

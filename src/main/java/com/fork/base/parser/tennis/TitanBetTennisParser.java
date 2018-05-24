@@ -46,7 +46,7 @@ public class TitanBetTennisParser extends BaseParser {
         Thread.sleep(1000);
     }
 
-    protected void parsOnePageMainRates(String parseType){
+    protected void parsOnePageMainRates(){
         int cntIds = COUNT_ROWS_ON_PAGES;
         if(countPages == pageNumber) {
             cntIds = countPages * COUNT_ROWS_ON_PAGES - driver.findElements(By.xpath(MATCHES)).size();

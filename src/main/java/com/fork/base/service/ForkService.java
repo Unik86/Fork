@@ -53,6 +53,7 @@ public class ForkService {
     public ParseResult parseBookMaker(String bookMakerName, String parseType) {
         if(ParseType.ONLY_LIVE.isEquals(parseType)
                 && !BookMakers.WILLIAMHILL.isEquals(bookMakerName)
+                && !BookMakers.FANSPORT.isEquals(bookMakerName)
                 && !BookMakers.BET365.isEquals(bookMakerName)) {
             return null;
         }
@@ -61,8 +62,9 @@ public class ForkService {
 
         try {
             Parser parser = getParser(bookMakerName);
+            parser.setParseType(parseType);
             parser.goToSite();
-            parser.parsMainRates(parseType);
+            parser.parsMainRates();
             parser.closeBrowser();
 
             BookMaker bookMaker = parser.getBookMaker();

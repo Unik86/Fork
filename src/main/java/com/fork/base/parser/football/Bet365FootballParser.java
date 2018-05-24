@@ -50,7 +50,7 @@ public class Bet365FootballParser extends BaseParser {
     }
 
     @Override
-    public void parsMainRates(String parseType){
+    public void parsMainRates(){
         log.info(getLog("Pars main rates"));
         bookMaker.getMatches().clear();
         int cntPages = 0;
@@ -67,7 +67,7 @@ public class Bet365FootballParser extends BaseParser {
                 Thread.sleep(2000);
                 log.info(getLog("page = " + (i+1)));
 
-                parsOnePageMainRates(parseType);
+                parsOnePageMainRates();
 
                 driver.findElement(By.xpath(SOCCER_LINK)).click();
                 Thread.sleep(1000);
@@ -79,7 +79,7 @@ public class Bet365FootballParser extends BaseParser {
         log.info(getLog("matches size = " + bookMaker.getMatches().size()));
     }
 
-    protected void parsOnePageMainRates(String parseType){
+    protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
         log.info(getLog("matches on page = " + cntIds));
 

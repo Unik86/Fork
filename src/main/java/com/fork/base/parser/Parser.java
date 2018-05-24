@@ -4,8 +4,9 @@ import com.fork.base.model.BookMaker;
 
 public interface Parser {
 
-    void parsMainRates(String parseType);
+    void parsMainRates();
     BookMaker getBookMaker();
+    void setParseType(String parseType);
 
     void goToSite() throws Exception;
     void closeBrowser();

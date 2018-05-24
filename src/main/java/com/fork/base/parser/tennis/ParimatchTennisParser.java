@@ -45,7 +45,7 @@ public class ParimatchTennisParser extends BaseParser {
     }
 
     @Override
-    protected void parsOnePageMainRates(String parseType){
+    protected void parsOnePageMainRates(){
         int cntIds = driver.findElements(By.xpath(MATCHES)).size();
         log.info(getLog("matches on page = " + cntIds));
 
