@@ -20,6 +20,7 @@ import static java.util.Objects.nonNull;
 @Component("WilliamHillTennisLive")
 public class WilliamHillTennisLiveParser implements LiveParser {
 
+    public static final String MATCH_BETTING_LIVE = "Match Betting Live";
     private WebDriver driver;
 
     @Override

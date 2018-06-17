@@ -11,8 +11,8 @@ public enum BookMakers {
 //    PARIMATCH("Parimatch"),
     UNIBET("Unibet"),
 //    SPORT888("Sport888"),
-    TITANBET("TitanBet"),
-    FANSPORT("FanSport");
+    TITANBET("TitanBet");
+//    FANSPORT("FanSport");
 
     private String name;
 

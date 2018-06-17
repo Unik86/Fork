@@ -39,11 +39,15 @@ public class UnibetTennisParser extends BaseParser {
         driver.get(URL);
         Thread.sleep(2000);
 
+        driver.findElement(By.id("CybotCookiebotDialogBodyButtonAccept")).click();
+
+        Thread.sleep(1000);
+
         List<WebElement> tabs = driver.findElements(By.className("KambiBC-collapsible-header"));
         for(WebElement element : tabs){
             if(element.findElements(By.className("KambiBC-mod-event-group-header__event-count")).size() > 0){
                 element.click();
-                Thread.sleep(randomInt(500, 2000));
+                Thread.sleep(randomInt(1000, 2000));
             }
         }
 
