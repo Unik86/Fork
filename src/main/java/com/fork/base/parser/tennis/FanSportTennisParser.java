@@ -27,7 +27,7 @@ public class FanSportTennisParser extends BaseParser {
     private final static String MATCHES = "//div[contains(@class, 'c-events__item_col')]";
 
     public FanSportTennisParser() {
-//        bookMaker = new BookMaker(BookMakers.FANSPORT.getName(), SportTypes.TENNIS.getType());
+        bookMaker = new BookMaker(BookMakers.FANSPORT.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -75,7 +75,7 @@ public class FanSportTennisParser extends BaseParser {
                 bet.setRight(Double.parseDouble(bets.get(2).getText()));
 
                 Match match = new Match();
-//                match.setBookMaker(BookMakers.FANSPORT.getName());
+                match.setBookMaker(BookMakers.FANSPORT.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);

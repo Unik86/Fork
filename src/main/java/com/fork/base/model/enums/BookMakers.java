@@ -2,17 +2,20 @@ package com.fork.base.model.enums;
 
 public enum BookMakers {
 
+    // foreign
     WILLIAMHILL("WilliamHill"),
     BWIN("BWin"),
-//    GAMEBOOKERS("GameBookers"),
+    GAMEBOOKERS("GameBookers"),// Copy BWIN
     BET365("Bet365"),
     BET10("Bet10"),
-//    PINNACLE("Pinnacle"),
-//    PARIMATCH("Parimatch"),
+    PINNACLE("Pinnacle"),
     UNIBET("Unibet"),
-//    SPORT888("Sport888"),
-    TITANBET("TitanBet");
-//    FANSPORT("FanSport");
+    SPORT888("Sport888"),// Copy UNIBET
+    TITANBET("TitanBet"),
+
+    // UA
+    PARIMATCH("Parimatch"),
+    FANSPORT("FanSport");
 
     private String name;
 

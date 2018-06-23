@@ -27,7 +27,7 @@ public class Sport888TennisParser extends BaseParser {
     private final static String MATCHES = "//a[contains(@class, 'KambiBC-event-item__link')]";
 
     public Sport888TennisParser() {
-//        bookMaker = new BookMaker(BookMakers.SPORT888.getName(), SportTypes.TENNIS.getType());
+        bookMaker = new BookMaker(BookMakers.SPORT888.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Sport888TennisParser extends BaseParser {
 
 
                 Match match = new Match();
-//                match.setBookMaker(BookMakers.SPORT888.getName());
+                match.setBookMaker(BookMakers.SPORT888.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);

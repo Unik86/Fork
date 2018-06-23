@@ -47,7 +47,7 @@ public class UnibetTennisParser extends BaseParser {
         for(WebElement element : tabs){
             if(element.findElements(By.className("KambiBC-mod-event-group-header__event-count")).size() > 0){
                 element.click();
-                Thread.sleep(randomInt(1000, 2000));
+                Thread.sleep(randomInt(2000, 3000));
             }
         }
 

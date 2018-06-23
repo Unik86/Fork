@@ -8,7 +8,7 @@ import java.util.List;
 public interface ForkRepository extends MongoRepository<Fork, Long> {
 
     List<Fork> findBySportTypeOrderByRate(String sportType);
-    List<Fork> findAllByOrderByForkBet();
+    List<Fork> findAllByOrderByForkBetAscParsDateAsc();
 
     void deleteBySportType(String sportType);
 

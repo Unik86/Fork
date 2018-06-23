@@ -15,10 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.fork.base.model.enums.BookMakersGroups.ALEX_BOOKMAKERS;
+import static com.fork.base.model.enums.BookMakersGroups.MY_BOOKMAKERS;
 import static java.util.Objects.isNull;
 
 @Log4j
@@ -44,8 +47,19 @@ public class ForkService {
         forkRepository.deleteAll();
     }
 
-    public List<ParseResult> parseAll(String parseType) {
-        return Stream.of(BookMakers.values())
+    public List<ParseResult> parseAll(String group, String parseType) {
+        switch(group) {
+            case "alex":
+                return parseGroupOfBookMaker(ALEX_BOOKMAKERS, parseType);
+            case "my":
+                return parseGroupOfBookMaker(MY_BOOKMAKERS, parseType);
+            default:
+                return null;
+        }
+    }
+
+    private List<ParseResult> parseGroupOfBookMaker(Collection<BookMakers> bookMakers, String parseType) {
+        return bookMakers.stream()
                 .map(bm -> parseBookMaker(bm.getName(), parseType))
                 .collect(Collectors.toList());
     }
@@ -53,7 +67,7 @@ public class ForkService {
     public ParseResult parseBookMaker(String bookMakerName, String parseType) {
         if(ParseType.ONLY_LIVE.isEquals(parseType)
                 && !BookMakers.WILLIAMHILL.isEquals(bookMakerName)
-//                && !BookMakers.FANSPORT.isEquals(bookMakerName)
+                && !BookMakers.FANSPORT.isEquals(bookMakerName)
                 && !BookMakers.BET365.isEquals(bookMakerName)) {
             return null;
         }

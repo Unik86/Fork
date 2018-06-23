@@ -26,7 +26,7 @@ public class ParimatchTennisParser extends BaseParser {
     private final static String MATCHES = "//tbody[contains(@class, 'row1 processed')]";
 
     public ParimatchTennisParser() {
-//        bookMaker = new BookMaker(BookMakers.PARIMATCH.getName(), SportTypes.TENNIS.getType());
+        bookMaker = new BookMaker(BookMakers.PARIMATCH.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -59,16 +59,22 @@ public class ParimatchTennisParser extends BaseParser {
 
                 Bet bet = new Bet();
 
-                if(tds.size() > 5){
-                    bet.setLeft(Double.parseDouble(tds.get(8).getText()));
-                    bet.setRight(Double.parseDouble(tds.get(9).getText()));
-                } else {
-                    bet.setLeft(Double.parseDouble(tds.get(3).getText()));
-                    bet.setRight(Double.parseDouble(tds.get(4).getText()));
+                switch(tds.size()) {
+                    case 17:
+                        bet.setLeft(Double.parseDouble(tds.get(8).getText()));
+                        bet.setRight(Double.parseDouble(tds.get(9).getText()));
+                        break;
+                    case 12:
+                        bet.setLeft(Double.parseDouble(tds.get(5).getText()));
+                        bet.setRight(Double.parseDouble(tds.get(6).getText()));
+                        break;
+                    default:
+                        bet.setLeft(Double.parseDouble(tds.get(3).getText()));
+                        bet.setRight(Double.parseDouble(tds.get(4).getText()));
                 }
 
                 Match match = new Match();
-//                match.setBookMaker(BookMakers.PARIMATCH.getName());
+                match.setBookMaker(BookMakers.PARIMATCH.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(driver.getCurrentUrl());

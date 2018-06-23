@@ -69,7 +69,7 @@ public class LiveService {
     }
 
     public List<Fork> getForks() {
-        return forkRepository.findAllByOrderByForkBet();
+        return forkRepository.findAllByOrderByForkBetAscParsDateAsc();
     }
 
     public void clearForks() {

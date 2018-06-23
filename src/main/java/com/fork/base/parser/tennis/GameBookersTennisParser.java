@@ -25,7 +25,7 @@ public class GameBookersTennisParser extends BaseParser {
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";
 
     public GameBookersTennisParser() {
-//        bookMaker = new BookMaker(BookMakers.GAMEBOOKERS.getName(), SportTypes.TENNIS.getType());
+        bookMaker = new BookMaker(BookMakers.GAMEBOOKERS.getName(), SportTypes.TENNIS.getType());
     }
 
     @Override
@@ -74,7 +74,7 @@ public class GameBookersTennisParser extends BaseParser {
 
 
                 Match match = new Match();
-//                match.setBookMaker(BookMakers.GAMEBOOKERS.getName());
+                match.setBookMaker(BookMakers.GAMEBOOKERS.getName());
                 match.setSportType(SportTypes.TENNIS.getType());
                 match.setParsDate(LocalDateTime.now());
                 match.setUrl(url);

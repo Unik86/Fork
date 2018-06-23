@@ -40,8 +40,13 @@
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll?name=All">
-              All
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll?group=alex">
+              All Alex
+            </a>
+          </li>
+          <li role="presentation">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll?group=my">
+              All My
             </a>
           </li>
           <li role="presentation" class="divider"></li>
@@ -55,11 +60,11 @@
               BWin
             </a>
           </li>
-          <!--li role="presentation">
+          <li role="presentation">
             <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=GameBookers">
               GameBookers
             </a>
-          </li-->
+          </li>
           <li role="presentation">
             <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet365">
               Bet365
@@ -70,25 +75,25 @@
               10Bet
             </a>
           </li>
-          <!--li role="presentation">
+          <li role="presentation">
             <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Pinnacle">
               Pinnacle
             </a>
-          </li-->
+          </li>
           <li role="presentation">
             <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Unibet">
               Unibet
             </a>
           </li>
-          <!--li role="presentation">
+          <li role="presentation">
             <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Sport888">
               888Sport
             </a>
-          </li->
-          <!--li role="presentation">
+          </li>
+          <li role="presentation">
             <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Parimatch">
               Parimatch
-            </a-->
+            </a>
           </li>
           <li role="presentation">
             <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=TitanBet">
@@ -125,27 +130,27 @@
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=BWin">BWin</a>
           </li>
-          <!--li role="presentation">
+          <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=GameBookers">GameBookers</a>
-          </li-->
+          </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet365">Bet365</a>
           </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet10">10Bet</a>
           </li>
-          <!--li role="presentation">
+          <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Pinnacle">Pinnacle</a>
-          </li-->
+          </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Unibet">Unibet</a>
           </li>
-          <!--li role="presentation">
+          <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Sport888">888Sport</a>
-          </li-->
-          <!--li role="presentation">
+          </li>
+          <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Parimatch">Parimatch</a>
-          </li-->
+          </li>
           <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=TitanBet">TitanBet</a>
           </li>

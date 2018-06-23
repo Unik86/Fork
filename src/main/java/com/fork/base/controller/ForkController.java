@@ -49,10 +49,10 @@ public class ForkController {
     }
 
     @GetMapping(value = "/parseAll")
-    public String parseAll(String parseType, Model model) {
+    public String parseAll(String group, String parseType, Model model) {
         log.info("GET /parseAll [BEGIN]");
 
-        List<ParseResult> parseResults = forkService.parseAll(parseType);
+        List<ParseResult> parseResults = forkService.parseAll(group, parseType);
         model.addAttribute("results", parseResults);
         addSportType(model);
 
