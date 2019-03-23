@@ -16,7 +16,7 @@ function runLive() {
     }).toArray();
 
     $.ajax({
-        url: '/fork/startLive',
+        url: '/startLive',
         type: 'POST',
         data: JSON.stringify(inputValues),
         contentType: 'application/json; charset=utf-8',

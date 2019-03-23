@@ -19,10 +19,10 @@
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportTwoOfThreesToExcel.xlsx'">Excel</a>
+            <a role="menuitem" tabindex="-1" onclick="location.href='/exportTwoOfThreesToExcel.xlsx'">Excel</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportTwoOfThreesToPdf.pdf'">PDF</a>
+            <a role="menuitem" tabindex="-1" onclick="location.href='/exportTwoOfThreesToPdf.pdf'">PDF</a>
           </li>
         </ul>
       </div>

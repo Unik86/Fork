@@ -3,24 +3,24 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../fork/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="../fork/js/script.js"></script>
+    <script src="../js/script.js"></script>
     <title>Fork</title>
   </head>
   <body>
 
     <div class="container">
       <div class="starter-template">
-        <a href="/fork" style="color: black;text-decoration: none;">
+        <a href="/" style="color: black;text-decoration: none;">
           <h1>Fork Application ${liveSportType}</h1>
         </a>
         <button type="button" class="btn btn-default"
-                onclick="location.href='/fork/liveSportType?type=Football'">Football</button>
+                onclick="location.href='/liveSportType?type=Football'">Football</button>
         <button type="button" class="btn btn-default"
-                onclick="location.href='/fork/liveSportType?type=Tennis'">Tennis</button>
+                onclick="location.href='/liveSportType?type=Tennis'">Tennis</button>
       </div>
       <br>
 
@@ -31,17 +31,17 @@
 
       <div class="pull-left" style="margin-left: 5px">
         <button type="button" class="btn btn-success"
-                onclick="location.href='/fork/stopLive'">Stop</button>
+                onclick="location.href='/stopLive'">Stop</button>
       </div>
 
       <div class="pull-left" style="margin-left: 5px">
         <button type="button" class="btn btn-primary"
-                onclick="location.href='/fork/getLives'">Lives</button>
+                onclick="location.href='/getLives'">Lives</button>
       </div>
 
       <div class="pull-left" style="margin-left: 5px">
         <button type="button" class="btn btn-warning"
-                onclick="location.href='/fork/clearLives'">Clear</button>
+                onclick="location.href='/clearLives'">Clear</button>
       </div>
 
       <div class="pull-left" style="margin-left: 5px">
@@ -121,7 +121,7 @@
 
     <!--script type="text/javascript">
         window.setInterval(function(){
-            $.ajax({url: "/fork/start", success: function(result){
+            $.ajax({url: "/start", success: function(result){
                 //$('#cnt').html();
             }});
         }, 3000);

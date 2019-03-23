@@ -64,8 +64,8 @@
 
           <td></td>
           <td></td>
-          <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Forks</a></td>
-          <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Parse</a></td>
+          <td><a onclick="location.href='/parseMatch?fork=fork'" class="btn btn-default">Forks</a></td>
+          <td><a onclick="location.href='/parseMatch?fork=fork'" class="btn btn-default">Parse</a></td>
         </tr>
         <tr class="info">
           <td></td>

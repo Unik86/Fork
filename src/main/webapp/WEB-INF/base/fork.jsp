@@ -19,10 +19,10 @@
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportForksToExcel.xlsx'">Excel</a>
+            <a role="menuitem" tabindex="-1" onclick="location.href='/exportForksToExcel.xlsx'">Excel</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" onclick="location.href='/fork/exportForksToPdf.pdf'">PDF</a>
+            <a role="menuitem" tabindex="-1" onclick="location.href='/exportForksToPdf.pdf'">PDF</a>
           </li>
         </ul>
       </div>
@@ -84,8 +84,8 @@
 
               <td></td>
               <td></td>
-              <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Forks</a></td>
-              <td><a onclick="location.href='/fork/parseMatch?fork=fork'" class="btn btn-default">Parse</a></td>
+              <td><a onclick="location.href='/parseMatch?fork=fork'" class="btn btn-default">Forks</a></td>
+              <td><a onclick="location.href='/parseMatch?fork=fork'" class="btn btn-default">Parse</a></td>
             </tr>
             <tr class="info">
               <td></td>

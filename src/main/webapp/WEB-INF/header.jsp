@@ -2,24 +2,24 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../fork/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="../fork/js/script.js"></script>
+    <script src="../js/script.js"></script>
   </head>
 
   <body onload="stopSpinner()">
 
     <div class="container">
       <div class="starter-template">
-        <a href="/fork" style="color: black;text-decoration: none;">
+        <a href="/" style="color: black;text-decoration: none;">
           <h1>Fork Application ${sportType}</h1>
         </a>
         <button type="button" class="btn btn-default"
-                onclick="location.href='/fork/sportType?type=Football'">Football</button>
+                onclick="location.href='/sportType?type=Football'">Football</button>
         <button type="button" class="btn btn-default"
-                onclick="location.href='/fork/sportType?type=Tennis'">Tennis</button>
+                onclick="location.href='/sportType?type=Tennis'">Tennis</button>
       </div>
       <br>
 
@@ -40,68 +40,68 @@
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll?group=alex">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseAll?group=alex">
               All Alex
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseAll?group=my">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseAll?group=my">
               All My
             </a>
           </li>
           <li role="presentation" class="divider"></li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=WilliamHill">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=WilliamHill">
               WilliamHill
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=BWin">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=BWin">
               BWin
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=GameBookers">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=GameBookers">
               GameBookers
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet365">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=Bet365">
               Bet365
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Bet10">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=Bet10">
               10Bet
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Pinnacle">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=Pinnacle">
               Pinnacle
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Unibet">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=Unibet">
               Unibet
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Sport888">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=Sport888">
               888Sport
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=Parimatch">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=Parimatch">
               Parimatch
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=TitanBet">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=TitanBet">
               TitanBet
             </a>
           </li>
           <li role="presentation">
-            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/fork/parseBookMaker?name=FanSport">
+            <a class="parse-btn" role="menuitem" tabindex="-1" onclick="runSpinner()" href="/parseBookMaker?name=FanSport">
               FanSport
             </a>
           </li>
@@ -110,13 +110,13 @@
 
       <div class="pull-left" style="margin-left: 5px">
         <button type="button" class="btn btn-warning"
-                onclick="location.href='/fork/clearAll'">Clear all</button>
+                onclick="location.href='/clearAll'">Clear all</button>
         <button type="button" class="btn btn-success"
-                onclick="location.href='/fork/countUp'">CountUp</button>
+                onclick="location.href='/countUp'">CountUp</button>
         <button type="button" class="btn btn-primary"
-                onclick="location.href='/fork/getForks'">Forks</button>
+                onclick="location.href='/getForks'">Forks</button>
         <button type="button" class="btn btn-primary"
-                onclick="location.href='/fork/getTwoOfThree'">TwoOfThree</button>
+                onclick="location.href='/getTwoOfThree'">TwoOfThree</button>
       </div>
 
       <div class="dropdown pull-left" style="margin-left: 5px">
@@ -125,44 +125,44 @@
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=WilliamHill">WilliamHill</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=WilliamHill">WilliamHill</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=BWin">BWin</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=BWin">BWin</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=GameBookers">GameBookers</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=GameBookers">GameBookers</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet365">Bet365</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=Bet365">Bet365</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Bet10">10Bet</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=Bet10">10Bet</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Pinnacle">Pinnacle</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=Pinnacle">Pinnacle</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Unibet">Unibet</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=Unibet">Unibet</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Sport888">888Sport</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=Sport888">888Sport</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=Parimatch">Parimatch</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=Parimatch">Parimatch</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=TitanBet">TitanBet</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=TitanBet">TitanBet</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/fork/getMatches?name=FanSport">FanSport</a>
+            <a role="menuitem" tabindex="-1" href="/getMatches?name=FanSport">FanSport</a>
           </li>
         </ul>
       </div>
 
       <div class="pull-left" style="margin-left: 5px">
         <button type="button" class="btn btn-info"
-                onclick="location.href='/fork/live'">Live</button>
+                onclick="location.href='/live'">Live</button>
       </div>
 
     </div>
