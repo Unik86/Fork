@@ -8,7 +8,7 @@ import com.fork.base.model.enums.ParseType;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
 import com.fork.util.Constants;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,9 +19,10 @@ import java.util.List;
 
 import static java.util.Objects.nonNull;
 
-@Log4j
 @Component("Bet365Football")
 public class Bet365FootballParser extends BaseParser {
+
+    private static final Logger log = Logger.getLogger(Bet365FootballParser.class);
 
     private final static String URL = "https://www.bet365.com";
     private final static String MATCHES = "//div[contains(@class, 'gl-MarketGroupContainer')]";

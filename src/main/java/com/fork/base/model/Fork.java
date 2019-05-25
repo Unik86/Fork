@@ -1,7 +1,5 @@
 package com.fork.base.model;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -14,25 +12,16 @@ import static java.util.Objects.nonNull;
 @Document(collection = "Fork")
 public class Fork {
 
-    @Getter @Setter
     private List<Match> matches;
-    @Getter @Setter
     private List<Bet> bets;
-    @Getter @Setter
     private String sportType;
-    @Getter @Setter
     private LocalDateTime parsDate;
 
-    @Getter
     private Bet forkBet;
-    @Getter
     private Double rate;
 
-    @Getter
     private Bet percentBet;
-    @Getter
     private Double sumPercentBet;
-    @Getter
     private Double percent;
 
     public Fork() {
@@ -75,5 +64,77 @@ public class Fork {
 
     public String getParsDateStr(){
         return dateFormater(parsDate);
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
+    public List<Bet> getBets() {
+        return bets;
+    }
+
+    public void setBets(List<Bet> bets) {
+        this.bets = bets;
+    }
+
+    public String getSportType() {
+        return sportType;
+    }
+
+    public void setSportType(String sportType) {
+        this.sportType = sportType;
+    }
+
+    public LocalDateTime getParsDate() {
+        return parsDate;
+    }
+
+    public void setParsDate(LocalDateTime parsDate) {
+        this.parsDate = parsDate;
+    }
+
+    public Bet getForkBet() {
+        return forkBet;
+    }
+
+    public void setForkBet(Bet forkBet) {
+        this.forkBet = forkBet;
+    }
+
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
+
+    public Bet getPercentBet() {
+        return percentBet;
+    }
+
+    public void setPercentBet(Bet percentBet) {
+        this.percentBet = percentBet;
+    }
+
+    public Double getSumPercentBet() {
+        return sumPercentBet;
+    }
+
+    public void setSumPercentBet(Double sumPercentBet) {
+        this.sumPercentBet = sumPercentBet;
+    }
+
+    public Double getPercent() {
+        return percent;
+    }
+
+    public void setPercent(Double percent) {
+        this.percent = percent;
     }
 }

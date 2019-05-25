@@ -6,7 +6,7 @@ import com.fork.base.model.Match;
 import com.fork.base.model.enums.BookMakers;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,9 +19,10 @@ import static com.fork.util.Utils.randomInt;
 import static com.fork.util.Utils.revertName;
 import static java.util.Objects.isNull;
 
-@Log4j
 @Component("UnibetTennis")
 public class UnibetTennisParser extends BaseParser {
+
+    private static final Logger log = Logger.getLogger(UnibetTennisParser.class);
 
     private final static String URL = "https://www.unibet.com/betting#filter/tennis";
     private final static String MATCHES = "//a[contains(@class, 'KambiBC-event-item__link')]";

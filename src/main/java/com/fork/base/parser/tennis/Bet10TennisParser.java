@@ -6,7 +6,7 @@ import com.fork.base.model.Match;
 import com.fork.base.model.enums.BookMakers;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,9 +18,10 @@ import java.util.List;
 import static com.fork.util.Utils.randomInt;
 import static java.util.Objects.isNull;
 
-@Log4j
 @Component("Bet10Tennis")
 public class Bet10TennisParser extends BaseParser {
+
+    private static final Logger log = Logger.getLogger(Bet10TennisParser.class);
 
     private final static String URL = "https://www.10bet.com/sports/";
     private final static String MATCHES = "//div[contains(@class, 'event-upcoming')]";

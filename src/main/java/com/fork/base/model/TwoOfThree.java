@@ -1,7 +1,5 @@
 package com.fork.base.model;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -16,21 +14,14 @@ public class TwoOfThree {
 
     private static final double MAX_RATE = 4.0;
 
-    @Getter @Setter
     private List<Match> matches;
-    @Getter @Setter
     private LocalDateTime parsDate = LocalDateTime.now();
 
-    @Getter
     private Bet bet;
-    @Getter
     private Double rate;
 
-    @Getter
     private Bet percentBet;
-    @Getter
     private Double sumPercentBet;
-    @Getter
     private Double percent;
 
     public TwoOfThree() {
@@ -87,5 +78,61 @@ public class TwoOfThree {
 
     public String getParsDateStr(){
         return dateFormater(parsDate);
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
+    public LocalDateTime getParsDate() {
+        return parsDate;
+    }
+
+    public void setParsDate(LocalDateTime parsDate) {
+        this.parsDate = parsDate;
+    }
+
+    public Bet getBet() {
+        return bet;
+    }
+
+    public void setBet(Bet bet) {
+        this.bet = bet;
+    }
+
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
+
+    public Bet getPercentBet() {
+        return percentBet;
+    }
+
+    public void setPercentBet(Bet percentBet) {
+        this.percentBet = percentBet;
+    }
+
+    public Double getSumPercentBet() {
+        return sumPercentBet;
+    }
+
+    public void setSumPercentBet(Double sumPercentBet) {
+        this.sumPercentBet = sumPercentBet;
+    }
+
+    public Double getPercent() {
+        return percent;
+    }
+
+    public void setPercent(Double percent) {
+        this.percent = percent;
     }
 }

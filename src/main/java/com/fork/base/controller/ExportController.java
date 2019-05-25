@@ -1,9 +1,9 @@
 package com.fork.base.controller;
 
-import com.fork.base.service.ForkService;
 import com.fork.base.model.Fork;
 import com.fork.base.model.TwoOfThree;
-import lombok.extern.log4j.Log4j;
+import com.fork.base.service.ForkService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@Log4j
 @Controller
 public class ExportController {
+
+    private static final Logger log = Logger.getLogger(ExportController.class);
 
     private ForkService findForkService;
 

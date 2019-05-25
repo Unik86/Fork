@@ -7,7 +7,7 @@ import com.fork.base.model.enums.BookMakers;
 import com.fork.base.model.enums.ParseType;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,9 +18,10 @@ import java.util.List;
 
 import static java.util.Objects.isNull;
 
-@Log4j
 @Component("FanSportTennis")
 public class FanSportTennisParser extends BaseParser {
+
+    private static final Logger log = Logger.getLogger(FanSportTennisParser.class);
 
     private final static String URL = "https://fan-sport.com.ua/en/line/Tennis/";
     private final static String URL_LIVE = "https://fan-sport.com.ua/en/live/Tennis/";

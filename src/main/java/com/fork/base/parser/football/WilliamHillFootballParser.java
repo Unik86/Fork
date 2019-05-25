@@ -8,7 +8,7 @@ import com.fork.base.model.enums.ParseType;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
 import com.fork.util.Constants;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -19,9 +19,10 @@ import java.util.List;
 
 import static java.util.Objects.isNull;
 
-@Log4j
 @Component("WilliamHillFootball")
 public class WilliamHillFootballParser extends BaseParser {
+
+    private static final Logger log = Logger.getLogger(WilliamHillFootballParser.class);
 
     private final static String URL = "http://sports.williamhill.com/bet/en-gb/betting/y/5/tm/0/Football.html";
     private final static String MATCHES = "//table[contains(@class, 'tableData')]/tbody/tr";

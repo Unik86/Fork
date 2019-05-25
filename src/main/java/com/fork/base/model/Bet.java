@@ -1,25 +1,53 @@
 package com.fork.base.model;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Bet")
 public class Bet {
 
-    @Getter @Setter
     private String bookMaker;
-
-    @Getter @Setter
     private String name;
-
-    @Getter @Setter
     private Double left;
-
-    @Getter @Setter
     private Double center;
-
-    @Getter @Setter
     private Double right;
 
+    public String getBookMaker() {
+        return bookMaker;
+    }
+
+    public void setBookMaker(String bookMaker) {
+        this.bookMaker = bookMaker;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getLeft() {
+        return left;
+    }
+
+    public void setLeft(Double left) {
+        this.left = left;
+    }
+
+    public Double getCenter() {
+        return center;
+    }
+
+    public void setCenter(Double center) {
+        this.center = center;
+    }
+
+    public Double getRight() {
+        return right;
+    }
+
+    public void setRight(Double right) {
+        this.right = right;
+    }
 }

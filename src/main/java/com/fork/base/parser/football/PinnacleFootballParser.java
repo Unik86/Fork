@@ -6,7 +6,7 @@ import com.fork.base.model.enums.BookMakers;
 import com.fork.base.model.Match;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,9 +15,10 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Log4j
 @Component("PinnacleFootball")
 public class PinnacleFootballParser extends BaseParser {
+
+    private static final Logger log = Logger.getLogger(PinnacleFootballParser.class);
 
     private final static String URL = "https://www.pinnacle.com/en/odds/today/soccer";
     private final static String MATCHES = "//table[contains(@class, 'odds-data') and not(contains(@class, 'ng-scope'))]/tbody";

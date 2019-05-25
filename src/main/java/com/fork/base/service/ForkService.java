@@ -3,14 +3,13 @@ package com.fork.base.service;
 import com.fork.base.model.*;
 import com.fork.base.model.enums.ParseType;
 import com.fork.base.model.enums.SportTypes;
+import com.fork.base.parser.BaseParser;
 import com.fork.base.parser.Parser;
 import com.fork.base.repository.BookMakerRepository;
 import com.fork.base.repository.ForkRepository;
 import com.fork.base.repository.TwoOfThreeRepository;
 import com.fork.base.model.enums.BookMakers;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -18,17 +17,16 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.fork.base.model.enums.BookMakersGroups.ALEX_BOOKMAKERS;
 import static com.fork.base.model.enums.BookMakersGroups.MY_BOOKMAKERS;
 import static java.util.Objects.isNull;
 
-@Log4j
 @Service
 public class ForkService {
 
-    @Getter @Setter
+    private static final Logger log = Logger.getLogger(ForkService.class);
+
     private String sportType = SportTypes.TENNIS.getType();
 
     @Autowired
@@ -150,5 +148,13 @@ public class ForkService {
             return 0;
         else
             return bookMaker.getMatches().size();
+    }
+
+    public String getSportType() {
+        return sportType;
+    }
+
+    public void setSportType(String sportType) {
+        this.sportType = sportType;
     }
 }

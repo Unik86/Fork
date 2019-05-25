@@ -6,16 +6,17 @@ import com.fork.base.service.ForkService;
 import com.fork.base.model.Match;
 import com.fork.base.model.TwoOfThree;
 import com.google.common.collect.ImmutableList;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Log4j
 @Controller
 public class ForkController {
+
+    private static final Logger log = Logger.getLogger(ForkController.class);
 
     private ForkService forkService;
 

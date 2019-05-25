@@ -6,7 +6,7 @@ import com.fork.base.model.Match;
 import com.fork.base.model.enums.BookMakers;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,9 +17,10 @@ import java.util.List;
 
 import static java.util.Objects.isNull;
 
-@Log4j
 @Component("GameBookersTennis")
 public class GameBookersTennisParser extends BaseParser {
+
+    private static final Logger log = Logger.getLogger(GameBookersTennisParser.class);
 
     private final static String URL = "https://sports.gamebookers.com/en/sports#sportId=5";
     private final static String MATCHES = "//div[contains(@class, 'ui-widget-content-body')]/div/div/div/div/div/div/div/div/div";

@@ -1,19 +1,20 @@
 package com.fork.live.service;
 
-import com.fork.base.repository.ForkRepository;
-import com.fork.live.parser.LiveParser;
-import com.fork.base.service.FindForkService;
 import com.fork.base.model.ForkResult;
+import com.fork.base.repository.ForkRepository;
+import com.fork.base.service.FindForkService;
 import com.fork.live.model.LiveMatch;
-import lombok.extern.log4j.Log4j;
+import com.fork.live.parser.LiveParser;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.fork.util.Utils.randomInt;
 
-@Log4j
 public class LiveRunner implements Runnable {
+
+    private static final Logger log = Logger.getLogger(LiveRunner.class);
 
     private ForkRepository forkRepository;
     private FindForkService findForkService;

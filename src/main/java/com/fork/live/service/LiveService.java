@@ -6,9 +6,7 @@ import com.fork.base.repository.ForkRepository;
 import com.fork.live.model.BookMakersLive;
 import com.fork.live.parser.LiveParser;
 import com.fork.base.service.FindForkService;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -20,12 +18,11 @@ import static com.fork.util.Utils.getUrlByDomain;
 import static com.fork.util.Utils.isNotEmpty;
 import static java.util.Objects.nonNull;
 
-@Log4j
 @Service
 public class LiveService {
 
-    @Getter
-    @Setter
+    private static final Logger log = Logger.getLogger(LiveService.class);
+
     private String sportType = SportTypes.TENNIS.getType();
 
     @Autowired

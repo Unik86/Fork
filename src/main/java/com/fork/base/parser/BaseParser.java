@@ -1,15 +1,16 @@
 package com.fork.base.parser;
 
 import com.fork.base.model.BookMaker;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static com.fork.util.Utils.randomInt;
 import static java.util.Objects.nonNull;
 
-@Log4j
 public abstract class BaseParser implements Parser {
+
+    private static final Logger log = Logger.getLogger(BaseParser.class);
 
     protected WebDriver driver;
     protected BookMaker bookMaker;

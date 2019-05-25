@@ -1,10 +1,11 @@
 package com.fork.live.parser.tennis;
 
 import com.fork.base.model.Bet;
+import com.fork.base.parser.BaseParser;
 import com.fork.live.model.BookMakersLive;
 import com.fork.live.model.LiveMatch;
 import com.fork.live.parser.LiveParser;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,9 +17,10 @@ import java.util.List;
 
 import static java.util.Objects.nonNull;
 
-@Log4j
 @Component("WilliamHillTennisLive")
 public class WilliamHillTennisLiveParser implements LiveParser {
+
+    private static final Logger log = Logger.getLogger(WilliamHillTennisLiveParser.class);
 
     public static final String MATCH_BETTING_LIVE = "Match Betting Live";
     private WebDriver driver;

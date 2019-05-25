@@ -1,10 +1,11 @@
 package com.fork.base.service;
 
+import com.fork.base.parser.BaseParser;
 import com.fork.live.model.LiveMatch;
 import com.fork.base.model.*;
 import com.fork.base.model.enums.SportTypes;
 import info.debatty.java.stringsimilarity.JaroWinkler;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,9 +15,10 @@ import java.util.List;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
-@Log4j
 @Service
 public class FindForkService {
+
+    private static final Logger log = Logger.getLogger(FindForkService.class);
 
     private static double SIMILARITY_FACTOR = 0.85;
 

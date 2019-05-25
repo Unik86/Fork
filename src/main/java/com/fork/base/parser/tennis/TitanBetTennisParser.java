@@ -6,7 +6,7 @@ import com.fork.base.model.Match;
 import com.fork.base.model.enums.BookMakers;
 import com.fork.base.model.enums.SportTypes;
 import com.fork.base.parser.BaseParser;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,9 +17,10 @@ import java.util.List;
 
 import static java.util.Objects.isNull;
 
-@Log4j
 @Component("TitanBetTennis")
 public class TitanBetTennisParser extends BaseParser {
+
+    private static final Logger log = Logger.getLogger(TitanBetTennisParser.class);
 
     private final static String URL = "http://sports.titanbet.com/en/tennis";
     private final static String MATCHES = "//tr[contains(@class, 'pager-item')]";

@@ -2,16 +2,17 @@ package com.fork.live.controller;
 
 import com.fork.base.model.Fork;
 import com.fork.live.service.LiveService;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Log4j
 @Controller
 public class LiveController {
+
+    private static final Logger log = Logger.getLogger(LiveController.class);
 
     private LiveService liveService;
 
